@@ -82,7 +82,6 @@ public class Human {
                     br.append(Period.between(birthDay,LocalDate.now()).getYears()).append(" лет ");
             else
                 br.append("умер в количестве : ").append(Period.between(birthDay,dateDeath)).append(" лет");
-
                   br.append(",пол: ")
                     .append(gender);
 

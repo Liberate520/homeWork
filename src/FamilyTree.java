@@ -36,8 +36,10 @@ public class FamilyTree {
             if(h.getDateDeath()==null)
                 builder.append(Period.between(h.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
             else
-                builder.append(" умер в количестве: ").append(Period.between(h.getBirthDay(),h.getDateDeath()).getYears())
-                    .append(" лет");
+                builder.append(" умер в количестве: ")
+                        .append(Period.between(h.getBirthDay(),h.getDateDeath()).getYears())
+                        .append(" лет");
+
                     builder.append(", пол: ")
                            .append(h.getGender()).append(",дети: ");
             if (h.getChildren().isEmpty())
@@ -74,7 +76,6 @@ public class FamilyTree {
                            else br.append("Умер в количестве: ")
                                    .append(Period.between(child.getBirthDay(),child.getDateDeath()).getYears())
                                            .append(" лет");
-
                                    br.append("\n")
                                    .append("************************").append("\n");
                        }
@@ -110,25 +111,28 @@ public class FamilyTree {
         ArrayList<Human> wedding = new ArrayList<>();
        for (int i = 0; i < humans.size(); i++) {
            if(humans.get(i).getName().equals(name)&&humans.get(i).getLastName().equals(lastName)){
-               for (int j = 0; j < humans.size(); j++) {
-               if (humans.get(i).getChildren().equals(humans.get(j).getChildren()))
-                   wedding.add(humans.get(j));
+               int j = 0;
+               while (j < humans.size()) {
+                   if (humans.get(i).getChildren().equals(humans.get(j).getChildren()))
+                       wedding.add(humans.get(j));
 
+                   j++;
                }
            }
 
            }
-       for (Human ch : wedding){
-           if(wedding.isEmpty()){
-               System.out.println("Не возможно добавить! Таких родителей нет!");
-           }
-            else if(ch.getChildren().contains(child)){
+       if(wedding.isEmpty()) {
+           System.out.println("Не возможно добавить! Таких родителей нет!");
+       }
+       else {
+       for (Human ch : wedding) {
+           if (ch.getChildren().contains(child)) {
                System.out.println("Такой ребенок уже добавлен!");
                break;
+           } else {
+               ch.getChildren().add(child);
            }
-            else {
-                ch.getChildren().add(child);
-           }
+       }
 
        }
 
