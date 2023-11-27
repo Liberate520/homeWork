@@ -1,7 +1,5 @@
 package ru.home_work.cherevichenko_sergey;
 
-import ru.home_work.cherevichenko_sergey.Writable;
-
 import java.io.*;
 
 // Класс для записи в файл и чтения из файла
@@ -15,15 +13,14 @@ public class FileHandler implements Writable {
             objectOutputStream.writeObject(o);
             objectOutputStream.close();
     }
+    @Override
     // Метод для чтения
-    public void read() throws IOException, ClassNotFoundException {
+    public Object readable() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream("homeWork.out"));
          Object p = (Object) objectInputStream.readObject();
-        System.out.println(p);
-
         objectInputStream.close();
-
+        return p;
 
 
     }

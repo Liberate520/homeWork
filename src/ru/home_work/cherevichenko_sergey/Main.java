@@ -50,6 +50,7 @@ public class Main {
         Human child = new Human("Aнна","Черевиченко", Gender.FEMALE,
                 LocalDate.of(2023,Month.NOVEMBER,15),null);
 
+
         // Создаем экземпляр класса ru.home_work.cherevichenko_sergey.familyTree.FamilyTree добавляем всех ru.home_work.cherevichenko_sergey.human.Human и выводим
         FamilyTree familyTree = new FamilyTree();
         FileHandler fileHandler = new FileHandler();
@@ -58,24 +59,25 @@ public class Main {
         familyTree.addHuman(son);
         familyTree.addHuman(father);
         familyTree.addHuman(mother);
-        familyTree.addHuman(fathersSister);
-
+         familyTree.addHuman(fathersSister);
         familyTree.addHuman(fathersMom);
         familyTree.addHuman(fathersFather);
         familyTree.addHuman(mothersBrother);
         familyTree.addHuman(mothersFather);
         familyTree.addHuman(mothersMom);
+        fileHandler.save(familyTree);
         familyTree.addHuman(child);
         familyTree.addChild("Елена","Черевиченко",child);
-        familyTree.addChild("Сергей","Черевиченко",child);
+
+
         System.out.println("=========================");
         System.out.println(familyTree);
         System.out.println(familyTree.findChildren("Елена","Черевиченко"));
         System.out.println("======================");
-        System.out.println(familyTree.findChildren("etuiwr","sdgf"));
-        fileHandler.save(familyTree);
+
+
         System.out.println("+++++++++++++++++++++++++++++++");
-        fileHandler.read();
+        System.out.println(fileHandler.readable());
         System.out.println("+++++++++++++++++++++++++++++++++");
 
 
