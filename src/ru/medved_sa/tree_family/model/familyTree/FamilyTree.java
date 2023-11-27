@@ -101,7 +101,7 @@ public class FamilyTree<T extends EntityCreation<T>> implements Serializable, It
      * @param id входящий id человека для его поиска
      * @return true/false
      */
-    private boolean checkId(long id) {
+    public boolean checkId(long id) {
         if (id >= humanId || id < 0) {
             return false;
         }

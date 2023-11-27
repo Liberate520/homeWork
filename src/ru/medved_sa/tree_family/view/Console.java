@@ -11,6 +11,14 @@ public class Console implements View {
     private Menu menu;
     private boolean work;
 
+    public Console() {
+        presenter = new Presenter(this);
+        scanner = new Scanner(System.in);
+        menu = new Menu(this);
+        work = true;
+    }
+
+
     @Override
     public void start() {
         while (work) {
@@ -21,25 +29,20 @@ public class Console implements View {
     }
 
     @Override
-    public void print(String answer) {
+    public void printAnswer(String answer) {
         System.out.println(answer);
     }
 
-    public Console() {
-        presenter = new Presenter(this);
-        scanner = new Scanner(System.in);
-        menu = new Menu(this);
-        work = true;
-    }
-
+    @Override
     public void getHumanList() {
         presenter.getHumanList();
     }
 
+    @Override
     public void addHuman() {
         System.out.println("Укажите имя человека: ");
         String newName = scanner.nextLine();
-        System.out.println("Введите дату рождения человека (год месяц день) ");
+        System.out.println("Введите дату рождения человека в формате (ГГГГ-ММ-ДД)");
         String newStrAge = scanner.nextLine();
         System.out.println("Введите пол человека (Male или Female) ");
         String gender = scanner.nextLine();
@@ -47,18 +50,62 @@ public class Console implements View {
 
     }
 
+    @Override
+    public void setParent() {
+        System.out.println("Укажите id человека, для которого надо указать родителя. Id можно посмотреть в списке выше");
+        int personId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Укажите id родителя. Id можно посмотреть в списке выше");
+        int parentId = Integer.parseInt(scanner.nextLine());
+        presenter.setParent(personId, parentId);
+    }
+
+
+    @Override
     public void sortByName() {
         presenter.sortByName();
     }
 
+    @Override
     public void sortByAge() {
         presenter.sortByAge();
     }
 
+    @Override
     public void finish() {
         System.out.println("До новых встреч...");
-        presenter.saveFile();
         work = false;
     }
 
+    @Override
+    public void noSortedList() {
+        presenter.getHumanList();
+    }
+
+    @Override
+    public void readDataFromFile() {
+        System.out.println("Укажите путь к файлу для загрузки дерева");
+        String path = scanner.nextLine();
+        while (!presenter.readFile(path)) {
+            System.out.println("Не удалось загрузить файл. Хотите попробовать снова? y/n");
+            if (scanner.nextLine().equals("n")) {
+                break;
+            }
+            System.out.println("Укажите путь к файлу для загрузки дерева");
+            path = scanner.nextLine();
+        }
+    }
+
+    @Override
+    public void saveDataFromFile() {
+        System.out.println("Укажите путь к файлу для сохранения дерева");
+        String path = scanner.nextLine();
+        while (!presenter.saveFile(path)) {
+            System.out.println("Не удалось сохранить объект. Хотите попробовать снова? y/n");
+            if (scanner.nextLine().equals("n")) {
+                break;
+            }
+            System.out.println("Укажите путь к файлу для сохранения дерева");
+            path = scanner.nextLine();
+        }
+    }
 }

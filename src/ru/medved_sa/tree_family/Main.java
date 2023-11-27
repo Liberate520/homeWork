@@ -3,11 +3,9 @@ package ru.medved_sa.tree_family;
 import ru.medved_sa.tree_family.model.familyTree.FamilyTree;
 import ru.medved_sa.tree_family.model.human.Gender;
 import ru.medved_sa.tree_family.model.human.Human;
-import ru.medved_sa.tree_family.model.save.FileHandlerService;
-import ru.medved_sa.tree_family.presenter.Presenter;
+import ru.medved_sa.tree_family.model.save.FileHandler;
 import ru.medved_sa.tree_family.view.Console;
 import ru.medved_sa.tree_family.view.View;
-import ru.medved_sa.tree_family.view.comands.AddHuman;
 
 import java.time.LocalDate;
 
@@ -17,8 +15,8 @@ public class Main {
         FamilyTree<Human> familyTreeList = getFamilyTreeTest();
 
 
-        save(familyTreeList);
-        System.out.println(familyTreeList);
+//        save(familyTreeList);
+//        System.out.println(familyTreeList);
 //        FamilyTree<Human> familyTreeRead = read();
 //
 //
@@ -37,25 +35,24 @@ public class Main {
     }
 
 
-    private static String getHumanListInfoIterator(FamilyTree<Human> familyList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Список семейного древа через iterator:\n");
-        for (Human human : familyList) {
-            sb.append(human);
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
+//    private static String getHumanListInfoIterator(FamilyTree<Human> familyList) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Список семейного древа через iterator:\n");
+//        for (Human human : familyList) {
+//            sb.append(human);
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+//    }
 
-    private static FamilyTree<Human> read() {
-        FileHandlerService fileHandler = new FileHandlerService();
-        return (FamilyTree) fileHandler.readFile();
-    }
-
-    private static void save(FamilyTree<Human> familyTreeForPreservation) {
-        FileHandlerService fileHandler = new FileHandlerService();
-        fileHandler.saveFile(familyTreeForPreservation);
-    }
+//    private static FamilyTree<Human> read() {
+//        FileHandler<Human> fileHandler = new FileHandler<>();
+//        return (FamilyTree) fileHandler.readFile(new FileHandler().getFilePath());
+//    }
+//    private static void save(FamilyTree<Human> familyTreeForPreservation) {
+//        FileHandler<Human> fileHandler = new FileHandler<>();
+//        fileHandler.saveFile(familyTreeForPreservation);
+//    }
 
 
     private static FamilyTree<Human> getFamilyTreeTest() {

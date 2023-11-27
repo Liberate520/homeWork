@@ -3,7 +3,7 @@ package ru.medved_sa.tree_family.view;
 public interface View {
     void start();
 
-    void print(String answer);
+    void printAnswer(String answer);
 
     void addHuman();
 
@@ -14,4 +14,10 @@ public interface View {
     void sortByAge();
 
     void finish();
+    void noSortedList();
+
+    void readDataFromFile();
+    void saveDataFromFile();
+    void setParent();
 }
+

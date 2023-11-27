@@ -8,6 +8,7 @@ public class GetHumanList extends Command {
         super(view, "Получить список людей:");
     }
 
+    @Override
     public void execute() {
         getView().getHumanList();
     }
