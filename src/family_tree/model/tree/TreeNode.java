@@ -1,4 +1,4 @@
-package family_tree.model.base;
+package family_tree.model.tree;
 
 import family_tree.model.human.Position;
 
@@ -21,9 +21,6 @@ public interface TreeNode<T> {
     int getAge();
 
     LocalDate getBirthDate();
-
-
-
 
 
 }

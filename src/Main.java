@@ -1,16 +1,9 @@
-package model_app;
-
-import family_tree.model.base.FileHandler;
-import family_tree.model.base.TreeNode;
-import family_tree.model.family_tree.FamilyTree;
-import family_tree.model.human.*;
+import family_tree.model.tree.TreeNode;
 //import static family_tree.model.base.FileHandler.FileHandlerForFamilyTree;
-import static family_tree.model.base.FileHandlerForTree.HandlerForTree;
 import family_tree.view.ConsoleUI;
 import family_tree.view.View;
 
 import java.io.*;
-import java.util.ArrayList;
 
 
 public class Main<E extends TreeNode<E>> {

@@ -1,21 +1,21 @@
-package family_tree.model.family_tree;
+package family_tree.model.tree;
 
 import java.time.LocalDate;
 
 public interface FamilyTreeHub<T> {
     String getLastName();
 
-    String getFirstName();
+//    String getFirstName();
 
-    void setId(double id);
+//    void getId(double id);
 
-    double setId();
+    boolean setId();
 
     double getIncome();
 
     String getPosition();
 
-    int getAge();
+    void getAge();
 
     LocalDate getBirthDate();
 }

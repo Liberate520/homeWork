@@ -1,6 +1,6 @@
 package family_tree.model.human;
 
-import family_tree.model.base.TreeNode;
+import family_tree.model.tree.TreeNode;
 
 import java.time.LocalDate;
 import java.time.Period;

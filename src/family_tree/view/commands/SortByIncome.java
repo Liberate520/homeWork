@@ -10,6 +10,6 @@ public class SortByIncome extends Command {
 
     @Override
     public void execute() {
-        consoleUI.sortByAge();
+        consoleUI.sortByIncome();
     }
 }

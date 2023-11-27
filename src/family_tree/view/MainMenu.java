@@ -12,9 +12,10 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new GetTreeInfo(consoleUI));
+        commandList.add(new SortByAge(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByIncome(consoleUI));
         commandList.add(new Finish(consoleUI));
-//        commandList.add(new SortByName(consoleUI)); /* как пример, из семинара */
-//        commandList.add(new SortByAge(consoleUI)); /* как пример, из семинара */
     }
 
     public String menu(){

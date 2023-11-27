@@ -1,6 +1,6 @@
 package family_tree.view;
 
-import family_tree.controller.Controller;
+import family_tree.presenter.Presenter;
 
 import java.util.Scanner;
 
@@ -8,24 +8,19 @@ public class ConsoleUI implements View {
     private boolean work;
     private Scanner scanner;
     private MainMenu menu;
-    private Controller controller;
+    private Presenter presenter;
     private static final String INPUT_ERROR = ("\"вы ввели неверное значение\"");
+
+    // Цвет строки в консоли
+    public static final String PURPLE_TEXT = "\u001B[35m";
+    public static final String PURPLE_TEXT_RESET = "\u001B[0m";
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
-        controller = new Controller(this);
+        presenter = new Presenter(this);
         work = true;
         menu = new MainMenu(this);
     }
-
-    // Цвет строки в консоли
-    public static final String PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String PURPLE_BACKGROUND_RESET = "\u001B[0m";
-    public static final String WHITE_TEXT = "\u001B[37m";
-    public static final String WHITE_TEXT_RESET = "\u001B[0m";
-
-    public static final String PURPLE_TEXT = "\u001B[35m";
-    public static final String PURPLE_TEXT_RESET = "\u001B[0m";
     @Override
     public void printAnswer(String text) {
         System.out.println(text);
@@ -38,13 +33,12 @@ public class ConsoleUI implements View {
     }
 
     public void instuction(){
-        System.out.println("\"укажите требуемое действие\"".toLowerCase());
+        System.out.print("\"укажите требуемое действие\" : ".toLowerCase());
     }
-
 
     @Override
     public void start() {
-        instuction();
+
         while (work){
             title();
             printMenu();
@@ -58,10 +52,12 @@ public class ConsoleUI implements View {
     }
 
     public void getFamilyListInfo() {
-        controller.getFamilyListInfo();
+        presenter.getFamilyListInfo();
     }
 
     private void execute(){
+//        System.out.print("выберите команду : ");
+        instuction();
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
             int numCommand = Integer.parseInt(line);
@@ -81,7 +77,7 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkCommand(int numCommand) {
-        if (numCommand < menu.getSize()){
+        if (numCommand > 0 && numCommand <= menu.getSize()){
             return true;
         } else {
             inputError();
@@ -97,10 +93,16 @@ public class ConsoleUI implements View {
         System.out.println(menu.menu());
     }
 
-    public void sortByAge() {
-        controller.sortByAge();
+    public void sortByName() {
+        presenter.sortByName();
     }
 
+    public void sortByAge() {
+        presenter.sortByAge();
+    }
 
+    public void sortByIncome() {
+        presenter.sortByIncome();
+    }
 }
 

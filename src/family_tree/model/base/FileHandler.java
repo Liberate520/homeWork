@@ -1,6 +1,6 @@
 package family_tree.model.base;
 
-import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.tree.FamilyTree;
 import family_tree.model.human.*;
 
 import java.io.*;
@@ -46,7 +46,6 @@ public class FileHandler {
             for (Human human : humans) {
                 objectOutputStream.writeObject(human);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,9 +70,9 @@ public class FileHandler {
 //        }
 
         //  Сортировка списка
-        FamilyTree.methodSortByLastName(humans);
-        FamilyTree.methodSortByAge(humans);
-        FamilyTree.methodSortByIncome(humans);
+//        FamilyTree.methodSortByLastName(humans);
+//        FamilyTree.methodSortByAge(humans);
+//        familyTree.methodSortByIncome(humans);
 
 
 
