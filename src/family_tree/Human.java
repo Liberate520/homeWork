@@ -15,6 +15,7 @@ public class Human {
     private Human father;
     private Human spouse;
     private List<Human> children;
+    //TODO: Добавить boolean переменную, фиксирующию статус нахождения в дереве
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate,
                  LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
