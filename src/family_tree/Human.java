@@ -46,7 +46,7 @@ public class Human {
         this(firstName, lastName, gender, null, null, mother, father, null, null);
     }
 
-    public void setMother(Human mother) {
+    void setMother(Human mother) {
         if (this.mother != null) {
             System.out.println("Мать уже задана");
         } else {
@@ -55,7 +55,7 @@ public class Human {
 
     }
 
-    public void setFather(Human father) {
+    void setFather(Human father) {
         if (this.father != null) {
             System.out.println("Отец уже задан");
         } else {
@@ -63,7 +63,7 @@ public class Human {
         }
     }
 
-    public void setSpouse(Human spouse) {
+    void setSpouse(Human spouse) {
         if (this.spouse != null) {
             System.out.println("Супруг уже задан");
         } else {
@@ -71,7 +71,7 @@ public class Human {
         }
     }
 
-    public void setChildren(Human children) {
+    void setChildren(Human children) {
         if (this.children == null) {
             List<Human> addChildren = new ArrayList<Human>();
             addChildren.add(children);
@@ -81,27 +81,27 @@ public class Human {
         }
     }
 
-    public LocalDate getDeathDate() {
+    LocalDate getDeathDate() {
         return deathDate;
     }
 
-    public String getName() {
+    String getName() {
         return firstName + " " + lastName;
     }
 
-    public Human getSpouse() {
+    Human getSpouse() {
         return spouse;
     }
 
-    public Human getMother() {
+    Human getMother() {
         return mother;
     }
 
-    public Human getFather() {
+    Human getFather() {
         return father;
     }
 
-    public List<Human> getChildren() {
+    List<Human> getChildren() {
         return children;
     }
 

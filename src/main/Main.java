@@ -1,4 +1,8 @@
-package family_tree;
+package main;
+
+import family_tree.FamilyTree;
+import family_tree.Genders;
+import family_tree.Human;
 
 import java.time.LocalDate;
 
@@ -10,7 +14,8 @@ public class Main {
                 LocalDate.of(1990, 1, 1));
         Human anna = new Human("Anna", "Petrova", Genders.Женский,
                 LocalDate.of(1965, 1, 1));
-        Human vasilii = new Human("Vasilii", "Petrov", Genders.Мужской, LocalDate.of(1987, 1, 1));
+        Human vasilii = new Human("Vasilii", "Petrov", Genders.Мужской,
+                LocalDate.of(1987, 1, 1));
         Human sofia = new Human("Sofia", "Legneva", Genders.Женский,
                 LocalDate.of(2008, 2, 3));
         Human ivan = new Human("Ivan", "Petrov", Genders.Мужской,
@@ -22,10 +27,9 @@ public class Main {
         familyPetrovi.setMother(sofia, vaselisa);
         familyPetrovi.setFather(sofia, sergei);
 
-
         System.out.println(familyPetrovi);
         System.out.println(sergei);
-        System.out.println("\n");
+        System.out.println("");
         System.out.println(anna);
 
 
