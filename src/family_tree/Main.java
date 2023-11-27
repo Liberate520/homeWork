@@ -10,12 +10,14 @@ public class Main {
                 LocalDate.of(1990, 1, 1));
         Human anna = new Human("Anna", "Petrova", Genders.Женский,
                 LocalDate.of(1965, 1, 1));
+        Human vasilii = new Human("Vasilii", "Petrov", Genders.Мужской, LocalDate.of(1987, 1, 1));
         Human sofia = new Human("Sofia", "Legneva", Genders.Женский,
                 LocalDate.of(2008, 2, 3));
         Human ivan = new Human("Ivan", "Petrov", Genders.Мужской,
                 LocalDate.of(2013, 12, 3));
         FamilyTree familyPetrovi = new FamilyTree();
         familyPetrovi.setSpouse(sergei, vaselisa);
+        familyPetrovi.setMother(vasilii, anna); // TODO: Заменить на setChildren
         familyPetrovi.setMother(sergei, anna);
         familyPetrovi.setMother(sofia, vaselisa);
         //TODO: Дописать метод setChildren;
@@ -24,6 +26,7 @@ public class Main {
 
         System.out.println(familyPetrovi);
         System.out.println(sergei);
+        System.out.println(anna);
 
 
     }

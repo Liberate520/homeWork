@@ -29,6 +29,7 @@ public class Human {
         this.spouse = spouse;
         this.children = children;
         //TODO: Добавить список бывших супругов - должны добавляться при разводе
+        //TODO: Добавить уникальный автоматический ID каждому человеку и завязать на него equals
     }
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate) {
