@@ -17,7 +17,7 @@ public class Main {
                 LocalDate.of(2013, 12, 3));
         FamilyTree familyPetrovi = new FamilyTree();
         familyPetrovi.setSpouse(sergei, vaselisa);
-        familyPetrovi.setMother(vasilii, anna); // TODO: Заменить на setChildren
+        familyPetrovi.setChildren(anna, vasilii);
         familyPetrovi.setMother(sergei, anna);
         familyPetrovi.setMother(sofia, vaselisa);
         //TODO: Дописать метод setChildren;
@@ -26,6 +26,7 @@ public class Main {
 
         System.out.println(familyPetrovi);
         System.out.println(sergei);
+        System.out.println("\n");
         System.out.println(anna);
 
 

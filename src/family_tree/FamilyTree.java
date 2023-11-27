@@ -13,6 +13,7 @@ public class FamilyTree {
         } else {
             System.out.println(firstSpouce.getName() + " или " + secondSpouce.getName() + " уже имеют супруга, пожалуйста" +
                     "проставьте корректные статусы");
+            return false;
         }
         if (!this.familyTree.contains(firstSpouce)) {
             familyTree.add(firstSpouce);
@@ -34,8 +35,6 @@ public class FamilyTree {
                     "проставьте корректные статусы");
         }
         return true;
-
-
     }
 
     public boolean setMother(Human children, Human mother) {
@@ -48,10 +47,28 @@ public class FamilyTree {
         }
         if (mother.getChildren() != null && mother.getChildren().contains(children)) {
             System.out.println("Такой ребенок уже задан");
-            return true;
+            return false;
         } else {
             mother.setChildren(children);
             System.out.println("Вы указали, что: " + mother.getName() + " мать " + children.getName());
+        }
+        return true;
+    }
+
+    public boolean setChildren(Human parent, Human children) {
+        if (!familyTree.contains(children)) {
+            familyTree.add(children);
+        }
+        if (!familyTree.contains(parent)) {
+            familyTree.add(parent);
+        }
+        if (parent.getChildren() != null && parent.getChildren().contains(children)) {
+            System.out.println("Такой ребенок уже задан");
+            return false;
+        } else {
+            parent.setChildren(children);
+            System.out.println("Вы указали, что: " + children.getName() +
+                    " является ребенком " + parent.getName());
         }
         return true;
     }
@@ -64,9 +81,9 @@ public class FamilyTree {
         if (!familyTree.contains(father)) {
             familyTree.add(father);
         }
-        if ( father.getChildren() != null && father.getChildren().contains(children)) {
+        if (father.getChildren() != null && father.getChildren().contains(children)) {
             System.out.println("Такой ребенок уже задан");
-            return true;
+            return false;
         } else {
             father.setChildren(children);
             System.out.println("Вы указали, что: " + father.getName() + " отец " + children.getName());
