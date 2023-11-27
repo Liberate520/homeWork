@@ -18,7 +18,7 @@ public class Main {
         Human human1 = new Human("Иванов Иван Иванович", Gender.Male, LocalDate.of(1984, 12, 31));
         familyTree.addHuman(human1);
 
-        Human human2 = new Human("Петров Петр Петрович", Gender.Male, LocalDate.of(1976, 06, 11));
+        Human human2 = new Human("Петров Петр Венедиктович", Gender.Male, LocalDate.of(1976, 06, 11));
         familyTree.addHuman(human2);
 
         Human human3 = new Human("Семенов Семен Семенович", Gender.Male, LocalDate.of(1964, 01, 16));
