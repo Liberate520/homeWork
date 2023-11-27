@@ -20,7 +20,6 @@ public class Main {
         familyPetrovi.setChildren(anna, vasilii);
         familyPetrovi.setMother(sergei, anna);
         familyPetrovi.setMother(sofia, vaselisa);
-        //TODO: Дописать метод setChildren;
         familyPetrovi.setFather(sofia, sergei);
 
 
