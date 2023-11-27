@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable, Comparable<Human>, FamilyTreeItem<Human> {
-
     private int id;
     private String name;
     private LocalDate dateOfBirth;

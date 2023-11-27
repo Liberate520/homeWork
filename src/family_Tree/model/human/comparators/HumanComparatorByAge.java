@@ -8,6 +8,12 @@ public class HumanComparatorByAge<E extends FamilyTreeItem> implements Comparato
 
     @Override
     public int compare(E o1, E o2) {
-        return o1.getAge().compareTo(o2.getAge());
+        String age1 = o1.getAge();
+        String age2 = o2.getAge();
+            if (age1.length() == age2.length()){
+                return o1.getAge().compareTo(o2.getAge());
+            } else if (age1.length() < age2.length()) {
+                return -1;
+            } else return +1;
     }
 }
