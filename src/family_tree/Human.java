@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Human {
     private String firstName;
     private String lastName;
-
     private Genders gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
@@ -28,6 +27,7 @@ public class Human {
         this.father = father;
         this.spouse = spouse;
         this.children = children;
+        //TODO: Добавить список бывших супругов - должны добавляться при разводе
     }
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate) {
