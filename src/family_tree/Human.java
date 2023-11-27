@@ -44,6 +44,7 @@ public class Human {
     public Human(String firstName, String lastName, Genders gender, Human mother, Human father) {
         this(firstName, lastName, gender, null, null, mother, father, null, null);
     }
+
     public void setMother(Human mother) {
         if (this.mother != null) {
             System.out.println("Мать уже задана");
@@ -54,7 +55,7 @@ public class Human {
     }
 
     public void setFather(Human father) {
-        if (this.father!= null) {
+        if (this.father != null) {
             System.out.println("Отец уже задан");
         } else {
             this.father = father;
@@ -62,7 +63,7 @@ public class Human {
     }
 
     public void setSpouse(Human spouse) {
-        if (this.spouse!= null) {
+        if (this.spouse != null) {
             System.out.println("Супруг уже задан");
         } else {
             this.spouse = spouse;
@@ -94,6 +95,7 @@ public class Human {
     public Human getMother() {
         return mother;
     }
+
     public Human getFather() {
         return father;
     }
@@ -106,6 +108,7 @@ public class Human {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int age;
+        boolean flag = false;
         sb.append("Персональная карточка: \n");
         sb.append(String.format("Имя, Фамилия: %s %s%n", this.firstName, this.lastName));
         sb.append(String.format("Пол: %s%n", this.gender));
@@ -130,8 +133,11 @@ public class Human {
             sb.append(String.format("Супруг(а): %s%n", this.spouse.getName()));
         }
         if (this.children != null) {
+            sb.append("Дети: ");
             for (Human child : this.children) {
-                sb.append(String.format("Дети: %s ", child.getName()));
+                if (flag) sb.append(", ");
+                sb.append(child.getName());
+                flag = true;
             }
 
         }
