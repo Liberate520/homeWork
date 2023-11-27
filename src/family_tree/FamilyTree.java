@@ -1,10 +1,12 @@
 package family_tree;
 
+import writer.Writable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Writable, Serializable {
     private List<Human> familyTree = new ArrayList<Human>();
 
     public boolean setSpouse(Human firstSpouce, Human secondSpouce) {
