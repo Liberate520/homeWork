@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        //TODO: Уйти от использования объекта Human, задавать дерево напрямую через familyTree
         Human sergei = new Human("Sergei", "Petrov", Genders.Мужской,
                 LocalDate.of(1989, 1, 1), LocalDate.of(2015, 12, 31));
         Human vaselisa = new Human("Vaselisa", "Petrova", Genders.Женский,

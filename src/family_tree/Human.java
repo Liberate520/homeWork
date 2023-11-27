@@ -16,7 +16,6 @@ public class Human {
     private Human spouse;
     private List<Human> children;
     //TODO: Добавить boolean переменную, фиксирующию статус нахождения в дереве
-    //TODO: Перенести Human и FamilyTree в отдельный пакет, исправить видимость функций Human
 
     public Human(String firstName, String lastName, Genders gender, LocalDate birthDate,
                  LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
@@ -46,28 +45,35 @@ public class Human {
         this(firstName, lastName, gender, null, null, mother, father, null, null);
     }
 
-    void setMother(Human mother) {
+
+    boolean setMother(Human mother) {
         if (this.mother != null) {
             System.out.println("Мать уже задана");
+            return false;
         } else {
             this.mother = mother;
+            return true;
         }
 
     }
 
-    void setFather(Human father) {
+    boolean setFather(Human father) {
         if (this.father != null) {
             System.out.println("Отец уже задан");
+            return false;
         } else {
             this.father = father;
+            return true;
         }
     }
 
-    void setSpouse(Human spouse) {
+    boolean setSpouse(Human spouse) {
         if (this.spouse != null) {
             System.out.println("Супруг уже задан");
+            return false;
         } else {
             this.spouse = spouse;
+            return true;
         }
     }
 
