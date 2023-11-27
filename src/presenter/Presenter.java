@@ -4,11 +4,12 @@ import model.human.Gender;
 import model.service.Service;
 import view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Presenter {
     private View view;
-    private Service service;
+    private static Service service;
 
     public Presenter(View view) {
         this.view = view;
@@ -31,4 +32,13 @@ public class Presenter {
     public void sortByAge() {
         service.sortByAge();
     }
+
+    public void read() throws IOException, ClassNotFoundException {
+        service.read();
+    }
+
+    public static void save() throws IOException, ClassNotFoundException {
+        service.save();
+    }
+
 }

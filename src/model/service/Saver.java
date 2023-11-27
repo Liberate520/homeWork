@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.List;
 
 public class Saver implements Serializable{
-    public boolean write (Object familyTree, String filePath) throws IOException, ClassNotFoundException {
+    public boolean write (Object familyTree, String filePath) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             outputStream.writeObject(familyTree);
             return true;
@@ -16,7 +16,7 @@ public class Saver implements Serializable{
         }
     }
 
-    public static List read (String filePath) throws IOException, ClassNotFoundException {
+    public static List read (String filePath) {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
             FamilyTree familyTree = new FamilyTree();
             return (List)(objectInputStream.readObject());

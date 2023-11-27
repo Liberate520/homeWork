@@ -2,12 +2,14 @@ package view.commands;
 
 import view.View;
 
+import java.io.IOException;
+
 public abstract class Command {
     private View view;
     private String description;
 
-    public Command(String descrption, View view) {
-        this.description = descrption;
+    public Command(String description, View view) {
+        this.description = description;
         this.view = view;
     }
 
@@ -19,5 +21,5 @@ public abstract class Command {
         return view;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws IOException, ClassNotFoundException;
 }

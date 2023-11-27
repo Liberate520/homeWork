@@ -2,11 +2,12 @@ package view;
 
 import view.commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu {
-    private List<Command> commandList;
+    public List<Command> commandList;
 
     public MainMenu(View view) {
         commandList = new ArrayList<>();
@@ -14,7 +15,10 @@ public class MainMenu {
         commandList.add(new SortByAge(view));
         commandList.add(new SortByAge(view));
         commandList.add(new GetFamilyTree(view));
-        commandList.add(new Finish(view));
+        commandList.add(new Save(view));
+        commandList.add(new Read(view));
+        commandList.add(new SaveAndExit(view));
+        commandList.add(new Exit(view));
     }
 
     public String print() {
@@ -24,12 +28,12 @@ public class MainMenu {
             stringBuilder.append(i+1);
             stringBuilder.append(". ");
             stringBuilder.append(commandList.get(i).getDescription());
-            stringBuilder.append("\n");
+            stringBuilder.append(".\n");
         }
         return stringBuilder.toString();
     }
 
-    public void execute (int choise) {
+    public void execute (int choise) throws IOException, ClassNotFoundException {
         Command command = commandList.get(choise-1);
         command.execute();
     }

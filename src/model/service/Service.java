@@ -28,11 +28,11 @@ public class Service {
         }
         return stringBuilder.toString();
     }
-    public void save () throws IOException, ClassNotFoundException {
+    public void save () {
         Saver saver = new Saver();
         saver.write(tree.getElementList(), "SaverFile.txt");
     }
-    public void read () throws IOException, ClassNotFoundException {
+    public void read () {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("Elements list from file: \n");
         for (Human human: (List<Human>) Objects.requireNonNull(Saver.read("SaverFile.txt"))) {

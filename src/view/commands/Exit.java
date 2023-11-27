@@ -2,13 +2,13 @@ package view.commands;
 
 import view.View;
 
-public class Finish  extends Command {
+public class Exit  extends Command {
 
-    public Finish(View view) {
+    public Exit(View view) {
         super("Finish", view);
     }
 
     public void execute(){
-        getView().finish();
+        getView().exit();
     }
 }
