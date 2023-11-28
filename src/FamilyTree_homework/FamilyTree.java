@@ -64,6 +64,6 @@ public class FamilyTree implements Serializable{
     public void saveToFile(String s) {
     }
 
-    public void loadFromFile(String s) {
+    public void setFilePath(String filePath) {
     }
 }

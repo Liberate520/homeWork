@@ -8,6 +8,7 @@ public interface Writable {
     private boolean save(List<Human> humanList) {
         return false;
     }
+
     private void setFilePath(String filePath) {
 
     }

@@ -1,11 +1,26 @@
 package FamilyTree_homework;
+import FamilyTree_homework.writer.FileHandler;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FamilyTree tree = testTree();
+        FamilyTree tree = load();
+        //FamilyTree tree = testTree();
         System.out.println(tree);
+    }
+    private static FamilyTree load(){
+        String filePath = "C:\\Users\\tiliv\\IdeaProjects\\homeWork\\src\\FamilyTree_homework";
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+    private static void save(FamilyTree tree){
+        String filePath = "C:\\Users\\tiliv\\IdeaProjects\\homeWork\\src\\FamilyTree_homework";
+        FileHandler fileHandler = new FileHandler();
+        if(fileHandler.save(tree, filePath)){
+            System.out.println();
+        }
     }
     static FamilyTree testTree() throws IOException {
         FamilyTree tree = new FamilyTree();
