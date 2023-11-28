@@ -10,6 +10,5 @@ public interface Writable {
     }
 
     private void setFilePath(String filePath) {
-
     }
 }
