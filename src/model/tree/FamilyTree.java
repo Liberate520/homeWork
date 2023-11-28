@@ -39,7 +39,6 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
         FamilyMember castedMother = (FamilyMember) mother;
         FamilyMember castedFather = (FamilyMember) father;
 
-
         member = (M) builder.build(name, surname, patronymicName, gender,
                 birthDate, deathDate, castedMother, castedFather);
 
@@ -58,6 +57,7 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
 
             addToParents(member);
             addToChildren(member);
+
             return true;
         }
         return false;
@@ -85,6 +85,12 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
             }
         }
         return null;
+    }
+
+    private boolean checkId(long id){
+        builder.assignID(familyMembers);
+        familyMemberId = builder.getId();
+        return id < familyMemberId && id >= 0;
     }
 
     public List<M> getSiblins(int id){
@@ -151,10 +157,6 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
         return false;
     }
 
-    private boolean checkId(long id){
-        return id < familyMemberId && id >= 0;
-    }
-
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("In the tree ");
@@ -204,7 +206,6 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
         }
 
         builder.assignID(familyMembers);
-        System.out.println(builder.getId());
     }
 
 }

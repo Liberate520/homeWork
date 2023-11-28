@@ -9,6 +9,7 @@ public interface View {
     void sortByBirthdate();
     void save();
     void loadFamilyTree();
+    void changeFamilyMember();
     void exit();
 
 }

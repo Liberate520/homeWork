@@ -1,5 +1,7 @@
 package homeWork.src.view;
 
+import homeWork.src.model.member.FamilyMember;
+import homeWork.src.model.tree.FamilyTree;
 import homeWork.src.model.tree.Gender;
 import homeWork.src.presenter.Presenter;
 import java.time.LocalDate;
@@ -68,6 +70,50 @@ public class ConsoleUI implements View {
         check = false;
     }
 
+    public void changeFamilyMember(){
+        String name;
+        String surname;
+        String patronymicName;
+
+        System.out.println("Enter the ID of the member you want to change: ");
+        long id = Long.parseLong(scanner.nextLine());
+
+        FamilyMember member = presenter.getFamilyMember(id);
+
+        if(member != null) {
+            System.out.println("Change name? Y/N");
+            String prompt1 = scanner.nextLine().toLowerCase();
+            if (prompt1.equals("y")) {
+                System.out.println("Type new name: ");
+                name = scanner.nextLine();
+            } else {
+                name = member.getName();
+            }
+
+            System.out.println("Change surname? Y/N");
+            String prompt2 = scanner.nextLine().toLowerCase();
+            if (prompt2.equals("y")) {
+                System.out.println("Type new surname: ");
+                surname = scanner.nextLine();
+            } else {
+                surname = member.getSurname();
+            }
+
+            System.out.println("Change patronymic name? Y/N");
+            String prompt3 = scanner.nextLine().toLowerCase();
+            if (prompt3.equals("y")) {
+                System.out.println("Type new patronymic name: ");
+                patronymicName = scanner.nextLine();
+            } else {
+                patronymicName = member.getPatronymicName();
+            }
+
+            presenter.changeFamilyMember(id, name, surname, patronymicName);
+        }else {
+            System.out.println("Family member with ID " + id + " not found.");
+        }
+    }
+
     public void loadFamilyTree() {
         presenter.loadFamilyTree();
     }
@@ -102,8 +148,8 @@ public class ConsoleUI implements View {
         presenter.getFamilyTreeInfo();
 
         System.out.println("Would you like to add parents? Y/N");
-
-        if (scanner.nextLine().equals("Y")){
+        String prompt = scanner.nextLine().toLowerCase();
+        if (prompt.equals("y")){
             System.out.println("Select id of mother: ");
             int motherID = Integer.parseInt(scanner.nextLine());
 
@@ -111,10 +157,9 @@ public class ConsoleUI implements View {
             int fatherID = Integer.parseInt(scanner.nextLine());
 
             presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate, motherID, fatherID);
+        } else {
+            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate);
         }
-
-        presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate);
-
     }
 
     private void printMenu(){

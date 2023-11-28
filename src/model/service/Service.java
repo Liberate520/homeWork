@@ -90,16 +90,16 @@ public class Service {
         return newTree.setWedding(m1ID, m2ID);
     }
 
-    public void sortBySurname(FamilyTree<FamilyMember> tree){
-        tree.sortBySurname();
+    public void sortBySurname(){
+        newTree.sortBySurname();
     }
 
     public void sortByAge(FamilyTree<FamilyMember> tree){
         tree.sortByAge();
     }
 
-    public void sortByBirthDate(FamilyTree<FamilyMember> tree){
-        tree.sortByBirthDate();
+    public void sortByBirthDate(){
+        newTree.sortByBirthDate();
     }
 
     public boolean addChild(FamilyMember member, FamilyMember child){
@@ -122,5 +122,20 @@ public class Service {
 
     public void save(){
         newTree.save();
+    }
+
+    public void changeFamilyMember(long id, String name, String surname, String patronymicName){
+        FamilyMember member =  newTree.getById(id);
+        member.setName(name);
+        member.setSurname(surname);
+        member.setPatronymicName(patronymicName);
+    }
+
+    public String getName(FamilyMember member) {
+        return member.getName();
+    }
+
+    public FamilyMember getFamilyMember(long id) {
+        return newTree.getById(id);
     }
 }

@@ -24,7 +24,7 @@ public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Compa
 
     public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, LocalDate deathDate,
-                        FamilyMember father, FamilyMember mother) {
+                        FamilyMember mother, FamilyMember father) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -44,7 +44,7 @@ public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Compa
 
     public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
                         LocalDate birthDate, FamilyMember father, FamilyMember mother){
-        this(id, name, surname, patronymicName, gender, birthDate, null, father, mother);
+        this(id, name, surname, patronymicName, gender, birthDate, null, mother, father);
     }
 
     public FamilyMember(long id, String name, String surname, String patronymicName, Gender gender,
@@ -109,7 +109,15 @@ public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Compa
     public FamilyMember getSpouse(){return spouse;}
 
     public String getName(){
-        return name + " " + surname + " " + patronymicName;
+        return name;
+    }
+
+    public String getSurname(){
+        return surname;
+    }
+
+    public String getPatronymicName(){
+        return patronymicName;
     }
 
     public void setId(long id){
@@ -231,4 +239,15 @@ public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Compa
         return surname.compareTo(o.surname);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPatronymicName(String patronymicName) {
+        this.patronymicName = patronymicName;
+    }
 }

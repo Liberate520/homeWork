@@ -28,8 +28,8 @@ public class FamilyMemberBuilder {
     }
 
     public FamilyMember build(String name, String surname, String patronymicName, Gender gender,
-                        LocalDate birthDate, LocalDate deathDate, FamilyMember father, FamilyMember mother){
-        return new FamilyMember(id++, name, surname, patronymicName, gender, birthDate, null, father, mother);
+                        LocalDate birthDate, LocalDate deathDate, FamilyMember mother, FamilyMember father){
+        return new FamilyMember(id++, name, surname, patronymicName, gender, birthDate, null, mother, father);
     }
 
     public FamilyMember build(String name, String surname, String patronymicName, Gender gender,

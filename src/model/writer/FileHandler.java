@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.List;
 
 public class FileHandler implements Writable{
-    // Добавить переменну path, убрать path из аргументов методов
     private String filePath = "src/homeWork/src/model/writer/tree.txt";
     public boolean save(List<? extends Serializable> serializableList) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {

@@ -16,6 +16,7 @@ public class MainMenu {
         commandList.add(new SortByBirthdate(view));
         commandList.add(new SaveFamilyTree(view));
         commandList.add(new LoadFamilyTree(view));
+        commandList.add(new ChangeFamilyMember(view));
         commandList.add(new Exit(view));
     }
 

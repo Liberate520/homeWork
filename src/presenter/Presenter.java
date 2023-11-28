@@ -17,13 +17,18 @@ public class Presenter {
         service = new Service();
     }
 
+    public void changeFamilyMember(long id, String name, String surname, String patronymicName){
+        service.changeFamilyMember(id, name, surname, patronymicName);
+        getFamilyTreeInfo();
+    }
+
     public void addFamilyMember(String name, String surname, String patronymicName, Gender gender, LocalDate birthDate) {
         service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, -1, -1);
         getFamilyTreeInfo();
     }
 
     public void addFamilyMember(String name, String surname, String patronymicName, Gender gender, LocalDate birthDate, int motherID, int fatherID) {
-        service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, -1, -1);
+        service.createFamilyMember(name, surname, patronymicName, gender, birthDate, null, motherID, fatherID);
         getFamilyTreeInfo();
     }
 
@@ -33,14 +38,14 @@ public class Presenter {
     }
 
     public void sortBySurname() {
-        FamilyTree<FamilyMember> tree = service.getFamilyTree();
-        service.sortBySurname(tree);
+//        FamilyTree<FamilyMember> tree = service.getFamilyTree();
+        service.sortBySurname();
         getFamilyTreeInfo();
     }
 
     public void sortByBirthdate() {
-        FamilyTree<FamilyMember> tree = service.getFamilyTree();
-        service.sortByBirthDate(tree);
+//        FamilyTree<FamilyMember> tree = service.getFamilyTree();
+        service.sortByBirthDate();
         getFamilyTreeInfo();
     }
 
@@ -51,5 +56,13 @@ public class Presenter {
     public void loadFamilyTree() {
         service.loadTree();
         getFamilyTreeInfo();
+    }
+
+    public String getName(FamilyMember member) {
+        return service.getName(member);
+    }
+
+    public FamilyMember getFamilyMember(long id) {
+        return service.getFamilyMember(id);
     }
 }
