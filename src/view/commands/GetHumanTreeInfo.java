@@ -1,14 +1,14 @@
-package study_group.view.commands;
+package view.commands;
 
-import study_group.view.ConsoleUI;
+import view.ConsoleUI;
 
-public class GetStudentsInfo extends Command {
-    public GetStudentsInfo(ConsoleUI consoleUI) {
+public class GetHumanTreeInfo extends Command {
+    public GetHumanTreeInfo(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Получить список студентов";
+        description = "Получить список семейного дерева";
     }
 
     public void execute(){
-        consoleUI.getStudentsListInfo();
+        consoleUI.getFamalyTreeListInfo();
     }
 }

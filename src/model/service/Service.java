@@ -17,6 +17,11 @@ public class Service {
         this.famalyTree = new FamalyTree<>();
     }
 
+    public void addHuman(String name, int year_bd, int m_bd, int day_bd, int year_dd,
+                         int m_dd, int day_dd, Gender gender){
+        this.famalyTree.addT(new Human(name,year_bd,m_bd,day_bd,year_dd,m_dd,day_dd,gender));
+    }
+
     public void addHuman(String name, int year_bd, int m_bd, int day_bd, Gender gender){
         this.famalyTree.addT(new Human(name, year_bd, m_bd, day_bd, gender));
     }
@@ -51,5 +56,9 @@ public class Service {
     public boolean saveInFile(String nameFile){
         Filehundler filehundler = new Filehundler();
         return filehundler.SaveInFile(this.famalyTree, nameFile);
+    }
+
+    public Human getHumanId (int id){
+        return famalyTree.searchID(id);
     }
 }

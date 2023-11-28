@@ -43,6 +43,10 @@ public class DataLive implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(" Дата рождения:"+ this.birthday.getDayOfMonth()+
                   "."+this.birthday.getMonthValue()+"."+this.birthday.getYear());
+        if (dayded != null){
+            sb.append("; Дата смерти:"+ this.dayded.getDayOfMonth()+
+                  "."+this.dayded.getMonthValue()+"."+this.dayded.getYear());
+        }
         return sb.toString();
     }
 }

@@ -1,15 +1,15 @@
-package study_group.view.commands;
+package view.commands;
 
-import study_group.view.ConsoleUI;
+import view.ConsoleUI;
 
-public class AddStudent extends Command{
+public class AddHuman extends Command{
 
-    public AddStudent(ConsoleUI consoleUI) {
+    public AddHuman(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Добавить студента";
+        description = "Добавить человека в дерево";
     }
 
     public void execute(){
-        consoleUI.addStudent();
+        consoleUI.addHuman();
     }
 }

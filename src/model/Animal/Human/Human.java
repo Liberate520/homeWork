@@ -11,7 +11,6 @@ import Animal.Animal;
  * Класс ЧЕЛОВЕК
  */
 public class Human implements Comparable<Human>, Animal<Human>, Serializable{
-    private static int count;
     private int ID;
     private String name;
     private DataLive data;
@@ -33,14 +32,15 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
      */
     public Human (String name, int year_bd, int m_bd, int day_bd, int year_dd,
                   int m_dd, int day_dd, Gender gender){
-        this.ID = count++;
+        this.ID = -1;
         this.name = name;
-        this.data.setTimeLive(LocalDate.of(year_bd, m_bd, day_bd),LocalDate.of(year_dd, m_dd, day_dd));
+        this.data = new DataLive();
+        data.setTimeLive(LocalDate.of(year_bd, m_bd, day_bd),LocalDate.of(year_dd, m_dd, day_dd));
         this.gender = gender;
         this.childrenList = new ArrayList<>();
     }
     public Human (String name, int year_bd, int m_bd, int day_bd, Gender gender){
-        this.ID = count++;
+        this.ID = -1;
         this.name = name;
         this.data = new DataLive(year_bd,m_bd,day_bd);
         this.gender = gender;
@@ -113,8 +113,16 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
             case "м":
                 this.gender = Gender.Male;
                 break;
+            
+            case "М":
+                this.gender = Gender.Male;
+                break;
         
             case "ж":
+                this.gender = Gender.Female;
+                break;
+            
+            case "Ж":
                 this.gender = Gender.Female;
                 break;
         }
@@ -154,7 +162,7 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
     }
 
     public Human getSpouse(){
-        return this.spouse;
+        return spouse;
     }
 
     public void addChildren(Human children){

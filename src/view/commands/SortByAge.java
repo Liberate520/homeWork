@@ -1,6 +1,6 @@
-package study_group.view.commands;
+package view.commands;
 
-import study_group.view.ConsoleUI;
+import view.ConsoleUI;
 
 public class SortByAge extends Command {
     public SortByAge(ConsoleUI consoleUI) {

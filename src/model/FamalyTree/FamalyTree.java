@@ -27,6 +27,7 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
      * Метод добавления нового человека в генеологическое дерево.
      */
     public void addT(T t){
+        t.setId(listT.size()+1);
         listT.add(t);
     }
 
@@ -43,31 +44,34 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
         switch (index) {
             case 1:
                 t0.setFather(t1);
+                if (t1.getSpouse()!= null){
+                    t1.getSpouse().addChildren(t0);
+                    t0.setMather(t1.getSpouse());
+                }
                 t1.addChildren(t0);
-                t1.getSpouse()
-                      .addChildren(t0);
                 break;
             case 2:
                 t0.setMather(t1);
+                if (t1.getSpouse()!=null){
+                    t0.setFather(t1.getSpouse());
+                    t1.getSpouse().addChildren(t0);
+                }
                 t1.addChildren(t0);
-                t1.getSpouse()
-                      .addChildren(t0);
                 break;
             case 3:
                 t0.setSpouse(t1);
-                t1.setSpouse(t1);
+                t1.setSpouse(t0);
                 break;
             case 4:
                 t0.addChildren(t1);
-                t0.getSpouse()
-                      .addChildren(t1);
+                if (t0.getSpouse()!=null) t0.getSpouse().addChildren(t1);
                 if (t0.getGender() == Gender.Male){
                     t1.setFather(t0);
-                    t1.setMather(t0.getSpouse());
+                    if (t0.getSpouse()!=null)t1.setMather(t0.getSpouse());
                 }
                 else{
                     t1.setMather(t0);
-                    t1.setFather(t0.getSpouse());
+                    if (t0.getSpouse()!=null)t1.setFather(t0.getSpouse());
                 }
                 break;
         }
