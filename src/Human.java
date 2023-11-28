@@ -10,6 +10,7 @@ public class Human {
     List<Human> child;
 
     LocalDate Ld;
+    Gender gender;
 
     public Human(String name, int age) {
         child = new ArrayList<>();
