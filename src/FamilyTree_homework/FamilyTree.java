@@ -1,39 +1,69 @@
 package FamilyTree_homework;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable{
+    private long humansId;
     private List<Human> humanList;
 
     public FamilyTree() {
-        humanList = new ArrayList<>();
+        this(new ArrayList<>());
+    }
+    public FamilyTree(List<Human> humanList) {
+        this.humanList = humanList;
     }
 
-    public void addHuman(Human human){
-        humanList.add(human);
-    }
-    public Human getByName(String name){
-        for (Human human: humanList){
-            if (human.getName().equals(name)){
-                return human;
-            }
+    public boolean add(Human human){
+        if (human == null) {
+            return false;
         }
-        return null;
-    }
+        if (!humanList.contains(human)){
+            humanList.add(human);
+            human.setId(humansId++);
 
-    public String getHumanListInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Семейное древо: \n");
-        for (Human human: humanList){
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
+            addToParents(human);
+            addToChildren(human);
+
+            return true;
         }
-        return stringBuilder.toString();
+        return false;
+    }
+    private void addToParents(Human human){
+        for (Human parent: human.getParents()){
+            parent.addChild(human);
+        }
     }
 
+    private void addToChildren(Human human){
+        for (Human child: human.getChildren()){
+            child.addParent(human);
+        }
+    }
     @Override
-    public String toString(){
-        return getHumanListInfo();
+    public String toString() {
+        return getInfo();
+    }
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("В дереве ");
+        sb.append(humanList.size());
+        sb.append(" объектов: \n");
+        for (Human human: humanList){
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void saveToFile(String s) {
+    }
+
+    public void loadFromFile(String s) {
     }
 }
