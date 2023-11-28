@@ -41,6 +41,7 @@ public class FamilyTree implements Writable, Serializable {
         }
         return true;
     }
+//Todo: rename children to child
 
     public boolean setMother(Human child, Human mother) {
         child.setMother(mother);
