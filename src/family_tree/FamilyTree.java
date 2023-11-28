@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Writable, Serializable {
+public class FamilyTree implements Serializable {
     private List<Human> familyTree = new ArrayList<>();
     private Human top;
 
