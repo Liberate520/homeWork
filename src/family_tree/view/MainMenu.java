@@ -11,9 +11,9 @@ public class MainMenu {
 
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
-        commandList.add(new GetTreeInfo(consoleUI));
-        commandList.add(new SortByAge(consoleUI));
         commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByAge(consoleUI));
+        commandList.add(new SortByLastName(consoleUI));
         commandList.add(new SortByIncome(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
@@ -31,6 +31,7 @@ public class MainMenu {
 
     public void execute(int choice) {
         Command command = commandList.get(choice - 1);
+        System.out.println(command.getDescription().toUpperCase());
         command.execute();
     }
 

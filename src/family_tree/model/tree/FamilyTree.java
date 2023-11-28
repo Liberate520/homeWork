@@ -4,11 +4,11 @@ import family_tree.model.Comparator.ComparatorByName;
 import family_tree.model.Comparator.ComparatorByBirthDate;
 import family_tree.model.human.Human;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public abstract class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<T>, FamilyTreeHub<Human> {
+public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, Iterable<T>, FamilyTreeHub {
 
     protected int age;
     private String lastName;
@@ -19,6 +19,8 @@ public abstract class FamilyTree<T extends TreeNode<T>> implements Serializable,
     private String position;
     private LocalDate birthDate;
     public String info;
+
+
 
     //    ArrayList<Human> humans = new ArrayList<>();
 //    public FamilyTree() { };
@@ -70,6 +72,11 @@ public abstract class FamilyTree<T extends TreeNode<T>> implements Serializable,
 
     @Override
     public String getPosition() { return position; }
+
+    @Override
+    public void getAge() {
+
+    }
 
 //    @Override
 //    public void getAge() {  }
@@ -134,6 +141,34 @@ public abstract class FamilyTree<T extends TreeNode<T>> implements Serializable,
 ////            humanList.add(human);
 //        }
 //    }
+
+    public static Human handlerForTree() {
+        String filePath = "homeWork/src/model_app/family_tree.txt";
+        // выводим на экран
+        Human human = null;
+        try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            // Десериализуем объекты
+            while (true) {
+                try {
+                    human = (Human) objectInputStream.readObject();
+                    System.out.println(human);
+//                    return human;
+//                    return (Human) objectInputStream.readObject();
+                }
+                catch (EOFException e) {
+                    break;
+                }
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return human;
+    }
+
+    public static void handlerForTreeMethod(){
+
+    }
 
     public void sortByName(){
         humanList.sort(new ComparatorByName());

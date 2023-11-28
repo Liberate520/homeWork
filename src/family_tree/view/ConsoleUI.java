@@ -38,7 +38,6 @@ public class ConsoleUI implements View {
 
     @Override
     public void start() {
-
         while (work){
             title();
             printMenu();
@@ -93,16 +92,21 @@ public class ConsoleUI implements View {
         System.out.println(menu.menu());
     }
 
-    public void sortByName() {
-        presenter.sortByName();
+    public void sortByLastName() {
+        presenter.sortByLastName();
     }
 
     public void sortByAge() {
+//        System.out.println(presenter.sortByAge());
         presenter.sortByAge();
     }
 
     public void sortByIncome() {
         presenter.sortByIncome();
     }
+
+    public void sortByName() { presenter.sortByName(); }
+
+
 }
 

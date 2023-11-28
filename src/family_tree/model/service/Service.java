@@ -5,21 +5,18 @@ import family_tree.model.base.SortFileByAge;
 import family_tree.model.base.SortFileByIncome;
 import family_tree.model.base.SortFileByLastName;
 import family_tree.model.tree.FamilyTree;
-import family_tree.model.human.Human;
+import static family_tree.model.tree.FamilyTree.handlerForTree;
 
 public class Service {
 //    private FamilyTree<Human> familyTree;
 
     public Service(){
-        FamilyTree familyTree = new FamilyTree() {
-            @Override
-            public void getAge() {
-                this.age = age;
-            }
-        };
+        FamilyTree familyTree = new FamilyTree();
+
     }
 
-//    FamilyTree familyTree = new FamilyTree();
+    FamilyTree familyTree = new FamilyTree();
+
 
 
     public void sortByLastName(){
@@ -32,5 +29,9 @@ public class Service {
 
     public void sortByIncome() {
         SortFileByIncome.sortByIncomeForTree();
+    }
+
+    public void sortByName() {
+        handlerForTree();
     }
 }

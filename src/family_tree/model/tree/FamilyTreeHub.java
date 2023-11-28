@@ -2,7 +2,7 @@ package family_tree.model.tree;
 
 import java.time.LocalDate;
 
-public interface FamilyTreeHub<T> {
+public interface FamilyTreeHub {
     String getLastName();
 
 //    String getFirstName();
