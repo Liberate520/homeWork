@@ -8,6 +8,12 @@ import java.util.List;
 
 public class FamilyTree implements Writable, Serializable {
     private List<Human> familyTree = new ArrayList<>();
+    private Human top;
+
+    public Human getTop() {
+        topOfTree(familyTree.getFirst());
+        return top;
+    }
 
     public boolean setSpouse(Human firstSpouce, Human secondSpouce) {
         if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
@@ -88,7 +94,7 @@ public class FamilyTree implements Writable, Serializable {
             familyTree.add(child);
             child.inTree = true;
         }
-        if (!father.inTree)  {
+        if (!father.inTree) {
             familyTree.add(father);
             father.inTree = true;
         }
@@ -109,7 +115,7 @@ public class FamilyTree implements Writable, Serializable {
 
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        sb.append("Семейное древо данной семьи: \n");
+        sb.append("Члены данной семьи: \n");
         for (Human human : familyTree) {
             sb.append(human.getName()).append("\n");
         }
@@ -117,4 +123,29 @@ public class FamilyTree implements Writable, Serializable {
     }
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
+    private String showTree() {
+
+        return null;
+    }
+
+    private boolean topOfTree(Human topEnter) {
+        if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
+            if (topEnter.getSpouse() != null) {
+                if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
+                    topOfTree(topEnter.getSpouse());
+                }
+            } else {
+                top = topEnter;
+            }
+        }
+        if (topEnter != null) {
+            topOfTree(topEnter.getFather());
+            topOfTree(topEnter.getMother());
+        }
+
+        return true;
+    }
 }
+
+
+

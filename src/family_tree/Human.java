@@ -49,6 +49,10 @@ public class Human implements Writable, Serializable {
         this(firstName, lastName, gender, null, null, mother, father, null, null);
     }
 
+    public Human() {
+
+    }
+
 
     boolean setMother(Human mother) {
         if (this.mother != null) {
@@ -99,7 +103,11 @@ public class Human implements Writable, Serializable {
         return deathDate;
     }
 
-    String getName() {
+    public Gender getGender() {
+        return gender;
+    }
+
+    public String getName() {
         return firstName + " " + lastName;
     }
 

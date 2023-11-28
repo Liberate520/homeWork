@@ -38,6 +38,8 @@ public class Main {
         fileHandler.writeObject(familyPetrovi, "familyPetrovi");
         FamilyTree recordTest = (FamilyTree) fileHandler.readObject("familyPetrovi");
         System.out.println(recordTest);
+
+        System.out.println(familyPetrovi.getTop().getName());
     }
 
 
