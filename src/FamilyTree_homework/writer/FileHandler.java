@@ -1,8 +1,11 @@
 package FamilyTree_homework.writer;
 
-import java.io.*;
+import FamilyTree_homework.Human;
 
-public class FileHandler {
+import java.io.*;
+import java.util.List;
+
+public class FileHandler implements Writable{
     public boolean save(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
@@ -21,4 +24,6 @@ public class FileHandler {
             return null;
         }
     }
+
+
 }

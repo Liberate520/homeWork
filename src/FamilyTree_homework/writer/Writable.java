@@ -1,8 +1,14 @@
 package FamilyTree_homework.writer;
 
+import FamilyTree_homework.Human;
+
+import java.util.List;
+
 public interface Writable {
-        boolean save(FamilyTree<Human> tree);
-        FamilyTree<Human> read();
-        void setFilePath(String filePath);
+    private boolean save(List<Human> humanList) {
+        return false;
+    }
+    private void setFilePath(String filePath) {
+
     }
 }
