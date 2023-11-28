@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Writable, Serializable {
-    private List<Human> familyTree = new ArrayList<Human>();
+    private List<Human> familyTree = new ArrayList<>();
 
     public boolean setSpouse(Human firstSpouce, Human secondSpouce) {
         if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
@@ -42,22 +42,22 @@ public class FamilyTree implements Writable, Serializable {
         return true;
     }
 
-    public boolean setMother(Human children, Human mother) {
-        children.setMother(mother);
-        if (!children.inTree) {
-            familyTree.add(children);
-            children.inTree = true;
+    public boolean setMother(Human child, Human mother) {
+        child.setMother(mother);
+        if (!child.inTree) {
+            familyTree.add(child);
+            child.inTree = true;
         }
         if (!mother.inTree) {
             familyTree.add(mother);
             mother.inTree = true;
         }
-        if (mother.getChildren() != null && mother.getChildren().contains(children)) {
+        if (mother.getChildren() != null && mother.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
             return false;
         } else {
-            mother.setChildren(children);
-            System.out.println("Вы указали, что: " + mother.getName() + " мать " + children.getName());
+            mother.setChildren(child);
+            System.out.println("Вы указали, что: " + mother.getName() + " мать " + child.getName());
         }
         return true;
     }
@@ -82,22 +82,22 @@ public class FamilyTree implements Writable, Serializable {
         return true;
     }
 
-    public boolean setFather(Human children, Human father) {
-        children.setFather(father);
-        if (!children.isInTree()) {
-            familyTree.add(children);
-            children.inTree = true;
+    public boolean setFather(Human child, Human father) {
+        child.setFather(father);
+        if (!child.isInTree()) {
+            familyTree.add(child);
+            child.inTree = true;
         }
         if (!father.inTree)  {
             familyTree.add(father);
             father.inTree = true;
         }
-        if (father.getChildren() != null && father.getChildren().contains(children)) {
+        if (father.getChildren() != null && father.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
             return false;
         } else {
-            father.setChildren(children);
-            System.out.println("Вы указали, что: " + father.getName() + " отец " + children.getName());
+            father.setChildren(child);
+            System.out.println("Вы указали, что: " + father.getName() + " отец " + child.getName());
         }
         return true;
     }
