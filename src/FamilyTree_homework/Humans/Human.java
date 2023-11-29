@@ -1,4 +1,4 @@
-package FamilyTree_homework;
+package FamilyTree_homework.Humans;
 
 
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable,Comparable<Human> {
 
     private long id;
     private String name;
@@ -174,6 +174,10 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
     }
 
 }

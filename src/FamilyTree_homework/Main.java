@@ -1,16 +1,18 @@
 package FamilyTree_homework;
+import FamilyTree_homework.Family.FamilyTree;
+import FamilyTree_homework.Humans.Gender;
+import FamilyTree_homework.Humans.Human;
 import FamilyTree_homework.writer.FileHandler;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = load();
-        //FamilyTree tree = testTree();
+        //FamilyTree tree = load();
+        FamilyTree tree = testTree();
         System.out.println(tree);
 
-        save(tree);
+        //save(tree);
     }
     private static FamilyTree load(){
         String filePath = "C:/Users/tiliv/IdeaProjects/homeWork/src/FamilyTree_homework/tree.txt";
@@ -40,7 +42,15 @@ public class Main {
         grandMother.addChild(vasya);
         tree.add(grandMother);
 
+        tree.sortByName();
+        System.out.println(tree.getInfo());
+
+        tree.sortByBirthday();
+        System.out.println(tree.getInfo());
+
         return tree;
+
+
 
     }
 

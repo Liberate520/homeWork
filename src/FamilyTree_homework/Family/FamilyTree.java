@@ -1,9 +1,12 @@
-package FamilyTree_homework;
+package FamilyTree_homework.Family;
+
+import FamilyTree_homework.Comparator.HumanComparatorByBirthday;
+import FamilyTree_homework.Comparator.HumanComparatorByName;
+import FamilyTree_homework.Humans.Human;
+import FamilyTree_homework.Humans.HumanIterator;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,18 @@ public class FamilyTree implements Serializable{
     public FamilyTree(List<Human> humanList) {
         this.humanList = humanList;
     }
+
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+    public void sortByBirthday(){
+        humanList.sort(new HumanComparatorByBirthday());
+    }
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
 
     public boolean add(Human human){
         if (human == null) {
