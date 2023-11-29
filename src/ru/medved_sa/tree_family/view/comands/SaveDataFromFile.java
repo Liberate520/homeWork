@@ -6,7 +6,7 @@ public class SaveDataFromFile extends Command{
 
 
     public SaveDataFromFile(View view) {
-        super(view, "Сохранить дерево в файл");
+        super(view, "Сохранить дерево в файл...");
     }
 
     @Override

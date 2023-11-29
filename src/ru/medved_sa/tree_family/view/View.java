@@ -14,7 +14,7 @@ public interface View {
     void sortByAge();
 
     void finish();
-    void noSortedList();
+    void sortById();
 
     void readDataFromFile();
     void saveDataFromFile();

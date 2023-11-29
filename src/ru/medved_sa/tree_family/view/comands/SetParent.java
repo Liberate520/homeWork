@@ -6,7 +6,7 @@ public class SetParent extends Command {
 
 
     public SetParent(View view) {
-        super(view, "Установить родителя");
+        super(view, "Установить родителя...");
     }
 
     @Override

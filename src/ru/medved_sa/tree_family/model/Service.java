@@ -49,6 +49,9 @@ public class Service {
     public void sortByAge() {
         activeTree.sortByAge();
     }
+    public void sortById() {
+        activeTree.sortById();
+    }
 
     public String getHumanList() {
         return activeTree.getInfo();

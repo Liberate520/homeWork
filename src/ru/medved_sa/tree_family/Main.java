@@ -12,13 +12,11 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
-
-
+//        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
+//
 //        save(familyTreeList);
 //        System.out.println(familyTreeList);
 //        FamilyTree<Human> familyTreeRead = read();
-//
 //
 //        System.out.println(getHumanListInfoIterator(familyTreeRead));
 //
@@ -27,11 +25,10 @@ public class Main {
 //        familyTreeRead.sortByAge();
 //        System.out.println(familyTreeRead);
 
+
+
         View view = new Console();
         view.start();
-
-
-
     }
 
 
@@ -51,13 +48,13 @@ public class Main {
 //    }
 //    private static void save(FamilyTree<Human> familyTreeForPreservation) {
 //        FileHandler<Human> fileHandler = new FileHandler<>();
-//        fileHandler.saveFile(familyTreeForPreservation);
+//        fileHandler.saveFile(familyTreeForPreservation, fileHandler.getFilePath());
 //    }
 
 
     private static FamilyTree<Human> getFamilyTreeTest() {
 
-        FamilyTree<Human> familyTree = new FamilyTree<>("Test");
+        FamilyTree<Human> familyTree = new FamilyTree<>("Ивановы");
 
         Human oleg = new Human("Олег", Gender.Male,
                 LocalDate.of(1988, 3, 5));
