@@ -6,7 +6,7 @@ import familyTree.Model.TreePack.TreeItem;
 import java.io.*;
 
 public class StorageTree<E extends TreeItem<E>> implements Savable<FamilyTree<E>> {
-    public boolean writeTree (Serializable serializable, String fileName){
+    public boolean writeTree (FamilyTree<E> serializable, String fileName){
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             objectOutputStream.writeObject(serializable);
             objectOutputStream.close();
