@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    Human human;
-    List<Human> familyTree;
+    private Human human;
+    private List<Human> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();

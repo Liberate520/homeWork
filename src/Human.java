@@ -96,12 +96,24 @@ public class Human {
         return sb.toString();
     }
 
-    public boolean addChildren(Human human){
-        if(!child.contains(human)) {
-            child.add(human);
+    public boolean addChildren(Human children){
+        if(!child.contains(children)) {
+            child.add(children);
             return true;
         }
         return false;
     }
+
+    public boolean addParants(Human parents){
+        if(parents.getGender().equals(Gender.Mail)){
+            setFather(parents);
+        } else {
+            setMother(parents);
+        }
+        return true;
+    }
+
+
+
 
 }
