@@ -2,30 +2,33 @@ package Main;
 
 import java.time.LocalDate;
 import FamilyTree.FamilyTree;
+import FamilyTreeItems.Sex;
+import FamilyTreeItems.Human.Human;
 import FileHandler.FileHandler;
-import Human.Human;
-import Human.Sex;
 
 public class Main {
     public static long id = 0;
-    public static FamilyTree familyTree;
+    public static FamilyTree<Human> familyTree;
+
     public static void main(String[] args) {
         // FileHandler f = new FileHandler("test.txt");
         // familyTree = (FamilyTree) f.readFromFile();
         boolean testing = true;
-        if (testing) initializeTestData();
-        else familyTree = new FamilyTree();
+        if (testing)
+            initializeTestData();
+        else
+            familyTree = new FamilyTree<>();
         System.out.println(familyTree);
         familyTree.sortByBirthYear();
         System.out.println(familyTree);
     }
-    
+
     private static long getId() {
         return ++id;
     }
 
     private static void initializeTestData() {
-        familyTree = new FamilyTree();
+        familyTree = new FamilyTree<>();
         LocalDate p1Date = LocalDate.of(1997, 3, 2);
         LocalDate p2Date = LocalDate.of(1986, 5, 12);
         LocalDate p3Date = LocalDate.of(1976, 6, 22);

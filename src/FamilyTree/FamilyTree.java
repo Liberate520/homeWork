@@ -4,29 +4,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import Human.ComparatorByBirthYear;
-import Human.ComparatorByFirstName;
-import Human.ComparatorById;
-import Human.ComparatorByLastName;
-import Human.Human;
-import Human.Sex;
+import FamilyTree.Comparators.ComparatorByBirthYear;
+import FamilyTree.Comparators.ComparatorByFirstName;
+import FamilyTree.Comparators.ComparatorById;
+import FamilyTree.Comparators.ComparatorByLastName;
+import FamilyTreeItems.FamilyTreeItem;
+import FamilyTreeItems.Sex;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> familyTree;
-    
-    public FamilyTree(List<Human> familyTree) {
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
+    private List<E> familyTree;
+
+    public FamilyTree(List<E> familyTree) {
         this.familyTree = familyTree;
     }
-    
+
     public FamilyTree() {
-        this(new ArrayList<Human>());
+        this(new ArrayList<E>());
     }
-    
-    public List<Human> getFamilyTree() {
+
+    public List<E> getFamilyTree() {
         return this.familyTree;
     }
 
-    private void addToParents(Human person) {
+    private void addToParents(E person) {
         if (person.getFather() != null) {
             person.getFather().addChild(person);
         }
@@ -35,14 +35,16 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
     }
 
-    private void addParent(Human parent) {
-        for (Human child : parent.getChildren()) {
-            if (parent.getSex().equals(Sex.Male)) child.setFather(parent);
-            else child.setMother(parent);
+    private void addParent(E parent) {
+        for (FamilyTreeItem child : parent.getChildren()) {
+            if (parent.getSex().equals(Sex.Male))
+                child.setFather(parent);
+            else
+                child.setMother(parent);
         }
     }
 
-    public boolean addPerson(Human person) {
+    public boolean addPerson(E person) {
         if (!this.familyTree.contains(person)) {
             this.familyTree.add(person);
             this.addToParents(person);
@@ -51,72 +53,76 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         }
         return false;
     }
-    
-    public boolean removePerson(Human person) {
+
+    public boolean removePerson(E person) {
         if (this.familyTree.contains(person)) {
             this.familyTree.remove(person);
             return true;
         }
         return false;
     }
-    
+
     public boolean removePerson(long id) {
         return this.familyTree.remove(this.getById(id));
     }
 
-    public Human getById(long id) {
+    public E getById(long id) {
         if (this.checkId(id)) {
-            for (Human person : familyTree) {
-                if (person.getId() == id) return person;
+            for (E person : familyTree) {
+                if (person.getId() == id)
+                    return person;
             }
         }
         return null;
     }
 
     private boolean checkId(long id) {
-        if (id > 0) return true;
+        if (id > 0)
+            return true;
         return false;
     }
 
-    public List<Human> getSiblings(Human person) {
-        List<Human> siblings = new ArrayList<>();
+    public List<FamilyTreeItem> getSiblings(E person) {
+        List<FamilyTreeItem> siblings = new ArrayList<>();
         if (person.getMother() != null) {
-            for (Human child : person.getMother().getChildren()) {
-                if (!siblings.contains(child) && !child.equals(person)) siblings.add(child);
+            for (FamilyTreeItem child : person.getMother().getChildren()) {
+                if (!siblings.contains(child) && !child.equals(person))
+                    siblings.add(child);
             }
         }
         if (person.getFather() != null) {
-            for (Human child : person.getFather().getChildren()) {
-                if (!siblings.contains(child) && !child.equals(person)) siblings.add(child);
+            for (FamilyTreeItem child : person.getFather().getChildren()) {
+                if (!siblings.contains(child) && !child.equals(person))
+                    siblings.add(child);
             }
         }
         return siblings;
     }
 
-    public List<Human> getSiblings(long personId) {
+    public List<FamilyTreeItem> getSiblings(long personId) {
         return this.getSiblings(this.getById(personId));
     }
 
     public void sortByFirstName() {
-        this.familyTree.sort(new ComparatorByFirstName());
+        this.familyTree.sort(new ComparatorByFirstName<>());
     }
 
     public void sortByLastName() {
-        this.familyTree.sort(new ComparatorByLastName());
+        this.familyTree.sort(new ComparatorByLastName<>());
     }
 
     public void sortByBirthYear() {
-        this.familyTree.sort(new ComparatorByBirthYear());
+        this.familyTree.sort(new ComparatorByBirthYear<>());
     }
 
     public void sortById() {
-        this.familyTree.sort(new ComparatorById());
+        this.familyTree.sort(new ComparatorById<>());
     }
 
     public double medianAge() {
         double ageSum = 0;
         int count = 0;
-        for (Human person : this.familyTree) {
+        for (E person : this.familyTree) {
             if (person.getDeathDate() == null) {
                 ageSum += person.getAge();
                 count++;
@@ -129,7 +135,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public double medianLifeSpan() {
         double lifeSpanSum = 0;
         int count = 0;
-        for (Human person : this.familyTree) {
+        for (E person : this.familyTree) {
             if (person.getDeathDate() != null) {
                 lifeSpanSum += person.getAge();
                 count++;
@@ -141,7 +147,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public double medianChildrenAmount() {
         double sumChildrenAmount = 0;
-        for (Human person : this.familyTree) {
+        for (E person : this.familyTree) {
             sumChildrenAmount += person.getChildrenAmount();
         }
 
@@ -151,14 +157,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     @Override
     public String toString() {
         StringBuilder familyTreeBuilder = new StringBuilder();
-        for (Human person : this.familyTree) {
+        for (E person : this.familyTree) {
             familyTreeBuilder.append(person.getFullName()).append("\n");
         }
         return familyTreeBuilder.toString();
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return this.familyTree.iterator();
     }
 }

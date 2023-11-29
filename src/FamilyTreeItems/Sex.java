@@ -1,4 +1,4 @@
-package Human;
+package FamilyTreeItems;
 
 public enum Sex {
     Male, Female

@@ -1,22 +1,24 @@
-package Human;
+package FamilyTreeItems.Human;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import FamilyTreeItems.FamilyTreeItem;
+import FamilyTreeItems.Sex;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human>, FamilyTreeItem {
     private long id;
     private String firstName;
     private String lastName;
     private Sex sex;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private Human mother, father;
-    private List<Human> children;
+    private FamilyTreeItem mother, father;
+    private List<FamilyTreeItem> children;
 
-    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children, LocalDate deathDate) {
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<FamilyTreeItem> children, LocalDate deathDate) {
         this.id = id; 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,28 +30,28 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
     }
     
-    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<Human> children) {
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father, List<FamilyTreeItem> children) {
         this(id, firstName, lastName, birthDate, sex, mother, father, children, null);
     }
 
     public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, Human mother, Human father) {
-        this(id, firstName, lastName, birthDate, sex, mother, father, new ArrayList<Human>(), null);
+        this(id, firstName, lastName, birthDate, sex, mother, father, new ArrayList<FamilyTreeItem>(), null);
     }
 
     public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, LocalDate deathDate) {
-        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), deathDate);
+        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<FamilyTreeItem>(), deathDate);
     }
 
-    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, LocalDate deathDate, List<Human> children) {
+    public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex, LocalDate deathDate, List<FamilyTreeItem> children) {
         this(id, firstName, lastName, birthDate, sex, null, null, children, deathDate);
     }
 
     public Human(long id, String firstName, String lastName, LocalDate birthDate, Sex sex) {
-        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
+        this(id, firstName, lastName, birthDate, sex, null, null, new ArrayList<FamilyTreeItem>(), null);
     }
 
     public Human(String firstName, String lastName, LocalDate birthDate, Sex sex) {
-        this(0, firstName, lastName, birthDate, sex, null, null, new ArrayList<Human>(), null);
+        this(0, firstName, lastName, birthDate, sex, null, null, new ArrayList<FamilyTreeItem>(), null);
     }
 
     public long getId() {
@@ -72,7 +74,7 @@ public class Human implements Serializable {
         return this.deathDate;
     }
 
-    public Human getFather() {
+    public FamilyTreeItem getFather() {
         return this.father;
     }
 
@@ -80,15 +82,15 @@ public class Human implements Serializable {
         return this.sex;
     }
 
-    public Human getMother() {
+    public FamilyTreeItem getMother() {
         return this.mother;
     }
 
-    public List<Human> getChildren() {
+    public List<FamilyTreeItem> getChildren() {
         return this.children;
     }
 
-    public boolean addChild(Human child) {
+    public boolean addChild(FamilyTreeItem child) {
         if (!this.children.contains(child)) {
             this.children.add(child);
             return true;
@@ -120,7 +122,7 @@ public class Human implements Serializable {
         return false;
     }
 
-    public boolean setMother(Human mother) {
+    public boolean setMother(FamilyTreeItem mother) {
         if (this.mother == null) {
             this.mother = mother;
             return true;
@@ -128,7 +130,7 @@ public class Human implements Serializable {
         return false;
     }
 
-    public boolean setFather(Human father) {
+    public boolean setFather(FamilyTreeItem father) {
         if (this.father == null) {
             this.father = father;
             return true;
@@ -157,7 +159,7 @@ public class Human implements Serializable {
 
     public String getChildrenNames() {
         StringBuilder childrenNames = new StringBuilder();
-        for (Human child : this.children) {
+        for (FamilyTreeItem child : this.children) {
             childrenNames.append(child.getFullName()).append("\n");
         }
         return childrenNames.toString();
@@ -204,5 +206,10 @@ public class Human implements Serializable {
             return this.id == e.getId();
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return o.getLastName().compareTo(this.lastName);
     }
 }
