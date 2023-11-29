@@ -3,26 +3,33 @@ import java.util.List;
 
 public class FamilyTree {
     Human human;
-    List<Human> FamilyTree;
+    List<Human> familyTree;
 
     public FamilyTree() {
-        FamilyTree = new ArrayList<>();
+        familyTree = new ArrayList<>();
     }
 
-    void addHumanInTree(Human human){
-        FamilyTree.add(human);
-    }
+    public boolean addHumanInTree(Human human) {
+        if (!familyTree.contains(human)) {
+            familyTree.add(human);
+            return true;
+        }
+        return false;
 
-    public List<Human> getFamilyTree() {
-        return FamilyTree;
-    }
 
-    public void setFamilyTree(List<Human> familyTree) {
-        FamilyTree = familyTree;
     }
 
     @Override
     public String toString() {
-        return "" + FamilyTree;
+        StringBuilder sb = new StringBuilder();
+        if (!(familyTree.isEmpty())) {
+            for (Human human : familyTree) {
+                    sb.append(human.getName() + " Дата рождения: " + human.getLd() +"\n");
+                    if(human.getChild() != null){
+                        sb.append("Дети: " +"\n"+ human.getChild() +  "\n");
+                    }
+            }
+        }
+        return sb.toString();
     }
 }

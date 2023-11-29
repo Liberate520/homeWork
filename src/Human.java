@@ -57,9 +57,12 @@ public class Human {
         this.father = father;
     }
 
-    public List<Human> getChild() {
-
-        return child;
+    public String getChild() {
+        StringBuilder sb = new StringBuilder();
+        for (Human human:child) {
+            sb.append(human.getName() + " " + human.getLd() + "\n");
+        }
+        return sb.toString();
     }
 
     public void setChild(List<Human> child) {
@@ -79,7 +82,7 @@ public class Human {
         sb.append("Дата рождения: ");
         sb.append(Ld).append(" ");
         sb.append("\n");
-        if(!(child.size() == 0)){
+        if(!(child.isEmpty())){
             for (Human human : child) {
                 if(human.getGender() == Gender.Mail) {
                     sb.append("Сын: ");
