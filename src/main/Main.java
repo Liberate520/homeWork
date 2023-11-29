@@ -33,13 +33,13 @@ public class Main {
         System.out.println(sergei);
         System.out.println("");
         System.out.println(anna);*/
+        //System.out.println(familyPetrovi.showTree());
 
         FileHandler fileHandler = new FileHandler();
         fileHandler.writeObject(familyPetrovi, "familyPetrovi");
         FamilyTree recordTest = (FamilyTree) fileHandler.readObject("familyPetrovi");
         System.out.println(recordTest);
 
-        System.out.println(familyPetrovi.getTop().getName());
     }
 
 

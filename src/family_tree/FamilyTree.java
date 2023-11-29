@@ -1,7 +1,5 @@
 package family_tree;
 
-import writer.Writable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,9 +121,27 @@ public class FamilyTree implements Serializable {
     }
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
-    private String showTree() {
+    public String showTree(){
+        topOfTree(familyTree.getFirst());
+        return showTreeService(top);
+    }
 
-        return null;
+    private String showTreeService(Human top) {
+        StringBuilder sb = new StringBuilder();
+        boolean flag = false;
+        if (top != null) {
+            sb.append(String.format("1. Старший член семейства: %s, %s г. р.", top.getName(), top.getBirthDate()));
+            if (top.getSpouse() != null) {
+                sb.append(String.format("Супруг старшего члена семейства: %s", top.getSpouse().getName()));
+            }
+            sb.append("Дети старшего члена семейства: ");
+            for (Human child : top.getChildren()) {
+                if (flag) sb.append(", ");
+                sb.append(child.getName());
+                flag = true;
+            }
+        }
+        return sb.toString();
     }
 
     private boolean topOfTree(Human topEnter) {
