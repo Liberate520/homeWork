@@ -1,4 +1,3 @@
-
 import view.View;
 import view.ConsoleUI;
 
@@ -12,7 +11,7 @@ public class Test {
 //        /**
 //         * загрузка из файла
 //         */
-////        FamilyTree<Human> myTree = load();
+//        FamilyTree<Human> myTree = new FamilyTree< Human >();
 
 //        Human human1 = new Human(1, "Кузнецов", "Владислав", LocalDate.of(1983, 5, 1), Gender.Male);
 //        Human human2 = new Human(2, "Березянская", "Ольга", LocalDate.of(1989, 2, 20), Gender.Female);
@@ -58,35 +57,7 @@ public class Test {
 //        human5.setDayOfDeath(LocalDate.of(2011, 2, 10));
 //        human7.setDayOfDeath(LocalDate.of(2005, 12, 25));
 //        human8.setDayOfDeath(LocalDate.of(2012, 5, 7));
-//        /**
-//         * сохранение в файл
-//         */
-////        save(myTree);
 
-        /**
-         * Вывод всех членов семьи
-         */
-//        System.out.println("-".repeat(128));
-//        System.out.println(myTree.allTree());
-//        System.out.println("*".repeat(128));
-
-
-
-//        /**
-//         * Поиск по слову (имени)
-//         */
-//        String str = myTree.SearchByNameSurname("Ирина");
-//        System.out.println(str);
-//        System.out.println("\n");
-//
-//        /**
-//         * Поиск по слову (фамилии)
-//         */
-//        String str1 = myTree.SearchByNameSurname("Афонченко");
-//        System.out.println(str1);
-//        System.out.println("\n");
-//
-//    }
     }
 }
 

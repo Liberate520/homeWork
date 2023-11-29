@@ -83,25 +83,21 @@ public class ConsoleUI implements View{
 
     @Override
     public void load() {
-            presenter.load();
-            presenter.getHumanListInfo();
-
+        System.out.println("Загрузка файла: ");
+        presenter.load();
+        presenter.getHumanListInfo();
     }
 
     @Override
     public void save() {
-            presenter.save();
-            presenter.getHumanListInfo();
-
+        boolean saved = presenter.save();
+        System.out.println("Сохранение файла: " + saved);
+        presenter.getHumanListInfo();
     }
 
     @Override
     public void addHuman() {
-//        StringBuilder sb = new StringBuilder();
         List info = new ArrayList<>();
-//        System.out.println("Введите ID");
-//        String idStr = scanner.nextLine();
-//        int id = Integer.parseInt(idStr);
         System.out.println("Введите фамилию");
         String lastname = scanner.nextLine();
         System.out.println("Введите имя");
@@ -115,31 +111,14 @@ public class ConsoleUI implements View{
             dayOfDeath = LocalDate.parse(dayStr.subSequence(0, dayStr.length()));
         } else dayOfDeath = null;
         System.out.println("Введите пол (Male, Female)");
-//        String gender = scanner.nextLine();
         Gender gender = Gender.valueOf(scanner.nextLine());
-//        sb.append(id);
-//        sb.append(", ");
         info.add(lastname);
         info.add(name);
         info.add(dayOfBirth);
         info.add(dayOfDeath);
         info.add(gender);
-//        sb.append(lastname);
-//        sb.append(", ");
-//        sb.append(name);
-//        sb.append(", ");
-//        sb.append(dayOfBirth);
-//        sb.append(", ");
-//        sb.append(dayOfDeath);
-//        sb.append(", ");
-//        sb.append(gender);
-//        String info = sb.toString();
         presenter.addHuman(info);
 
-//        Gender gender = Gender.valueOf(scanner.nextLine());
-//        Human human = new Human(id, lastname, name, dayOfBirth, gender);
-//        presenter.addHuman(human);
-//        System.out.println("Чтобы внести человека, необходимо провести сохранение!");
     }
 
     @Override

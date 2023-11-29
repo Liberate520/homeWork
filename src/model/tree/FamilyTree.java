@@ -79,7 +79,7 @@ public void addHuman(T human) {
      * @param name
      * @return Строка данных "ID, Фамилия, Имя, Родители, Дети"
      */
-    public String SearchByNameSurname (String name){
+    public String searchByNameSurname (String name){
         StringBuilder sb = new StringBuilder();
         sb.append("Результат поиска: \n");
         for (T member: familyList) {
