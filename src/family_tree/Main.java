@@ -3,14 +3,34 @@ package family_tree;
 import family_tree.family.FamilyTree;
 import family_tree.human.Gender;
 import family_tree.human.Human;
+import writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-        FamilyTree tree = testTree();
+        System.out.println("Дерево до сохранения в файл:\n");
         System.out.println(testTree());
+
+        save(testTree());
+
+        System.out.println("Дерево после выгрузки в из файла:\n");
+        FamilyTree savedTree = download();
+        System.out.println(savedTree);
+
+    }
+
+    private static void save(FamilyTree tree) {
+        String filePath = "src/writer/tree";
+        FileHandler fh = new FileHandler();
+        System.out.printf("Данные успешно сохранены в файл? %b\n", fh.write(tree, filePath));
+    }
+
+    private static FamilyTree download() {
+        String filePath = "src/writer/tree";
+        FileHandler fh = new FileHandler();
+        return (FamilyTree) fh.read(filePath);
     }
 
     static FamilyTree testTree(){
