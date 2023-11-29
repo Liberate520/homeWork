@@ -1,14 +1,10 @@
 package FamilyTree_homework.writer;
 
-import FamilyTree_homework.Human;
-
-import java.util.List;
+import java.io.Serializable;
 
 public interface Writable {
-    private boolean save(List<Human> humanList) {
-        return false;
-    }
-
-    private void setFilePath(String filePath) {
-    }
+    boolean save (Serializable serializable,String filePath);
+    Object read(String filePath);
 }
+
+
