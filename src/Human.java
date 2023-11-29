@@ -53,6 +53,7 @@ public class Human {
         return stringBuilder.toString();
     }
 
+
     public String getParents() {
         StringBuilder stringBuilder = new StringBuilder("Родители: ");
         stringBuilder.append(this.parents);
@@ -68,6 +69,14 @@ public class Human {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public LocalDate getBirthday() {
@@ -107,6 +116,6 @@ public class Human {
     }
 
     @Override
-    public String toString() {return "name: " + name + ", birthday: " + birthday + ", gender: " + gender  + ", children: " + children;}
+    public String toString() {return "name: " + name + ", lastname: " + lastname + ", birthday: " + birthday + ", gender: " + gender  + ", children: " + children;}
 
 }

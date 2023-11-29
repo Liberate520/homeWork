@@ -1,6 +1,20 @@
+import writer.FileHandler;
+
 import java.time.LocalDate;
 public class Main {
+    private static FamilyTree load(){
+        String filePath = "src/writer/tree.txt";
+                FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+
+    private static void save(FamilyTree tree) {
+        String filePath = "src/writer/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(tree, filePath);
+    }
     public static void main(String[] args) {
+
         FamilyTree familyTree = new FamilyTree("Fedorov's");
 
         Human father = new Human("Федоров", "Николай", Gender.Male);
@@ -30,5 +44,8 @@ public class Main {
         mother.setChild(sister);
         System.out.println(father.getChildren());
         System.out.println(sister.getParents());
+
+        System.out.println(familyTree);
+        save(familyTree);
     }
 }
