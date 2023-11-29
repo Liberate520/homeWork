@@ -6,6 +6,8 @@ import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.tree.FamilyTree;
 import ru.gb.family_tree.model.writer.FIleHandler;
+import ru.gb.family_tree.model.writer.Writable;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -13,12 +15,12 @@ import java.time.LocalDate;
 public class Service {
     private FamilyTree<Human> tree;
     private HumanBuilder builder;
-    private FIleHandler fh;
+    private Writable writable;
 
     public Service() {
         tree = new FamilyTree<>();
         builder = new HumanBuilder();
-        fh = new FIleHandler();
+        writable = new FIleHandler();
     }
 
     public Human addNewToFamily(String lastname, String name, Gender gender) throws HumanExcistsException {
@@ -57,16 +59,7 @@ public class Service {
     }
 
     public String getInfoShort() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Human member : tree) {
-            stringBuilder.append(member);
-            if (member.getBirthday() == null) {
-                stringBuilder.append(", возраст неизвестен\n");
-            } else {
-                stringBuilder.append(", возраст: ").append(member.age()).append("\n");
-            }
-        }
-        return stringBuilder.toString();
+        return tree.getInfoShort();
     }
 
     public void sortByLastname() {
@@ -111,11 +104,11 @@ public class Service {
     }
 
     public void load() throws IOException {
-        tree = (FamilyTree) fh.read("output.data");
+        tree = (FamilyTree) writable.read("output.data");
     }
 
     public boolean save() {
-        return fh.write(tree, "output.data");
+        return writable.write(tree, "output.data");
     }
 
     public boolean checkId(int id) {

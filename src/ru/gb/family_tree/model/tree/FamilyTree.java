@@ -34,6 +34,19 @@ public class FamilyTree<E extends TreeItem> implements Serializable, Iterable<E>
         }
     }
 
+    public String getInfoShort() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (E member : familyMembers) {
+            stringBuilder.append(member);
+            if (member.getBirthday() == null) {
+                stringBuilder.append(", возраст неизвестен\n");
+            } else {
+                stringBuilder.append(", возраст: ").append(member.age()).append("\n");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     public E findInTree(int id) {
         for (E member : familyMembers) {
             if (member.getId() == id) {

@@ -18,8 +18,7 @@ public class Presenter {
     }
 
     public void allTree() {
-        String tree = service.getInfoShort();
-        view.printAnswer(tree);
+        view.printAnswer(service.getInfoShort());
     }
 
     public void addBody(String lastname, String name, Gender gender) throws HumanExcistsException {
@@ -28,7 +27,7 @@ public class Presenter {
 
     public boolean setBirthday(int id, int year, int month, int day) {
         if (service.setBirthday(id, year, month, day)) {
-            view.printAnswer(service.infoByID(id));
+            getBodyInfoById(id);
             return true;
         }
         return false;
@@ -40,17 +39,17 @@ public class Presenter {
 
     public void sortById() {
         service.sortById();
-        view.printAnswer(service.getInfoShort());
+        allTree();
     }
 
     public void sortByLastname() {
         service.sortByLastname();
-        view.printAnswer(service.getInfoShort());
+        allTree();
     }
 
     public boolean setDeathdate(int id, int year, int month, int day) {
         if (service.setDeathdate(id, year, month, day)) {
-            view.printAnswer(service.infoByID(id));
+            getBodyInfoById(id);
             return true;
         }
         return false;
@@ -58,17 +57,17 @@ public class Presenter {
 
     public void addSpouse(int one, int two) {
         service.addSpouse(one, two);
-        view.printAnswer(service.infoByID(one));
+        getBodyInfoById(one);
     }
 
     public void addChild(int parentId, int childId) {
         service.addChild(parentId, childId);
-        view.printAnswer(service.infoByID(parentId));
+        getBodyInfoById(parentId);
     }
 
     public void sortByAge() {
         service.sortByAge();
-        view.printAnswer(service.getInfoShort());
+        allTree();
     }
 
     public void load() throws IOException {
