@@ -4,12 +4,15 @@ import family_tree.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import family_tree.human.comparator.HumanComparatorByAge;
+import family_tree.human.comparator.HumanComparatorByName;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
 
-    private long humanId;
     private List<Human> familyMembersList;
+    private long humanId;
 
     public FamilyTree() {
         familyMembersList = new ArrayList<>();
@@ -47,7 +50,7 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    public List<Human> getSiblingsList(int id) {
+    public List<Human> getSiblingsList(long id) {
         Human human = getById(id);
         if (human == null) {
             return null;
@@ -73,7 +76,7 @@ public class FamilyTree implements Serializable {
         return res;
     }
 
-    public boolean setWedding(long humanId1, long humanId2) {
+    public boolean setWedding(Integer humanId1, Integer humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
             Human human1 = getById(humanId1);
             Human human2 = getById(humanId2);
@@ -91,7 +94,7 @@ public class FamilyTree implements Serializable {
         return false;
     }
 
-    public boolean setDivorce(long humanId1, long humanId2) {
+    public boolean setDivorce(Integer humanId1, Integer humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
             Human human1 = getById(humanId1);
             Human human2 = getById(humanId2);
@@ -110,7 +113,7 @@ public class FamilyTree implements Serializable {
         }
     }
 
-    public boolean remove(long humanId) {
+    public boolean remove(Integer humanId) {
         if (checkId(humanId)) {
             Human human = getById(humanId);
             return familyMembersList.remove(human);
@@ -147,4 +150,19 @@ public class FamilyTree implements Serializable {
         }
         return sb.toString();
     }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(familyMembersList);
+    }
+
+    public void sortByAge() {
+        familyMembersList.sort(new HumanComparatorByAge());
+    }
+
+    public void sortByName() {
+        familyMembersList.sort(new HumanComparatorByName());
+    }
+
+
 }

@@ -3,6 +3,7 @@ package family_tree;
 import family_tree.family.FamilyTree;
 import family_tree.human.Gender;
 import family_tree.human.Human;
+import family_tree.service.Service;
 import writer.FileHandler;
 
 import java.time.LocalDate;
@@ -10,15 +11,25 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Дерево до сохранения в файл:\n");
-        System.out.println(testTree());
+        Service service = new Service();
 
+        System.out.println("Дерево до сохранения в файл:\n");
+        System.out.println(service.getHumanListInfo(testTree()));
         save(testTree());
 
         System.out.println("Дерево после выгрузки в из файла:\n");
         FamilyTree savedTree = download();
-        System.out.println(savedTree);
+        System.out.println(service.getHumanListInfo(savedTree));
 
+        service.sortByName(savedTree);
+        System.out.println("Дерево отсортированное по имени:\n");
+        System.out.println(service.getHumanListInfo(savedTree));
+
+        service.sortByAge(savedTree);
+        System.out.println("Дерево отсортированное по возрасту:\n");
+        System.out.println(service.getHumanListInfo(savedTree));
+
+        save(savedTree);
     }
 
     private static void save(FamilyTree tree) {
@@ -33,12 +44,12 @@ public class Main {
         return (FamilyTree) fh.read(filePath);
     }
 
-    static FamilyTree testTree(){
+    static FamilyTree testTree() {
 
         FamilyTree familyTree = new FamilyTree();
 
-        Human human1 = new Human(Gender.Male,"Ivan","Ivanov");
-        Human human2 = new Human(Gender.Female,"Maria","Ivanova");
+        Human human1 = new Human(Gender.Male, "Ivan", "Ivanov");
+        Human human2 = new Human(Gender.Female, "Maria", "Ivanova");
         familyTree.addFamilyMember(human1);
         familyTree.addFamilyMember(human2);
         familyTree.setWedding(human1, human2);
@@ -49,8 +60,8 @@ public class Main {
         familyTree.addFamilyMember(human4);
         familyTree.setWedding(human3, human4);
 
-        Human human5 = new Human(Gender.Male,"Ivanushka","Ivanov");
-        Human human6 = new Human(Gender.Female,"Alenushka","Petrova");
+        Human human5 = new Human(Gender.Male, "Ivanushka", "Ivanov");
+        Human human6 = new Human(Gender.Female, "Alenushka", "Petrova");
 
         human5.setFather(human1);
         human5.setMother(human2);
@@ -61,16 +72,16 @@ public class Main {
         familyTree.addFamilyMember(human6);
         familyTree.setWedding(human5, human6);
 
-        human1.setBirthDate(LocalDate.of(1921,1,1));
-        human2.setBirthDate(LocalDate.of(1922,2,2));
-        human3.setBirthDate(LocalDate.of(1923,3,3));
-        human4.setBirthDate(LocalDate.of(1924,4,4));
-        human5.setBirthDate(LocalDate.of(1945,5,5));
-        human6.setBirthDate(LocalDate.of(1946,6,6));
+        human1.setBirthDate(LocalDate.of(1921, 1, 1));
+        human2.setBirthDate(LocalDate.of(1922, 2, 2));
+        human3.setBirthDate(LocalDate.of(1923, 3, 3));
+        human4.setBirthDate(LocalDate.of(1924, 4, 4));
+        human5.setBirthDate(LocalDate.of(1945, 5, 5));
+        human6.setBirthDate(LocalDate.of(1946, 6, 6));
 
-        Human grandMother = new Human(Gender.Female,"Varvara", "Ivanova",LocalDate.of(1900,1,1));
+        Human grandMother = new Human(Gender.Female, "Varvara", "Ivanova", LocalDate.of(1900, 1, 1));
         grandMother.addChild(human1);
-        grandMother.setDeathDate(LocalDate.of(2000,1,1));
+        grandMother.setDeathDate(LocalDate.of(2000, 1, 1));
         familyTree.addFamilyMember(grandMother);
 
         return familyTree;

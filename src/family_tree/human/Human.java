@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private Gender gender;
     private LocalDate birthDate, deathDate;
@@ -32,7 +32,6 @@ public class Human implements Serializable {
     public Human(Gender gender, String name, String familyName, LocalDate birthDate) {
         this(gender, name, familyName, birthDate, null, null, null);
     }
-
     public Human(Gender gender, String name, String familyName, LocalDate birthDate, Human father, Human mother) {
         this(gender, name, familyName, birthDate, null, father, mother);
     }
@@ -40,6 +39,7 @@ public class Human implements Serializable {
     public Human(Gender gender, String name, String familyName) {
         this(gender, name, familyName, null, null, null, null);
     }
+
 
 
     public boolean addChild(Human child) {
@@ -241,5 +241,10 @@ public class Human implements Serializable {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Human human) {
+        return name.compareTo(human.getName());
     }
 }
