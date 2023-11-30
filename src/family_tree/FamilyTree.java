@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    private List<Human> familyTree = new ArrayList<>();
+    private List<Human> familyTree;
     private Human top;
+
+    {
+       familyTree = new ArrayList<>();
+    }
 
     public Human getTop() {
         topOfTree(familyTree.getFirst());
