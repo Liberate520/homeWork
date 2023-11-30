@@ -3,7 +3,7 @@ package ru.home_work.cherevichenko_sergey.file_handler;
 import java.io.*;
 
 // Класс для записи в файл и чтения из файла
-public class FileHandler implements FileHandler.Writable {
+public class FileHandler implements Writable {
 
 // Метод для записи
     @Override
