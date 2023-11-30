@@ -5,12 +5,17 @@ import java.time.LocalDate;
 
 import family_tree.model.builder.HumanBuilder;
 import family_tree.model.family_trees.FamilyTree;
+import family_tree.model.file_system.FS;
+import family_tree.model.file_system.OOS;
+import family_tree.model.file_system.enums.StatusFileFS;
 import family_tree.model.human.Human;
 import family_tree.model.human.types_enum.Gender;
 
 public class Service implements Serializable{
     private FamilyTree<Human> ftree;
     private HumanBuilder builder;
+
+    FS fileOperations = new FS(new OOS());
 
     public Service() {
         ftree = new FamilyTree<>();
@@ -38,7 +43,7 @@ public class Service implements Serializable{
         }
     }
 
-    public String getFamilyTreeHumansListInfo(){
+    public String getFamilyTreeProbandsListInfo(){
         int index = 1;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список членов семьи:\n");
@@ -65,4 +70,35 @@ public class Service implements Serializable{
     {
         return ftree.getFamilyListSize();
     }
+
+    public StatusFileFS saveTreeOOS(String file_path)
+    {          
+        return fileOperations.Save(ftree, file_path);
+    }
+
+    public StatusFileFS loadHumanTreeOOS(String file_path)
+    {
+        if(fileOperations.IsFileExist(file_path))
+        {           
+            this.ftree = (FamilyTree<Human>) fileOperations.Read(file_path);
+            return StatusFileFS.FileLoaded;
+        }
+        else
+        {
+            return StatusFileFS.NoSuchFile;
+        }
+    }
+
+    // public StatusFileFS loadHumanTree(String file_path)
+    // {
+    //     if(fileOperations.IsFileExist(file_path))
+    //     {           
+    //         this.ftree = (FamilyTree<Human>) fileOperations.Read(file_path);
+    //         return StatusFileFS.FileLoaded;
+    //     }
+    //     else
+    //     {
+    //         return StatusFileFS.NoSuchFile;
+    //     }
+    // }
 }

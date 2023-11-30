@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import javax.lang.model.util.ElementScanner6;
+
+import family_tree.model.file_system.enums.StatusFileFS;
 import family_tree.model.human.types_enum.Gender;
 import family_tree.presenter.Presenter;
 
@@ -211,10 +214,46 @@ public class ConsoleUI implements View, Serializable{
         presenter.getFamilyTreeHumansListInfo();
     }
 
-    public void saveAndExit ()
+    public void exit ()
     {
         inProgress = false;
     }
+
+    public void save()
+    {
+        System.out.println("Введите путь файла для сохранения");
+        Scanner scanner = new Scanner(System.in);
+        String file_path = scanner.nextLine();
+        if(presenter.saveTreeOOS(file_path) == StatusFileFS.FileSaved)
+        {
+            System.out.println("Файл успешно был сохранен");
+        }
+        else
+        {
+            System.out.println("Произошла ошибка, файл не был сохранен");
+        }
+    }
+
+    public void load()
+    {
+        System.out.println("Введите путь файла для загрузки");
+        Scanner scanner = new Scanner(System.in);
+        String file_path = scanner.nextLine();
+        StatusFileFS statusFile = presenter.loadHumanTreeOOS(file_path);
+        if(statusFile == StatusFileFS.FileLoaded)
+        {
+            System.out.println("Файл с деревом успешно был загружен");
+        }
+        else if (statusFile == StatusFileFS.NoSuchFile)
+        {
+            System.out.println("Такого файла нету");
+        }
+        else
+        {
+            System.out.println("Произошла ошибка загрузки");
+        }
+    }
+
 
     private void error() {
         System.out.println("Введено неверное значение!");

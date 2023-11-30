@@ -8,7 +8,9 @@ import family_tree.view.commands.AddParentToChild;
 import family_tree.view.commands.AddToTree;
 import family_tree.view.commands.Command;
 import family_tree.view.commands.GetFamilyTreeListInfo;
-import family_tree.view.commands.SaveAndExit;
+import family_tree.view.commands.Load;
+import family_tree.view.commands.Save;
+import family_tree.view.commands.Exit;
 import family_tree.view.commands.SortByAge;
 import family_tree.view.commands.SortByName;
 
@@ -23,7 +25,9 @@ public class MainMenu implements Serializable{
         commandList.add(new SortByName(view));
         commandList.add(new SortByAge(view));
         commandList.add(new AddParentToChild(view));
-        commandList.add(new SaveAndExit(view));
+        commandList.add(new Save(view));
+        commandList.add(new Load(view));
+        commandList.add(new Exit(view));
     }
 
     public String print()

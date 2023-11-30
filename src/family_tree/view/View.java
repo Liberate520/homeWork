@@ -10,5 +10,7 @@ public interface View extends Serializable{
     void sortByName();
     void sortByAge();
     void getFamilyTreeInfo();
-    void saveAndExit();
+    void save();
+    void load();
+    void exit();
 }

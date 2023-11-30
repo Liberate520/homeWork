@@ -3,6 +3,7 @@ package family_tree.presenter;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import family_tree.model.file_system.enums.StatusFileFS;
 import family_tree.model.human.types_enum.Gender;
 import family_tree.model.service.Service;
 import family_tree.view.View;
@@ -24,7 +25,7 @@ public class Presenter implements Serializable{
 
     public void getFamilyTreeHumansListInfo()
     {
-        String answer = service.getFamilyTreeHumansListInfo();
+        String answer = service.getFamilyTreeProbandsListInfo();
         view.answer(answer);
     }
 
@@ -48,5 +49,15 @@ public class Presenter implements Serializable{
     {
         service.sortByAge();
         getFamilyTreeHumansListInfo();
+    }
+
+    public StatusFileFS saveTreeOOS(String file_path)
+    {
+        return service.saveTreeOOS(file_path);
+    }
+
+    public StatusFileFS loadHumanTreeOOS(String file_path)
+    {
+        return service.loadHumanTreeOOS(file_path);
     }
 }

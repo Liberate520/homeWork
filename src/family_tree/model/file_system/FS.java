@@ -3,6 +3,8 @@ package family_tree.model.file_system;
 import java.io.File;
 import java.io.Serializable;
 
+import family_tree.model.file_system.enums.StatusFileFS;
+
 public class FS{
     Writable writable;
 
@@ -11,9 +13,9 @@ public class FS{
         this.writable = writable;
     }
 
-    public void Save(Serializable serializable, String file_path)
+    public StatusFileFS Save(Serializable serializable, String file_path)
     {
-        writable.Save(serializable, file_path);
+        return writable.Save(serializable, file_path);
     }
 
     public Object Read(String file_path)
