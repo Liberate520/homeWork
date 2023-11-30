@@ -1,8 +1,12 @@
+package familyTree;
+
+import human.Human;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree {
-    private Human human;
+    private long countPeople;
     private List<Human> familyTree;
 
     public FamilyTree() {
@@ -12,6 +16,7 @@ public class FamilyTree {
     public boolean addHumanInTree(Human human) {
         if (!familyTree.contains(human)) {
             familyTree.add(human);
+            human.setId(countPeople++);
             return true;
         }
         return false;
@@ -24,7 +29,7 @@ public class FamilyTree {
         StringBuilder sb = new StringBuilder();
         if (!(familyTree.isEmpty())) {
             for (Human human : familyTree) {
-                    sb.append(human.getName() + " Дата рождения: " + human.getLd() +"\n");
+                    sb.append(human.getId() + " " + human.getName() + " Возраст: " + human.getAge() +"\n");
                     if(human.getChild() != null){
                         sb.append("Дети: " +"\n"+ human.getChild() +  "\n");
                     }
