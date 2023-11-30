@@ -1,10 +1,8 @@
 package ru.home_work.cherevichenko_sergey.service_tree;
-
 import ru.home_work.cherevichenko_sergey.human.Gender;
 import ru.home_work.cherevichenko_sergey.familyTree.FamilyTree;
 import ru.home_work.cherevichenko_sergey.human.Human;
 import ru.home_work.cherevichenko_sergey.human_builder.HumanBuilder;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -14,19 +12,16 @@ import java.util.List;
 public class ServiceTree implements Serializable {
     private FamilyTree tree;
     private HumanBuilder builder;
-
     public ServiceTree()  {
         tree = new FamilyTree();
         builder = new HumanBuilder();
     }
-
     // Создание человека и добавление в древо
     public void addHuman(String name, String lastName, Gender gender,
                          LocalDate birthDay, LocalDate dateDeath) {
         Human human = builder.build(name, lastName, gender, birthDay, dateDeath, new ArrayList<Human>(0));
         tree.addHuman(human);
     }
-
     // Добавление ребенка родителям
     public String addChildForFamily(String motherName, String motherLastName, String fatherName,
                                     String fatherLastName, String nameChild, String lastNameChild) {
@@ -88,7 +83,6 @@ public class ServiceTree implements Serializable {
         return br.toString();
     }
 
-
     // Вся информация о древе
     public String getHumanInfo() {
         StringBuilder builder = new StringBuilder();
@@ -122,8 +116,6 @@ public class ServiceTree implements Serializable {
                             .append(" фамилия: ").append(ch.getLastName())
                             .append(" возраст:")
                             .append(Period.between(ch.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
-
-
                 }
             }
             builder.append("\n").append("--------------------------------").append("\n");
@@ -144,7 +136,6 @@ public class ServiceTree implements Serializable {
             if (human.getName().equals(name) && human.getLastName().equals(lastName)) {
                 tree.getHumans().remove(human);
                 find = true;
-
             }
         }
 
@@ -155,7 +146,6 @@ public class ServiceTree implements Serializable {
                     human.getChildren().remove(child);
                     findChild = true;
                 }
-
             }
         }
         if(find && findChild) br.append("Удален успешно из родителя и списка детей!");
@@ -164,7 +154,6 @@ public class ServiceTree implements Serializable {
 
         return br.toString();
     }
-
     // Поиск ребенка по имени и фамилии
     public String findChildren(String name, String lastName) {
         StringBuilder br = new StringBuilder();
@@ -209,13 +198,11 @@ public class ServiceTree implements Serializable {
                     br.append("\n");
                     find = true;
                 }
-
             }
         }
         if(!find)  br.append("Ребенок с таким именем и фамилией НЕ НАЙДЕН!");
 
         return br.toString();
-
     }
     // Cортировка оп имени
 

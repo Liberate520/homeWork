@@ -1,14 +1,10 @@
 package ru.home_work.cherevichenko_sergey.familyTree;
-
 import ru.home_work.cherevichenko_sergey.human.*;
-
 import java.io.Serializable;
 import java.util.*;
-
 public class FamilyTree implements Serializable, Iterable<Human> {
     // Класс имеет одно поле с листом
     private ArrayList<Human> humans;
-
     // В конструкторе инициализируем List как ArrayList
     public FamilyTree() {
         humans = new ArrayList<>();
@@ -18,11 +14,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public void addHuman(Human human) {
         humans.add(human);
     }
-
     public ArrayList<Human> getHumans() {
         return humans;
     }
-
     @Override
     public Iterator iterator() {
         return new HumanIterator(humans);
@@ -39,7 +33,6 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public void sortByCountChildren(){
         Collections.sort(humans,new HumanComparatorSortByCountChildren());
     }
-
 }
 
 

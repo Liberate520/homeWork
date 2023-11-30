@@ -1,10 +1,7 @@
 package ru.home_work.cherevichenko_sergey.file_handler;
-
 import java.io.*;
-
 // Класс для записи в файл и чтения из файла
 public class FileHandler implements Writable {
-
 // Метод для записи
     @Override
     public void save(Object o) throws IOException {
@@ -21,16 +18,11 @@ public class FileHandler implements Writable {
          Object p = (Object) objectInputStream.readObject();
         objectInputStream.close();
         return p;
-
-
     }
-
     // интерфейс, для того чтобы пользоваться классами записи и чтения
     // методы для записи и чтения
     public static interface Writable {
         void save(Object o) throws IOException;
             Object readable() throws IOException, ClassNotFoundException;
-
-
     }
 }

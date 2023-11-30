@@ -1,11 +1,9 @@
 package ru.home_work.cherevichenko_sergey.human;
-
 import ru.home_work.cherevichenko_sergey.human.Human;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Comparator;
-
 public class HumansComparatorSortByAge implements Comparator<Human> {
     @Override
     public int compare(Human o1, Human o2) {
