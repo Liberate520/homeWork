@@ -1,7 +1,12 @@
 package ru.gb.family_tree;
 
+import ru.gb.family_tree.family_tree.FamilyTree;
+import ru.gb.family_tree.human.Gender;
+import ru.gb.family_tree.human.Human;
+import ru.gb.family_tree.writer.FileHandler;
+
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class main {
     public static void main(String[] args) {
@@ -16,41 +21,40 @@ public class main {
         LocalDate muratBirthdate = LocalDate.of(1980, 12, 07);
         LocalDate gulmiraBirthdate = LocalDate.of(1971, 07, 25);
 
-        Human grandpa = new Human("Grandpa_KuanishKali", kuanishKaliBirthdate, kuanishKaliDeathdate, Gender.Male);
-        Human daddy = new Human("Talgat", talgatBirthdate, talgatDeathdate, Gender.Male);
-        Human father = new Human("Serik", serikBirthdate, serikDeathdate, Gender.Male);
-        Human mother = new Human("Zubarzhat", zubarzhatBirthDate, Gender.Female);
-        Human murat = new Human("Murat",muratBirthdate,Gender.Male);
-        Human gulmira = new Human("Gulmira",gulmiraBirthdate, Gender.Female);
-
-        Children children = new Children();  // Дети 1-поколение
-        children.addMember(father);
-        children.addMember(daddy);
-        Children children2 = new Children();  // Дети 2 поколение
-        children2.addMember(murat);
-        children2.addMember(gulmira);
-
+        Human grandpa = new Human("Grandpa_KuanishKali", kuanishKaliBirthdate, kuanishKaliDeathdate, Gender.Male,null,null);
+        Human daddy = new Human("Talgat", talgatBirthdate, talgatDeathdate, Gender.Male,null,grandpa);
+        Human father = new Human("Serik", serikBirthdate, serikDeathdate, Gender.Male,null,grandpa);
+        Human mother = new Human("Zubarzhat", zubarzhatBirthDate, Gender.Female,null,null);
+        Human murat = new Human("Murat",muratBirthdate,Gender.Male,mother,father);
+        Human gulmira = new Human("Gulmira",gulmiraBirthdate, Gender.Female,mother,father);
+//        grandpa.addChild(father);
+//        grandpa.addChild(daddy);
+//        mother.addChild(murat);
         //  Семейное древо добавление
-        familyTree.addHumanToFamilyTree(grandpa, children);
-        familyTree.addHumanToFamilyTree(father, children2);
-        familyTree.addHumanToFamilyTree(mother, children2);
-
+        familyTree.addHumanToFamilyTree(grandpa);
+        familyTree.addHumanToFamilyTree(daddy);
+        familyTree.addHumanToFamilyTree(father);
+        familyTree.addHumanToFamilyTree(mother);
+        familyTree.addHumanToFamilyTree(murat);
+        familyTree.addHumanToFamilyTree(gulmira);
 
         // Вывод информации о древе
-
         printFamilyTree(familyTree);
+
+//        load();
+//        save(familyTree);
     }
-
-    static void printFamilyTree(@org.jetbrains.annotations.NotNull FamilyTree familyTree) {
-        for (Map.Entry<Human, Children> entry : familyTree.getFamilyMap().entrySet()) {
-            Human parent = entry.getKey();
-            Children children = entry.getValue();
-
-            System.out.println("Parent: " + parent.getName() + ", Age: " + parent.getAge());
-
-            for (Human child : children.getMembers()) {
-                System.out.println("  Child: " + child.getName() + ", Age: " + child.getAge());
-            }
-        }
+    private static FamilyTree load(){
+        String filePath = "src/ru/gb/family_tree/writer/file";
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.load(filePath);
+    }
+    private static void save(FamilyTree tree){
+        String filePath = "src/ru/gb/family_tree/writer/file";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(tree,filePath);
+    }
+    static void printFamilyTree(FamilyTree familytree) {
+        System.out.println(familytree);
     }
 }
