@@ -1,4 +1,6 @@
-package FamilyTree_homework.Humans;
+package FamilyTree_homework.Family;
+
+import FamilyTree_homework.Humans.Human;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package FamilyTree_homework.Comparator;
+package FamilyTree_homework.Humans;
 
 import FamilyTree_homework.Family.FamilyTree;
 import FamilyTree_homework.Humans.Human;

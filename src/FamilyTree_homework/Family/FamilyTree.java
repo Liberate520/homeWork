@@ -1,9 +1,8 @@
 package FamilyTree_homework.Family;
 
-import FamilyTree_homework.Comparator.HumanComparatorByBirthday;
-import FamilyTree_homework.Comparator.HumanComparatorByName;
+import FamilyTree_homework.Humans.HumanComparatorByBirthday;
+import FamilyTree_homework.Humans.HumanComparatorByName;
 import FamilyTree_homework.Humans.Human;
-import FamilyTree_homework.Humans.HumanIterator;
 
 import java.io.Serializable;
 import java.util.*;
