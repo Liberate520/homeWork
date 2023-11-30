@@ -5,14 +5,18 @@ import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
 import family_tree.model.writer.FileHandler;
 
-import java.io.File;
 import java.time.LocalDate;
 
-public class Service {
-    private FamilyTree tree;
+public class Service{
+    private FamilyTree<Human> tree;
+    private FileHandler fileHandler;
+    private FileExists fileExist;
+    private String filePath = "src/family_tree/model/writer/tree.txt";
 
     public Service() {
-        tree = new FamilyTree();
+        tree = new FamilyTree<>();
+        fileHandler = new FileHandler();
+        fileExist = new FileExists();
     }
 
     public String printFamilyTree(){
@@ -20,7 +24,7 @@ public class Service {
     }
 
     public void addHuman(String name,Gender gender, LocalDate birth, LocalDate death, Object parentM, Object parentF){
-        Human human = new Human<>(name,gender, birth,death,null,null);
+        Human human = new Human(name,gender, birth,death,null,null);
         tree.add(human);
     }
     public void sortByName(){
@@ -31,33 +35,22 @@ public class Service {
         tree.sortByAge();
     }
 
-    public boolean isFileExists(String filePath) {
-        File file = new File(filePath);
-        return file.isFile();
-    }
-
-    public FamilyTree loadFamilyTree() {
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/family_tree/model/writer/tree.txt";
-        if (isFileExists(filePath)) {
+    public FamilyTree<Human> loadFamilyTree() {
+          if (fileExist.isFileExists(filePath)) {
             return tree = (FamilyTree) fileHandler.read(filePath);
         } else {
-            System.out.println("Файл не найден.\n");
             return null;
         }
     }
 
     public void saveFamilyTree() {
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/family_tree/model/writer/tree.txt";
         fileHandler.save(tree,filePath);
     }
 
     public void addParentGlobal(long human_id, long parent_id) {
-        Human human = (Human) tree.getById(human_id);
-        Human parent = (Human) tree.getById(parent_id);
+        Human human = tree.getById(human_id);
+        Human parent = tree.getById(parent_id);
         human.addParent(parent);
         parent.addKid(human);
     }
-
 }

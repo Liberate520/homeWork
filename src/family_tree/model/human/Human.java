@@ -7,18 +7,18 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human<T extends HumanInterface<T>> implements Serializable, Comparable<T>, HumanInterface<T> {
+public class Human implements Serializable, Comparable<Human>, HumanInterface<Human> {
     private long id;
     private String name;
     private Gender gender;
     private LocalDate birth;
     private LocalDate death;
-    private T parentM;
-    private T parentF;
-    private List<T> children;
+    private Human parentM;
+    private Human parentF;
+    private List<Human> children;
 
 
-    public Human(String name,Gender gender, LocalDate birth, LocalDate death, T parentM, T parentF) {
+    public Human(String name,Gender gender, LocalDate birth, LocalDate death, Human parentM, Human parentF) {
         id = -1;
         this.name = name;
         this.gender = gender;
@@ -31,7 +31,7 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
     public Human(String name,Gender gender, LocalDate birth) {
         this(name,gender,birth,null,null,null);
     }
-    public Human(String name,Gender gender, LocalDate birth, T parentM, T parentF) {
+    public Human(String name,Gender gender, LocalDate birth, Human parentM, Human parentF) {
         this(name,gender,birth,null,parentM,parentF);
     }
 
@@ -59,7 +59,7 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
         return death;
     }
 
-    public List<T> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
@@ -70,19 +70,19 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
     public long getId(){
         return id;
     }
-    public void setParentM(T parentM){
+    public void setParentM(Human parentM){
         this.parentM = parentM;
     }
 
-    public void setParentF(T parentF){
+    public void setParentF(Human parentF){
         this.parentF = parentF;
     }
 
-    public T getParentF() {
+    public Human getParentF() {
         return parentF;
     }
 
-    public T getParentM() {
+    public Human getParentM() {
         return parentM;
     }
 
@@ -90,13 +90,13 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
         return gender;
     }
 
-    public void addKid(T kid){
+    public void addKid(Human kid){
         if (!children.contains(kid)){
             children.add(kid);
         }
     }
 
-    public void addParent(T parent){
+    public void addParent(Human parent){
         if (parent.getGender().equals(Gender.male)){
             setParentM(parent);
         }
@@ -105,8 +105,8 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
         }
     }
 
-    public List<T> getParent() {
-        List<T> parents = new ArrayList<>(2);
+    public List<Human> getParent() {
+        List<Human> parents = new ArrayList<>(2);
         if (parentM != null){
             parents.add(parentM);
         }
@@ -194,12 +194,12 @@ public class Human<T extends HumanInterface<T>> implements Serializable, Compara
         if (!(obj instanceof Human)){
             return false;
         }
-        T human = (T) obj;
+        Human human = (Human) obj;
         return human.getId() == getId();
     }
 
     @Override
-    public int compareTo(T o) {
+    public int compareTo(Human o) {
         return name.compareTo(o.getName());
     }
 }
