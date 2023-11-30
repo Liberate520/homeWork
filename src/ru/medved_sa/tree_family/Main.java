@@ -12,6 +12,13 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
+        View view = new Console();
+        view.start();
+
+
+
+
+
 //        FamilyTree<Human> familyTreeList = getFamilyTreeTest();
 //
 //        save(familyTreeList);
@@ -24,11 +31,6 @@ public class Main {
 //        System.out.println(familyTreeRead);
 //        familyTreeRead.sortByAge();
 //        System.out.println(familyTreeRead);
-
-
-
-        View view = new Console();
-        view.start();
     }
 
 
