@@ -27,8 +27,8 @@ public class main {
         Human mother = new Human("Zubarzhat", zubarzhatBirthDate, Gender.Female,null,null);
         Human murat = new Human("Murat",muratBirthdate,Gender.Male,mother,father);
         Human gulmira = new Human("Gulmira",gulmiraBirthdate, Gender.Female,mother,father);
-//        grandpa.addChild(father);
-//        grandpa.addChild(daddy);
+        grandpa.addChild(father);
+        grandpa.addChild(daddy);
 //        mother.addChild(murat);
         //  Семейное древо добавление
         familyTree.addHumanToFamilyTree(grandpa);
@@ -41,6 +41,7 @@ public class main {
         // Вывод информации о древе
         printFamilyTree(familyTree);
 
+        // Serialize для ДЗ Семинара 2
 //        load();
 //        save(familyTree);
     }

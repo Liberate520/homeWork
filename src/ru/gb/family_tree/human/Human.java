@@ -16,11 +16,11 @@ public class Human {
 
     public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender,Human mother,Human father) {
         this.name = name;
-        this.birthDate = bDate;
-        this.deathDate = dDate;
+        birthDate = bDate;
+        deathDate = dDate;
         this.mother = mother;
         this.father = father;
-        this.childrens = new ArrayList<>();
+        childrens = new ArrayList<>();
         this.gender=gender;
     }
 
@@ -31,6 +31,7 @@ public class Human {
         this.mother = mother;
         this.father = father;
         this.gender=gender;
+        childrens = new ArrayList<>();
     }
 
     public int getAge() {
