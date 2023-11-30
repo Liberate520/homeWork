@@ -103,12 +103,12 @@ public class Service {
     }
 
     public void load() throws IOException {
-        writable = new FIleHandler();
+        writable = new FIleHandler(); // т.к. могут быть другие классы и методы, описывающие сохранение и загрузку, значение writable присваиваю здесь, а не в конструкторе
         tree = (FamilyTree) writable.read("output.data");
     }
 
     public boolean save() {
-        writable = new FIleHandler();
+        writable = new FIleHandler(); // т.к. могут быть другие классы и методы, описывающие сохранение и загрузку, значение writable присваиваю здесь, а не в конструкторе
         return writable.write(tree, "output.data");
     }
 
