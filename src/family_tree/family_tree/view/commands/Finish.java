@@ -1,10 +1,10 @@
 package family_tree.family_tree.view.commands;
 
-import family_tree.family_tree.view.View;
+import family_tree.family_tree.view.ConsoleUI;
 
 public class Finish extends Command {
 
-    public Finish(View view) {
+    public Finish(ConsoleUI view) {
         super("Потушили свет!", view);
     }
 

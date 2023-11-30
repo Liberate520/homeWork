@@ -1,10 +1,10 @@
 package family_tree.family_tree.view.commands;
 
-import family_tree.family_tree.view.View;
+import family_tree.family_tree.view.ConsoleUI;
 
 public class SortByName extends Command {
 
-    public SortByName(View view) {
+    public SortByName(ConsoleUI view) {
         super("Отсортировать по имени", view);
     }
 

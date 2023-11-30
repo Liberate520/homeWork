@@ -1,6 +1,7 @@
 package family_tree.family_tree.view;
 
 import family_tree.family_tree.model.Gender;
+import family_tree.family_tree.model.service.Service;
 import family_tree.family_tree.presenter.Presenter;
 
 
@@ -25,15 +26,14 @@ public class ConsoleUI implements View{
         System.out.println("Приветюли!");
         while (work){
             printMenu();
-            scanMenu();
         }
     }
 
-    private void scanMenu() {
-        String  choiceStr = scanner.nextLine();
-        // метод проверочки строки
-        int choice = Integer.parseInt(choiceStr);
-        menu.execute(choice);
+//    private String scanMenu() {
+//        String  choiceStr = scanner.nextLine();
+//        // метод проверочки строки
+//        int choice = Integer.parseInt(choiceStr);
+//        menu.execute(choice);
 //        switch (choice){
 //            case "1":
 //                addHuman();
@@ -53,19 +53,14 @@ public class ConsoleUI implements View{
 //            default:
 //                error();
 //        }
-    }
+
     private void printMenu(){
         System.out.println(menu.print());
-//        System.out.println("1. Добавить человека");
-//        System.out.println("2. Получить список");
-//        System.out.println("3. Отсортировать по имени");
-//        System.out.println("4. Отсортировать по возрасту");
+        System.out.println("1. Добавить человека");
+        System.out.println("2. Получить список");
+        System.out.println("3. Отсортировать по имени");
+        System.out.println("4. Отсортировать по возрасту");
     }
-
-    private void error() {
-        System.out.println("Вы накосячили с данными");
-    }
-
     public void finish() {
         System.out.println("Пока !");
         work = false;
@@ -80,33 +75,42 @@ public class ConsoleUI implements View{
     }
 
     public void getHumanListInfo() {
+
         presenter.getHumanListInfo();
     }
 
     public void addHuman() {
         System.out.println("Укажите имя Human");
         String name = scanner.nextLine();
-//        System.out.println("Укажите возраст: ");
-//        String ageStr = scanner.nextLine();
-        System.out.println("Укажите дату рождения");
-        String birthDate = scanner.nextLine();
-        // проверочка
-//        int age = Integer.parseInt(ageStr);
-//        presenter.addHuman(name, age);
-//        System.out.println("Укажите дату смерти");
-//        String deathDate = scanner.nextLine();
-        System.out.println("Укажите пол (гендер)");
+        System.out.println("Укажите пол (Male/Female)");
         String gender = scanner.nextLine();
-
-//        CharSequence deathDate = null;
-//        presenter.addHuman(name, LocalDate.parse(birthDate), LocalDate.parse(deathDate), Gender.valueOf(gender));
-        presenter.addHuman(name, LocalDate.parse(birthDate), Gender.valueOf(gender));
+        System.out.println("Укажите дату рождения (ГГГГ-ММ-ДД)");
+        String birthDate = scanner.nextLine();
+        presenter.addHuman(name, gender, birthDate);
     }
 
 
     @Override
-    public void answer(String answer) {
+//    public void answer(String answer) {
+//        System.out.println(answer);
+    public void printAnswer(String answer) {
         System.out.println(answer);
+        }
 
     }
+    // метод сохранения      save(tree);
+//    public void save(FamilyTree tree) {
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/family_tree/writer/tree.txt";
+//        fileHandler.save(tree, filePath);
+//    }
+
+    // метод загрузки
+//    private void FamilyTree load() {
+//        FileHandler fileHandler = new FileHandler();
+//        String filePath = "src/family_tree/writer/tree.txt";
+//        familyTree = (FamilyTree)fileHandler.read(filePath);
+////        return (FamilyTree) fileHandler.read(filePath);
+//    }
 }
+

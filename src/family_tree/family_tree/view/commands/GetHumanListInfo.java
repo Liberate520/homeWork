@@ -1,10 +1,10 @@
 package family_tree.family_tree.view.commands;
 
-import family_tree.family_tree.view.View;
+import family_tree.family_tree.view.ConsoleUI;
 
 public class GetHumanListInfo extends Command {
 
-    public GetHumanListInfo(View view) {
+    public GetHumanListInfo(ConsoleUI view) {
         super("Получить список Human", view);
     }
 
