@@ -83,7 +83,7 @@ public class Human implements Serializable, Comparable<Human>, TreeItem<Human> {
 
     @Override
     public int getFirstParent() {
-        return 0;
+        return getParent_Id();
     }
 
     public LocalDate getBirthday() {
