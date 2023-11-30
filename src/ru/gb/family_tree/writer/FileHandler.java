@@ -3,7 +3,7 @@ package ru.gb.family_tree.writer;
 import java.io.*;
 
 public class FileHandler implements Writable{
-    String path="src/ru/gb/family_tree/writer/save.txt";
+    String path="src/ru/gb/family_tree/writer/save";
     public boolean save(Serializable serializable,String path) {
         try (ObjectOutputStream familytreeOut= new ObjectOutputStream(new FileOutputStream(path))) {
             familytreeOut.writeObject(serializable);
@@ -20,6 +20,7 @@ public class FileHandler implements Writable{
             return familytreeInput.readObject();
         }
         catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

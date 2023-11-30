@@ -46,7 +46,7 @@ public class main {
 //      save(familyTree);
     }
     private static FamilyTree load(){
-        String filePath = "src/ru/gb/family_tree/writer/file.txt";
+        String filePath = "src/ru/gb/family_tree/writer/file";
         FileHandler fileHandler = new FileHandler();
         return (FamilyTree) fileHandler.load(filePath);
     }
