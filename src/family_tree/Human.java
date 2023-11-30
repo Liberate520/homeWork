@@ -17,10 +17,13 @@ public class Human implements Serializable {
     private Human spouse;
     private List<Human> children;
     boolean inTree = false;
+    {
+        children = new ArrayList<>();
+    }
 
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
-                 LocalDate deathDate, Human mother, Human father, Human spouse, List<Human> children) {
+                 LocalDate deathDate, Human mother, Human father, Human spouse) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -29,22 +32,21 @@ public class Human implements Serializable {
         this.mother = mother;
         this.father = father;
         this.spouse = spouse;
-        this.children = children;
         //TODO: Добавить список бывших супругов - должны добавляться при разводе
         //TODO: Добавить уникальный автоматический ID каждому человеку и завязать на него equals
     }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate) {
         this(firstName, lastName, gender, birthDate, null, null,
-                null, null, null);
+                null, null);
     }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
-        this(firstName, lastName, gender, birthDate, deathDate, null, null, null, null);
+        this(firstName, lastName, gender, birthDate, deathDate, null, null, null);
     }
 
     public Human(String firstName, String lastName, Gender gender, Human mother, Human father) {
-        this(firstName, lastName, gender, null, null, mother, father, null, null);
+        this(firstName, lastName, gender, null, null, mother, father, null);
     }
 
     public Human() {
@@ -83,14 +85,16 @@ public class Human implements Serializable {
         }
     }
 
-    void setChildren(Human children) {
-        if (this.children == null) {
-            List<Human> addChildren = new ArrayList<Human>();
-            addChildren.add(children);
-            this.children = addChildren;
-        } else {
-            this.children.add(children);
+    public void setChildren(Human child) {
+        if (this.children!= null) {
+            for (Human child1 : children) {
+                if (child1.equals(child)) {
+                    System.out.println("Такой ребенок уже задан");
+                    return;
+                }
+            }
         }
+        this.children.add(child);
     }
 
     public void setInTree(boolean inTree) {

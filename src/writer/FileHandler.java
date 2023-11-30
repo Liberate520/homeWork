@@ -2,7 +2,7 @@ package writer;
 
 import java.io.*;
 
-public class FileHandler implements Writable, Serializable {
+public class FileHandler implements Writable {
     Object element;
 
     public void writeObject(Object o, String fileName) {
