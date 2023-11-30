@@ -20,7 +20,6 @@ public class Service {
     public Service() {
         tree = new FamilyTree<>();
         builder = new HumanBuilder();
-        writable = new FIleHandler();
     }
 
     public Human addNewToFamily(String lastname, String name, Gender gender) throws HumanExcistsException {
@@ -104,10 +103,12 @@ public class Service {
     }
 
     public void load() throws IOException {
+        writable = new FIleHandler();
         tree = (FamilyTree) writable.read("output.data");
     }
 
     public boolean save() {
+        writable = new FIleHandler();
         return writable.write(tree, "output.data");
     }
 
