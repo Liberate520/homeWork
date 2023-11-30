@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FamilyTree implements Serializable {
     private List<Human> familyTree;
-
+    private int treeNum=0; //счетчик людей в дереве
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
     }
@@ -17,6 +17,7 @@ public class FamilyTree implements Serializable {
     }
     public void addHumanToFamilyTree(Human human) {
         familyTree.add(human);
+        human.setHumanID(++treeNum);
     }
 
     public List<Human> getByName(String name){
@@ -41,6 +42,8 @@ public class FamilyTree implements Serializable {
         sb.append(" человек\n");
         for(Human human:familyTree)
         {
+            sb.append(human.getHumanID());
+            sb.append(") ");
             sb.append(human);
             sb.append("\n");
         }

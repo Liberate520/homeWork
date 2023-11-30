@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Human {
+    private int humanID=1;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
@@ -15,6 +16,7 @@ public class Human {
     private List<Human> childrens;
 
     public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender,Human mother,Human father) {
+        humanID++;
         this.name = name;
         this.birthDate = bDate;
         this.deathDate = dDate;
@@ -25,12 +27,14 @@ public class Human {
     }
 
     public Human(String name, LocalDate bDate,Gender gender,Human mother,Human father) {
+        humanID++;
         this.name = name;
         this.birthDate = bDate;
         this.deathDate = null;
         this.mother = mother;
         this.father = father;
         this.gender=gender;
+        this.childrens = new ArrayList<>();
     }
 
     public int getAge() {
@@ -40,7 +44,12 @@ public class Human {
     public String getName(){
         return name;
     }
-
+    public int getHumanID(){
+        return humanID;
+    }
+    public void setHumanID(int num){
+        this.humanID=num;
+    }
     public boolean  addChild(Human child){
         if (childrens.contains(child)) {
             return true;
@@ -72,28 +81,50 @@ public class Human {
         String res="";
         if(this.gender==Gender.Male)
         {
-            res+="мужской";
+            res+="Мужской";
         }
-        else res+="женский";
+        else res+="Женский";
         return res;
     }
-    public List<Human>getParents(){
-        List<Human> parents = new ArrayList<>(2);
-        if(father!=null){
-            parents.add(father);
-        }
-        if(mother!=null){
-            parents.add(mother);
-        }
-        return parents;
+//    public List<Human>getParents(){
+//        List<Human> parents = new ArrayList<>(2);
+//        if(father!=null){
+//            parents.add(father);
+//        }
+//        if(mother!=null){
+//            parents.add(mother);
+//        }
+//        return parents;
+//    }
+public String getParents(){
+    StringBuilder sb = new StringBuilder();
+    if (this.father!=null||this.mother!=null){
+    if(this.father!=null){
+        sb.append("Отец: ");
+        sb.append(getFatherName());
+        sb.append(" ");
     }
-    public List<Human>getChildrens(){
-        List<Human> childrens = new ArrayList<>();
+    if (this.mother!=null)
+    {
+        sb.append("Мать: ");
+        sb.append(getMotherName());
+        sb.append(" ");
+    }
+    }
+    else sb.append("Родители не известны");
+        return sb.toString();
+    }
+    public String getChildrens(){
         if(!this.childrens.isEmpty()){
-            childrens=this.childrens;
+            StringBuilder sb = new StringBuilder();
+            for (Human child:childrens
+                 ) {
+                sb.append(child.getName());
+                sb.append(" ");
+            }
+            return sb.toString();
         }
-        return childrens;
-
+        else return "детей нет";
     }
     public void setMother(Human mother){
         this.mother=mother;
@@ -104,9 +135,13 @@ public class Human {
 
     public String getDeathStatus(){
         if(deathDate!=null){
-            return "мертв";
+            if(gender==Gender.Female){return "мертва";}
+            else return "мертв";
         }
-        else return "жив";
+        else {
+            if(gender==Gender.Female){return "жива";}
+            else return "жив";
+        }
     }
     @Override
     public String toString() {return GetInfo();}
@@ -121,10 +156,18 @@ public class Human {
         sb.append(", Статус: ");
         sb.append(getDeathStatus());
         sb.append(", Дата рождения: ");
-        sb.append(birthDate);
+        sb.append(birthDate.getDayOfMonth());
+        sb.append("-");
+        sb.append(birthDate.getMonth());
+        sb.append("-");
+        sb.append(birthDate.getYear());
         if(deathDate!=null) {
             sb.append(", Дата смерти: ");
-            sb.append(deathDate);
+            sb.append(deathDate.getDayOfMonth());
+            sb.append("-");
+            sb.append(deathDate.getMonth());
+            sb.append("-");
+            sb.append(deathDate.getYear());
         }
         sb.append(", Дети: ");
         if(childrens==null)
@@ -133,10 +176,7 @@ public class Human {
         }
         sb.append(getChildrens());
         sb.append(", Родители: ");
-        if(!getParents().isEmpty()) {
-            sb.append(getParents());
-        }
-        else sb.append("Не известны");
+        sb.append(getParents());
         return sb.toString();
     }
 }

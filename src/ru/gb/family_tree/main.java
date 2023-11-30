@@ -37,6 +37,8 @@ public class main {
 
         // Вывод информации о древе
         printFamilyTree(familyTree);
+        System.out.println("Проверка метода поиска по имени Murat");
+        System.out.println(familyTree.getByName("Murat"));
 
         // Serialize для ДЗ Семинара 2
 //        load();
