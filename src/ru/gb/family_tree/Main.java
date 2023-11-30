@@ -3,15 +3,33 @@ package ru.gb.family_tree;
 import ru.gb.family_tree.humans.Gender;
 import ru.gb.family_tree.humans.Human;
 import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
+//        FamilyTree tree = testTree();
+        FamilyTree tree = load();
         System.out.println(tree);
+
+//        save(tree);
     }
-        static FamilyTree testTree() {
+
+    private static FamilyTree load() {
+            String filePath = "src/ru/gb/family_tree/writer/tree.txt";
+            FileHandler fileHandler = new FileHandler();
+            return (FamilyTree) fileHandler.readFile(filePath);
+    }
+
+    private static void save(FamilyTree tree) {
+        String filePath = "src/ru/gb/family_tree/writer/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.saveFile(tree, filePath);
+    }
+
+
+    static FamilyTree testTree() {
             FamilyTree tree = new FamilyTree();
 
             Human egor = new Human("Egor", Gender.Male, LocalDate.of(1990, 6, 15));
