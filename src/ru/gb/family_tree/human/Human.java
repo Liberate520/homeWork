@@ -1,5 +1,7 @@
 package ru.gb.family_tree.human;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable,Comparable<Human> {
     private int humanID=1;
     private String name;
     private Gender gender;
@@ -179,5 +181,10 @@ public String getParents(){
         sb.append(", Родители: ");
         sb.append(getParents());
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
     }
 }

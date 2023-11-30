@@ -37,16 +37,25 @@ public class main {
 
         // Вывод информации о древе
         printFamilyTree(familyTree);
-        System.out.println("Проверка метода поиска по имени Murat");
-        System.out.println(familyTree.getByName("Murat"));
+//        System.out.println("Проверка метода поиска по имени Murat");
+//        System.out.println(familyTree.getByName("Murat"));
 
         // Serialize для ДЗ Семинара 2
-        System.out.println("вывод загруженного дерева из файла");
-        printFamilyTree(load());
+//        System.out.println("вывод загруженного дерева из файла");
+//        printFamilyTree(load());
 //      save(familyTree);
+        // Sort для ДЗ Семинара 3
+        familyTree.sortByName();
+        System.out.println("После сортировки по имени");
+        printFamilyTree(familyTree);
+        System.out.println("После сортировки по возрасту");
+        familyTree.sortByAge();
+        printFamilyTree(familyTree);
     }
+
+
     private static FamilyTree load(){
-        String filePath = "src/ru/gb/family_tree/writer/file.txt";
+        String filePath = "src/ru/gb/family_tree/writer/file";
         FileHandler fileHandler = new FileHandler();
         return (FamilyTree) fileHandler.load(filePath);
     }
