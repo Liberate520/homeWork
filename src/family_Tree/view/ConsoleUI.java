@@ -1,7 +1,6 @@
 package family_Tree.view;
 
 import family_Tree.model.human.Gender;
-import family_Tree.model.human.Human;
 import family_Tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -69,14 +68,16 @@ public class ConsoleUI implements View {
     public void addChild(){
         answer("Введите ID родителя");
         int parentId = checkId(scanner.nextLine());
-        if (parentId>=0){
+        if (parentId>=0) {
             answer("Введите ID ребёнка");
             int childId = checkId(scanner.nextLine());
-            if (childId>=0){
-                presenter.addChild(parentId,childId);
+            if (childId >= 0) {
+                presenter.addChild(parentId, childId);
             } else {
                 answer(errorId);
             }
+        }else{
+                answer(errorId);
         }
     }
 
@@ -161,14 +162,14 @@ public class ConsoleUI implements View {
     private int checkId(String id){
         if (checkIfInt(id)) {
             int intId = Integer.parseInt(id);
-            if (findById(intId) != null) {
+            if (findById(intId)) {
                 return intId;
             }
         }
         return -1;
     }
 
-    private Human findById(int id){
+    private boolean findById(int id){
         return presenter.findById(id);
     }
 

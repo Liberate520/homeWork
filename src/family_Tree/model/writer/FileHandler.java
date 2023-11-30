@@ -3,8 +3,9 @@ package family_Tree.model.writer;
 import java.io.*;
 
 public class FileHandler implements Writable{
+    String filePath = "src/family_Tree/model/writer/tree.txt";
 
-    public boolean save(Serializable serializable, String filePath) {
+    public boolean save(Serializable serializable) {
         try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
             objectOutputStream.writeObject(serializable);
             return true;
@@ -15,7 +16,7 @@ public class FileHandler implements Writable{
     }
 
 
-    public Object read(String filePath) {
+    public Object read() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))){
             return objectInputStream.readObject();
         } catch (Exception e) {

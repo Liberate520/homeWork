@@ -5,6 +5,7 @@ import family_Tree.model.builder.TreeBuilder;
 import family_Tree.model.human.Gender;
 import family_Tree.model.human.Human;
 import family_Tree.model.writer.FileHandler;
+import family_Tree.model.writer.Writable;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ public class Service {
 
     public FamilyTree<Human> tree;
     public TreeBuilder builder;
+    Writable writable;
 
     public Service() {
         tree = new FamilyTree<>();
@@ -19,15 +21,13 @@ public class Service {
     }
 
     public void save(){
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/family_Tree/writer/tree.txt";
-        fileHandler.save(tree, filePath);
+        writable = new FileHandler();
+        writable.save(tree);
     }
 
     public void load(){
-        FileHandler fileHandler = new FileHandler();
-        String filePath = "src/family_Tree/writer/tree.txt";
-        tree = (FamilyTree) fileHandler.read(filePath);
+        writable = new FileHandler();
+        tree = (FamilyTree) writable.read();
     }
 
     public void sortByName(){
@@ -51,12 +51,12 @@ public class Service {
         tree = builder.generateTree();
     }
 
-    public void printFullInfo() {
-        System.out.println(tree.getInfo());
+    public String printFullInfo() {
+        return tree.getInfo();
     }
 
-    public void printHumanInfo(int id) {
-        System.out.println(tree.getHumanInfo(id));
+    public String printHumanInfo(int id) {
+        return tree.getHumanInfo(id);
     }
 
     public void addChild(int parentId, int childId){
@@ -67,8 +67,8 @@ public class Service {
         tree.addParent(humanId, parentId);
     }
 
-    public Human findById(int id){
-        return tree.findById(id);
+    public boolean findById(int id){
+        return tree.findById(id) != null;
     }
 
     public void setDeathDate(int id, LocalDate date){

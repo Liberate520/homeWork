@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public interface Writable {
 
-    boolean save (Serializable serializable, String filepath);
-    Object read (String filepath);
+    boolean save(Serializable serializable);
+    Object read();
 }

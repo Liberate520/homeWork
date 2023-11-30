@@ -25,7 +25,7 @@ public class Presenter {
 
     public void load(){
         service.load();
-        view.answer(positive+"Для просмотра выберите соответствующий пункт меню\n");
+        view.answer(positive);
     }
 
     public void sortByName(){
@@ -50,11 +50,11 @@ public class Presenter {
         print();
     }
     public void print(){
-        service.printFullInfo();
+        view.answer(service.printFullInfo());
     }
 
     public void printById(int id){
-        service.printHumanInfo(id);
+        view.answer(service.printHumanInfo(id));
     }
 
     public void addChild(int parentId, int childId){
@@ -69,7 +69,7 @@ public class Presenter {
         printById(humanId);
     }
 
-    public Human findById(int id){
+    public boolean findById(int id){
         return service.findById(id);
     }
 
@@ -78,5 +78,4 @@ public class Presenter {
         view.answer(positive);
         printById(id);
     }
-
 }
