@@ -115,10 +115,20 @@ public class ServiceTree implements Serializable {
                     .append(h.getGender()).append(",дети: ");
             if (h.getChildren().isEmpty())
                 builder.append(",нет детей.").append("\n");
-            else
-                builder.append(h.children).append("\n").append("-------------------------------------").append("\n");
 
+            else {
+                for (Human ch : h.getChildren()) {
+                    builder.append("\n").append("имя: ").append(ch.getName())
+                            .append(" фамилия: ").append(ch.getLastName())
+                            .append(" возраст:")
+                            .append(Period.between(ch.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
+
+
+                }
+            }
+            builder.append("\n").append("--------------------------------").append("\n");
         }
+
         return builder.toString();
     }
     // Удаление человека (если есть в списке детей тоже удалиться
@@ -217,12 +227,12 @@ public class ServiceTree implements Serializable {
         tree.sortByAge();
     }
     // Сортировка по фамилии
-    public void sortByLastName(){
+    public void sortTreeByLastName(){
          tree.sortByLastName();
 
     }
     // Сортировка по количеству детей
-    public void sortByCountChildren(){
+    public void sortTreeByCountChildren(){
         tree.sortByCountChildren();
     }
 public String toString(){

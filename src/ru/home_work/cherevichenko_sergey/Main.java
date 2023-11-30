@@ -101,10 +101,9 @@ public class Main {
         tree.addChildForFamily("Людмила","Краснова",
                 "Борис","Пузанев","Валерий","Пузанев");
 
-
-        tree.sortByCountChildren();
         System.out.println(tree);
-
+        tree.sortTreeByCountChildren();
+        System.out.println(tree);
 
 
         }
