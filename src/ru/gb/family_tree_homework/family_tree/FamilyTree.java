@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyTree implements Serializable {
-    public long counter;
+    private long counter;
     private List<Human> familyTree;
 
     public FamilyTree() {

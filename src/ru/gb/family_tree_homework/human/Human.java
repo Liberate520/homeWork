@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable {
-    public long id;
+    private long id;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private Human mother, father;
     private Human spouse;
-    private List<Human> children = new ArrayList<>();
+    private List<Human> children;
     private String name;
 
     // Конструкторы
