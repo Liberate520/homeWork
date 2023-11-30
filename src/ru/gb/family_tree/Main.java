@@ -9,8 +9,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree tree = testTree();
-//        FamilyTree tree = load();
+//        FamilyTree tree = testTree();
+        FamilyTree tree = load();
         System.out.println(tree);
 
         save(tree);
