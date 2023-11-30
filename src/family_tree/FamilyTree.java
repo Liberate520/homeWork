@@ -6,15 +6,15 @@ import java.util.List;
 
 public class FamilyTree implements Serializable {
     private List<Human> familyTree;
-    private Human top;
 
     {
        familyTree = new ArrayList<>();
     }
 
     public Human getTop() {
+        Service service = new Service();
         topOfTree(familyTree.getFirst());
-        return top;
+        return service.getTreeTop();
     }
 
     public boolean setSpouse(Human firstSpouce, Human secondSpouce) {
@@ -126,8 +126,9 @@ public class FamilyTree implements Serializable {
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
     public String showTree(){
+        Service service = new Service();
         topOfTree(familyTree.getFirst());
-        return showTreeService(top);
+        return showTreeService(service.getTreeTop());
     }
 
     private String showTreeService(Human top) {
@@ -149,13 +150,14 @@ public class FamilyTree implements Serializable {
     }
 
     private boolean topOfTree(Human topEnter) {
+        Service service = new Service();
         if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
             if (topEnter.getSpouse() != null) {
                 if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
                     topOfTree(topEnter.getSpouse());
                 }
             } else {
-                top = topEnter;
+                service.setTreeTop(topEnter);
             }
         }
         if (topEnter != null) {
