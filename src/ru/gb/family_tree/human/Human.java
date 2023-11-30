@@ -16,11 +16,11 @@ public class Human {
 
     public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender,Human mother,Human father) {
         this.name = name;
-        birthDate = bDate;
-        deathDate = dDate;
+        this.birthDate = bDate;
+        this.deathDate = dDate;
         this.mother = mother;
         this.father = father;
-        childrens = new ArrayList<>();
+        this.childrens = new ArrayList<>();
         this.gender=gender;
     }
 
@@ -31,7 +31,6 @@ public class Human {
         this.mother = mother;
         this.father = father;
         this.gender=gender;
-        childrens = new ArrayList<>();
     }
 
     public int getAge() {
@@ -81,7 +80,7 @@ public class Human {
     public List<Human>getParents(){
         List<Human> parents = new ArrayList<>(2);
         if(father!=null){
-         parents.add(father);
+            parents.add(father);
         }
         if(mother!=null){
             parents.add(mother);
@@ -109,8 +108,8 @@ public class Human {
         }
         else return "жив";
     }
-@Override
-public String toString() {return GetInfo();}
+    @Override
+    public String toString() {return GetInfo();}
     public String GetInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("Имя: ");
@@ -141,4 +140,3 @@ public String toString() {return GetInfo();}
         return sb.toString();
     }
 }
-
