@@ -41,12 +41,12 @@ public class main {
         System.out.println(familyTree.getByName("Murat"));
 
         // Serialize для ДЗ Семинара 2
-//        System.out.println("вывод загруженного дерева из файла");
-//        printFamilyTree(load());
-        save(familyTree);
+        System.out.println("вывод загруженного дерева из файла");
+        printFamilyTree(load());
+//      save(familyTree);
     }
     private static FamilyTree load(){
-        String filePath = "src/ru/gb/family_tree/writer/file";
+        String filePath = "src/ru/gb/family_tree/writer/file.txt";
         FileHandler fileHandler = new FileHandler();
         return (FamilyTree) fileHandler.load(filePath);
     }
