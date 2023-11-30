@@ -1,10 +1,8 @@
 package ru.medved_sa.tree_family.presenter;
 
-import ru.medved_sa.tree_family.model.Service;
+import ru.medved_sa.tree_family.model.service.Service;
 import ru.medved_sa.tree_family.model.save.FileHandler;
 import ru.medved_sa.tree_family.view.View;
-
-import java.util.ArrayList;
 
 public class Presenter {
     private View view;
@@ -20,12 +18,8 @@ public class Presenter {
         view.printAnswer(answer);
     }
 
-    public boolean setParent(int personId, int parentId){
-        if (service.checkId(personId) & service.checkId(parentId)) {
-            service.setParent(personId, parentId);
-            return true;
-        }
-        return false;
+    public void setParent(int personId, int parentId){
+        service.setParent(personId, parentId);
     }
 
     public void getHumanList() {

@@ -1,4 +1,4 @@
-package ru.medved_sa.tree_family.model;
+package ru.medved_sa.tree_family.model.service;
 
 import ru.medved_sa.tree_family.model.familyTree.FamilyTree;
 import ru.medved_sa.tree_family.model.human.Gender;
@@ -6,6 +6,7 @@ import ru.medved_sa.tree_family.model.human.Human;
 import ru.medved_sa.tree_family.model.save.Writable;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Service {
     private FamilyTree<Human> activeTree;
@@ -25,16 +26,16 @@ public class Service {
     }
 
     public boolean readFile(String filePath) {
-        FamilyTree<Human> tempTree = new FamilyTree<>();
-        tempTree = writable.readFile(filePath);
+        FamilyTree<Human> tempTree;
         if (writable == null) {
             return false;
         }
+        tempTree = writable.readFile(filePath);
         activeTree = tempTree;
         return true;
     }
 
-    public String addHuman(String name, String genderString, String birthDate){
+    public String addHuman(String name, String genderString, String birthDate) {
         Gender gender = Gender.valueOf(genderString);
         LocalDate humanBirthDate = LocalDate.parse(birthDate);
         Human human = new Human(name, gender, humanBirthDate);
@@ -49,6 +50,7 @@ public class Service {
     public void sortByAge() {
         activeTree.sortByAge();
     }
+
     public void sortById() {
         activeTree.sortById();
     }
@@ -57,13 +59,17 @@ public class Service {
         return activeTree.getInfo();
     }
 
-    public void setParent(int person_id, int parent_id){
+    public boolean setParent(int person_id, int parent_id) {
         Human human = activeTree.getById(person_id);
-        human.addParent(activeTree.getById(parent_id));
-        activeTree.getById(parent_id).addChild(human);
+        if (activeTree.checkId(person_id) && activeTree.checkId(parent_id)) {
+            human.addParent(activeTree.getById(parent_id));
+            activeTree.getById(parent_id).addChild(human);
+            return true;
+        }
+        return false;
     }
 
-    public boolean checkId(int id){
+    public boolean checkId(int id) {
         return activeTree.checkId(id);
     }
 }
