@@ -1,12 +1,12 @@
-import javax.swing.table.TableRowSorter;
-import java.awt.image.AreaAveragingScaleFilter;
+package ru.gb.family_tree_homework.human;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class Human {
+public class Human implements Serializable {
     public long id;
     private Gender gender;
     private LocalDate birthDate;
