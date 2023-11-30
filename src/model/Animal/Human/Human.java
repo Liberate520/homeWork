@@ -45,6 +45,7 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
         this.data = new DataLive(year_bd,m_bd,day_bd);
         this.gender = gender;
         this.childrenList = new ArrayList<>();
+        //this(name, year_bd, m_bd, day_bd,0, 0, 0, gender);
     }
     public Human(){
         this("человек", 12, 12, 12, Gender.Male);
@@ -106,26 +107,6 @@ public class Human implements Comparable<Human>, Animal<Human>, Serializable{
 
     public void setGender(Gender value){
         this.gender = value;
-    }
-
-    public void setGender(String value){
-        switch (value) {
-            case "м":
-                this.gender = Gender.Male;
-                break;
-            
-            case "М":
-                this.gender = Gender.Male;
-                break;
-        
-            case "ж":
-                this.gender = Gender.Female;
-                break;
-            
-            case "Ж":
-                this.gender = Gender.Female;
-                break;
-        }
     }
    
     public Gender getGender(){

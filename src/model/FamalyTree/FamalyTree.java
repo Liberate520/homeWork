@@ -88,13 +88,6 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
         return null;
     }
 
-    public void PrintTree() {
-        System.out.println("Выводим дерево в консоль");
-        for (T t: listT){
-            System.out.println(t);
-        }
-    }
-
     @Override
     public Iterator<T> iterator(){
         return new TIterator<T>(listT);

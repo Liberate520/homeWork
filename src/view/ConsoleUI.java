@@ -1,6 +1,9 @@
 package view;
 
 import presenter.Presenter;
+import view.consoles.ConsoleRelative;
+import view.menu.MainMenu;
+import view.menu.Sortmenu;
 
 import java.util.Scanner;
 
@@ -8,12 +11,13 @@ import Animal.Human.Gender;
 
 public class ConsoleUI implements View {
 
-    private static final String INPUT_ERROR = "Вы ввели неверное значение";
+    private static final String INPUT_ERROR = "Вы ввели неверное значение!";
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
     private MainMenu menu;
     private Sortmenu sortmenu;
+    private ConsoleRelative consR;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -39,7 +43,7 @@ public class ConsoleUI implements View {
     }
 
     public void finish() {
-        System.out.println("И больше не запускайте это");
+        System.out.println("И больше не запускайте это)");
         work = false;
     }
 
@@ -64,41 +68,39 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        System.out.println("Введите имя человека: ");
+        System.out.print("Введите имя человека: ");
         String name = scanner.nextLine();
-        System.out.println("Укажите пол человека 'м,ж': ");
+        System.out.print("Укажите пол человека 'm,f': ");
         Gender gender = setGender(scanner.nextLine());
-        System.out.println("Укажите дату рождения человека: ГГГГ.ММ.ЧЧ: ");
+        System.out.println("Укажите дату рождения человека ");
+        System.out.print("ГГГГ: ");
         int year = Integer.parseInt(scanner.nextLine());
+        System.out.print("ММ: ");
         int month = Integer.parseInt(scanner.nextLine());
+        System.out.print("ЧЧ: ");
         int day = Integer.parseInt(scanner.nextLine());
-        System.out.println("Человек еще жив? 'Y'\'N'");
+        System.out.print("Человек еще жив? Y/N ");
         if (scanner.nextLine().equals("N")){
-            System.out.println("Укажите дату смерти человека: ГГГГ.ММ.ЧЧ: ");
+            System.out.print("Укажите дату смерти человека");
+            System.out.print("ГГГГ: ");
             int dyear = Integer.parseInt(scanner.nextLine());
+            System.out.print("ММ: ");
             int dmonth = Integer.parseInt(scanner.nextLine());
+            System.out.print("ЧЧ: ");
             int dday = Integer.parseInt(scanner.nextLine());
             presenter.addHuman(name,year,month,day,dyear,dmonth,dday,gender);
         } else presenter.addHuman(name,year,month,day,gender);
     }
 
     public void addHumanRelatives(){
-        System.out.println("Введите id первого человека: ");
-        int id0 = Integer.parseInt(scanner.nextLine());
-        System.out.println("Введите id второго человека: ");
-        int id1 = Integer.parseInt(scanner.nextLine());
-        String name0 = presenter.getHumanId(id0).getName();
-        String name1 = presenter.getHumanId(id1).getName();
-        System.out.println("Кем является "+name1+" для "+name0+":\n" + //
-                "\t 1-отцом;\n\t2-матерью;\n" + //
-                "\t3-супругом;\n\t4-ребенком");
-        int index = Integer.parseInt(scanner.nextLine());
-        presenter.addHumanRelatives(id0, id1, index);
+        consR = new ConsoleRelative(this);
+        consR.work();
     }
 
     public void saveInFile(){
-        System.out.println("Введите имя файла для сохранения:");
+        System.out.print("Введите имя файла для сохранения: ");
         presenter.saveInFile(scanner.nextLine());
+        System.out.println();
     }
 
     private void hello(){
@@ -106,15 +108,21 @@ public class ConsoleUI implements View {
     }
 
     private void init(){
-        System.out.println("Хотите загрузить генеологическое дерево из файла? Y/N");
+        System.out.print("Хотите загрузить генеологическое дерево из файла? Y/N ");
         if (scanner.nextLine().equals("Y")){
-            System.out.println("Введите имя файла: ");
+            System.out.print("Введите имя файла: ");
             presenter = new Presenter(this,scanner.nextLine());
-            System.out.println();
-            getFamalyTreeListInfo();
+            if (presenter.getFamalyObject() != null){
+                System.out.println();
+                getFamalyTreeListInfo();
+            } 
+            else{
+                System.out.println("Создали новое дерево.");
+                presenter = new Presenter(this);
+            }
         } 
         else {
-            System.out.println("Создали пустое дерево");
+            System.out.println("Создали новое дерево.");
             presenter = new Presenter(this);
         }
     }
@@ -174,5 +182,9 @@ public class ConsoleUI implements View {
     private Gender setGender(String value){
         if (value.equals("m")) return Gender.Male;
         else return Gender.Female;       
+    }
+
+    public Presenter getPresenter(){
+        return this.presenter;
     }
 }

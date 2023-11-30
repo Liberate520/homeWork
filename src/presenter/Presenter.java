@@ -69,4 +69,8 @@ public class Presenter {
     public Human getHumanId (int id){
         return service.getHumanId(id);
     }
+
+    public Object getFamalyObject(){
+        return service.getFamaliObject();
+    }
 }

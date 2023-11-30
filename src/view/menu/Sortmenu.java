@@ -1,32 +1,31 @@
-package view;
+package view.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import view.commands.AddHuman;
-import view.commands.AddHumanRelatives;
+import view.ConsoleUI;
 import view.commands.Command;
-import view.commands.Finish;
-import view.commands.GetHumanTreeInfo;
-import view.commands.SaveInFile;
-import view.commands.Sorts;
+import view.commands.SortByAge;
+import view.commands.SortByChildren;
+import view.commands.SortByGender;
+import view.commands.SortByName;
 
-public class MainMenu {
+public class Sortmenu {
     private List<Command> commandList;
 
-    public MainMenu(ConsoleUI consoleUI) {
+    public Sortmenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
-        commandList.add(new AddHuman(consoleUI));
-        commandList.add(new AddHumanRelatives(consoleUI));
-        commandList.add(new GetHumanTreeInfo(consoleUI));
-        commandList.add(new Sorts(consoleUI));
-        commandList.add(new SaveInFile(consoleUI));
-        commandList.add(new Finish(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByAge(consoleUI));
+        commandList.add(new SortByGender(consoleUI));
+        commandList.add(new SortByChildren(consoleUI));
     }
 
-    public String menu(){
+    public String sortmenu(){
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\tВыберите метод сортировки:\n");
         for (int i = 0; i < commandList.size(); i++) {
+            stringBuilder.append("\t");
             stringBuilder.append(i+1);
             stringBuilder.append(". ");
             stringBuilder.append(commandList.get(i).getDescription());

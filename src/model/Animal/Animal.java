@@ -10,7 +10,6 @@ public interface Animal<T>{
     void setBirthday(LocalDate date);
     LocalDate getBirthday();
     void setGender(Gender gender);
-    void setGender(String gender);
     Gender getGender();
     void setId(int id);
     int getId();

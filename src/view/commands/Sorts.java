@@ -6,7 +6,7 @@ public class Sorts extends Command{
 
     public Sorts(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Отсортировать список";
+        description = "Отсортировать список.";
     }
 
     public void execute(){

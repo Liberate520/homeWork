@@ -61,4 +61,8 @@ public class Service {
     public Human getHumanId (int id){
         return famalyTree.searchID(id);
     }
+
+    public Object getFamaliObject(){
+        return famalyTree;
+    }
 }

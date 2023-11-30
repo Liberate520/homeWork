@@ -29,7 +29,7 @@ public class Filehundler implements Writeble{
                 new FileInputStream(fileName))){
             return objectInputStream.readObject();
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Файл не найден или тип данных не соответствует!\n");
             return null;
         }
     }
