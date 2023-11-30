@@ -1,8 +1,15 @@
 package family_tree.view;
 
+import family_tree.model.human.Fondation;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Position;
+import family_tree.model.human.SocialPosition;
 import family_tree.presenter.Presenter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class ConsoleUI implements View {
     private boolean work;
@@ -55,7 +62,6 @@ public class ConsoleUI implements View {
     }
 
     private void execute(){
-//        System.out.print("выберите команду : ");
         instuction();
         String line = scanner.nextLine();
         if (checkTextForInt(line)){
@@ -96,10 +102,7 @@ public class ConsoleUI implements View {
         presenter.sortByLastName();
     }
 
-    public void sortByAge() {
-//        System.out.println(presenter.sortByAge());
-        presenter.sortByAge();
-    }
+    public void sortByAge() { presenter.sortByAge(); }
 
     public void sortByIncome() {
         presenter.sortByIncome();
@@ -107,6 +110,34 @@ public class ConsoleUI implements View {
 
     public void sortByName() { presenter.sortByName(); }
 
+    public void addHuman() {
+        System.out.print("введите фамилию : ");
+        String lastName = scan();
+        System.out.print("введите имя отчество (через пробел) : ");
+        String firstName = scan();
+        System.out.print("укажите пол (Male, Female) : ");
+        Gender gender = Gender.valueOf(scan());
+        System.out.print("укажите кто (Father, Mother, Child, Daughter, Son) : ");
+        Position position = Position.valueOf(scan());
+        System.out.print("укажите социальное положение (Not_married, Married) : ");
+        SocialPosition socialPosition = SocialPosition.valueOf(scan());
+        System.out.print("укажите образование (Formal, Informal, Non_formal) : ");
+        Fondation fondation = Fondation.valueOf(scan());
+        System.out.print("укажите доход (только цифры) : ");
+        double income = Double.parseDouble(scan());
+        System.out.print("введите дату рождения (в формате: yyyy-MM-dd) :");
+        String birthDate = scan();
+        System.out.print("введите дату смерти (в формате: yyyy-MM-dd) или пропустите : ");
+        String deathDate =  scan();
+        System.out.print("укажите ID (в формате 0.**) : ");
+        double id = Double.parseDouble(scan());
+        presenter.add(lastName, firstName, gender, position, socialPosition, fondation, income, LocalDate.parse(birthDate), LocalDate.parse(deathDate, DateTimeFormatter.ISO_LOCAL_DATE), id);
+        
+    }
 
+    private String scan() {
+        scanner = new Scanner(System.in, "UTF-8");
+        return scanner.nextLine();
+    }
 }
 

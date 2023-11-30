@@ -24,11 +24,7 @@ public class Main<E extends TreeNode<E>> {
         View view = new ConsoleUI();
         view.start();
 
-
-
     }
-
-
 
 
 //    private static extends TreeHub void party() {
@@ -55,8 +51,6 @@ public class Main<E extends TreeNode<E>> {
 ////        familyTree.getRelativeInfo.sortByLastName();
 ////        System.out.println(familyTree);
 //    }
-
-
 
 
 

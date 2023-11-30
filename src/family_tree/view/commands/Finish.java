@@ -9,7 +9,7 @@ public class Finish extends Command {
         super(consoleUI);
         description = "закончить работу со списком";
     }
-
+    @Override
     public void execute(){
         consoleUI.finish();
     }

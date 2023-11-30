@@ -16,4 +16,10 @@ public abstract class Command {
     public String getDescription() {
         return description;
     }
+
+    public ConsoleUI getConsoleUI() {
+        return consoleUI;
+    }
+
+
 }

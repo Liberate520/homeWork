@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 public class SortFileByIncome {
-    static ArrayList<Human> humans = new ArrayList<>();
+    public static ArrayList<Human> humans = new ArrayList<>();
     public static void sortByIncomeForTree() {
         String filePath = "homeWork/src/model_app/family_tree.txt";
         // выводим на экран
@@ -17,7 +17,7 @@ public class SortFileByIncome {
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             // Десериализуем объекты
-            System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
+//            System.out.println("\n============= Сортировка списка по Доходу (по убыванию) :");
             while (true) {
                 try {
                     humInc = (Human) objectInputStream.readObject();

@@ -15,6 +15,7 @@ public class MainMenu {
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new SortByLastName(consoleUI));
         commandList.add(new SortByIncome(consoleUI));
+        commandList.add(new AddHuman(consoleUI));
         commandList.add(new Finish(consoleUI));
     }
 

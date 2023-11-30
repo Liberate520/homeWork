@@ -17,7 +17,7 @@ public class SortFileByAge {
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             // Десериализуем объекты
-            System.out.println("\n============= Сортировка списка по Возрасту : ");
+//            System.out.println("\n============= Сортировка списка по Возрасту : ");
             while (true) {
                 try {
                     humAge = (Human) objectInputStream.readObject();

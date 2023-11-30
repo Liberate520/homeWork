@@ -17,7 +17,7 @@ public class SortFileByLastName {
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             // Десериализуем объекты
-            System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) : ");
+            // System.out.println("\n============= Сортировка списка по Фамилии (по алфавиту) : ");
             while (true) {
                 try {
                     humNam = (Human) objectInputStream.readObject();

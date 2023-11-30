@@ -1,5 +1,7 @@
 package family_tree.model.tree;
 
+import family_tree.model.human.Position;
+
 import java.time.LocalDate;
 
 public interface FamilyTreeHub {
@@ -13,7 +15,7 @@ public interface FamilyTreeHub {
 
     double getIncome();
 
-    String getPosition();
+    Position getPosition();
 
     void getAge();
 

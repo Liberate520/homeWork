@@ -1,25 +1,27 @@
 package family_tree.model.tree;
 
-import family_tree.model.Comparator.ComparatorByName;
-import family_tree.model.Comparator.ComparatorByBirthDate;
-import family_tree.model.human.Human;
+import family_tree.model.comparator.ComparatorByName;
+import family_tree.model.comparator.ComparatorByBirthDate;
+import family_tree.model.human.*;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, Iterable<T>, FamilyTreeHub {
+import static family_tree.model.base.SortFileByIncome.humans;
 
-    protected int age;
+public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<T>, FamilyTreeHub {
+
     private String lastName;
-
-//    private String firstName;
+    private String firstName;
     private static List<Human> humanList;
     private double income;
-    private String position;
+    private Position position;    
+    public String info;    
+    private Fondation fondation;
+    private SocialPosition socialPosition;    
     private LocalDate birthDate;
-    public String info;
-
+    private LocalDate deathDate;
 
 
     //    ArrayList<Human> humans = new ArrayList<>();
@@ -50,16 +52,6 @@ public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, I
         return lastName;
     }
 
-//    @Override
-//    public String getFirstName() {
-//        return null;
-//    }
-
-//    @Override
-//    public String getFirstName() {
-//        return firstName;
-//    }
-
     @Override
     public boolean setId() {
         return true;
@@ -71,23 +63,24 @@ public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, I
     }
 
     @Override
-    public String getPosition() { return position; }
+    public Position getPosition() { return position; }
 
     @Override
     public void getAge() {
 
     }
 
+    @Override
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
 //    @Override
 //    public void getAge() {  }
 
-    @Override
-    public LocalDate getBirthDate() { return birthDate; }
+//    @Override
+//    public LocalDate getBirthDate() { return birthday; }
 
-    @Override
-    public Iterator<T> iterator() {
-        return new TreeIterator((List) humanList);
-    }
 
 //    public static void main(String[] args){
 //        System.out.println("вывод из FamilyTree ============ >>>>.");
@@ -142,6 +135,7 @@ public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, I
 //        }
 //    }
 
+
     public static Human handlerForTree() {
         String filePath = "homeWork/src/model_app/family_tree.txt";
         // выводим на экран
@@ -152,32 +146,90 @@ public class FamilyTree<T extends TreeNode<T>, human> implements Serializable, I
                 try {
                     human = (Human) objectInputStream.readObject();
                     System.out.println(human);
-//                    return human;
-//                    return (Human) objectInputStream.readObject();
                 }
                 catch (EOFException e) {
-                    break;
+                    return null;
                 }
             }
         }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
-        return human;
-    }
-
-    public static void handlerForTreeMethod(){
 
     }
+
+    public static Human handlerForIncome() {
+        String filePath = "homeWork/src/model_app/family_tree.txt";
+        // выводим на экран
+        Human human = null;
+        try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            // Десериализуем объекты
+            while (true) {
+                try {
+                    human = (Human) objectInputStream.readObject();
+                    //Сортировка списка по Доходам
+                    humans.sort(Comparator.comparing(Human::getIncome).reversed());
+                    System.out.println(human);
+                }
+                catch (EOFException e) {
+                    return null;
+                }
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    public static Human handlerForAge() {
+        String filePath = "homeWork/src/model_app/family_tree.txt";
+        // выводим на экран
+        Human human = null;
+        try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            // Десериализуем объекты
+            while (true) {
+                try {
+                    human = (Human) objectInputStream.readObject();
+                    //Сортировка списка по Возрасту
+                    humans.sort(Comparator.comparing(Human::getAge).reversed());
+                    System.out.println(human);
+                }
+                catch (EOFException e) {
+                    return null;
+                }
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
 
     public void sortByName(){
-        humanList.sort(new ComparatorByName());
+        humans.sort(new ComparatorByName());
     }
 
     public void sortByAge(){
-        humanList.sort(new ComparatorByBirthDate());
+        humans.sort(new ComparatorByBirthDate());
     }
 
+    public static void addNewHumans(Human newHuman){
+        humanList.add(newHuman);
+    }
+
+
+
+    @Override
+    public Iterator<T> iterator() {
+        return new TreeIterator((List) humanList);
+    }
 
 
 }

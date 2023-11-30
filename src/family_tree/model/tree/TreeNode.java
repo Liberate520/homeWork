@@ -2,6 +2,7 @@ package family_tree.model.tree;
 
 import family_tree.model.human.Position;
 
+
 import java.time.LocalDate;
 
 public interface TreeNode<T> {
@@ -21,6 +22,7 @@ public interface TreeNode<T> {
     int getAge();
 
     LocalDate getBirthDate();
+
 
 
 }

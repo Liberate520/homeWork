@@ -5,20 +5,21 @@ import family_tree.model.tree.TreeNode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.io.Serializable;
 
 public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
-    private final String lastName;
-    private final String firstName;
-    private final Gender gender;
-    private final Fondation fondation;
-    private final Position position;
-    private final SocialPosition socialPosition;
-    private final double income;
+    private String lastName;
+    private String firstName;
+    private Gender gender;
+    private Fondation fondation;
+    private Position position;
+    private SocialPosition socialPosition;
+    private double income;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private final double id;
+    private double id;
 
 
     public <children> Human(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, LocalDate deathDate, double id) {
@@ -33,10 +34,6 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
         this.deathDate = deathDate;
         this.id = id;
         List<Human> children = new ArrayList<>();
-    }
-
-    public Human(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, double id) {
-        this(lastName, firstName, gender, position, socialPosition, fondation, income, birthDate, null, id);
     }
 
 
