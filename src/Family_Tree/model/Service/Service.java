@@ -38,6 +38,30 @@ public class Service {
     public void sortByBirthday(){
         tree.sortByBirthday();
     }
+    public boolean read(String filePath){
+        FamilyTree<Human> tmpTree = new FamilyTree<Human>();
+        tmpTree = storage.read(filePath);
+        if (tmpTree.equals(null)){
+            return false;
+        }
+        tree = tmpTree;
+        return true;
+    }
+
+    public boolean save(String fileName){
+        return storage.write(tree, fileName);
+
+    }
+
+    public boolean setWedding(Human human1, Human human2) {
+        if (human1.getSpouse() == null && human2.getSpouse() == null) {
+            human1.setSpouse(human2);
+            human2.setSpouse(human1);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString(){

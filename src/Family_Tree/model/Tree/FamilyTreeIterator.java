@@ -12,6 +12,9 @@ public class FamilyTreeIterator <E> implements Iterator<E> {
         this.humanList = familyTree;
     }
 
+    public FamilyTreeIterator() {
+    }
+
     @Override
     public boolean hasNext() {
         return humanList.size() > index;

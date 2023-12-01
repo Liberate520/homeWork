@@ -1,5 +1,6 @@
 package Family_Tree.model.Human;
 
+import Family_Tree.model.Tree.FamilyTreeIterator;
 import Family_Tree.model.Tree.TreeNode;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, Comparable<Human>, TreeNode<Human> {
+public class Human extends FamilyTreeIterator<Human> implements Serializable, Comparable<Human>, TreeNode<Human> {
     private int id;
     private String name;
     private LocalDate birthday;

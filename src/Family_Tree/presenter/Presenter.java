@@ -33,4 +33,13 @@ public class Presenter {
         service.sortByBirthday();
         getStudentListInfo();
     }
+
+    public boolean read(String filePath){
+        return service.read(filePath);
+    }
+
+    public boolean save(String fileName){
+        return service.save(fileName);
+    }
+
 }
