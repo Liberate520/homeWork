@@ -1,3 +1,7 @@
+import Family.Family;
+import Family.FamilyTree;
+import Human.Human;
+import Human.Gender;
 import writer.FileHandler;
 
 import java.time.LocalDate;
@@ -31,5 +35,16 @@ public class Main {
         System.out.println(tree1);
         tree1 = (FamilyTree) fileHandler.load();
         System.out.println(tree1);
+
+        Family family1 = new Family();
+        family1.createFamily(human1);
+        System.out.println(family1);
+        family1.sortByName();
+        System.out.println(family1.fullInfo());
+        family1.sortByAge();
+        System.out.println(family1.fullInfo());
+        family1.sortByFamilyName();
+        System.out.println(family1.fullInfo());
+
     }
 }
