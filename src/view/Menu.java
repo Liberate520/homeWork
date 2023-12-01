@@ -13,6 +13,7 @@ public class Menu {
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new GetFamilyTreeInfo(consoleUI));
         commandList.add(new GetHumanByFullName(consoleUI));
+        commandList.add(new AddChild(consoleUI));
         commandList.add(new SortByFullName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new SaveFamilyTree(consoleUI));

@@ -4,6 +4,7 @@ import model.familyTree.FamilyTreeItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
@@ -18,7 +19,7 @@ public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
     private List<Human> children;
 
 
-    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father, List<Human> children) {
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, Human mother, Human father) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,31 +28,37 @@ public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
         this.died = died;
         this.mother = mother;
         this.father = father;
-        this.children = children;
+        children = new ArrayList<>();
     }
 
 
-    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died, List<Human> children) {
-        this(id, firstName, lastName, gender, born , died, null, null, children);
+    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
+        this(id, firstName, lastName, gender, born , died, null, null);
+        children = new ArrayList<>();
     }
 
     public Human(int id, String firstName, String lastName, Gender gender, LocalDate born) {
-        this(id, firstName, lastName, gender, born, null, null);
+        this(id, firstName, lastName, gender, born, null);
+        children = new ArrayList<>();
     }
 
-    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
-        this(id, firstName, lastName, gender, born, died, null);
-    }
+//    public Human(int id, String firstName, String lastName, Gender gender, LocalDate born, LocalDate died) {
+//        this(id, firstName, lastName, gender, born, died);
+//        children = new ArrayList<>();
+//    }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Children:\n");
+        stringBuilder.append("\n");
+        stringBuilder.append(firstName);
+        stringBuilder.append("'s children:");
         if (children != null) {
             for (Human child : children) {
-//                stringBuilder.append("\n");
+                stringBuilder.append("\n");
                 stringBuilder.append(child.firstName);
-                stringBuilder.append(", ");
+//                stringBuilder.append("\n");
+//                stringBuilder.append(", ");
 
             }
             return "First name: " + firstName + ", Last name: " + lastName + " Gender " + gender + ", Date of Birth: " + born + ", Date of death: " + died + ", " + stringBuilder.toString();
@@ -136,7 +143,8 @@ public class Human implements Serializable , Comparable<Human>, FamilyTreeItem {
         this.children = children;
     }
 
-    public void addChild(Human child) {children.add(child); }
+    public void addChild(Human child) {
+        children.add(child); }
 
     public int getAge(){
 //        LocalDate yearNow = LocalDate.now();

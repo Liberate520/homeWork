@@ -10,13 +10,11 @@ import java.time.LocalDate;
 public class Service {
     private int idHuman;
     private FamilyTree<Human> familyTree;
-    private FileHandler saveFileHandler;
-    private FileHandler loadFileHandler;
+    private FileHandler fileHandler;
 
     public Service() {
         familyTree = new FamilyTree<>();
-        saveFileHandler = new FileHandler("default_name");
-        loadFileHandler = new FileHandler("default_name");
+        fileHandler = new FileHandler("default_name");
     }
 
     public void addHuman(String firstName, String lastName, Gender gender, LocalDate born){
@@ -40,11 +38,18 @@ public class Service {
     }
 
     public void saveFamilyTree(String fileName){
-        saveFileHandler.setFileName(fileName);
-        saveFileHandler.save(familyTree);
+        fileHandler.setFileName(fileName);
+        fileHandler.save(familyTree);
     }
     public FamilyTree<Human> loadFamilyTree(String fileName){
-        loadFileHandler.setFileName(fileName);
-        return loadFileHandler.load();
+        fileHandler.setFileName(fileName);
+        familyTree = fileHandler.load();
+        return fileHandler.load();
+    }
+
+    public void addChild(String parentFirstName, String parentSecondName,  String childFirstName, String childSecondName){
+        Human parent = familyTree.getHumanByFullName(parentFirstName, parentSecondName);
+        Human child = familyTree.getHumanByFullName(childFirstName, childSecondName);
+        parent.addChild(child);
     }
 }

@@ -82,7 +82,7 @@ public class ConsoleUI implements View{
         String gender = scanner.nextLine();
         System.out.println("Input year of born:");
         String yearString = scanner.nextLine();
-        System.out.println("Input month of born:");
+        System.out.println("Input month of born (number):");
         String monthString = scanner.nextLine();
         System.out.println("Input day of born:");
         String dayString = scanner.nextLine();
@@ -99,6 +99,19 @@ public class ConsoleUI implements View{
             System.out.println("Incorrect date.");
         }
     }
+
+    public void addChild(){
+        System.out.println("Input parent's first name:");
+        String parentFirstName = scanner.nextLine();
+        System.out.println("Input parent's second name:");
+        String parentSecondName = scanner.nextLine();
+        System.out.println("Input child's first name:");
+        String childFirstName = scanner.nextLine();
+        System.out.println("Input child's second name:");
+        String childSecondName = scanner.nextLine();
+        presenter.addChild(parentFirstName, parentSecondName, childFirstName, childSecondName);
+    }
+
     public void getFamilyTreeInfo() {
         presenter.getFamilyTreeInfo();
     }

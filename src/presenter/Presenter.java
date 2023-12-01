@@ -49,4 +49,9 @@ public class Presenter {
         view.printAnswer("The family tree is loaded.");
     }
 
+    public void addChild(String parentFirstName, String parentSecondName,  String childFirstName, String childSecondName){
+        service.addChild(parentFirstName, parentSecondName,  childFirstName, childSecondName);
+        view.printAnswer("The child is added.");
+    }
+
 }
