@@ -3,6 +3,7 @@ package ru.gb.family_tree.presenter;
 import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.service.Service;
+import ru.gb.family_tree.model.writer.Writable;
 import ru.gb.family_tree.view.View;
 
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class Presenter {
 
     public void sortByAge() {
         service.sortByAge();
-        allTree();
+        view.printAnswer(service.getInfoShort());
     }
 
     public void load() throws IOException {
@@ -80,5 +81,9 @@ public class Presenter {
 
     public boolean checkId(int id) {
         return service.checkId(id);
+    }
+
+    public void setWritable(Writable writable) {
+        service.setWritable(writable);
     }
 }

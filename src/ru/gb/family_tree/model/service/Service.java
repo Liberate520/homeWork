@@ -5,7 +5,6 @@ import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.human.Human;
 import ru.gb.family_tree.model.tree.FamilyTree;
-import ru.gb.family_tree.model.writer.FIleHandler;
 import ru.gb.family_tree.model.writer.Writable;
 
 import java.io.IOException;
@@ -94,21 +93,21 @@ public class Service {
         Human first = tree.findInTree(one);
         Human second = tree.findInTree(two);
         first.setSpouse(second);
+        second.setSpouse(first);
     }
 
     public void addChild(int parentId, int childId) {
         Human parent = tree.findInTree(parentId);
         Human child = tree.findInTree(childId);
         parent.setChild(child);
+        child.setParent(parent);
     }
 
     public void load() throws IOException {
-        writable = new FIleHandler(); // т.к. могут быть другие классы и методы, описывающие сохранение и загрузку, значение writable присваиваю здесь, а не в конструкторе
         tree = (FamilyTree) writable.read("output.data");
     }
 
     public boolean save() {
-        writable = new FIleHandler(); // т.к. могут быть другие классы и методы, описывающие сохранение и загрузку, значение writable присваиваю здесь, а не в конструкторе
         return writable.write(tree, "output.data");
     }
 
@@ -117,4 +116,7 @@ public class Service {
         return human != null;
     }
 
+    public void setWritable(Writable writable) {
+        this.writable = writable;
+    }
 }

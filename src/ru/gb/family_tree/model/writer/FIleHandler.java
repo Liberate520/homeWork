@@ -48,4 +48,5 @@ public class FIleHandler implements Writable {
         }
         throw new InvalidObjectException("Что-то пошло не так...");
     }
+
 }

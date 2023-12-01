@@ -3,6 +3,7 @@ package ru.gb.family_tree.view;
 import ru.gb.family_tree.model.exception.HumanExcistsException;
 import ru.gb.family_tree.model.human.Gender;
 import ru.gb.family_tree.model.tree.FamilyTree;
+import ru.gb.family_tree.model.writer.Writable;
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.io.IOException;
@@ -51,6 +52,10 @@ public class ConsoleUI implements View {
     private void printMenu() {
         System.out.println("Выберите пункт меню.");
         System.out.println(menu.menu());
+    }
+
+    public void setWritable(Writable writable) {
+        presenter.setWritable(writable);
     }
 
     public void load() {

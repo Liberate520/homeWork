@@ -115,23 +115,21 @@ public class Human implements Serializable, TreeItem {
         this.gender = gender;
     }
 
-    private void setParent(Human human) {
+    public void setParent(Human human) {
         if (human.gender == Gender.Male) {
             this.parents.put("отец",human);
         }
         else this.parents.put("мать",human);
     }
 
-    public void setChild(Human human) { // в main можно использовать только этот метод, т.к. он привязывает родителей автоматически
+    public void setChild(Human human) {
         if(!children.contains(human)) {
             this.children.add(human);
-            human.setParent(this);
         }
     }
 
     public void setSpouse(Human spouse) {
         this.spouse = spouse;
-        spouse.spouse = this;
     }
 
 
