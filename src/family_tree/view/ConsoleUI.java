@@ -148,6 +148,7 @@ public class ConsoleUI implements View, Serializable{
         if(motherIndexStr.length() == 0)
         {
             motherIndex = 0;
+            System.out.println("Мать не выбрана");
         }
         else if(checkTextForInt(motherIndexStr))
         {
@@ -158,19 +159,24 @@ public class ConsoleUI implements View, Serializable{
             }
             else
             {
-                return;
+                System.out.println("Ошибка выбора матери");
             }
         }
         else
         {
-            return;
+            System.out.println("Ошибка выбора матери");
         }
 
-        System.out.println("Выберите отца");
+        System.out.println("Выберите отца. Если не известен, то ничего не вводите");
         getFamilyTreeInfo();
         String fatherIndexStr = scanner.nextLine();
 
-        if(checkTextForInt(fatherIndexStr))
+        if(fatherIndexStr.length() == 0)
+        {
+            fatherIndex = 0;
+            System.out.println("Отец не выбран");
+        }
+        else if(checkTextForInt(fatherIndexStr))
         {
             choice = Integer.parseInt(fatherIndexStr);
             if(checkFamilyList(choice))
@@ -183,12 +189,12 @@ public class ConsoleUI implements View, Serializable{
             }
             else
             {
-                return;
+                System.out.println("Ошибка выбора отца");
             }
         }
         else
         {
-            return;
+            System.out.println("Ошибка выбора отца");
         }
 
         addParentToChild(motherIndex - 1, fatherIndex - 1, childIndex - 1);

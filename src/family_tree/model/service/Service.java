@@ -15,7 +15,7 @@ public class Service implements Serializable{
     private FamilyTree<Human> ftree;
     private HumanBuilder builder;
 
-    FS fileOperations = new FS(new OOS());
+    FS fileOperationsOOS = new FS(new OOS());
 
     public Service() {
         ftree = new FamilyTree<>();
@@ -28,19 +28,8 @@ public class Service implements Serializable{
     }
 
     public void addParentToChild(int mothers_index, int fathers_index, int child_index){
-        if(mothers_index == -1)
-        {
-            ftree.addMotherToChild(null, ftree.getProbandFromList(child_index));
-        }
-        else if(fathers_index == -1)
-        {
-            ftree.addFatherToChild(null, ftree.getProbandFromList(child_index));
-        }
-        else
-        {
-            ftree.addMotherToChild(ftree.getProbandFromList(mothers_index), ftree.getProbandFromList(child_index));
-            ftree.addFatherToChild(ftree.getProbandFromList(fathers_index), ftree.getProbandFromList(child_index));
-        }
+        ftree.addMotherToChild(ftree.getProbandFromList(mothers_index), ftree.getProbandFromList(child_index));
+        ftree.addFatherToChild(ftree.getProbandFromList(fathers_index), ftree.getProbandFromList(child_index));
     }
 
     public String getFamilyTreeProbandsListInfo(){
@@ -73,14 +62,14 @@ public class Service implements Serializable{
 
     public StatusFileFS saveTreeOOS(String file_path)
     {          
-        return fileOperations.Save(ftree, file_path);
+        return fileOperationsOOS.Save(ftree, file_path);
     }
 
     public StatusFileFS loadHumanTreeOOS(String file_path)
     {
-        if(fileOperations.IsFileExist(file_path))
+        if(fileOperationsOOS.IsFileExist(file_path))
         {           
-            this.ftree = (FamilyTree<Human>) fileOperations.Read(file_path);
+            this.ftree = (FamilyTree<Human>) fileOperationsOOS.Read(file_path);
             return StatusFileFS.FileLoaded;
         }
         else
@@ -88,17 +77,4 @@ public class Service implements Serializable{
             return StatusFileFS.NoSuchFile;
         }
     }
-
-    // public StatusFileFS loadHumanTree(String file_path)
-    // {
-    //     if(fileOperations.IsFileExist(file_path))
-    //     {           
-    //         this.ftree = (FamilyTree<Human>) fileOperations.Read(file_path);
-    //         return StatusFileFS.FileLoaded;
-    //     }
-    //     else
-    //     {
-    //         return StatusFileFS.NoSuchFile;
-    //     }
-    // }
 }

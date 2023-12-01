@@ -76,6 +76,10 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
 
     public E getProbandFromList(int index)
     {
+        if(index == -1)
+        {
+            return null;
+        }
         return probandList.get(index);
     }
 
