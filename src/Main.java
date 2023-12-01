@@ -1,7 +1,7 @@
 import Family.Family;
 import Family.FamilyTree;
-import Human.Human;
 import Human.Gender;
+import Human.Human;
 import writer.FileHandler;
 
 import java.time.LocalDate;
