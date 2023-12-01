@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private List<Human> familyTree;
+public class FamilyTree<T extends Human> implements Serializable {
+    private List<T> familyTree;
 
     {
        familyTree = new ArrayList<>();
@@ -17,7 +17,8 @@ public class FamilyTree implements Serializable {
         return service.getTreeTop();
     }
 
-    public boolean setSpouse(Human firstSpouce, Human secondSpouce) {
+    //TODO: INTERFACE описать методы set, get
+    public boolean setSpouse(T firstSpouce, T secondSpouce) {
         if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
             firstSpouce.setSpouse(secondSpouce);
             secondSpouce.setSpouse(firstSpouce);
@@ -38,7 +39,7 @@ public class FamilyTree implements Serializable {
         return true;
     }
 
-    public boolean divorce(Human firstSpouce, Human secondSpouce) {
+    public boolean divorce(T firstSpouce, T secondSpouce) {
         if (firstSpouce.equals(secondSpouce.getSpouse())) {
             firstSpouce.setSpouse(null);
             secondSpouce.setSpouse(null);
@@ -50,7 +51,7 @@ public class FamilyTree implements Serializable {
         return true;
     }
 
-    public boolean setMother(Human child, Human mother) {
+    public boolean setMother(T child, T mother) {
         child.setMother(mother);
         if (!child.inTree) {
             familyTree.add(child);
@@ -70,7 +71,7 @@ public class FamilyTree implements Serializable {
         return true;
     }
 
-    public boolean setChildren(Human parent, Human children) {
+    public boolean setChildren(T parent, T children) {
         if (!children.inTree) {
             familyTree.add(children);
             children.inTree = true;
@@ -90,7 +91,7 @@ public class FamilyTree implements Serializable {
         return true;
     }
 
-    public boolean setFather(Human child, Human father) {
+    public boolean setFather(T child, T father) {
         child.setFather(father);
         if (!child.isInTree()) {
             familyTree.add(child);
