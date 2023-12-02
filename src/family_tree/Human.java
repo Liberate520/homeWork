@@ -149,9 +149,9 @@ public class Human implements Serializable, Comparable, Humans {
         sb.append("Персональная карточка: \n");
         sb.append(String.format("Имя, Фамилия: %s %s%n", this.firstName, this.lastName));
         if (this.gender.equals(Gender.Male)) {
-            sb.append(String.format("Пол: Мужской\n"));
+            sb.append("Пол: Мужской\n");
         } else {
-            sb.append(String.format("Пол: Женский\n"));
+            sb.append("Пол: Женский\n");
         }
 
         if (this.deathDate != null) {

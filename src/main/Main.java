@@ -51,7 +51,7 @@ public class Main {
         familyPetrovi.sortByAge();
 
         for (Human person : familyPetrovi){
-            System.out.println(String.format("Имя: %s, Возраст: %d", person.getName(), person.getAge()));
+            System.out.printf("Имя: %s, Возраст: %d%n", person.getName(), person.getAge());
         }
 
     }
