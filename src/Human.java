@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable<Human> {
 
     private String name;
 
@@ -72,12 +72,23 @@ public class Human implements Serializable {
 
    @Override
     public String toString() {
-        return "имя: " + name + "\n" +
-                birthday + " - " +
-                deathDay + "\n" +
-                "отец: " + father.getName() + "\n" +
-                "мать: " + mother.getName() + "\n" +
-                "супруг(а): " + spouse.getName() + "\n" +
-                "дети: " + getChildren();
+        StringBuilder sb = new StringBuilder();
+        sb.append("имя: ").append(name).append(" ").append(birthday).append("-").append(deathDay).append("\n");
+        if(father != null){
+            sb.append("отец: ").append(father.getName()).append("\n");
+        }
+        if(mother != null){
+           sb.append("мать: ").append(mother.getName()).append("\n");
+        }
+        if(spouse != null){
+            sb.append("супруг(а): ").append(spouse.getName()).append("\n");
+        }
+        sb.append("дети: ").append(getChildren()).append("\n");
+        return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return -1 * (birthday - o.birthday);
     }
 }

@@ -1,7 +1,9 @@
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
 
-
+        // Создание объектов Human.
         Human human1 = new Human("Пушкин Лев Александрович", 1723, 1790);
         Human human2 = new Human("Чичерина Ольга Васильевна", 1737, 1802);
         Human human3 = new Human("Пушкин Сергей Львович", 1770, 1848);
@@ -11,7 +13,7 @@ public class Main {
         Human human7 = new Human("Пушкин Лев Сергеевич", 1805, 1852);
         Human human8 = new Human("Гончарова Наталья Николаевна", 1812, 1863);
 
-
+        // Создание связей между Human.
         human1.setSpouse(human2);
         human2.setSpouse(human1);
         human2.addChildren(human3);
@@ -38,7 +40,7 @@ public class Main {
         human6.setSpouse(human8);
         human8.setSpouse(human6);
 
-
+        // Создание генеалогического дерева.
         GenealogicalTree pushkin = new GenealogicalTree();
         pushkin.addHuman(human1);
         pushkin.addHuman(human2);
@@ -65,14 +67,43 @@ public class Main {
         System.out.println(pushkin.findHuman("Пушкин Александр Сергеевич").getSpouse().getName());
         System.out.println();
 
+
+        // Сериализация в файл.
         FromTo savedFamily = new FromToSerializeFile("pushkin.out");
         savedFamily.saveTo(pushkin);
 
+
+        // Получение списка имён из загруженного дерева.
         System.out.println("Загружено из файла:");
         System.out.println();
         GenealogicalTree loadedPushkin = savedFamily.readFrom("pushkin.out");
         for (String human:
                 loadedPushkin.getFamily()) {
+            System.out.println(human);
+        }
+        System.out.println();
+
+
+        // Перебор human в дереве
+        for (Human human :
+                pushkin) {
+            System.out.println(human);
+        }
+
+
+        // Сортировка по умолчанию по дню рождения (от младших к старшим).
+        pushkin.sort();
+        for (String human:
+                pushkin.getFamily()) {
+            System.out.println(human);
+        }
+        System.out.println();
+
+
+        // Сортировка по имени.
+        pushkin.sortByName();
+        for (String human:
+                pushkin.getFamily()) {
             System.out.println(human);
         }
     }

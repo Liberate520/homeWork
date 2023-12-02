@@ -1,8 +1,10 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class GenealogicalTree implements Serializable {
+public class GenealogicalTree implements Serializable, Iterable<Human>{
    private List<Human> family;
 
     public GenealogicalTree(List<Human> family) {
@@ -24,6 +26,7 @@ public class GenealogicalTree implements Serializable {
     public void addHuman(Human human){
         family.add(human);
     }
+
     public Human findHuman(String name) {
 
         for (Human item :
@@ -33,5 +36,19 @@ public class GenealogicalTree implements Serializable {
             }
         }
         return null;
+
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new FamilyIterator(family);
+    }
+
+    public void sort(){
+        Collections.sort(family);
+    }
+
+    public void sortByName(){
+        family.sort(new ComparatorByName());
     }
 }
