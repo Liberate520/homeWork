@@ -15,15 +15,17 @@ public class Human implements Serializable {
     private Human mother;
     private Human father;
     private Human spouse;
+    //TODO: Переделать в конструктор
     private List<Human> children;
     boolean inTree = false;
-    {
-        children = new ArrayList<>();
-    }
 
+    public Human() {
+        this.children = new ArrayList<Human>();
+    }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
                  LocalDate deathDate, Human mother, Human father, Human spouse) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -48,11 +50,6 @@ public class Human implements Serializable {
     public Human(String firstName, String lastName, Gender gender, Human mother, Human father) {
         this(firstName, lastName, gender, null, null, mother, father, null);
     }
-
-    public Human() {
-
-    }
-
 
     boolean setMother(Human mother) {
         if (this.mother != null) {
@@ -86,7 +83,7 @@ public class Human implements Serializable {
     }
 
     public void setChildren(Human child) {
-        if (this.children!= null) {
+        if (this.children != null) {
             for (Human child1 : children) {
                 if (child1.equals(child)) {
                     System.out.println("Такой ребенок уже задан");
@@ -149,7 +146,6 @@ public class Human implements Serializable {
         } else {
             sb.append(String.format("Пол: Женский\n"));
         }
-
 
         if (this.deathDate != null) {
             age = this.deathDate.getYear() - this.birthDate.getYear();
