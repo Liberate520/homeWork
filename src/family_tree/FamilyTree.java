@@ -1,14 +1,19 @@
 package family_tree;
 
+import service.Service;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends Human> implements Serializable {
+public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     private List<T> familyTree;
 
-    {
-       familyTree = new ArrayList<>();
+    public FamilyTree() {
+        this.familyTree = new ArrayList<>();
+
     }
 
     public Human getTop() {
@@ -71,21 +76,21 @@ public class FamilyTree<T extends Human> implements Serializable {
         return true;
     }
 
-    public boolean setChildren(T parent, T children) {
-        if (!children.inTree) {
-            familyTree.add(children);
-            children.inTree = true;
+    public boolean setChildren(T parent, T child) {
+        if (!child.inTree) {
+            familyTree.add(child);
+            child.inTree = true;
         }
         if (!parent.inTree) {
             familyTree.add(parent);
             parent.inTree = true;
         }
-        if (parent.getChildren() != null && parent.getChildren().contains(children)) {
+        if (parent.getChildren() != null && parent.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
             return false;
         } else {
-            parent.setChildren(children);
-            System.out.println("Вы указали, что: " + children.getName() +
+            parent.setChildren(child);
+            System.out.println("Вы указали, что: " + child.getName() +
                     " является ребенком " + parent.getName());
         }
         return true;
@@ -111,11 +116,8 @@ public class FamilyTree<T extends Human> implements Serializable {
         return true;
     }
 
-
     @Override
     public String toString() {
-
-
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
         sb.append("Члены данной семьи: \n");
@@ -125,8 +127,16 @@ public class FamilyTree<T extends Human> implements Serializable {
         return sb.toString();
     }
 
+    public void sortByName() {
+        Collections.sort(familyTree, new HumanComporatorByName());
+    }
+
+    public void sortByAge() {
+        Collections.sort(familyTree, new HumanComporatorByAge());
+    }
+
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
-    public String showTree(){
+    public String showTree() {
         Service service = new Service();
         topOfTree(familyTree.getFirst());
         return showTreeService(service.getTreeTop());
@@ -168,6 +178,12 @@ public class FamilyTree<T extends Human> implements Serializable {
 
         return true;
     }
+
+    @Override
+    public Iterator iterator() {
+        return new HumanIterator(familyTree);
+    }
+
 }
 
 

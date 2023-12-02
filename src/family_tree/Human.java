@@ -2,11 +2,12 @@ package family_tree;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, Comparable, Humans {
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -110,6 +111,7 @@ public class Human implements Serializable {
         return firstName + " " + lastName;
     }
 
+
     Human getSpouse() {
         return spouse;
     }
@@ -120,6 +122,11 @@ public class Human implements Serializable {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public int getAge() {
+        int currentYear = Year.now().getValue();
+        return currentYear - this.getBirthDate().getYear();
     }
 
     Human getFather() {
@@ -176,7 +183,6 @@ public class Human implements Serializable {
             }
 
         }
-
         return sb.toString();
     }
 
@@ -191,5 +197,11 @@ public class Human implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName, gender, birthDate);
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return new HumanComporatorByName().compare(this, (Humans) o);
     }
 }

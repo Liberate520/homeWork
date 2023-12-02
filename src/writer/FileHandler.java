@@ -3,15 +3,16 @@ package writer;
 import java.io.*;
 
 public class FileHandler implements Writable {
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
 
     public void writeObject(Object o, String fileName) {
-        ObjectOutputStream objectOutputStream;
+
 
         {
             try {
                 objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
                 objectOutputStream.writeObject(o);
-                objectOutputStream.close();
                 System.out.println("Запись прошла успешно");
 
             } catch (IOException e) {
@@ -22,8 +23,6 @@ public class FileHandler implements Writable {
     }
 
     public Object readObject(String fileName) {
-        ObjectInputStream objectInputStream;
-
         {
             try {
                 objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
@@ -34,6 +33,20 @@ public class FileHandler implements Writable {
                 throw new RuntimeException(e);
             }
 
+        }
+    }
+
+    public void close(){
+        try {
+            if (objectInputStream != null) {
+                objectInputStream.close();
+            }
+            if (objectOutputStream != null) {
+                objectOutputStream.close();
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

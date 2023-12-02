@@ -3,7 +3,6 @@ package main;
 import family_tree.FamilyTree;
 import family_tree.Gender;
 import family_tree.Human;
-import writer.FileHandler;
 
 import java.time.LocalDate;
 
@@ -22,7 +21,7 @@ public class Main {
                 LocalDate.of(2008, 2, 3));
         Human ivan = new Human("Ivan", "Petrov", Gender.Male,
                 LocalDate.of(2013, 12, 3));
-        FamilyTree familyPetrovi = new FamilyTree();
+        FamilyTree<Human> familyPetrovi = new FamilyTree<>();
         familyPetrovi.setSpouse(sergei, vaselisa);
         familyPetrovi.setChildren(anna, vasilii);
         familyPetrovi.setMother(sergei, anna);
@@ -35,10 +34,25 @@ public class Main {
         System.out.println(anna);*/
         //System.out.println(familyPetrovi.showTree());
 
-        FileHandler fileHandler = new FileHandler();
+ /*       FileHandler fileHandler = new FileHandler();
         fileHandler.writeObject(familyPetrovi, "familyPetrovi");
         FamilyTree recordTest = (FamilyTree) fileHandler.readObject("familyPetrovi");
         System.out.println(recordTest);
+        fileHandler.close();*/
+
+        familyPetrovi.sortByName();
+
+        System.out.println("\nДемонстрация сортировки по имени + Iterable:");
+        for (Human person : familyPetrovi) {
+            System.out.println(person.getName());
+        }
+        System.out.println("\nДемонстрация сортировки по возрасту");
+
+        familyPetrovi.sortByAge();
+
+        for (Human person : familyPetrovi){
+            System.out.println(String.format("Имя: %s, Возраст: %d", person.getName(), person.getAge()));
+        }
 
     }
 

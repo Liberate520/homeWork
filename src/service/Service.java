@@ -1,4 +1,6 @@
-package family_tree;
+package service;
+
+import family_tree.Human;
 
 public class Service {
     private static Human treeTop;
