@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface FamilyTreeItem<T, E> {
+public interface FamilyTreeItem<E> {
     String getName();
 
     String getLastName();
