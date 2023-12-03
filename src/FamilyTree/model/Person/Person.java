@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.io.Serializable;
 
 public class Person implements Serializable, PersonElements, TreeElements<Person> {
+
+    private int id;
     private String name;
     private String surname;
     private Gender gender;
@@ -19,7 +21,8 @@ public class Person implements Serializable, PersonElements, TreeElements<Person
     private List<MaritalStatus> maritalStatus = new ArrayList<>();
     private List<Person> children = new ArrayList<>();
 
-    public Person (String name, String surname, Gender gender, LocalDate burnData, Person mother, Person father) {
+    public Person (int id, String name, String surname, Gender gender, LocalDate burnData, Person mother, Person father) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -28,6 +31,7 @@ public class Person implements Serializable, PersonElements, TreeElements<Person
         this.father = father;
     }
 
+    public int getId() { return id; }
     public String getName() { return name; }
     public String getSurname() { return surname; }
     public Gender getGender() { return gender; }
@@ -92,7 +96,8 @@ public class Person implements Serializable, PersonElements, TreeElements<Person
         else {childrenStrList.append("детей нет.");}
 
         return "Person{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", gender=" + gender +
                 ", burnData=" + burnData +

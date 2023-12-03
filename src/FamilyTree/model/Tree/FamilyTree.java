@@ -1,5 +1,6 @@
 package FamilyTree.model.Tree;
 
+import FamilyTree.model.Person.Person;
 import FamilyTree.model.Person.comparators.CompareByPersonAge;
 import FamilyTree.model.Person.comparators.CompareByPersonName;
 
@@ -10,34 +11,49 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<E extends TreeElements<E>> implements Serializable, Iterable<E> {
+    private List<E> tree;
+    private String family;
 
     public FamilyTree(String str){
+        this.tree = new ArrayList<>();
         this.family = str;
     }
 
-    private String family = "";
-
-    private List<E> tree = new ArrayList<>();      // Список всех людей в семье
-
     // 1 Добавление человека
     public void addPerson(E person){
-        if (!tree.contains(person)){tree.add(person);}
+        if (!tree.contains(person)){
+            tree.add(person);
+        }
     }
 
     // 3 Добавление детей (ссылки на родителей уже внутри класса) (у родителей прописать так же детей)
-    public void addChild(E child){
-        addPerson(child);
-        if (child.getMother() != null) { child.getMother().addChild(child); }
-        if (child.getFather() != null) { child.getFather().addChild(child); }
+//    public void addChild(E child){
+//        addPerson(child);
+//        if (child.getMother() != null) { child.getMother().addChild(child); }
+//        if (child.getFather() != null) { child.getFather().addChild(child); }
+//
+//    }
+//    public void addChild(E child, E mother){
+//        child.addMother(mother);
+//        addChild(child);
+//    }
+//    public void addChild(E child, E father){
+//        child.addFather(father);
+//        addChild(child);
+//    }
 
+    public E getElementById(int id){
+        for (E el: tree) {
+            if (el.getId() == id) {return el;}
+        }
+        return null;
     }
-    public void addChild(E child, E mother){
-        child.addMother(mother);
-        addChild(child);
-    }
-    public void addChild(E child, E mother, E father){
-        child.addFather(father);
-        addChild(child, mother);
+
+    public void addParent(E child, E mother, E father){
+        if(tree.contains(child)){
+            child.addFather(father);
+            child.addMother(mother);
+        }
     }
     // 4 Свадьба
     public void setMarriage(E spouse1, E spouse2, LocalDate marriageDate ){

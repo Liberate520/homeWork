@@ -12,5 +12,7 @@ public interface View {
     void saveTree();
     void loadTree();
 
+    void setMarriage();
+
     void finish();
 }

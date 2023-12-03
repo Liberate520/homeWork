@@ -31,10 +31,12 @@ public class Presenter {
 
         LocalDate date = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("yyyy MM dd"));
 
-        service.addPerson(service.builder.build(name, surname, gen, date));
+        service.addPerson(name, surname, gen, date);
         getTree();
-        //view.answer("ок, добавили");
     }
+
+    // Соединение 2х людей
+    public void setMarriage(int idP1, int idP2, String date){ service.setMarriage(idP1, idP2, date); }
 
     // Сортировки
     public void sortByName() {
@@ -48,11 +50,14 @@ public class Presenter {
     }
 
     // Работа с файлом
-    public void saveTree() {
-        service.saveTreeInFile();
+    public void saveTree(String filename) {
+        service.saveTreeInFile(filename);
     }
 
-    public void loadTree() {
-        service.loadFromFile();
+    public void loadTree(String filename) {
+        service.loadFromFile(filename);
     }
+
+
+
 }

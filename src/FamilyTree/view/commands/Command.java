@@ -16,6 +16,4 @@ public abstract class Command {
     View getView() { return view;  } // Без модификатора, чтобы было видно только в пределах пакета
 
     public abstract void execute();
-
-
 }

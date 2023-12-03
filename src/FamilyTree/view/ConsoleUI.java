@@ -1,11 +1,7 @@
 package FamilyTree.view;
 
-import FamilyTree.model.Person.Gender;
-import FamilyTree.model.Person.Person;
 import FamilyTree.presenter.Presenter;
 
-import java.security.Principal;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
@@ -22,35 +18,16 @@ public class ConsoleUI implements View{
         this.menu = new MainMenu(this);
     }
 
-    private void printMenu(){
-        System.out.println(menu.print());
-//        System.out.println("1. Добавить человека");
-//        System.out.println("2. Показать дерево");
-//        System.out.println("3. Отсортировать по имени");
-//        System.out.println("4. Отсортировать по возрасту");
-//        System.out.println("5. Сохранить дерево в файл");
-//        System.out.println("6. Загрузить дерево из файла");
-//
-//        System.out.println("0. Загрузить дерево из файла");
-    }
+    private void printMenu(){ System.out.println(menu.print()); }
 
-        private void scanMenu(){
+    private void scanMenu(){
         int choise  = Integer.parseInt(scanner.nextLine());
-        if (choise > 0 && choise < menu.size()){
+        if (choise > 0 && choise <= menu.size()){
             menu.execute(choise);
         }
         else {
             System.out.println("Такого пункта нет в списке.");
         }
-//        switch (choise){
-//            case "1": addPerson();  break;
-//            case "2": getTree();    break;
-//            case "3": sortByName(); break;
-//            case "4": sortByAge();  break;
-//            case "5": saveTree();   break;
-//            case "6": loadTree();   break;
-//            case "0": finish();     break;
-//        }
     }
 
     public void addPerson() {
@@ -66,11 +43,35 @@ public class ConsoleUI implements View{
         presenter.addPerson(name, surname, gender, birthday);
     }
 
-    public void getTree()      { presenter.getTree(); }
-    public void sortByName()   { presenter.sortByName(); }
-    public void sortByAge()    { presenter.sortByAge(); }
-    public void saveTree()     { presenter.saveTree();   }
-    public void loadTree()     { presenter.loadTree();    }
+    public void getTree()                   { presenter.getTree(); }
+    public void sortByName()                { presenter.sortByName(); }
+    public void sortByAge()                 { presenter.sortByAge(); }
+    public void saveTree()   {
+        System.out.println("Введите название файла:");
+        String filename = scanner.nextLine();
+        presenter.saveTree(filename);
+    }
+    public void loadTree()   {
+        System.out.println("Введите название файла:");
+        String filename = scanner.nextLine();
+        presenter.loadTree(filename);
+    }
+
+    public void setMarriage() {
+        getTree();
+        System.out.println("Выберите id первого человека:");
+        int id1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Выберите id первого человека:");
+        int id2 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите дату рождения (гггг мм дд):");
+        String birthday = scanner.nextLine();
+        if (id1 != id2) {
+            presenter.setMarriage(id1, id2, birthday);
+        }
+        else {
+            System.out.println("Это один и тот же человек.");
+        }
+    }
 
     public void finish()       {
         System.out.println("До скорых встреч.");
