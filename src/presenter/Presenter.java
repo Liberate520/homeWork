@@ -3,6 +3,7 @@ package presenter;
 import model.group.FamilyTree;
 import model.group.TreeItem;
 import model.human.Human;
+import model.writer.Writable;
 import view.View;
 import model.service.Service;
 import model.human.Gender;
@@ -46,6 +47,10 @@ public class Presenter {
    public void importTree() {
         service.importTree();
    }
+
+    public void setWritable(Writable writable) {
+        service.setWritable(writable);
+    }
 
     public void load() {
         service.load();

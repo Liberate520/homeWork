@@ -5,6 +5,7 @@ import model.human.Gender;
 import model.human.Human;
 import model.group.FamilyTree;
 import model.writer.FileHandler;
+import model.writer.Writable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +14,9 @@ import java.util.Scanner;
 
 public class Service {
     private FamilyTree<Human> tree;
-    private FileHandler handler;
-    String filename = "./tree.txt";
+    //private FileHandler handler;
+    private Writable writable;
+    //String filename = "./tree.txt";
 
     public Service() {
         tree = new FamilyTree<>();
@@ -42,12 +44,16 @@ public class Service {
     public void sortByAge() {
         tree.sortByAge();
     }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
+    }
     public void load() {
-        tree = (FamilyTree)handler.read(filename);
+        tree = (FamilyTree) writable.read("./tree.txt");
     }
 
     public void save() {
-        handler.save(tree, filename);
+        writable.save(tree, "./tree.txt");
     }
 
     public void addFP(int humanId, int parentId) {

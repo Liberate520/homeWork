@@ -1,6 +1,7 @@
 package view;
 
 import model.human.Gender;
+import model.writer.Writable;
 import presenter.Presenter;
 
 import java.time.LocalDate;
@@ -57,6 +58,10 @@ public class ConsoleUI implements View {
         }
         System.out.println("Вы ввели неверное значение!");
         return false;
+    }
+
+    public void setWritable(Writable writable) {
+        presenter.setWritable(writable);
     }
 
     public void save() {
