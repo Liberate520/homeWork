@@ -5,13 +5,12 @@ import model.builder.HumanBuilder;
 import model.human.Gender;
 import model.human.Human;
 import model.tree.FamilyTree;
-import model.writer.FileHandler;
+import model.writer.Writable;
 
 public class Service {
-    public final char[] getHumansListInfo = null;
     private FamilyTree <Human> tree;
     private HumanBuilder builder;
-    private FileHandler fileHandler;
+    private Writable writable;
 
     public FamilyTree<Human> getFamilyTree() {
         return this.tree;
@@ -20,7 +19,6 @@ public class Service {
     public Service() {
         tree = new FamilyTree<>(0);
         builder = new HumanBuilder();
-        fileHandler = new FileHandler();
     }
 
     public Service(FamilyTree <Human> tree) {
@@ -72,10 +70,14 @@ public class Service {
     }
 
     public void load() throws IOException {
-        tree = (FamilyTree) fileHandler.read("output.data");
+        tree = (FamilyTree) writable.read("output.data");
     }
 
     public boolean write() {
-        return fileHandler.write(tree, "output.data");
+        return writable.write(tree, "output.data");
+    }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
     }
 }

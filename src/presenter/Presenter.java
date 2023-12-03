@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import model.Service;
 import model.human.Gender;
+import model.writer.Writable;
 import view.View;
 
 public class Presenter {
@@ -49,5 +50,8 @@ public void addHuman(String name, String surname, Gender gender) {
 
     public void write() {
         service.write();
+    }
+    public void setWritable(Writable writable) {
+        service.setWritable(writable);
     }
 }

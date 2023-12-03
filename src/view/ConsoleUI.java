@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.human.Gender;
+import model.writer.Writable;
 import presenter.Presenter;
 
 public class ConsoleUI implements View {
@@ -170,4 +171,7 @@ public class ConsoleUI implements View {
         presenter.write();
     }
 
+    public void setWritable(Writable writable) {
+        presenter.setWritable(writable);
+    }
 }
