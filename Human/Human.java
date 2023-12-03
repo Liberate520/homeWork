@@ -4,7 +4,7 @@ import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Human implements Serializable {
+public class Human implements Serializable, HumanInterface<Human> {
     private long id;
 
     private String firstName;

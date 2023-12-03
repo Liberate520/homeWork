@@ -9,7 +9,7 @@ import java.util.*;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends HumanInterface<T>> implements Serializable {
+public class FamilyTree<T extends HumanInterface<T>> implements Serializable, Iterable<Human> {
 
     private static final long serialVersionUID = 1L;
 
@@ -72,5 +72,19 @@ public class FamilyTree<T extends HumanInterface<T>> implements Serializable {
             }
         }
         return lst;
+    }
+
+    // Переопредиляем
+    @Override
+    public Iterator<Human> iterator() {
+        return this.humanList.iterator();
+    }
+
+    public void sortByFirstName() {
+        Collections.sort(humanList, Comparator.comparing(Human::getFirstName));
+    }
+
+    public void sortByBirthDate() {
+        Collections.sort(humanList, Comparator.comparing(Human::getBirthDate));
     }
 }

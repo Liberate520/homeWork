@@ -31,6 +31,25 @@ public class Main {
                 FamilyTree ff = FamilyTreeGUI.LoadObject("test.dat");
                 System.out.println("После сериализации:");
                 FamilyTreeGUI.PrintAll(ff);
+                // Проверяем работу итератора
+                FamilyTree<Human> familyTree = new FamilyTree<>();
+                familyTree.add(tom);
+                familyTree.add(sam);
+                familyTree.add(cat);
+                System.out.println("Печатаем всех людей");
+                for (Human human : familyTree) {
+                        HumanPrint.printHumanFLA(human);
+                }
+                System.out.println("Печатаем всех людей после сортировки по имени");
+                familyTree.sortByFirstName();
+                for (Human human : familyTree) {
+                        HumanPrint.printHumanFLA(human);
+                }
+                System.out.println("Печатаем всех людей после сортировки по дате рождения");
+                familyTree.sortByBirthDate();
+                for (Human human : familyTree) {
+                        HumanPrint.printHumanFLA(human);
+                }
 
         }
 }
