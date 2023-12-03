@@ -1,10 +1,13 @@
 package ru.home_work.cherevichenko_sergey.human;
+import ru.home_work.cherevichenko_sergey.FamilyTreeItem;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-public class Human implements Serializable,Comparable<Human> {
+
+public class Human implements FamilyTreeItem, Serializable, Comparable<Human> {
     // Описываем класс ru.home_work.cherevichenko_sergey.human.Human
     private String name;
     private String lastName;
@@ -26,21 +29,19 @@ public class Human implements Serializable,Comparable<Human> {
     }
     // Конструктор без детей по принципу DRY
     public Human(String name, String lastName, Gender gender, LocalDate birthDay, LocalDate dateDeath) {
-        this(name,lastName,gender,birthDay,dateDeath ,new ArrayList<>(0));
+        this(name,lastName,gender,birthDay,dateDeath ,new ArrayList<Human>(0));
+
     }
     // Геттеры для полей класса
     public List<Human> getChildren() {
         return children;
     }
-
     public String getName() {
         return name;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public Gender getGender() {
         return gender;
     }
@@ -85,9 +86,10 @@ public class Human implements Serializable,Comparable<Human> {
 
         return br.toString();
     }
+
     @Override
     public int compareTo(Human o) {
-        return name.compareTo(o.getName());
+        return (o.getName().compareTo(this.name));
     }
 }
 

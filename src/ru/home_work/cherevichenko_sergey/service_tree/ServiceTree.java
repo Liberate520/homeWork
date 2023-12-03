@@ -1,4 +1,5 @@
 package ru.home_work.cherevichenko_sergey.service_tree;
+import ru.home_work.cherevichenko_sergey.FamilyTreeItem;
 import ru.home_work.cherevichenko_sergey.human.Gender;
 import ru.home_work.cherevichenko_sergey.familyTree.FamilyTree;
 import ru.home_work.cherevichenko_sergey.human.Human;
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 // Класс верхне уровнего программирования для создания человека и сразу добавления его в древо
 public class ServiceTree implements Serializable {
-    private FamilyTree tree;
+    private FamilyTree<Human> tree;
     private HumanBuilder builder;
     public ServiceTree()  {
-        tree = new FamilyTree();
+        tree = new FamilyTree<>();
         builder = new HumanBuilder();
     }
     // Создание человека и добавление в древо
@@ -204,7 +205,7 @@ public class ServiceTree implements Serializable {
 
         return br.toString();
     }
-    // Cортировка оп имени
+    // Сортировка по имени
 
     public void sortTreeByName(){
          tree.sortByName();
