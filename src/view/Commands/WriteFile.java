@@ -1,6 +1,5 @@
 package view.Commands;
 
-import Model.home_work_class.FamilyTree.FileWriter;
 import view.ConsoleUI;
 
 public class WriteFile extends Commands{

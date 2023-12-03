@@ -2,7 +2,6 @@ package Presenter;
 
 import Model.home_work_class.Human.Gender;
 import Model.Model;
-import Model.FileWriteRead;
 import Model.home_work_class.Human.Human;
 import view.View;
 import java.time.LocalDate;

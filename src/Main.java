@@ -1,5 +1,5 @@
 import Model.home_work_class.FamilyTree.FamilyTree;
-import Model.home_work_class.FamilyTree.FileWriter;
+import Model.home_work_class.Write.FileWriter;
 import Model.home_work_class.Human.Gender;
 import Model.home_work_class.Human.Human;
 
