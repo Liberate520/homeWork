@@ -1,0 +1,151 @@
+package view;
+
+import Model.home_work_class.Human.Gender;
+import Model.home_work_class.Human.Human;
+import Presenter.Presenter;
+import view.Commands.MainMenu;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class ConsoleUI implements View {
+    private Scanner scanner;
+    private Presenter presenter;
+    private MainMenu menu;
+    private boolean work;
+
+    public ConsoleUI(){
+        this.scanner = new Scanner(System.in);
+        //this.presenter = new Presenter(this);
+        this.menu = new MainMenu(this);
+        this.work = true;
+    }
+
+    public void setPresenter(Presenter presenter){this.presenter = presenter;}
+
+    @Override
+    public void printAnswer(String answer) {
+        System.out.println(answer);
+    }
+
+    @Override
+    public void startMenu() {
+        hello();
+        while (work){
+            printMenu();
+            execute();
+        }
+    }
+
+    private void printMenu(){
+        System.out.println(this.menu.menu());
+    }
+
+    private void execute(){
+        System.out.println("Выберите пункт: ");
+        String choice = scanner.nextLine();
+        if (checkTextForInt(choice)){
+            int numCommand = Integer.parseInt(choice);
+            if (checkCommand(numCommand)){
+                this.menu.execute(numCommand - 1);
+            }
+        }
+    }
+
+    private void hello(){System.out.println("Здравствуйте.");}
+
+    public void finish(){
+        System.out.println("Досвидания!");
+        this.work = false;
+    }
+
+    private void inputError(){System.out.println("Вы указали неверный пункт меню\n");}
+
+    private boolean checkTextForInt(String text){
+        if (text.matches("[0-9]+")){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private boolean checkCommand(int numCommand){
+        if (numCommand <= menu.getSize() && numCommand > 0){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    public void addHuman() { dialogAddHuman();}
+
+    private void dialogAddHuman(){
+        System.out.println("Введите имя:");
+        String name = scanner.nextLine();
+        System.out.println("Введите пол: 1.Мужской, Другое - Женский:");
+        String choiceGender = scanner.nextLine();
+        Gender gender = Gender.Male;
+        if (! choiceGender.equals("1")) {
+            gender = Gender.Female;
+        }
+        System.out.println("Введите дату рождения:");
+        LocalDate dataBorn = getDateToString();
+        System.out.println("Пропустить дату смерти? 1. Да, Другое - нет");
+        String choiceDiedDate = scanner.nextLine();
+        LocalDate diedDate = null;
+        if (! choiceDiedDate.equals("1")){ diedDate = getDateToString(); }
+        presenter.addHuman(name, gender, dataBorn, diedDate);
+    }
+
+    private LocalDate getDateToString(){
+        System.out.println("день");
+        int day = Integer.parseInt(scanner.nextLine());
+        System.out.println("месяц");
+        int month = Integer.parseInt(scanner.nextLine());
+        System.out.println("год");
+        int year = Integer.parseInt(scanner.nextLine());
+
+        return LocalDate.of(year, month, day);
+    }
+
+    public void addChildren(){
+        System.out.println("Укажите родителя:");
+        String parent = scanner.nextLine();
+        System.out.println("Укажите имена детей: (пустая строка выход)");
+        List<String> children = new ArrayList<>();
+        while (true){
+            String name = scanner.nextLine();
+            if (name.isEmpty()){break;}
+            children.add(name);
+        }
+        presenter.addChildrenToParent(parent, children);
+    }
+
+    public void fileWriter(){
+        System.out.println("Введите путь к файлу: (по умолчанию - в директории проекта, можно пропусить)");
+        String path = scanner.nextLine();
+        presenter.fileWriter(path);
+    }
+
+    public void fileRead(){
+        System.out.println("Введите путь к файлу: (по умолчанию - в директории проекта, можно пропусить)");
+        String path = scanner.nextLine();
+        presenter.fileReader(path);
+    }
+
+    public void sortByName() {
+        presenter.sortByName();
+    }
+
+    public void sortByAge() {
+        presenter.sortByAge();
+    }
+
+    public void sortById() {
+        presenter.sortById();
+    }
+}
