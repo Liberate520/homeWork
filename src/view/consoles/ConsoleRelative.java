@@ -3,10 +3,8 @@ package view.consoles;
 import view.ConsoleUI;
 import java.util.Scanner;
 
-public class ConsoleRelative {
-    private Scanner scanner;
-    private ConsoleUI cons;
-    private int id0, id1, index;
+public class ConsoleRelative extends Consoles {
+    private int id0, id1, typeRe;
     private String name0, name1; 
 
     public ConsoleRelative(ConsoleUI cons){
@@ -14,7 +12,7 @@ public class ConsoleRelative {
         this.cons = cons;
     }
     
-    public void work(){
+    public void workConsole(){
         System.out.print("Введите id первого человека: ");
         id0 = Integer.parseInt(scanner.nextLine());
         System.out.print("Введите id второго человека: ");
@@ -24,8 +22,8 @@ public class ConsoleRelative {
         System.out.println("Кем является "+name1+" для "+name0+":\n" + //
                 "1-отцом;\n2-матерью;\n" + //
                 "3-супругом;\n4-ребенком");
-        index = Integer.parseInt(scanner.nextLine());
-        cons.getPresenter().addHumanRelatives(id0, id1, index);
+        typeRe = Integer.parseInt(scanner.nextLine());
+        cons.getPresenter().addHumanRelatives(id0, id1, typeRe);
 
     }
 }

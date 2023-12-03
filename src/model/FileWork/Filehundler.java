@@ -10,7 +10,7 @@ public class Filehundler implements Writeble{
     /**
      * Метод сохранение дерева в файл
      */
-    public boolean SaveInFile(Serializable serializable, String fileName){
+    public boolean saveInFile(Serializable serializable, String fileName){
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(fileName))){
         objectOutputStream.writeObject(serializable);
@@ -24,7 +24,7 @@ public class Filehundler implements Writeble{
     /**
      * Метод загрузки дерева из файла
      */
-    public Object LoadInFile(String fileName){
+    public Object loadInFile(String fileName){
         try (ObjectInputStream objectInputStream = new ObjectInputStream(
                 new FileInputStream(fileName))){
             return objectInputStream.readObject();

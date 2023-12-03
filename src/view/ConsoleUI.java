@@ -1,6 +1,7 @@
 package view;
 
 import presenter.Presenter;
+import view.consoles.ConsoleAddHuman;
 import view.consoles.ConsoleRelative;
 import view.menu.MainMenu;
 import view.menu.Sortmenu;
@@ -18,6 +19,7 @@ public class ConsoleUI implements View {
     private MainMenu menu;
     private Sortmenu sortmenu;
     private ConsoleRelative consR;
+    private ConsoleAddHuman consAdd;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -68,33 +70,13 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        System.out.print("Введите имя человека: ");
-        String name = scanner.nextLine();
-        System.out.print("Укажите пол человека 'm,f': ");
-        Gender gender = setGender(scanner.nextLine());
-        System.out.println("Укажите дату рождения человека ");
-        System.out.print("ГГГГ: ");
-        int year = Integer.parseInt(scanner.nextLine());
-        System.out.print("ММ: ");
-        int month = Integer.parseInt(scanner.nextLine());
-        System.out.print("ЧЧ: ");
-        int day = Integer.parseInt(scanner.nextLine());
-        System.out.print("Человек еще жив? Y/N ");
-        if (scanner.nextLine().equals("N")){
-            System.out.print("Укажите дату смерти человека");
-            System.out.print("ГГГГ: ");
-            int dyear = Integer.parseInt(scanner.nextLine());
-            System.out.print("ММ: ");
-            int dmonth = Integer.parseInt(scanner.nextLine());
-            System.out.print("ЧЧ: ");
-            int dday = Integer.parseInt(scanner.nextLine());
-            presenter.addHuman(name,year,month,day,dyear,dmonth,dday,gender);
-        } else presenter.addHuman(name,year,month,day,gender);
+        consAdd = new ConsoleAddHuman();
+        consAdd.workConsole();
     }
 
     public void addHumanRelatives(){
         consR = new ConsoleRelative(this);
-        consR.work();
+        consR.workConsole();
     }
 
     public void saveInFile(){
@@ -177,11 +159,6 @@ public class ConsoleUI implements View {
 
     private void inputError(){
         System.out.println(INPUT_ERROR);
-    }
-
-    private Gender setGender(String value){
-        if (value.equals("m")) return Gender.Male;
-        else return Gender.Female;       
     }
 
     public Presenter getPresenter(){

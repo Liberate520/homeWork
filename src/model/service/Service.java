@@ -7,14 +7,19 @@ import FileWork.Filehundler;
 
 public class Service {
     private FamalyTree<Human> famalyTree;
+    private Filehundler filehundler;
 
     public Service(String nameFile){
-        Filehundler filehundler = new Filehundler();
-        this.famalyTree = (FamalyTree<Human>)(filehundler.LoadInFile(nameFile));
+        this.famalyTree = (FamalyTree<Human>)(loadInFile(nameFile));
     }
 
     public Service(){
         this.famalyTree = new FamalyTree<>();
+    }
+
+    private Object loadInFile(String nameFile){
+        filehundler = new Filehundler();
+        return filehundler.loadInFile(nameFile);
     }
 
     public void addHuman(String name, int year_bd, int m_bd, int day_bd, int year_dd,
@@ -49,13 +54,13 @@ public class Service {
         this.famalyTree.sortByChildren();
     }
 
-    public void addHumanRelatives(int idHuman0, int idHuman1, int index){
-        this.famalyTree.addTRelatives(idHuman0, idHuman1, index);
+    public void addHumanRelatives(int idHuman0, int idHuman1, int typeRel){
+        this.famalyTree.addTRelatives(idHuman0, idHuman1, typeRel);
     }
 
     public boolean saveInFile(String nameFile){
         Filehundler filehundler = new Filehundler();
-        return filehundler.SaveInFile(this.famalyTree, nameFile);
+        return filehundler.saveInFile(this.famalyTree, nameFile);
     }
 
     public Human getHumanId (int id){
