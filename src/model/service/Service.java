@@ -2,76 +2,40 @@ package homeWork.src.model.service;
 
 import homeWork.src.model.builder.FamilyMemberBuilder;
 import homeWork.src.model.member.FamilyMember;
+import homeWork.src.model.tree.DateBuilder;
 import homeWork.src.model.tree.FamilyTree;
 import homeWork.src.model.tree.Gender;
-import homeWork.src.model.tree.TreeItem;
 import homeWork.src.model.writer.FileHandler;
+import homeWork.src.model.writer.Writable;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Service {
 
     private FamilyTree<FamilyMember> newTree;
-//    private M member;
+//    Scanner scanner = new Scanner(System.in);
+    private FamilyMemberBuilder builder;
+    Writable writable;
 
     public Service(){
+        builder = new FamilyMemberBuilder();
         newTree = new FamilyTree<>();
+        writable = new FileHandler();
     }
+
 
     private void addFamilyMember(FamilyMember member) {
         newTree.addFamilyMember(member);
-////        newTree.addFamilyMember(member);
-//        if(member == null){
-//            return false;
-//        }
-//        // Это внутренняя часть дерева и метод get не может изменяться без разрешения дерева
-//        // (признак нарушения: слишком много строчек). Пример: кассир берет деньги из вашего кошелька.
-//        // Решение: вынести данную работу в класс FamilyTree.
-//        if(!newTree.getFamilyMembers().contains(member)){
-//            newTree.addFamilyMember(member);
-////            member.setId(familyMemberId++);
-//
-//            addToParents(member);
-//            addToChildren(member);
-//            return true;
-//        }
-//        return false;
-////        return true;
     }
-
-    // Add parents так же перенести в класс FamilyTree
-//    private void addToParents(FamilyMember member){
-//        for(FamilyMember parent: member.getParents()){
-//            parent.addChild(member);
-//        }
-//    }
-//
-//    private void addToChildren(FamilyMember member){
-//        for(FamilyMember child: member.getChildren()){
-//            child.addParent(member);
-//        }
-//    }
-
-//    public boolean createFamilyMember(String name, String surname, String patronymicName, Gender gender,
-//                                           LocalDate birthDate, LocalDate deathDate,
-//                                           int motherID, int fatherID) {
-//        FamilyMember member;
-//        FamilyMember mother = newTree.getById(motherID);
-//        FamilyMember father = newTree.getById(fatherID);
-//
-//        member = builder.build(name, surname, patronymicName, gender,
-//                birthDate, deathDate, mother, father);
-//
-//        if (member!= null) {
-//            addFamilyMember(member);
-//        }
-//        return true;
-//    }
 
     public void createFamilyMember(String name, String surname, String patronymicName, Gender gender,
                                            LocalDate birthDate, LocalDate deathDate,
                                            int motherID, int fatherID){
-        newTree.createFamilyMember(name, surname, patronymicName, gender, birthDate, deathDate, motherID, fatherID);
+        FamilyMember mother = newTree.getById(motherID);
+        FamilyMember father = newTree.getById(fatherID);
+        FamilyMember member = builder.build(name, surname, patronymicName, gender, birthDate, deathDate, mother, father);
+        newTree.addFamilyMember(member);
     }
 
     public FamilyTree<FamilyMember> getFamilyTree(){
@@ -106,29 +70,72 @@ public class Service {
         return member.addChild(child);
     }
 
-    // Путь нужно вынести в filehandler
-//    public FamilyTree<FamilyMember> loadFamilyTree(){
-//        FileHandler fileHandler = new FileHandler();
-//        String filePath = "src/homeWork/src/model/writer/tree.txt";
-//        newTree = (FamilyTree<FamilyMember>) fileHandler.read();
-//        builder.assignID(newTree);
-//        return newTree;
-//    }
+    public void addChild(long memberID, long childID){
+        FamilyMember member = newTree.getById(memberID);
+        FamilyMember child = newTree.getById(childID);
+        member.addChild(child);
+    }
 
-    public FamilyTree<FamilyMember> loadTree(){
-        newTree.load();
-        return newTree;
+    public void loadTree(){
+        newTree = (FamilyTree<FamilyMember>) writable.read();
+        builder.assignID(newTree.getFamilyMembers());
     }
 
     public void save(){
-        newTree.save();
+        writable.save(newTree);
     }
 
-    public void changeFamilyMember(long id, String name, String surname, String patronymicName){
-        FamilyMember member =  newTree.getById(id);
+    public void changeName(long familyMemberID, String name){
+        FamilyMember member = newTree.getById(familyMemberID);
         member.setName(name);
+        System.out.println(member);
+    }
+
+    public void changeSurname(long familyMemberID, String surname){
+        FamilyMember member = newTree.getById(familyMemberID);
         member.setSurname(surname);
+        System.out.println(member);
+    }
+
+    public void changePatronymicName(long familyMemberID, String patronymicName){
+        FamilyMember member = newTree.getById(familyMemberID);
         member.setPatronymicName(patronymicName);
+        System.out.println(member);
+    }
+
+    public void chnageGender(long familyMemberId, String gender){
+        FamilyMember member = newTree.getById(familyMemberId);
+        member.setGender(gender);
+        System.out.println(member);
+    }
+
+    public void changeBirthDate(FamilyMember member){
+        DateBuilder dtBuilder = new DateBuilder();
+        member.setBirthDate(dtBuilder.buildDate());
+    }
+
+    public void changeDeathDate(FamilyMember member){
+        DateBuilder dtBuilder = new DateBuilder();
+        member.setDeathDate(dtBuilder.buildDate());
+    }
+
+    public void changeSpouse(long familyMemberID, long spouseID){
+        setWedding(familyMemberID, spouseID);
+        System.out.println(getFamilyTreeInfo());
+    }
+
+    public void changeMother(long familyMemberID, long motherID){
+        FamilyMember member = newTree.getById(familyMemberID);
+        FamilyMember mother = newTree.getById(motherID);
+        member.setMother(mother);
+        System.out.println(member);
+    }
+
+    public void changeFather(long familyMemberID, long fatherID){
+        FamilyMember member = newTree.getById(familyMemberID);
+        FamilyMember father = newTree.getById(fatherID);
+        member.setFather(father);
+        System.out.println(member);
     }
 
     public String getName(FamilyMember member) {
@@ -136,6 +143,7 @@ public class Service {
     }
 
     public FamilyMember getFamilyMember(long id) {
-        return newTree.getById(id);
+        FamilyMember member = newTree.getById(id);
+        return member;
     }
 }

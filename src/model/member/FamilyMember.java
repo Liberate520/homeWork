@@ -3,6 +3,7 @@ package homeWork.src.model.member;
 import homeWork.src.model.tree.Gender;
 import homeWork.src.model.tree.TreeItem;
 
+import java.awt.font.ShapeGraphicAttribute;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -136,6 +137,15 @@ public class FamilyMember implements Serializable, TreeItem<FamilyMember>, Compa
 
     public void setDeathDate(LocalDate deathDate){this.deathDate = deathDate;}
 
+    public void setGender(String gender){
+        if(gender.equals("Male")){
+            this.gender = Gender.Male;
+        } else if (gender.equals("Female")){
+            this.gender = Gender.Female;
+        } else {
+            System.out.println("Incorrect gender, please, enter correct gender.");
+        }
+    }
     public Gender getGender(){return gender;}
 
     @Override

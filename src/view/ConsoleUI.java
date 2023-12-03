@@ -1,6 +1,7 @@
 package homeWork.src.view;
 
 import homeWork.src.model.member.FamilyMember;
+import homeWork.src.model.tree.DateBuilder;
 import homeWork.src.model.tree.FamilyTree;
 import homeWork.src.model.tree.Gender;
 import homeWork.src.presenter.Presenter;
@@ -12,6 +13,7 @@ public class ConsoleUI implements View {
     private Presenter presenter;
     private boolean check;
     private MainMenu menu;
+    private DateBuilder dateBuilder = new DateBuilder();
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -33,32 +35,6 @@ public class ConsoleUI implements View {
         // метод проверки на валидность введенной строки
         int choice = Integer.parseInt(choiceStr);
         menu.execute(choice);
-
-//        switch (choice){
-//            case "1":
-//                addFamilyMember();
-//                break;
-//            case "2":
-//                getFamilyTreeInfo();
-//                break;
-//            case "3":
-//                sortBySurname();
-//                break;
-//            case "4":
-//                sortByBirthdate();
-//                break;
-//            case "5":
-//                save();
-//                break;
-//            case "6":
-//                loadFamilyTree();
-//                break;
-//            case "7":
-//                exit();
-//                break;
-//            default:
-//                error();
-//        }
     }
 
     private void error() {
@@ -66,52 +42,24 @@ public class ConsoleUI implements View {
     }
 
     public void exit() {
+        System.out.println("Would you like to save your changes? Y/N");
+        String prompt = scanner.nextLine().toLowerCase();
+        if(prompt.equals("y")){
+            presenter.save();
+        }
         System.out.println("Bye-bye");
         check = false;
     }
 
     public void changeFamilyMember(){
-        String name;
-        String surname;
-        String patronymicName;
-
-        System.out.println("Enter the ID of the member you want to change: ");
-        long id = Long.parseLong(scanner.nextLine());
-
-        FamilyMember member = presenter.getFamilyMember(id);
-
-        if(member != null) {
-            System.out.println("Change name? Y/N");
-            String prompt1 = scanner.nextLine().toLowerCase();
-            if (prompt1.equals("y")) {
-                System.out.println("Type new name: ");
-                name = scanner.nextLine();
-            } else {
-                name = member.getName();
-            }
-
-            System.out.println("Change surname? Y/N");
-            String prompt2 = scanner.nextLine().toLowerCase();
-            if (prompt2.equals("y")) {
-                System.out.println("Type new surname: ");
-                surname = scanner.nextLine();
-            } else {
-                surname = member.getSurname();
-            }
-
-            System.out.println("Change patronymic name? Y/N");
-            String prompt3 = scanner.nextLine().toLowerCase();
-            if (prompt3.equals("y")) {
-                System.out.println("Type new patronymic name: ");
-                patronymicName = scanner.nextLine();
-            } else {
-                patronymicName = member.getPatronymicName();
-            }
-
-            presenter.changeFamilyMember(id, name, surname, patronymicName);
-        }else {
-            System.out.println("Family member with ID " + id + " not found.");
-        }
+        ConsoleUI2 console = new ConsoleUI2(presenter);
+        console.start();
+//        System.out.println("Enter the ID of the member you want to change: ");
+//        long id = Long.parseLong(scanner.nextLine());
+//        FamilyMember member = presenter.getFamilyMember(id);
+//        if(member != null) {
+//            console.start(member);
+//        }
     }
 
     public void loadFamilyTree() {
@@ -141,36 +89,57 @@ public class ConsoleUI implements View {
         String surname = scanner.nextLine();
         System.out.println("Enter patronymic name: ");
         String patronymicName = scanner.nextLine();
-        System.out.println("Enter gender: ");
-        Gender gender = Gender.valueOf(scanner.nextLine());
+
+        Gender gender = null;
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter gender: ");
+            String genderStr = scanner.nextLine();
+            if (genderStr.equals("Male")) {
+                gender = Gender.Male;
+                flag = false;
+            } else if (genderStr.equals("Female")) {
+                gender = Gender.Female;
+                flag = false;
+            } else {
+                System.out.println("Incorrect gender, please enter correct gender.");
+            }
+        }
+
         System.out.println("Enter birthDate: ");
-        LocalDate birthDate = LocalDate.parse(scanner.nextLine());
+        LocalDate birthDate = dateBuilder.buildDate();
+
+        System.out.println("Would you like to add death date? Y/N");
+        String prompt1 = scanner.nextLine().toLowerCase();
+        LocalDate deathDate = null;
+        if(prompt1.equals("y")){
+            deathDate = dateBuilder.buildDate();
+        }
+
         presenter.getFamilyTreeInfo();
 
         System.out.println("Would you like to add parents? Y/N");
-        String prompt = scanner.nextLine().toLowerCase();
-        if (prompt.equals("y")){
+        String prompt2 = scanner.nextLine().toLowerCase();
+        if (prompt2.equals("y")){
             System.out.println("Select id of mother: ");
             int motherID = Integer.parseInt(scanner.nextLine());
 
             System.out.println("Select id of father: ");
             int fatherID = Integer.parseInt(scanner.nextLine());
 
-            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate, motherID, fatherID);
+            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate, deathDate, motherID, fatherID);
         } else {
-            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate);
+            presenter.addFamilyMember(name, surname, patronymicName, gender, birthDate, deathDate);
         }
+    }
+
+    @Override
+    public void addChild() {
+        presenter.addChild();
     }
 
     private void printMenu(){
         System.out.println(menu.print());
-//        System.out.println("1. Add family member");
-//        System.out.println("2. Get family tree info");
-//        System.out.println("3. Sort by surname");
-//        System.out.println("4. Sort by birthDate");
-//        System.out.println("5. Save family tree");
-//        System.out.println("6. Load family tree");
-//        System.out.println("7. Exit");
     }
 
     @Override

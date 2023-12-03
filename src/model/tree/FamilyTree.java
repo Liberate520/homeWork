@@ -13,45 +13,44 @@ import java.util.*;
 public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable<M> {
     private long familyMemberId;
     private List<M> familyMembers;
-    private FamilyMemberBuilder builder;
     public FamilyTree(){this(new ArrayList<>());}
 
     public FamilyTree(List<M> familyMembers){
         this.familyMembers = familyMembers;
-        this.builder = new FamilyMemberBuilder();
     }
 
     public List<M> getFamilyMembers(){
         return familyMembers;
     }
 
-    public boolean createFamilyMember(String name, String surname, String patronymicName, Gender gender,
-                                      LocalDate birthDate, LocalDate deathDate,
-                                      int motherID, int fatherID) {
-        M member;
-        M mother = getById(motherID);
-        M father = getById(fatherID);
-
-        // Explicitly cast mother and father to FamilyMember, the logic here is that FamilyMemberBuilder
-        // class is used only to create a family tree for humans if I build a tree for dogs then I will
-        // use a DogMemberBuilder
-
-        FamilyMember castedMother = (FamilyMember) mother;
-        FamilyMember castedFather = (FamilyMember) father;
-
-        member = (M) builder.build(name, surname, patronymicName, gender,
-                birthDate, deathDate, castedMother, castedFather);
-
-        if (member!= null) {
-            addFamilyMember(member);
-        }
-        return true;
-    }
+//    public boolean createFamilyMember(String name, String surname, String patronymicName, Gender gender,
+//                                      LocalDate birthDate, LocalDate deathDate,
+//                                      int motherID, int fatherID) {
+//        M member;
+//        M mother = getById(motherID);
+//        M father = getById(fatherID);
+//
+//        // Explicitly cast mother and father to FamilyMember, the logic here is that FamilyMemberBuilder
+//        // class is used only to create a family tree for humans if I build a tree for dogs then I will
+//        // use a DogMemberBuilder
+//
+//        FamilyMember castedMother = (FamilyMember) mother;
+//        FamilyMember castedFather = (FamilyMember) father;
+//
+//        member = (M) builder.build(name, surname, patronymicName, gender,
+//                birthDate, deathDate, castedMother, castedFather);
+//
+//        if (member!= null) {
+//            addFamilyMember(member);
+//        }
+//        return true;
+//    }
 
     public boolean addFamilyMember(M member) {
         if(member == null){
             return false;
         }
+        checkMaxID(member);
         if(!familyMembers.contains(member)){
             familyMembers.add(member);
 
@@ -88,9 +87,15 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
     }
 
     private boolean checkId(long id){
-        builder.assignID(familyMembers);
-        familyMemberId = builder.getId();
-        return id < familyMemberId && id >= 0;
+//        builder.assignID(familyMembers);
+//        familyMemberId = builder.getId();
+        return id <= familyMemberId && id >= 0;
+    }
+
+    private void checkMaxID(M member){
+        if(member.getId() > familyMemberId){
+            familyMemberId = member.getId();
+        }
     }
 
     public List<M> getSiblins(int id){
@@ -178,8 +183,7 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
         Collections.sort(familyMembers);
     }
 
-    public void sortByAge (){
-//        Collections.sort(familyMembers, new FamilyMemberComparatorByAge());
+    public void sortByAge (){;
         familyMembers.sort(new FamilyMemberComparatorByAge<>());
     }
 
@@ -191,21 +195,4 @@ public class FamilyTree<M extends TreeItem<M>> implements Serializable, Iterable
     public Iterator<M> iterator() {
         return new FamilyMemberIterator<>(familyMembers);
     }
-
-    public void save() {
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(familyMembers);
-    }
-
-    public void load() {
-        FileHandler fileHandler = new FileHandler();
-        List<M> loadedFamilyMembers = (List<M>) fileHandler.read();
-
-        if (loadedFamilyMembers != null){
-            familyMembers = loadedFamilyMembers;
-        }
-
-        builder.assignID(familyMembers);
-    }
-
 }

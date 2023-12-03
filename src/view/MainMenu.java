@@ -11,6 +11,7 @@ public class MainMenu {
     public MainMenu(View view) {
         commandList = new ArrayList<>();
         commandList.add(new AddFamilyMember(view));
+        commandList.add(new AddChild(view));
         commandList.add(new GetFamilyTreeInfo(view));
         commandList.add(new SortBySurname(view));
         commandList.add(new SortByBirthdate(view));
