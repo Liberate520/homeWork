@@ -24,18 +24,12 @@ public class Presenter {
     }
 
     public void addChildrenToParent(String parent, List<String> names){
-        List<Human> childrenList = new ArrayList<>();
+        List<Human> childrenList = model.getListChildren(names);
         for (String children: names) {
-            Human human = model.findHumanByName(children);
-            if (! human.getName().equals("not found")){
-                childrenList.add(human);
-                view.printAnswer("Ребёнок " + children + " найден");
-            }
+            view.printAnswer("Ребёнок " + children + " найден");
         }
 
-        Human human = model.findHumanByName(parent);
-        if (! human.getName().equals("not found")){
-            human.addChildren(childrenList);
+        if (model.addChildrenToParent(parent, childrenList)){
             view.printAnswer("Для родителя " + parent + " дети добавлены\n");
         }
         else {view.printAnswer("Для родителя " + parent + " дети не добавлены\n");}

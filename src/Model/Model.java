@@ -6,6 +6,7 @@ import Model.home_work_class.Human.Human;
 import Model.home_work_class.Write.WriteRead;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -30,6 +31,27 @@ public class Model {
         List<Human>humans = familyTree.findHumanByName(name);
         if (!humans.isEmpty()) {return humans.get(0);}
         return new Human("not found", Gender.Male, LocalDate.of(1,1,1));
+    }
+
+    public List<Human> getListChildren(List<String> names){
+        List<Human> childrenList = new ArrayList<>();
+        for (String children: names) {
+            Human human = findHumanByName(children);
+            if (! human.getName().equals("not found")){
+                childrenList.add(human);
+            }
+        }
+        return childrenList;
+    }
+
+    public boolean addChildrenToParent(String parent, List<Human> childrenList){
+        boolean res = false;
+        Human human = findHumanByName(parent);
+        if (! human.getName().equals("not found")) {
+            human.addChildren(childrenList);
+            res = true;
+        }
+        return res;
     }
 
     public void sortByName(){familyTree.sortByName();}

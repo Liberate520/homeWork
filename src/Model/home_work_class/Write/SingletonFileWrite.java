@@ -11,9 +11,9 @@ public class SingletonFileWrite implements WriteRead {
         }
         return singletonFileWrite;
     }
-    FileWriter handler;
+    Writeable handler;
 
-    private SingletonFileWrite(FileWriter fileWrite){
+    private SingletonFileWrite(Writeable fileWrite){
         handler = fileWrite;
     }
 
