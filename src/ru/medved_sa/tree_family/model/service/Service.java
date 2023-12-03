@@ -60,8 +60,8 @@ public class Service {
     }
 
     public boolean setParent(int person_id, int parent_id) {
-        Human human = activeTree.getById(person_id);
         if (activeTree.checkId(person_id) && activeTree.checkId(parent_id)) {
+            Human human = activeTree.getById(person_id);
             human.addParent(activeTree.getById(parent_id));
             activeTree.getById(parent_id).addChild(human);
             return true;
