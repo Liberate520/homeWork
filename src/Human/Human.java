@@ -1,5 +1,7 @@
 package Human;
 
+import Family.FamilyMember;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyMember {
     private String name;
     private String familyName;
     private Gender gender;

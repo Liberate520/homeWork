@@ -7,18 +7,18 @@ import Human.Human;
 
 import java.util.*;
 
-public class Family implements Iterable<Human>{
-    private List<Human> family;
+public class Family<E extends FamilyMember> implements Iterable<E>{
+    private List<E> family;
 
     public Family() {
         family = new ArrayList<>();
     }
 
-    public void createFamily(Human human) {
-        family = human.getChildrens();
-        family.add(human);
-        if (human.getFather() != null) family.add(human.getFather());
-        if (human.getMother() != null) family.add(human.getMother());
+    public void createFamily(E e) {
+        family = (List<E>) e.getChildrens();
+        family.add(e);
+        if (e.getFather() != null) family.add((E) e.getFather());
+        if (e.getMother() != null) family.add((E) e.getMother());
     }
 
     @Override
@@ -28,24 +28,24 @@ public class Family implements Iterable<Human>{
 
     public StringBuilder fullInfo() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: family) stringBuilder.append(human.fullInfo()).append("\n");
+        for (E e: family) stringBuilder.append(e.fullInfo()).append("\n");
         return stringBuilder;
     }
 
     public void sortByAge() {
-        family.sort(new ComparatorByAge());
+        family.sort(new ComparatorByAge<>());
     }
 
     public void sortByName() {
-        family.sort(new ComparatorByName());
+        family.sort(new ComparatorByName<>());
     }
 
     public void sortByFamilyName() {
-        family.sort(new ComparatorByFamilyName());
+        family.sort(new ComparatorByFamilyName<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return family.iterator();
     }
 }

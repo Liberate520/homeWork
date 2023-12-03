@@ -9,20 +9,20 @@ import java.util.List;
 // Я понял в задании перепутаны понятия, под генеалогическим деревом, подразумеваеться семья.
 // Я создал отдельный класс Family.
 // Этот тоже оставлю, жалко удалять.
-public class FamilyTree implements Serializable {
-    private Human rootHuman;
+public class FamilyTree<E extends FamilyMember> implements Serializable {
+    private E rootHuman;
     private List<FamilyTree> heirs;
 
-    public FamilyTree(Human human) {
-        rootHuman = human;
+    public FamilyTree(E e) {
+        rootHuman = e;
         heirs = new ArrayList<>();
-        addHeirs(human);
+        addHeirs(e);
     }
 
-    private void addHeirs(Human human) {
-        List<Human> children = human.getChildrens();
+    private void addHeirs(E e) {
+        List<E> children = e.getChildrens();
         if (!children.isEmpty()) {
-            for (Human child : children) {
+            for (E child : children) {
                 heirs.add(new FamilyTree(child));
             }
         }
