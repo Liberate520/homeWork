@@ -1,8 +1,16 @@
+package model;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GenealogyTree implements FileWritableReadable {
+import io.FileWritableReadable;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class GenealogyTree implements FileWritableReadable, Iterable<Person>  {
     private Map<String, Person> people;
 
     public GenealogyTree() {
@@ -30,19 +38,36 @@ public class GenealogyTree implements FileWritableReadable {
         }
     }
 
-    @Override
-    public void writeToFile(String filename) throws IOException {
+     public void writeToFile(String filename, GenealogyTree genealogyTree) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(people);
+            oos.writeObject(genealogyTree);
         }
     }
 
     @Override
-    public void readFromFile(String filename) throws IOException {
+    public GenealogyTree readFromFile(String filename) throws IOException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            this.people = (Map<String, Person>) ois.readObject();
+            return (GenealogyTree) ois.readObject();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return people.values().iterator();
+    }
+
+    public List<Person> sortByName() {
+        List<Person> sortedList = new ArrayList<>(people.values());
+        sortedList.sort(Comparator.comparing(Person::getFirstName));
+        return sortedList;
+    }
+
+    public List<Person> sortByDateOfBirth() {
+        List<Person> sortedList = new ArrayList<>(people.values());
+        sortedList.sort(Comparator.comparing(Person::getDateOfBirth));
+        return sortedList;
     }
 }

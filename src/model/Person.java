@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
@@ -57,5 +57,9 @@ public class Person {
     public void addChild(Person child) {
         children.add(child);
     }
-}
 
+    @Override
+    public int compareTo(Person other) {
+        return this.getFirstName().compareTo(other.getFirstName());
+    }
+}
