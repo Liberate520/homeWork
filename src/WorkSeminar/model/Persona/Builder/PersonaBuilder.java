@@ -59,7 +59,8 @@ public class PersonaBuilder {
                 } else {System.out.println("Не корректный формат даты. Попробуйте снова.");}
             }
         } catch (Exception ex){
-            System.out.println("Ошибка ввода!" + ex);
+            System.out.println("Ошибка ввода!");
+            ex.printStackTrace();
         }
         return persona;
     }

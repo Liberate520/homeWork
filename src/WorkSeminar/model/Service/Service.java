@@ -1,6 +1,8 @@
 package WorkSeminar.model.Service;
 
 import WorkSeminar.Test.TestTree;
+import WorkSeminar.model.Persona.Builder.Input;
+import WorkSeminar.model.Persona.Builder.InputID;
 import WorkSeminar.model.Persona.Builder.PersonaBuilder;
 import WorkSeminar.model.Persona.Gender;
 import WorkSeminar.model.Persona.Persona;
@@ -62,8 +64,8 @@ public class Service {
     TODO Ввод из сервиса, придумать алтернативу..
      */
     public void setWedding() {
-        long personaOne = Long.parseLong(scanner.nextLine());
-        long personaTwo = Long.parseLong(scanner.nextLine());
+        long personaOne = InputID.inputsID();
+        long personaTwo = InputID.inputsID();
         setWedding(personaOne, personaTwo);
     }
     /*
@@ -71,8 +73,8 @@ public class Service {
      */
 
     public void addParent(){
-        Persona parrentOne = tree.addID(Long.parseLong(scanner.nextLine()));
-        Persona parrentTwo = tree.addID(Long.parseLong(scanner.nextLine()));
+        Persona parrentOne = tree.addID(InputID.inputsID());
+        Persona parrentTwo = tree.addID(InputID.inputsID());
         Persona kid = tree.addID(Long.parseLong(scanner.nextLine()));
         addParent(parrentOne, parrentTwo, kid);
     }
@@ -80,8 +82,8 @@ public class Service {
     TODO Ввод из сервиса, придумать алтернативу..
      */
     public void addKid(){
-        Persona parrent = tree.addID(Long.parseLong(scanner.nextLine()));
-        Persona kid = tree.addID(Long.parseLong(scanner.nextLine()));
+        Persona parrent = tree.addID(InputID.inputsID());
+        Persona kid = tree.addID(InputID.inputsID());
         addKid(parrent, kid);
     }
 
@@ -130,11 +132,6 @@ public class Service {
         SaveLoadTree loadTree = new SaveLoadTree();
         tree = (Tree) loadTree.loadFile("src/WorkSeminar/model/SaveFile/saveTree.out");
     }
-
-
-
-
-
 }
 
 
