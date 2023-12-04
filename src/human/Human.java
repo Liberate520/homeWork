@@ -100,11 +100,6 @@ public class Human implements Serializable {
         sb.append("\n");
         if(!(child.isEmpty())){
             for (Human human : child) {
-                if(human.getGender() == Gender.Mail) {
-                    sb.append("Сын: ");
-                } else {
-                    sb.append("Дочь: ");
-                }
                 sb.append(human.getName() +" Дата рождения: " + human.getBirthDay() + "\n");
             }
 

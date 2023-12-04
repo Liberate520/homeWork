@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args){
         //FamilyTree tree = load();
         FamilyTree tree = testTree();
-        System.out.println(tree.toString());
+        System.out.println(tree);
         save(tree);
 
     }
@@ -35,15 +35,21 @@ public class Main {
         Human kostya = new Human("Костя",Gender.Mail,LocalDate.of(1972,2,2));
         Human nikita = new Human("Никита",Gender.Mail,yulia,kostya,LocalDate.of(1991,7,3));
         Human gosha = new Human("Георгий",Gender.Mail,yulia,kostya,LocalDate.of(1992,12,4));
+        Human vasilisa = new Human("Василиса",Gender.Female,null,nikita,LocalDate.of(2013,7,20));
+        Human timofey= new Human("Тимофей",Gender.Mail,null,gosha,LocalDate.of(2016,6,3));
         yulia.addChildren(nikita);
         yulia.addChildren(gosha);
         kostya.addChildren(nikita);
         kostya.addChildren(gosha);
+        nikita.addChildren(vasilisa);
+        gosha.addChildren(timofey);
 
         familyTree.addHumanInTree(yulia);
         familyTree.addHumanInTree(kostya);
         familyTree.addHumanInTree(nikita);
         familyTree.addHumanInTree(gosha);
+        familyTree.addHumanInTree(vasilisa);
+        familyTree.addHumanInTree(timofey);
 
 
         return familyTree;
