@@ -1,4 +1,7 @@
 package view.commands;
 
-public class AddChild {
+import view.ConsoleUI;
+
+public class AddChild  extends Command{
+
 }
