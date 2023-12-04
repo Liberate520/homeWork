@@ -9,11 +9,17 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FamilyTree tree = testTree();
-        FamilyTree tree = load();
-        System.out.println(tree);
+        FamilyTree tree = testTree();
+//        FamilyTree tree = load();
+//        System.out.println(tree);
 
-        save(tree);
+//        save(tree);
+
+        System.out.println(tree.getInfo());
+        tree.sortByName();
+        System.out.println(tree.getInfo());
+        tree.sortByDate();
+        System.out.println(tree.getInfo());
     }
 
     private static FamilyTree load() {
