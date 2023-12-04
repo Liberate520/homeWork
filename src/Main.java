@@ -1,14 +1,34 @@
 import family_tree.FamilyTree;
 import humans.Gender;
 import humans.Human;
+import writer.FileHandler;
 import java.time.LocalDate;
 
 
 public class Main {
     public static void main(String[] args) {
+//        FamilyTree tree = testFamilyTree();
+//        save(tree);
+//        System.out.println(tree);
+        System.out.println(load());
+
+    }
+
+    private static FamilyTree load() {
+        String file = "src/writer/family_tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.read(file);
+    }
+
+    private static void save(FamilyTree tree) {
+        String file = "src/writer/family_tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.write(tree, file);
+    }
+
+    private static FamilyTree testFamilyTree() {
         FamilyTree familyTree = new FamilyTree();
         int id = 1;
-
         Human human1 = new Human(id++,
                 "Иван Иванов",
                 Gender.Male,
@@ -32,7 +52,6 @@ public class Main {
         human3.setFather(human1);
         human3.setMother(human2);
         familyTree.addHuman(human3);
-
 
 
         Human human4 = new Human(id++,
@@ -70,8 +89,7 @@ public class Main {
 //        Human human10 = new Human(id++, "Семен Иванов", LocalDate.of(1762, 11, 3), LocalDate.of(1854, 8, 11), Gender.Male);
 //        Human human11 = new Human(id++, "Геннадий Васильев", LocalDate.of(1753, 1, 31), LocalDate.of(1844, 2, 22), Gender.Male);
 //        Human human12 = new Human(id++, "Василиса Васильева", LocalDate.of(1778, 1, 21), LocalDate.of(1856, 10, 2), Gender.Female);
-
-
-        System.out.println(familyTree);
+        return familyTree;
     }
 }
+

@@ -1,12 +1,13 @@
 package humans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human {
+public class Human implements Serializable {
     private Integer id;
     private String name;
     private Gender gender;
