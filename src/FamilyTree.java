@@ -6,7 +6,7 @@ public class FamilyTree implements Serializable {
     private int id;
     private String family;
     private List<Human> membersList;
-    int memberId = 1;
+    private int memberId = 1;
 
 
     public FamilyTree(String family) {
