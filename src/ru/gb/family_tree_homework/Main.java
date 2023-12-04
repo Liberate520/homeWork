@@ -6,6 +6,7 @@ import ru.gb.family_tree_homework.human.Gender;
 import ru.gb.family_tree_homework.human.Human;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +15,16 @@ public class Main {
         System.out.println(familyTree);
 
         FamilyTree newTree = load();
-        System.out.println(newTree);;
+        System.out.println(newTree);
+        Iterator<Human> treeIterator = newTree.iterator();
+        System.out.println(treeIterator.next());
+        System.out.println(treeIterator.hasNext());
+        newTree.sortByAge();
+        System.out.println(newTree);
+        newTree.sortByName();
+        System.out.println(newTree);
+        newTree.sortByBirthDate();
+        System.out.println(newTree);
     }
 
     private static FamilyTree load() {
