@@ -17,7 +17,7 @@ public class Human implements Serializable, FamilyMember {
     private LocalDate deathData;
     private Human mother;
     private Human father;
-    private List<Human> childrens;
+    private List<FamilyMember> childrens;
 
     public Human(String name, String familyName, Gender gender, LocalDate birthData) {
         this.name = name;
@@ -92,7 +92,7 @@ public class Human implements Serializable, FamilyMember {
         return gender;
     }
 
-    public List<Human> getChildrens() {
+    public List<FamilyMember> getChildrens() {
         return childrens;
     }
 

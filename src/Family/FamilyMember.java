@@ -13,10 +13,10 @@ public interface FamilyMember {
     int getAge();
     String getName();
     String getFamilyName();
-    Human getMother();
-    Human getFather();
+    FamilyMember getMother();
+    FamilyMember getFather();
     Gender getGender();
-    List getChildrens();
+    List<FamilyMember> getChildrens();
 
     LocalDate getBirthData();
 

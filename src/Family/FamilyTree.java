@@ -20,7 +20,7 @@ public class FamilyTree<E extends FamilyMember> implements Serializable {
     }
 
     private void addHeirs(E e) {
-        List<E> children = e.getChildrens();
+        List<E> children = (List<E>) e.getChildrens();
         if (!children.isEmpty()) {
             for (E child : children) {
                 heirs.add(new FamilyTree(child));
