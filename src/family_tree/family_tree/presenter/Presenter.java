@@ -1,5 +1,6 @@
 package family_tree.family_tree.presenter;
 
+import family_tree.family_tree.model.FamilyTree;
 import family_tree.family_tree.model.Gender;
 import family_tree.family_tree.model.service.Service;
 import family_tree.family_tree.view.View;
@@ -12,7 +13,9 @@ public class Presenter {
     public Presenter(View view) {
 
         this.view = view;
-        service = new Service();
+        int index = 0;                                    // ???
+//        FamilyTree familyTree = null;                     // ???
+//        service = new Service(index, familyTree);         // ???
     }
 
     // Уточнить метод, - переделать !!!
