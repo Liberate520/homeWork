@@ -3,7 +3,7 @@ package Family_Tree.view.Commands;
 import Family_Tree.view.View;
 
 public abstract class Command {
-    private String description;
+    public String description;
     private View view;
 
     public Command(String description, View view) {

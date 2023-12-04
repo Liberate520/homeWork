@@ -65,6 +65,7 @@ public class ConsoleUI implements View{
         presenter.add(name, birthday, gender);
     }
 
+
     private void printMenu(){
         System.out.println(menu.print());
     }

@@ -32,29 +32,29 @@ public class FamilyTree <E extends TreeNode<E>> implements Serializable, Iterabl
         return false;
     }
 
-    public List<E> getHumanList() {
-        return humanList;
-    }
-
-    public List<E> getByName(String name) {
-        List<E> result = new ArrayList<>();
-        for (E human : humanList) {
-            if (human.getName().equals(name)) {
-                result.add(human);
-            }
-        }
-        return result;
-    }
-
-    public boolean setWedding(E human1, E human2) {
-        if (human1.getSpouse() == null && human2.getSpouse() == null) {
-            human1.setSpouse(human2);
-            human2.setSpouse(human1);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public List<E> getHumanList() {
+//        return humanList;
+//    }
+//
+//    public List<E> getByName(String name) {
+//        List<E> result = new ArrayList<>();
+//        for (E human : humanList) {
+//            if (human.getName().equals(name)) {
+//                result.add(human);
+//            }
+//        }
+//        return result;
+//    }
+//
+//    public boolean setWedding(E human1, E human2) {
+//        if (human1.getSpouse() == null && human2.getSpouse() == null) {
+//            human1.setSpouse(human2);
+//            human2.setSpouse(human1);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     private void addToParents(E human) {
         for (E parent : human.getParents()) {

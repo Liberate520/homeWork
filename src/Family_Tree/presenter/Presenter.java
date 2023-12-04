@@ -26,12 +26,12 @@ public class Presenter {
 
     public void sortByName() {
         service.sortByName();
-        getStudentListInfo();
+        service.getHumanListInfo();
     }
 
     public void sortByBirthday() {
         service.sortByBirthday();
-        getStudentListInfo();
+        service.getHumanListInfo();
     }
 
     public boolean read(String filePath){
@@ -41,5 +41,4 @@ public class Presenter {
     public boolean save(String fileName){
         return service.save(fileName);
     }
-
 }
