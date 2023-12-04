@@ -4,8 +4,8 @@ import my_family_tree.model.builder.HumanBuilder;
 import my_family_tree.model.human.Gender;
 import my_family_tree.model.human.Human;
 import my_family_tree.model.tree.FamilyTree;
-import my_family_tree.model.tree.TreeItem;
 import my_family_tree.model.writer.FileHandler;
+
 
 import java.time.LocalDate;
 
@@ -55,6 +55,7 @@ public class Service {
             Human child = tree.findById(chil);
             Human parent = tree.findById(par);
             child.addParents(parent);
+            parent.addChildren(child);
 
     }
 
@@ -77,5 +78,9 @@ public class Service {
     public void setDeathDate(int iD, LocalDate deathday) {
         Human human = tree.findById(iD);
         human.setDeathDay(deathday);
+    }
+
+    public boolean checkId(int id) {
+       return tree.checkId(id);
     }
 }

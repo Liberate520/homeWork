@@ -1,11 +1,7 @@
 package my_family_tree.view;
 
 import my_family_tree.model.human.Gender;
-import my_family_tree.model.human.Human;
-import my_family_tree.model.tree.FamilyTree;
-import my_family_tree.model.tree.TreeItem;
 import my_family_tree.presenter.Presenter;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -14,14 +10,12 @@ public class ConsoleUI implements View{
     private Presenter presenter;
     private boolean work;
     private MainMenu menu;
-    private FamilyTree<Human> tree;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
         menu = new MainMenu(this);
-        tree = new FamilyTree<>();
     }
 
     @Override
@@ -34,10 +28,8 @@ public class ConsoleUI implements View{
     }
 
     private void scanMenu() {
-        String choiceStr = scanner.nextLine();
-        int choice = Integer.parseInt(choiceStr);
+        int choice = checkInt();
         menu.execute(choice);
-
     }
 
     public void error() {
@@ -47,12 +39,39 @@ public class ConsoleUI implements View{
     public void finish() {
         work = false;
     }
+    private int checkInt(){
+        int value = 0;
+        boolean flag = true;
+        while (flag){
+            String string = scanner.nextLine();
+            if(string.matches("[0-9]+")){
+                value = Integer.parseInt(string);
+                flag = false;
+            } else { System.out.println("Вы ввели неверное значение"); }
+        }
+        return value;
+    }
+
+    private int checkId(){
+        int id = 0;
+        boolean flag = true;
+        while (flag){
+            id = checkInt();
+            if(presenter.checkId(id)) {
+                flag = false;
+            }
+            else {System.out.println("Вы ввели неверное значение");}
+        }
+        return id;
+    }
+
+
 
     public void setDeathDate(){
         presenter.getTreeInfo();
         System.out.println("Введите ID: ");
-        int iD = Integer.parseInt(scanner.nextLine());
-        System.out.println("Введите дату смерти: ");
+        int iD = checkId();
+        System.out.println("Введите дату смерти в формате YYYY-MM-DD: ");
         LocalDate deathday = LocalDate.parse(scanner.nextLine());
         presenter.setDeathDate(iD, deathday);
     }
@@ -82,9 +101,9 @@ public class ConsoleUI implements View{
     public void addHumanToTheFamily() {
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        System.out.println("Введите пол: ");
+        System.out.println("Введите пол (Male/Female: ");
         Gender gender = Gender.valueOf(scanner.nextLine());
-        System.out.println("Введите дату рождения: ");
+        System.out.println("Введите дату рождения в формате YYYY-MM-DD: ");
         LocalDate birthday = LocalDate.parse(scanner.nextLine());
         presenter.addHumanToTheFamily(name, gender, birthday);
     }
@@ -93,18 +112,18 @@ public class ConsoleUI implements View{
     public void wedding() {
         presenter.getTreeInfo();
         System.out.println("Введите ID 1");
-        int sp1 = Integer.parseInt(scanner.nextLine());
+        int sp1 = checkId();
         System.out.println("Введите ID 2");
-        int sp2 = Integer.parseInt(scanner.nextLine());
+        int sp2 = checkId();
         presenter.wedding(sp1, sp2);
     }
 
     public void addParents() {
         presenter.getTreeInfo();
         System.out.println("Введите ID родителя");
-        int par = Integer.parseInt(scanner.nextLine());
+        int par = checkId();
         System.out.println("Введите ID ребенка");
-        int chil = Integer.parseInt(scanner.nextLine());
+        int chil = checkId();
         presenter.addParents(par, chil);
 
     }

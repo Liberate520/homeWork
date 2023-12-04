@@ -1,15 +1,12 @@
 package my_family_tree.presenter;
 
 import my_family_tree.model.human.Gender;
-import my_family_tree.model.human.Human;
 import my_family_tree.model.service.Service;
-import my_family_tree.model.tree.FamilyTree;
-import my_family_tree.model.tree.TreeItem;
 import my_family_tree.view.View;
 
 import java.time.LocalDate;
 
-public class Presenter <E extends TreeItem<E>> {
+public class Presenter {
     private View view;
     private Service service;
 
@@ -61,5 +58,9 @@ public class Presenter <E extends TreeItem<E>> {
 
     public void setDeathDate(int iD, LocalDate deathday) {
         service.setDeathDate(iD, deathday);
+    }
+
+    public boolean checkId(int id) {
+        return service.checkId(id);
     }
 }

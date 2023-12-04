@@ -1,7 +1,6 @@
 package my_family_tree.view;
 
 import my_family_tree.view.commands.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

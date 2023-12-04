@@ -4,7 +4,7 @@ import my_family_tree.model.human.Gender;
 import my_family_tree.model.human.Human;
 import my_family_tree.model.human.comparators.HumanComparatorByAge;
 import my_family_tree.model.human.comparators.HumanComparatorByYear;
-import my_family_tree.model.writer.FileHandler;
+
 
 import java.io.Serializable;
 import java.util.*;
@@ -45,7 +45,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         }
     }
 
-    private boolean checkId(int id){
+    public boolean checkId(int id){
         return id < humanId && id >= 0;
     }
 
