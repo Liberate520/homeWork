@@ -1,6 +1,5 @@
 package ru.home_work.cherevichenko_sergey.human;
 import ru.home_work.cherevichenko_sergey.FamilyTreeItem;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -53,7 +52,6 @@ public class Human implements FamilyTreeItem, Serializable, Comparable<Human> {
     public LocalDate getDateDeath() {
         return dateDeath;
     }
-
     // Переопределяем метод toString класса ru.home_work.cherevichenko_sergey.human.Human
     @Override
     public  String toString() {

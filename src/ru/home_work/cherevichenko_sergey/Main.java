@@ -2,13 +2,16 @@ package ru.home_work.cherevichenko_sergey;
 
 import ru.home_work.cherevichenko_sergey.familyTree.FamilyTree;
 import ru.home_work.cherevichenko_sergey.human.Gender;
+import ru.home_work.cherevichenko_sergey.human.Human;
 import ru.home_work.cherevichenko_sergey.service_tree.ServiceTree;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
         ServiceTree tree = new ServiceTree();
         tree.addHuman("Михаил", "Черевиченко", Gender.MALE,
                 LocalDate.of(2013, Month.OCTOBER, 4), null);
