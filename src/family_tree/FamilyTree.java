@@ -1,11 +1,13 @@
-package familyTree;
+package family_tree;
 
 import human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+    private static final long serialVersionUID = 1L;
     private long countPeople;
     private List<Human> familyTree;
 
