@@ -58,30 +58,25 @@ public class Human implements Serializable {
         this.id = id;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
     public Human getMother() {
         return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
     }
 
     public Human getFather() {
         return father;
     }
 
-    public void setFather(Human father) {
-        this.father = father;
-    }
+
 
     public String getChild() {
         StringBuilder sb = new StringBuilder();
         for (Human human:child) {
-            sb.append(human.getId() + " " + human.getName() + " " + human.getAge() + "\n");
+            sb.append(human.getName() + " " + human.getAge() + " ");
+            if(human.gender.equals(Gender.Mail)){
+                sb.append("Мужчина" + "\n");
+            } else {
+                sb.append("Женщина" + "\n");
+            }
         }
         return sb.toString();
     }
@@ -110,7 +105,7 @@ public class Human implements Serializable {
                 } else {
                     sb.append("Дочь: ");
                 }
-                sb.append(human.getName() +" Дата рождения:" + human.getBirthDay() + "\n");
+                sb.append(human.getName() +" Дата рождения: " + human.getBirthDay() + "\n");
             }
 
         }
@@ -125,14 +120,14 @@ public class Human implements Serializable {
         return false;
     }
 
-    public boolean addParants(Human parents){
-        if(parents.getGender().equals(Gender.Mail)){
-            setFather(parents);
-        } else {
-            setMother(parents);
-        }
-        return true;
-    }
+//    public boolean addParants(Human parents){
+//        if(parents.getGender().equals(Gender.Mail)){
+//            setFather(parents);
+//        } else {
+//            setMother(parents);
+//        }
+//        return true;
+//    }
 
     private int getPeriod(LocalDate birthDay,LocalDate deathDay){
         Period diff = Period.between(birthDay,deathDay);

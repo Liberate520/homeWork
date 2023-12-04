@@ -1,5 +1,6 @@
 package family_tree;
 
+import human.Gender;
 import human.Human;
 
 import java.io.Serializable;
@@ -22,8 +23,6 @@ public class FamilyTree implements Serializable {
             return true;
         }
         return false;
-
-
     }
 
     @Override
@@ -31,7 +30,12 @@ public class FamilyTree implements Serializable {
         StringBuilder sb = new StringBuilder();
         if (!(familyTree.isEmpty())) {
             for (Human human : familyTree) {
-                    sb.append(human.getId() + " " + human.getName() + " Возраст: " + human.getAge() +"\n");
+                    sb.append("Id:" + human.getId() + " " + human.getName() + " Возраст: " + human.getAge());
+                    if(human.getGender().equals(Gender.Mail)){
+                        sb.append(" " + "Мужчина" + "\n");
+                    } else {
+                        sb.append(" " + "Женщина" + "\n");
+                    }
                     if(human.getChild() != null){
                         sb.append("Дети: " +"\n"+ human.getChild() +  "\n");
                     }
