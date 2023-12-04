@@ -22,6 +22,11 @@ public class Presentor {
         view.aswer(infoTree);
     }
 
+    public void sortTreeByName(){
+        service.sortTreeByName();
+        view.aswer("Древо отсортировано по имени персонажей!");
+    }
+
     public void sortTreeByAge(){
         service.sortTreeByAge();
         view.aswer("Древо отсортировано от младшего к старшему!");
@@ -44,13 +49,36 @@ public class Presentor {
     }
 
     public void saveTree(){
-        service.seveTree();
+        service.saveTree();
         view.aswer("Древо сохранено!");
     }
 
     public void loadTree(){
         service.loadTree();
         view.aswer("Древо загружено!");
+    }
+
+    /*
+    Методы ручного изменения древа.
+     */
+
+    public  void creatPerson(){
+        service.creatPerson();
+        view.aswer("Персонаж создан.");
+    }
+    public void setWedding(){
+        service.setWedding();
+        view.aswer("Связь установлена.");
+    }
+
+    public void addParent(){
+        service.addParent();
+        view.aswer("Роители добавлены");
+    }
+
+    public void addKid(){
+        service.addKid();
+        view.aswer("Ребёнок добавлен");
     }
 
 }

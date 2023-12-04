@@ -12,13 +12,17 @@ public class mainConsole {
         commandList = new ArrayList<>();
         commandList.add(new CreateTree(view));
         commandList.add(new ShowTree(view));
+        commandList.add(new SaveTree(view));
+        commandList.add(new LoadTree(view));
+        commandList.add(new SortTreeByName(view));
         commandList.add(new SortDefaut(view));
         commandList.add(new SortThreeByAge(view));
         commandList.add(new SortTreeByGender(view));
-        commandList.add(new SaveTree(view));
-        commandList.add(new LoadTree(view));
+        commandList.add(new CreatPersona(view));
+        commandList.add(new SetWedding(view));
+        commandList.add(new AddParent(view));
+        commandList.add(new AddKid(view));
         commandList.add(new Exit(view));
-
 
     }
     public  String print(){

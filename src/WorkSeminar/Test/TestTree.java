@@ -10,11 +10,10 @@ import java.time.LocalDate;
 public class TestTree {
     public Tree test (){
         Service service = new Service();
-        // йеп. знаю что так неправильно, и надо реализовать способ вытаскивание нужных персон иным способом.
-        // пока что это просто костыль-затычка.
+        
         Persona one = service.addPersona("Граф", "Грэй", Gender.Male, LocalDate.of(1990, 2, 22));
         Persona two = service.addPersona("Графиня", "Грэй", Gender.Female, LocalDate.of(1988, 6, 1));
-        service.setWedding(one, two);
+        service.setWedding(0, 1);
 
         Persona Three = service.addPersona("Старший сын", "Грэй", Gender.Male, LocalDate.of(2010, 1, 5));
         Persona Four = service.addPersona("Старшая дочь", "Грэй", Gender.Female, LocalDate.of(2009, 5, 1));

@@ -116,6 +116,7 @@ public class Persona implements Serializable, TreeEtem<Persona> {
     }
 
 
+
     public  boolean addParent(Persona parent){
         if (parent.getGender().equals(Gender.Female)){
             setMather(parent);
