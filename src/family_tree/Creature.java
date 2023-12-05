@@ -2,10 +2,9 @@ package family_tree;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public interface Creature<T> {
+public interface Creature<T>{
 
 
     String getName();

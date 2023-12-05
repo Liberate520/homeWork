@@ -1,8 +1,8 @@
 package service;
 
-import family_tree.Human;
 
-public class Service<Creature> {
+
+public class Service<T> {
     private static family_tree.Creature treeTop;
 
     public Service() {
@@ -12,8 +12,8 @@ public class Service<Creature> {
         Service.treeTop = treeTop;
     }
 
-    public Human getTreeTop() {
-        return (Human) treeTop;
+    public family_tree.Creature<T> getTreeTop() {
+        return treeTop;
 
 
     }

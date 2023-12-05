@@ -135,12 +135,12 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
     public String showTree() {
-        Service service = new Service();
+        Service<T> service = new Service<T>();
         topOfTree(familyTree.getFirst());
-        return showTreeService(service.getTreeTop());
+        return showTreeService((T) service.getTreeTop());
     }
 
-    private String showTreeService(Human top) {
+    private String showTreeService(T top) {
         StringBuilder sb = new StringBuilder();
         boolean flag = false;
         if (top != null) {
@@ -149,7 +149,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
                 sb.append(String.format("Супруг старшего члена семейства: %s", top.getSpouse().getName()));
             }
             sb.append("Дети старшего члена семейства: ");
-            for (Human child : top.getChildren()) {
+            for (T child : top.getChildren()) {
                 if (flag) sb.append(", ");
                 sb.append(child.getName());
                 flag = true;
