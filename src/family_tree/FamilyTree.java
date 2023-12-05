@@ -4,11 +4,10 @@ import service.Service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
+public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializable {
     private List<T> familyTree;
 
     public FamilyTree() {
@@ -16,13 +15,12 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
 
     }
 
-    public Human getTop() {
-        Service service = new Service();
+    public Creature getTop() {
+        Service<T> service = new Service<T>();
         topOfTree(familyTree.getFirst());
         return service.getTreeTop();
     }
 
-    //TODO: INTERFACE описать методы set, get
     public boolean setSpouse(T firstSpouce, T secondSpouce) {
         if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
             firstSpouce.setSpouse(secondSpouce);
@@ -32,13 +30,13 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
                     "проставьте корректные статусы");
             return false;
         }
-        if (!firstSpouce.inTree) {
+        if (!firstSpouce.isInTree()) {
             familyTree.add(firstSpouce);
-            firstSpouce.inTree = true;
+            firstSpouce.setInTree();
         }
-        if (!secondSpouce.inTree) {
+        if (!secondSpouce.isInTree()) {
             familyTree.add(secondSpouce);
-            secondSpouce.inTree = true;
+            secondSpouce.setInTree();
         }
         System.out.println("Вы указали, что: " + firstSpouce.getName() + " и " + secondSpouce.getName() + " женаты");
         return true;
@@ -58,13 +56,13 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
 
     public boolean setMother(T child, T mother) {
         child.setMother(mother);
-        if (!child.inTree) {
+        if (!child.isInTree()) {
             familyTree.add(child);
-            child.inTree = true;
+            child.setInTree();
         }
-        if (!mother.inTree) {
+        if (!mother.isInTree()) {
             familyTree.add(mother);
-            mother.inTree = true;
+            mother.setInTree();
         }
         if (mother.getChildren() != null && mother.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
@@ -77,13 +75,13 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     }
 
     public boolean setChildren(T parent, T child) {
-        if (!child.inTree) {
+        if (child.isInTree()) {
             familyTree.add(child);
-            child.inTree = true;
+            child.setInTree();
         }
-        if (!parent.inTree) {
+        if (parent.isInTree()) {
             familyTree.add(parent);
-            parent.inTree = true;
+            parent.setInTree();
         }
         if (parent.getChildren() != null && parent.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
@@ -98,13 +96,13 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
 
     public boolean setFather(T child, T father) {
         child.setFather(father);
-        if (!child.isInTree()) {
+        if (child.isInTree()) {
             familyTree.add(child);
-            child.inTree = true;
+            child.setInTree();
         }
-        if (!father.inTree) {
+        if (!father.isInTree()) {
             familyTree.add(father);
-            father.inTree = true;
+            father.setInTree();
         }
         if (father.getChildren() != null && father.getChildren().contains(child)) {
             System.out.println("Такой ребенок уже задан");
@@ -121,18 +119,18 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
         sb.append("Члены данной семьи: \n");
-        for (Human human : familyTree) {
+        for (T human : familyTree) {
             sb.append(human.getName()).append("\n");
         }
         return sb.toString();
     }
 
     public void sortByName() {
-        Collections.sort(familyTree, new HumanComporatorByName());
+        familyTree.sort(new HumanComporatorByName());
     }
 
     public void sortByAge() {
-        Collections.sort(familyTree, new HumanComporatorByAge());
+        familyTree.sort(new HumanComporatorByAge());
     }
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
@@ -160,15 +158,14 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
         return sb.toString();
     }
 
-    private boolean topOfTree(Human topEnter) {
-        Service service = new Service();
+    private boolean topOfTree(T topEnter) {
         if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
             if (topEnter.getSpouse() != null) {
                 if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
                     topOfTree(topEnter.getSpouse());
                 }
             } else {
-                service.setTreeTop(topEnter);
+                Service.setTreeTop(topEnter);
             }
         }
         if (topEnter != null) {
@@ -180,8 +177,8 @@ public class FamilyTree<T extends Human> implements Iterable<T>, Serializable {
     }
 
     @Override
-    public Iterator iterator() {
-        return new HumanIterator(familyTree);
+    public Iterator<T> iterator() {
+        return new HumanIterator<T>(familyTree);
     }
 
 }

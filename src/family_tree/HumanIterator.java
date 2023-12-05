@@ -3,7 +3,7 @@ package family_tree;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator<T> implements Iterator {
+public class HumanIterator<T> implements Iterator<T> {
     private List<T> familyTree;
     private int count;
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable, Comparable, Humans {
+public class Human implements Serializable, Comparable<Object>, Creature<Human> {
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -18,10 +18,11 @@ public class Human implements Serializable, Comparable, Humans {
     private Human spouse;
     //TODO: Переделать в конструктор
     private List<Human> children;
-    boolean inTree = false;
+    private boolean inTree;
 
     public Human() {
         this.children = new ArrayList<Human>();
+        boolean inTree = false;
     }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
@@ -52,7 +53,7 @@ public class Human implements Serializable, Comparable, Humans {
         this(firstName, lastName, gender, null, null, mother, father, null);
     }
 
-    boolean setMother(Human mother) {
+    public boolean setMother(Human mother) {
         if (this.mother != null) {
             System.out.println("Мать уже задана");
             return false;
@@ -63,7 +64,8 @@ public class Human implements Serializable, Comparable, Humans {
 
     }
 
-    boolean setFather(Human father) {
+
+    public boolean setFather(Human father) {
         if (this.father != null) {
             System.out.println("Отец уже задан");
             return false;
@@ -73,7 +75,11 @@ public class Human implements Serializable, Comparable, Humans {
         }
     }
 
-    boolean setSpouse(Human spouse) {
+    public void setInTree() {
+        this.inTree = true;
+    }
+
+    public boolean setSpouse(Human spouse) {
         if (this.spouse != null) {
             System.out.println("Супруг уже задан");
             return false;
@@ -92,6 +98,7 @@ public class Human implements Serializable, Comparable, Humans {
                 }
             }
         }
+        assert this.children != null;
         this.children.add(child);
     }
 
@@ -112,11 +119,11 @@ public class Human implements Serializable, Comparable, Humans {
     }
 
 
-    Human getSpouse() {
+    public Human getSpouse() {
         return spouse;
     }
 
-    Human getMother() {
+    public Human getMother() {
         return mother;
     }
 
@@ -129,16 +136,16 @@ public class Human implements Serializable, Comparable, Humans {
         return currentYear - this.getBirthDate().getYear();
     }
 
-    Human getFather() {
+    public Human getFather() {
         return father;
     }
 
-    List<Human> getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
     public boolean isInTree() {
-        return inTree;
+        return !inTree;
     }
 
     @Override
@@ -202,6 +209,6 @@ public class Human implements Serializable, Comparable, Humans {
 
     @Override
     public int compareTo(Object o) {
-        return new HumanComporatorByName().compare(this, (Humans) o);
+        return new HumanComporatorByName().compare(this, (Creature) o);
     }
 }

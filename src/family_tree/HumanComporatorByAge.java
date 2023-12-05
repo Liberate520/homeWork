@@ -2,10 +2,10 @@ package family_tree;
 
 import java.util.Comparator;
 
-public class HumanComporatorByAge implements Comparator<Humans> {
+public class HumanComporatorByAge implements Comparator<Creature> {
 
     @Override
-    public int compare(Humans o1, Humans o2) {
+    public int compare(Creature o1, Creature o2) {
         if (o2.getBirthDate().isAfter(o1.getBirthDate())) {
             return 1;
         } else {
