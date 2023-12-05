@@ -3,11 +3,11 @@ package family_tree;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator<T> implements Iterator<T> {
+public class TreeIterator<T> implements Iterator<T> {
     private List<T> familyTree;
     private int count;
 
-    public HumanIterator(List<T> familyTree) {
+    public TreeIterator(List<T> familyTree) {
         this.familyTree = familyTree;
         this.count = 0;
     }

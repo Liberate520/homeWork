@@ -1,4 +1,4 @@
-package family_tree;
+package creatures;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -209,6 +209,6 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
 
     @Override
     public int compareTo(Object o) {
-        return new HumanComporatorByName().compare(this, (Creature) o);
+        return new CreatureComporatorByName().compare(this, (Creature) o);
     }
 }

@@ -1,8 +1,8 @@
-package family_tree;
+package creatures;
 
 import java.util.Comparator;
 
-public class HumanComporatorByAge implements Comparator<Creature> {
+public class CreatureComporatorByAge implements Comparator<Creature> {
 
     @Override
     public int compare(Creature o1, Creature o2) {

@@ -1,18 +1,19 @@
 package service;
 
 
+import creatures.Creature;
 
 public class Service<T> {
-    private static family_tree.Creature treeTop;
+    private static Creature treeTop;
 
     public Service() {
     }
 
-    public static void setTreeTop(family_tree.Creature treeTop) {
+    public static void setTreeTop(Creature treeTop) {
         Service.treeTop = treeTop;
     }
 
-    public family_tree.Creature<T> getTreeTop() {
+    public Creature<T> getTreeTop() {
         return treeTop;
 
 

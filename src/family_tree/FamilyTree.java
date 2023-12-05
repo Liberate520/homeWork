@@ -1,5 +1,8 @@
 package family_tree;
 
+import creatures.Creature;
+import creatures.CreatureComporatorByAge;
+import creatures.CreatureComporatorByName;
 import service.Service;
 
 import java.io.Serializable;
@@ -126,11 +129,11 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     }
 
     public void sortByName() {
-        familyTree.sort(new HumanComporatorByName());
+        familyTree.sort(new CreatureComporatorByName());
     }
 
     public void sortByAge() {
-        familyTree.sort(new HumanComporatorByAge());
+        familyTree.sort(new CreatureComporatorByAge());
     }
 
     //TODO: Дописать метод, который рекурсивно собирает дерево семьи
@@ -178,7 +181,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     @Override
     public Iterator<T> iterator() {
-        return new HumanIterator<T>(familyTree);
+        return new TreeIterator<T>(familyTree);
     }
 
 }
