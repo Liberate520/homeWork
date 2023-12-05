@@ -1,3 +1,5 @@
+package human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Human implements Serializable {
+public class Human
+        implements Serializable, Comparable<Human> {
     private int id;
 
     private String name;
@@ -48,6 +51,16 @@ public class Human implements Serializable {
         }
     }
 
+    public int age() {
+        if (this.birthday == null) return 0;
+        if (this.deathday == null) {
+            return Period.between(this.birthday, LocalDate.now()).getYears();
+        }
+        else {
+            return Period.between(this.birthday, this.deathday).getYears();
+        }
+    }
+
     public String getChildren() {
         StringBuilder stringBuilder = new StringBuilder("Дети: ");
         stringBuilder.append(this.children);
@@ -60,7 +73,6 @@ public class Human implements Serializable {
         stringBuilder.append(this.parents);
         return stringBuilder.toString();
     }
-
 
 
 
@@ -117,6 +129,10 @@ public class Human implements Serializable {
     }
 
     @Override
-    public String toString() {return "name: " + name + ", lastname: " + lastname + ", birthday: " + birthday + ", gender: " + gender  + ", children: " + children;}
+    public String toString() {return "имя: " + name + ", фамилия: " + lastname + ", день рождения: " + birthday + ", пол: " + gender  + ", дети: " + children;}
 
+    @Override
+    public int compareTo(Human o) {
+        return this.name.compareTo(o.name);
+    }
 }
