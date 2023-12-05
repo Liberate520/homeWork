@@ -13,11 +13,9 @@ public class Human implements Serializable {
     private Gender gender;
     private LocalDate dateBirthday;
     private LocalDate dateDeath;
-    private Integer ageHuman;
     private Human mother;
     private Human father;
     private List<Human> childrenList;
-    private List<Human> parentsList;
     private LiveStatus liveStatus;
 
     public Human(Integer id,
@@ -85,12 +83,11 @@ public class Human implements Serializable {
     private Integer setAgeHuman() {
         if (!(dateDeath == null)) {
             liveStatus = LiveStatus.Dead;
-            ageHuman = Period.between(dateBirthday, dateDeath).getYears();
+            return Period.between(dateBirthday, dateDeath).getYears();
         } else {
             liveStatus = LiveStatus.Live;
-            ageHuman = Period.between(dateBirthday, LocalDate.now()).getYears();
+            return Period.between(dateBirthday, LocalDate.now()).getYears();
         }
-        return ageHuman;
     }
 
     public Gender getGender() {
@@ -124,7 +121,7 @@ public class Human implements Serializable {
     }
 
     public List<Human> getParents() {
-        parentsList = new ArrayList<>(2);
+        List<Human> parentsList = new ArrayList<>(2);
         if (father != null) {
             parentsList.add(father);
         }
@@ -178,6 +175,8 @@ public class Human implements Serializable {
                 .append(name)
                 .append(", gender: ")
                 .append(gender)
+                .append(", birth date: ")
+                .append(getDateBirthday())
                 .append(", age: ")
                 .append(getAgeHuman())
                 .append(", status: ")
@@ -196,5 +195,18 @@ public class Human implements Serializable {
     public String toString() {
         return humanInfo().toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Human)) {
+            return false;
+        }
+        Human human = (Human) obj;
+        return human.getId().equals(getId());
+    }
 }
+
 

@@ -7,10 +7,15 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FamilyTree tree = testFamilyTree();
+        FamilyTree tree = testFamilyTree();
 //        save(tree);
 //        System.out.println(tree);
-        System.out.println(load());
+        tree.sortByDateBirthday();
+        System.out.println(tree);
+        System.out.println();
+
+        tree.sortByName();
+        System.out.println(tree);
 
     }
 

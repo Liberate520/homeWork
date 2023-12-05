@@ -1,12 +1,16 @@
 package family_tree;
 
 import humans.Human;
+import humans.HumanComparatorByAge;
+import humans.HumanComparatorByDateBirthday;
+import humans.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> humanList;
 
     public FamilyTree(List<Human> humanList) {
@@ -70,18 +74,37 @@ public class FamilyTree implements Serializable {
         return humanList;
     }
 
-    public StringBuilder getHumanListInfo() {
+    public String getHumanListInfo() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Список людей: \n");
         for (Human human : humanList) {
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
-        return stringBuilder;
+        return String.valueOf(stringBuilder);
     }
 
     @Override
     public String toString() {
-        return "Список людей: \n" + getHumanListInfo();
+        return getHumanListInfo();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByDateBirthday() {
+        humanList.sort(new HumanComparatorByDateBirthday());
+    }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
     }
 
 
