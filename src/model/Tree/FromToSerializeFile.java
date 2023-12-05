@@ -1,6 +1,6 @@
-package Tree;
+package model.Tree;
 
-import Elements.TreeElement;
+import model.Elements.TreeElement;
 import java.io.*;
 
 

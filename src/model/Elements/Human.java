@@ -1,4 +1,4 @@
-package Elements;
+package model.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class Human extends TreeElement  {
         children.add(child);
     }
 
-    public List<String> getChildren() {
+    public List<String> getChildrensName() {
         List<String> result = new ArrayList<>();
         for (Human item:
              children) {
@@ -51,7 +51,11 @@ public class Human extends TreeElement  {
         return result;
     }
 
-   @Override
+    public List<Human> getChildren() {
+        return children;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("имя: ").append(name).append(" ").append(birthday).append("-").append(deathDay).append("\n");
@@ -64,7 +68,7 @@ public class Human extends TreeElement  {
         if(spouse != null){
             sb.append("супруг(а): ").append(spouse.getName()).append("\n");
         }
-        sb.append("дети: ").append(getChildren()).append("\n");
+        sb.append("дети: ").append(getChildrensName()).append("\n");
         return sb.toString();
     }
 
@@ -72,4 +76,5 @@ public class Human extends TreeElement  {
     public int compareTo(TreeElement o) {
         return -1 * (birthday - o.birthday);
     }
+
 }
