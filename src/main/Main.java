@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: Уйти от использования объекта Human, задавать дерево напрямую через familyTree
         Human sergei = new Human("Sergei", "Petrov", Gender.Male,
                 LocalDate.of(1989, 1, 1), LocalDate.of(2015, 12, 31));
         Human vaselisa = new Human("Vaselisa", "Petrova", Gender.Female,
@@ -27,6 +26,7 @@ public class Main {
         familyPetrovi.setMother(sergei, anna);
         familyPetrovi.setMother(sofia, vaselisa);
         familyPetrovi.setFather(sofia, sergei);
+        familyPetrovi.setChildren(vasilii, ivan);
 
 /*        System.out.println(familyPetrovi);
         System.out.println(sergei);
@@ -40,7 +40,7 @@ public class Main {
         System.out.println(recordTest);
         fileHandler.close();*/
 
-        familyPetrovi.sortByName();
+/*        familyPetrovi.sortByName();
 
         System.out.println("\nДемонстрация сортировки по имени + Iterable:");
         for (Human person : familyPetrovi) {
@@ -50,11 +50,14 @@ public class Main {
 
         familyPetrovi.sortByAge();
 
-        for (Human person : familyPetrovi){
-            System.out.printf("Имя: %s, Возраст: %d%n", person.getName(), person.getAge());
-        }
-
+        for (Human person : familyPetrovi) {
+            System.out.printf("Имя: %s, Возраст: %d%n", person.getName(), person.getAge());*/
+        System.out.println();
+        System.out.println(familyPetrovi.showTree());
     }
-
-
 }
+
+
+
+
+

@@ -78,11 +78,11 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     }
 
     public boolean setChildren(T parent, T child) {
-        if (child.isInTree()) {
+        if (!child.isInTree()) {
             familyTree.add(child);
             child.setInTree();
         }
-        if (parent.isInTree()) {
+        if (!parent.isInTree()) {
             familyTree.add(parent);
             parent.setInTree();
         }
@@ -99,7 +99,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     public boolean setFather(T child, T father) {
         child.setFather(father);
-        if (child.isInTree()) {
+        if (!child.isInTree()) {
             familyTree.add(child);
             child.setInTree();
         }
@@ -136,27 +136,34 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         familyTree.sort(new CreatureComporatorByAge());
     }
 
-    //TODO: Дописать метод, который рекурсивно собирает дерево семьи
+
     public String showTree() {
         Service<T> service = new Service<T>();
         topOfTree(familyTree.getFirst());
-        return showTreeService((T) service.getTreeTop());
+        return showTreeService((T) service.getTreeTop(), 1);
     }
 
-    private String showTreeService(T top) {
+    private String showTreeService(T top, int count) {
         StringBuilder sb = new StringBuilder();
+        List<T> tempChildren = new ArrayList<>();
         boolean flag = false;
         if (top != null) {
-            sb.append(String.format("1. Старший член семейства: %s, %s г. р.", top.getName(), top.getBirthDate()));
+            sb.append(String.format("\n%d уровень семьи: %s, %s г. р.\n", count, top.getName(), top.getBirthDate()));
             if (top.getSpouse() != null) {
-                sb.append(String.format("Супруг старшего члена семейства: %s", top.getSpouse().getName()));
+                sb.append(String.format("Супруг : %s\n", top.getSpouse().getName()));
             }
-            sb.append("Дети старшего члена семейства: ");
-            for (T child : top.getChildren()) {
-                if (flag) sb.append(", ");
-                sb.append(child.getName());
-                flag = true;
+            if (!top.getChildren().isEmpty()) {
+                sb.append(String.format("Дети: "));
+                for (T child : top.getChildren()) {
+                    tempChildren.add(child);
+                    if (flag) sb.append(", ");
+                    sb.append(child.getName());
+                    flag = true;
+                }
             }
+        }
+        for (T child : tempChildren) {
+            sb.append(showTreeService(child, count + 1));
         }
         return sb.toString();
     }

@@ -13,7 +13,7 @@ public class Service<T> {
         Service.treeTop = treeTop;
     }
 
-    public Creature<T> getTreeTop() {
+    public Creature getTreeTop() {
         return treeTop;
 
 

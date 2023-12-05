@@ -16,17 +16,14 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
     private Human mother;
     private Human father;
     private Human spouse;
-    //TODO: Переделать в конструктор
     private List<Human> children;
-    private boolean inTree;
+    private boolean inTree = false;
 
     public Human() {
         this.children = new ArrayList<Human>();
-        boolean inTree = false;
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
-                 LocalDate deathDate, Human mother, Human father, Human spouse) {
+    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,8 +38,7 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
     }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate) {
-        this(firstName, lastName, gender, birthDate, null, null,
-                null, null);
+        this(firstName, lastName, gender, birthDate, null, null, null, null);
     }
 
     public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
@@ -63,7 +59,6 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         }
 
     }
-
 
     public boolean setFather(Human father) {
         if (this.father != null) {
@@ -100,10 +95,6 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         }
         assert this.children != null;
         this.children.add(child);
-    }
-
-    public void setInTree(boolean inTree) {
-        this.inTree = inTree;
     }
 
     LocalDate getDeathDate() {
@@ -145,7 +136,7 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
     }
 
     public boolean isInTree() {
-        return !inTree;
+        return inTree;
     }
 
     @Override
