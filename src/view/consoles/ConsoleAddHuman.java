@@ -1,13 +1,20 @@
 package view.consoles;
 
+import java.util.Scanner;
+
 import Animal.Human.Gender;
+import view.ConsoleUI;
 
 public class ConsoleAddHuman extends Consoles {
     private String name;
     private Gender gender;
     private int year, month, day, dyear, dmonth, dday;
     
-
+    public ConsoleAddHuman(ConsoleUI cons){
+        scanner = new Scanner(System.in);
+        this.cons = cons;
+    }
+    
     public void workConsole(){
         System.out.print("Введите имя человека: ");
         name = scanner.nextLine();

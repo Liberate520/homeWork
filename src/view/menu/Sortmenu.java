@@ -10,7 +10,7 @@ import view.commands.SortByChildren;
 import view.commands.SortByGender;
 import view.commands.SortByName;
 
-public class Sortmenu {
+public class Sortmenu implements Menu {
     private List<Command> commandList;
 
     public Sortmenu(ConsoleUI consoleUI) {
@@ -21,7 +21,7 @@ public class Sortmenu {
         commandList.add(new SortByChildren(consoleUI));
     }
 
-    public String sortmenu(){
+    public String workmenu(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\tВыберите метод сортировки:\n");
         for (int i = 0; i < commandList.size(); i++) {

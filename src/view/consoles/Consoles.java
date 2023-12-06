@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import view.ConsoleUI;
 
-abstract class Consoles {
+abstract class Consoles implements Iconsole {
     Scanner scanner;
     ConsoleUI cons;
 
-    abstract void workConsole();
+    public abstract void workConsole();
 }
 

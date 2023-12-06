@@ -3,7 +3,9 @@ package view;
 import presenter.Presenter;
 import view.consoles.ConsoleAddHuman;
 import view.consoles.ConsoleRelative;
+import view.consoles.Iconsole;
 import view.menu.MainMenu;
+import view.menu.Menu;
 import view.menu.Sortmenu;
 
 import java.util.Scanner;
@@ -16,17 +18,19 @@ public class ConsoleUI implements View {
     private Scanner scanner;
     private Presenter presenter;
     private boolean work;
-    private MainMenu menu;
-    private Sortmenu sortmenu;
-    private ConsoleRelative consR;
-    private ConsoleAddHuman consAdd;
+    //private MainMenu menu;
+    //private Sortmenu sortmenu;
+    private Menu maiMenu, sortMenu;
+    //private ConsoleRelative consR;
+    //private ConsoleAddHuman consAdd;
+    private Iconsole console;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         //presenter = new Presenter(this);
         work = true;
-        menu = new MainMenu(this);
-        sortmenu = new Sortmenu(this);
+        maiMenu = new MainMenu(this);
+        sortMenu = new Sortmenu(this);
     }
 
     @Override
@@ -70,13 +74,13 @@ public class ConsoleUI implements View {
     }
 
     public void addHuman() {
-        consAdd = new ConsoleAddHuman();
-        consAdd.workConsole();
+        console = new ConsoleAddHuman(this);
+        console.workConsole();
     }
 
     public void addHumanRelatives(){
-        consR = new ConsoleRelative(this);
-        consR.workConsole();
+        console = new ConsoleRelative(this);
+        console.workConsole();
     }
 
     public void saveInFile(){
@@ -115,7 +119,7 @@ public class ConsoleUI implements View {
         if (checkTextForInt(line)){
             int numCommand = Integer.parseInt(line);
             if (checkCommand(numCommand)){
-                menu.execute(numCommand);
+                maiMenu.execute(numCommand);
             }
         }
     }
@@ -125,7 +129,7 @@ public class ConsoleUI implements View {
         if (checkTextForInt(line)){
             int numCommand = Integer.parseInt(line);
             if (checkCommand(numCommand)){
-                sortmenu.execute(numCommand);
+                sortMenu.execute(numCommand);
             }
         }
     }
@@ -140,7 +144,7 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < menu.getSize()+1){
+        if (numCommand < maiMenu.getSize()+1){
             return true;
         } else {
             inputError();
@@ -149,11 +153,11 @@ public class ConsoleUI implements View {
     }
 
     private void printMenu(){
-        System.out.println(menu.menu());
+        System.out.println(maiMenu.workmenu());
     }
 
     public void sortmenu(){
-        System.out.println(sortmenu.sortmenu());
+        System.out.println(sortMenu.workmenu());
         executesort();
     }
 

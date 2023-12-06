@@ -12,7 +12,7 @@ import view.commands.GetHumanTreeInfo;
 import view.commands.SaveInFile;
 import view.commands.Sorts;
 
-public class MainMenu {
+public class MainMenu implements Menu{
     private List<Command> commandList;
 
     public MainMenu(ConsoleUI consoleUI) {
@@ -25,7 +25,7 @@ public class MainMenu {
         commandList.add(new Finish(consoleUI));
     }
 
-    public String menu(){
+    public String workmenu(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Выберите действие:\n");
         for (int i = 0; i < commandList.size(); i++) {

@@ -4,10 +4,11 @@ import Animal.Human.Gender;
 import Animal.Human.Human;
 import FamalyTree.FamalyTree;
 import FileWork.Filehundler;
+import FileWork.Writeble;
 
 public class Service {
     private FamalyTree<Human> famalyTree;
-    private Filehundler filehundler;
+    private Writeble writeble;
 
     public Service(String nameFile){
         this.famalyTree = (FamalyTree<Human>)(loadInFile(nameFile));
@@ -18,8 +19,8 @@ public class Service {
     }
 
     private Object loadInFile(String nameFile){
-        filehundler = new Filehundler();
-        return filehundler.loadInFile(nameFile);
+        writeble = new Filehundler();
+        return writeble.loadInFile(nameFile);
     }
 
     public void addHuman(String name, int year_bd, int m_bd, int day_bd, int year_dd,
@@ -32,13 +33,7 @@ public class Service {
     }
 
     public String getTreeInfo(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Список генеологического дерева:\n");
-        for(Human human : famalyTree){
-            sb.append(human);
-            sb.append("\n");
-        }
-        return sb.toString();
+        return famalyTree.getTreeInfo();
     }
 
     public void sortByName(){
@@ -59,8 +54,8 @@ public class Service {
     }
 
     public boolean saveInFile(String nameFile){
-        Filehundler filehundler = new Filehundler();
-        return filehundler.saveInFile(this.famalyTree, nameFile);
+        writeble = new Filehundler();
+        return writeble.saveInFile(this.famalyTree, nameFile);
     }
 
     public Human getHumanId (int id){

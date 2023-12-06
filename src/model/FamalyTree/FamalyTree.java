@@ -10,6 +10,7 @@ import Animal.AnimalCompByChildren;
 import Animal.AnimalCompByGender;
 import Animal.AnimalCompByName;
 import Animal.Human.Gender;
+import Animal.Human.Human;
 
 import java.util.Iterator;
 
@@ -108,4 +109,16 @@ public class FamalyTree<T extends Animal<T>> implements Serializable, Iterable<T
     public void sortByChildren(){
         listT.sort(new AnimalCompByChildren<>());
     }
+
+    public String getTreeInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Список генеологического дерева:\n");
+        for(T t : this){
+            sb.append(t);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
 }
+
