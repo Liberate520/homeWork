@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import human.сomparators.ComparatorByAge;
-
+import human.сomparators.ComparatorByName;
 
 
 public class FamilyTree
@@ -39,11 +39,21 @@ public class FamilyTree
     }
     public void sortByAge() {
         membersList.sort(new ComparatorByAge());
+
+    }
+
+    public void sortByName() {
+        membersList.sort(new ComparatorByName());
     }
 
     @Override
     public Iterator<Human> iterator() {
         return new FamilyTreeIterator(membersList);
     }
-}
 
+
+    @Override
+    public String toString() {
+    return getFamilyInfo();
+    }
+}
