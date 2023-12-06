@@ -6,11 +6,11 @@ import ru.gb.family_tree.human.Human;
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
+public class FamilyIterator<A extends TreeNode<A>> implements Iterator<Human> {
     private int index;
     private List<Human> humanList;
 
-    public HumanIterator(List<Human> humanList) {
+    public FamilyIterator(List<Human> humanList) {
         this.humanList= humanList;
     }
 

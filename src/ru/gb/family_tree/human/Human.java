@@ -1,15 +1,14 @@
 package ru.gb.family_tree.human;
 
-import org.jetbrains.annotations.NotNull;
+import ru.gb.family_tree.family_tree.TreeNode;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable,Comparable<Human> {
+public class Human implements TreeNode<Human> {
     private int humanID=1;
     private String name;
     private Gender gender;
@@ -47,12 +46,32 @@ public class Human implements Serializable,Comparable<Human> {
     public String getName(){
         return name;
     }
-    public int getHumanID(){
-        return humanID;
+
+    @Override
+    public LocalDate getDeathDate() {
+        return deathDate;
     }
-    public void setHumanID(int num){
-        this.humanID=num;
+
+    @Override
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
+
+    @Override
+    public List<Human> getParents() {
+        List<Human> parents = new ArrayList<>();
+        parents.add(this.father);
+        parents.add(this.mother);
+        return parents;
+    }
+
+    @Override
+    public List<Human> getChildrens() {
+
+        return this.childrens;
+    }
+
+
     public boolean  addChild(Human child){
         if (childrens.contains(child)) {
             return true;
@@ -60,9 +79,31 @@ public class Human implements Serializable,Comparable<Human> {
         childrens.add(child);
         return true;
     }
+
+    @Override
+    public boolean addParent(Human human) {
+        if(human.getGender()==Gender.Female){
+            this.mother=human;
+            return true;
+        }
+        else this.father=human;
+        return true;
+    }
+
     public Human getFather(){
         return father;
     }
+
+    @Override
+    public void setID(int id) {
+        this.humanID=id;
+    }
+
+    @Override
+    public int getID() {
+    return this.humanID;
+    }
+
     public Human getMother(){
         return mother;
     }
@@ -80,7 +121,7 @@ public class Human implements Serializable,Comparable<Human> {
         else res+="Не известен";
         return res;
     }
-    public String getGender(){
+    public String getGenderInfo(){
         String res="";
         if(this.gender==Gender.Male)
         {
@@ -88,6 +129,9 @@ public class Human implements Serializable,Comparable<Human> {
         }
         else res+="Женский";
         return res;
+    }
+    public Gender getGender(){
+        return this.gender;
     }
 //    public List<Human>getParents(){
 //        List<Human> parents = new ArrayList<>(2);
@@ -99,7 +143,7 @@ public class Human implements Serializable,Comparable<Human> {
 //        }
 //        return parents;
 //    }
-public String getParents(){
+public String getListParents(){
     StringBuilder sb = new StringBuilder();
     if (this.father!=null||this.mother!=null){
     if(this.father!=null){
@@ -117,7 +161,7 @@ public String getParents(){
     else sb.append("Родители не известны");
         return sb.toString();
     }
-    public String getChildrens(){
+    public String getListChildrens(){
         if(!this.childrens.isEmpty()){
             StringBuilder sb = new StringBuilder();
             for (Human child:childrens
@@ -155,7 +199,7 @@ public String getParents(){
         sb.append(", Возраст: ");
         sb.append(getAge());
         sb.append(", Пол: ");
-        sb.append(getGender());
+        sb.append(getGenderInfo());
         sb.append(", Статус: ");
         sb.append(getDeathStatus());
         sb.append(", Дата рождения: ");
@@ -177,9 +221,9 @@ public String getParents(){
         {
             sb.append("Нет");
         }
-        sb.append(getChildrens());
+        sb.append(getListChildrens());
         sb.append(", Родители: ");
-        sb.append(getParents());
+        sb.append(getListParents());
         return sb.toString();
     }
 

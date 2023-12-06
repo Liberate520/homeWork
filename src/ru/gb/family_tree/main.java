@@ -3,7 +3,7 @@ package ru.gb.family_tree;
 import ru.gb.family_tree.family_tree.FamilyTree;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
-import ru.gb.family_tree.writer.FileHandler;
+import ru.gb.family_tree.family_tree.writer.FileHandler;
 import java.time.LocalDate;
 public class main {
     public static void main(String[] args) {
@@ -28,12 +28,12 @@ public class main {
         grandpa.addChild(daddy);
 
         //  Семейное древо добавление
-        familyTree.addHumanToFamilyTree(grandpa);
-        familyTree.addHumanToFamilyTree(daddy);
-        familyTree.addHumanToFamilyTree(father);
-        familyTree.addHumanToFamilyTree(mother);
-        familyTree.addHumanToFamilyTree(murat);
-        familyTree.addHumanToFamilyTree(gulmira);
+        familyTree.addToFamilyTree(grandpa);
+        familyTree.addToFamilyTree(daddy);
+        familyTree.addToFamilyTree(father);
+        familyTree.addToFamilyTree(mother);
+        familyTree.addToFamilyTree(murat);
+        familyTree.addToFamilyTree(gulmira);
 
         // Вывод информации о древе
         printFamilyTree(familyTree);
