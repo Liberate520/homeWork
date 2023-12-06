@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private int humanId;
     private List<Human> HumanList;
 
@@ -62,6 +63,33 @@ public class FamilyTree {
         }
     }
 
+    public boolean setDivorce(int humanId1, int humanId2){
+        if(checkId(humanId1) && checkId(humanId2)){
+            Human human1 = getById(humanId1);
+            Human human2 = getById(humanId2);
+            return setDivorce(human1, human2);
+        }
+        return false;
+    }
+
+    public boolean setDivorce(Human human1, Human human2){
+        if(human1.getPartner() != null && human2.getPartner() != null){
+            human1.setPartner(null);
+            human2.setPartner(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean remove(int humanId){
+        if(checkId(humanId)){
+            Human e = getById(humanId);
+            return HumanList.remove(e);
+        }
+        return false;
+    }
+
     private boolean checkId(int id){
         return  id < humanId && id >= 0;
     }
@@ -83,6 +111,7 @@ public class FamilyTree {
         sb.append("В дереве ");
         sb.append(HumanList.size());
         sb.append(" объектов: ");
+        sb.append("\n");
         for(Human human : HumanList){
             sb.append(human);
             sb.append("\n");
