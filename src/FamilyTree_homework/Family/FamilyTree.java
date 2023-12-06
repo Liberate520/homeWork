@@ -9,30 +9,30 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree implements Serializable{
+public class FamilyTree<E extends TreeNode<E>> implements Serializable,Iterable<E>{
     private long humansId;
-    private List<Human> humanList;
+    private List<E> humanList;
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
 
     public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort((Comparator<? super E>) new HumanComparatorByName());
     }
     public void sortByBirthday(){
-        humanList.sort(new HumanComparatorByBirthday());
+        humanList.sort((Comparator<? super E>) new HumanComparatorByBirthday());
     }
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
 
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human == null) {
             return false;
         }
@@ -47,14 +47,14 @@ public class FamilyTree implements Serializable{
         }
         return false;
     }
-    private void addToParents(Human human){
-        for (Human parent: human.getParents()){
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human){
-        for (Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
             child.addParent(human);
         }
     }
@@ -68,7 +68,7 @@ public class FamilyTree implements Serializable{
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов: \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             sb.append(human);
             sb.append("\n");
         }

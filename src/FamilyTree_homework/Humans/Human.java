@@ -2,12 +2,14 @@ package FamilyTree_homework.Humans;
 
 
 
+import FamilyTree_homework.Family.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable,Comparable<Human> {
+public class Human implements Serializable,Comparable<Human>, TreeNode<Human> {
 
     private long id;
     private String name;
@@ -179,5 +181,6 @@ public class Human implements Serializable,Comparable<Human> {
     public int compareTo(Human o) {
         return name.compareTo(o.getName());
     }
+
 
 }
