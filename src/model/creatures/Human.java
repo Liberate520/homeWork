@@ -1,4 +1,4 @@
-package creatures;
+package model.creatures;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,7 +23,8 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         this.children = new ArrayList<Human>();
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father, Human spouse) {
+    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
+                 LocalDate deathDate, Human mother, Human father, Human spouse) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;

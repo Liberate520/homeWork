@@ -1,8 +1,8 @@
 package main;
 
-import family_tree.FamilyTree;
-import creatures.Gender;
-import creatures.Human;
+import model.family_tree.FamilyTree;
+import model.creatures.Gender;
+import model.creatures.Human;
 
 import java.time.LocalDate;
 

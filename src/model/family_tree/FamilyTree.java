@@ -1,8 +1,8 @@
-package family_tree;
+package model.family_tree;
 
-import creatures.Creature;
-import creatures.CreatureComporatorByAge;
-import creatures.CreatureComporatorByName;
+import model.creatures.Creature;
+import model.creatures.CreatureComporatorByAge;
+import model.creatures.CreatureComporatorByName;
 import service.Service;
 
 import java.io.Serializable;
@@ -19,9 +19,13 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     }
 
     public Creature getTop() {
-        Service<T> service = new Service<T>();
+        Service service = new Service();
         topOfTree(familyTree.getFirst());
         return service.getTreeTop();
+    }
+
+    public List<T> getFamilyTree() {
+        return familyTree;
     }
 
     public boolean setSpouse(T firstSpouce, T secondSpouce) {
@@ -138,7 +142,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
 
     public String showTree() {
-        Service<T> service = new Service<T>();
+        Service service = new Service();
         topOfTree(familyTree.getFirst());
         return showTreeService((T) service.getTreeTop(), 1);
     }
@@ -190,6 +194,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     public Iterator<T> iterator() {
         return new TreeIterator<T>(familyTree);
     }
+
 
 }
 
