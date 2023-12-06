@@ -7,7 +7,12 @@ import FamilyTree_homework.Family.TreeNode;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 public class Human implements Serializable,Comparable<Human>, TreeNode<Human> {
 
@@ -167,6 +172,11 @@ public class Human implements Serializable,Comparable<Human>, TreeNode<Human> {
     }
 
     @Override
+    public int compare(Human o1, Human o2) {
+        return 0;
+    }
+
+    @Override
     public  boolean equals(Object obj){
         if (this == obj) {
             return true;
@@ -176,6 +186,41 @@ public class Human implements Serializable,Comparable<Human>, TreeNode<Human> {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public Comparator<Human> reversed() {
+        return TreeNode.super.reversed();
+    }
+
+    @Override
+    public Comparator<Human> thenComparing(Comparator<? super Human> other) {
+        return TreeNode.super.thenComparing(other);
+    }
+
+    @Override
+    public <U> Comparator<Human> thenComparing(Function<? super Human, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {
+        return TreeNode.super.thenComparing(keyExtractor, keyComparator);
+    }
+
+    @Override
+    public <U extends Comparable<? super U>> Comparator<Human> thenComparing(Function<? super Human, ? extends U> keyExtractor) {
+        return TreeNode.super.thenComparing(keyExtractor);
+    }
+
+    @Override
+    public Comparator<Human> thenComparingInt(ToIntFunction<? super Human> keyExtractor) {
+        return TreeNode.super.thenComparingInt(keyExtractor);
+    }
+
+    @Override
+    public Comparator<Human> thenComparingLong(ToLongFunction<? super Human> keyExtractor) {
+        return TreeNode.super.thenComparingLong(keyExtractor);
+    }
+
+    @Override
+    public Comparator<Human> thenComparingDouble(ToDoubleFunction<? super Human> keyExtractor) {
+        return TreeNode.super.thenComparingDouble(keyExtractor);
     }
 
     public int compareTo(Human o) {

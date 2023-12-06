@@ -28,7 +28,7 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable,Iterable<
         humanList.sort((Comparator<? super E>) new HumanComparatorByBirthday());
     }
     public Iterator<E> iterator() {
-        return new HumanIterator(humanList);
+        return new HumanIterator<>(humanList);
     }
 
 

@@ -2,10 +2,11 @@ package FamilyTree_homework.Family;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public interface TreeNode<T> extends Serializable {
+public interface TreeNode<T> extends Serializable, Comparator<T> {
     void setId(long id);
     long getId();
     T getFather();
