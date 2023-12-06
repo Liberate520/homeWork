@@ -1,28 +1,28 @@
 package family_tree.service;
 
 import family_tree.family.FamilyTree;
-import family_tree.human.Human;
+import family_tree.family.TreeNode;
 
-public class Service {
+public class Service<T extends TreeNode<T>> {
 
     public Service() {
     }
 
-    public String getHumanListInfo(FamilyTree tree) {
+    public String getHumanListInfo(FamilyTree<T> tree) {
         StringBuilder sb = new StringBuilder();
         sb.append("Список членов семьи:\n");
-        for (Human human : tree) {
+        for (T human : tree) {
             sb.append(human);
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public void sortByName(FamilyTree tree){
+    public void sortByName(FamilyTree<T> tree){
         tree.sortByName();
     }
 
-    public void sortByAge(FamilyTree tree){
+    public void sortByAge(FamilyTree<T> tree){
         tree.sortByAge();
     }
 }

@@ -11,14 +11,14 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        Service service = new Service();
+        Service<Human> service = new Service<>();
 
         System.out.println("Дерево до сохранения в файл:\n");
         System.out.println(service.getHumanListInfo(testTree()));
         save(testTree());
 
         System.out.println("Дерево после выгрузки в из файла:\n");
-        FamilyTree savedTree = download();
+        FamilyTree<Human> savedTree = download();
         System.out.println(service.getHumanListInfo(savedTree));
 
         service.sortByName(savedTree);
@@ -32,21 +32,21 @@ public class Main {
         save(savedTree);
     }
 
-    private static void save(FamilyTree tree) {
+    private static void save(FamilyTree<Human> tree) {
         String filePath = "src/writer/tree";
         FileHandler fh = new FileHandler();
         System.out.printf("Данные успешно сохранены в файл? %b\n", fh.write(tree, filePath));
     }
 
-    private static FamilyTree download() {
+    private static FamilyTree<Human> download() {
         String filePath = "src/writer/tree";
         FileHandler fh = new FileHandler();
         return (FamilyTree) fh.read(filePath);
     }
 
-    static FamilyTree testTree() {
+    static FamilyTree<Human> testTree() {
 
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Human> familyTree = new FamilyTree<>();
 
         Human human1 = new Human(Gender.Male, "Ivan", "Ivanov");
         Human human2 = new Human(Gender.Female, "Maria", "Ivanova");
