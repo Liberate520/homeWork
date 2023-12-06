@@ -2,7 +2,7 @@ package ru.gb.family_tree_homework.file_handler;
 
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable {
     @Override
     public boolean save(Serializable serializable, String path) {
         try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path))){

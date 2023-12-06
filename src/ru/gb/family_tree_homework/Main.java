@@ -10,11 +10,11 @@ import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = tree();
+        FamilyTree<Human> familyTree = tree();
         save(familyTree);
         System.out.println(familyTree);
 
-        FamilyTree newTree = load();
+        FamilyTree<Human> newTree = load();
         System.out.println(newTree);
         Iterator<Human> treeIterator = newTree.iterator();
         System.out.println(treeIterator.next());
@@ -27,20 +27,20 @@ public class Main {
         System.out.println(newTree);
     }
 
-    private static FamilyTree load() {
-        String path = "src/ru/gb/family_tree_homework/file_handler/tree.txt";
+    private static FamilyTree<Human> load() {
+        String path = "src/ru/gb/family_tree_homework/file_handler/human_tree_1.txt";
         FileHandler fileHandler = new FileHandler();
-        return (FamilyTree) fileHandler.read(path);
+        return (FamilyTree<Human>) fileHandler.read(path);
     }
 
-    private static void save(FamilyTree familyTree){
-        String path = "src/ru/gb/family_tree_homework/file_handler/tree.txt";
+    private static void save(FamilyTree<Human> familyTree){
+        String path = "src/ru/gb/family_tree_homework/file_handler/human_tree_1.txt";
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(familyTree, path);
     }
 
-    static FamilyTree tree(){
-        FamilyTree familyTree = new FamilyTree();
+    static FamilyTree<Human> tree(){
+        FamilyTree<Human> familyTree = new FamilyTree<>();
 
         Human son = new Human("Nikita", Gender.Male,LocalDate.of(2001, 5, 11));
         Human mother = new Human("Anna", Gender.Female, LocalDate.of(1978, 12, 7));

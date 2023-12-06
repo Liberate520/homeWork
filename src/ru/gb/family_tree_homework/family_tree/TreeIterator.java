@@ -1,15 +1,13 @@
 package ru.gb.family_tree_homework.family_tree;
 
-import ru.gb.family_tree_homework.human.Human;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human> {
-    private List<Human> familyTree;
+public class TreeIterator<E> implements Iterator<E> {
+    private List<E> familyTree;
     private int index;
 
-    public HumanIterator(List<Human> familyTree){
+    public TreeIterator(List<E> familyTree){
         this.familyTree = familyTree;
         this.index = 0;
     }
@@ -20,11 +18,11 @@ public class HumanIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next(){
+    public E next(){
         if(hasNext()){
-            Human human = familyTree.get(index);
+            E member = familyTree.get(index);
             index++;
-            return human;
+            return member;
         } else {
             return null;
         }

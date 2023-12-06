@@ -1,12 +1,13 @@
 package ru.gb.family_tree_homework.human;
 
-import java.io.Serializable;
+import ru.gb.family_tree_homework.family_tree.TreeNode;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements TreeNode<Human> {
     private long id;
     private Gender gender;
     private LocalDate birthDate;
@@ -92,12 +93,13 @@ public class Human implements Serializable {
     public void setMother(Human mother){
         this.mother = mother;
     }
-    public void addParent(Human parent){
+    public boolean addParent(Human parent){
         if(parent.getGender().equals(Gender.Male)){
             setFather(parent);
         } else {
             setMother(parent);
         }
+        return true;
     }
 
     public List<Human> getParents(){
