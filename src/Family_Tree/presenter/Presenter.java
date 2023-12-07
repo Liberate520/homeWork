@@ -14,24 +14,32 @@ public class Presenter {
         service = new Service();
     }
 
-    public void add(String name, LocalDate birthday, Gender gender) {
+    public boolean add(String name, LocalDate birthday, Gender gender) {
         service.add(name, birthday, gender);
-        getStudentListInfo();
+        return true;
     }
 
-    public void getStudentListInfo() {
-        String answer = service.getHumanListInfo();
+    public void getHumanListInfo() {
+        String answer = view.getHumanListInfo();
         view.answer(answer);
     }
 
     public void sortByName() {
         service.sortByName();
-        service.getHumanListInfo();
+        view.getHumanListInfo();
     }
 
     public void sortByBirthday() {
         service.sortByBirthday();
-        service.getHumanListInfo();
+        view.getHumanListInfo();
+    }
+
+    public boolean addToParents (int humanId, int parentId){
+        if (service.checkId(humanId) & service.checkId(parentId)){
+            service.addToParents(humanId,parentId);
+            return true;
+        }
+        return false;
     }
 
     public boolean read(String filePath){
@@ -41,4 +49,6 @@ public class Presenter {
     public boolean save(String fileName){
         return service.save(fileName);
     }
+
+
 }

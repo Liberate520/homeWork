@@ -4,16 +4,15 @@ import Family_Tree.model.Writer.FileHandler;
 import Family_Tree.model.Human.Human;
 import Family_Tree.model.Human.Gender;
 import Family_Tree.model.Tree.FamilyTree;
+import Family_Tree.model.Writer.Save;
+import Family_Tree.model.Writer.Writable;
 
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> tree;
-    private FileHandler<Human> storage = new FileHandler();
-
-    public Service() {
-        tree = new FamilyTree<>();
-    }
+    private Writable<FamilyTree<Human>> storage;
+    private int id;
 
     public boolean add(String name, LocalDate birthday, Gender gender) {
         Human human = new Human(name, birthday, gender);
@@ -21,15 +20,6 @@ public class Service {
         return true;
     }
 
-    public String getHumanListInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Список родственников: \n");
-        for (Human human: tree){
-            stringBuilder.append(human);
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
 
     public void sortByName(){
         tree.sortByName();
@@ -52,19 +42,13 @@ public class Service {
 
     }
 
-//    public boolean setWedding(Human human1, Human human2) {
-//        if (human1.getSpouse() == null && human2.getSpouse() == null) {
-//            human1.setSpouse(human2);
-//            human2.setSpouse(human1);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    public boolean checkId(int id){
+        return tree.checkId(id);
+    }
 
-    @Override
-    public String toString(){
-        return getHumanListInfo();
+    public void addToParents(int humanId, int parentId) {
+        Human human = tree.getId(id);
+        human.getParents();
     }
 
 }

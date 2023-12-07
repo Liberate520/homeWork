@@ -7,12 +7,17 @@ import Family_Tree.model.Writer.FileHandler;
 import Family_Tree.view.ConsoleUI;
 import Family_Tree.view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
-        View view = new ConsoleUI();
-        view.start();
+//    public static void main(String[] args) {
+//        View view = new ConsoleUI();
+//        view.start();
+//    }
+    public static void main(String[] args) throws IOException {
+        ConsoleUI app = new ConsoleUI();
+        app.start();
     }
 //        FamilyTree tree = wholeTree();
 ////        FamilyTree tree=load();

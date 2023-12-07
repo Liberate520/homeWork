@@ -1,14 +1,19 @@
 package Family_Tree.view.Commands;
 
+import Family_Tree.view.ConsoleUI;
 import Family_Tree.view.View;
 
 public class Add extends Command{
 
-    public Add(View view) {
-        super("Добавить человека", view);
+    public Add(ConsoleUI consoleUI) {
+        super(consoleUI);
+        description = "Добавить человека";
     }
 
-    public void execute(){
-        getView().add();
+    @Override
+    public void execute() {
+        consoleUI.add();
     }
+
+
 }

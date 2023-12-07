@@ -4,7 +4,7 @@ public interface View {
     void start();
     void answer(String answer);
     void add();
-    void getHumanListInfo();
+    String getHumanListInfo();
     void sortByName();
     void sortByBirthday();
     void finish();

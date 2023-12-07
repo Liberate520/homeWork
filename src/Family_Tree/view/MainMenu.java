@@ -8,13 +8,12 @@ import java.util.List;
 public class MainMenu {
     private List<Command> commandList;
 
-    public MainMenu(View view) {
-        commandList = new ArrayList<>();
-        commandList.add(new Add(view));
-        commandList.add(new GetHumanListInfo(view));
-        commandList.add(new SortByName(view));
-        commandList.add(new SortByBirthday(view));
-        commandList.add(new Finish(view));
+    public MainMenu(ConsoleUI consoleUI) {
+        commandList.add(new Add(consoleUI));
+        commandList.add(new GetHumanListInfo(consoleUI));
+        commandList.add(new SortByName(consoleUI));
+        commandList.add(new SortByBirthday(consoleUI));
+        commandList.add(new Finish(consoleUI));
     }
 
     public String print(){

@@ -51,8 +51,9 @@ public class ConsoleUI implements View{
         presenter.sortByName();
     }
 
-    public void getHumanListInfo() {
-        presenter.getStudentListInfo();
+    public String getHumanListInfo() {
+        presenter.getHumanListInfo();
+        return null;
     }
 
     public void add() {
@@ -74,4 +75,13 @@ public class ConsoleUI implements View{
     public void answer(String answer) {
         System.out.println(answer);
     }
+
+    public void addToParents() {
+        System.out.println("Укажите id человека, для которого надо указать родителя");
+        int humanId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Укажите id родителя");
+        int parentId = Integer.parseInt(scanner.nextLine());
+        presenter.addToParents(humanId, parentId);
+    }
+
 }
