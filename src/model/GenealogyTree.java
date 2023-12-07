@@ -1,33 +1,30 @@
 package model;
-import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator; 
+import java.util.List;
 import java.util.Map;
 
-import io.FileWritableReadable;
-
-import java.util.Iterator;
-import java.util.List;
-
-public class GenealogyTree implements FileWritableReadable, Iterable<Person>  {
-    private Map<String, Person> people;
+public class GenealogyTree <T extends Person> implements Iterable<T> {
+    private Map<String, T> people;
 
     public GenealogyTree() {
         this.people = new HashMap<>();
     }
 
-    public void addPerson(String key, Person person) {
+    public void addPerson(String key, T person) {
         people.put(key, person);
     }
 
-    public Person getPerson(String key) {
+    public T getPerson(String key) {
         return people.get(key);
     }
 
     public void addChild(String parentKey, String childKey) {
-        Person parent = people.get(parentKey);
-        Person child = people.get(childKey);
+        T parent = people.get(parentKey);
+        T child = people.get(childKey);
         if (parent != null && child != null) {
             parent.addChild(child);
             if (child.getGender().equals("male")) {
@@ -38,35 +35,19 @@ public class GenealogyTree implements FileWritableReadable, Iterable<Person>  {
         }
     }
 
-     public void writeToFile(String filename, GenealogyTree genealogyTree) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(genealogyTree);
-        }
-    }
-
     @Override
-    public GenealogyTree readFromFile(String filename) throws IOException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            return (GenealogyTree) ois.readObject();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public Iterator<Person> iterator() {
+    public Iterator<T> iterator() {
         return people.values().iterator();
     }
 
-    public List<Person> sortByName() {
-        List<Person> sortedList = new ArrayList<>(people.values());
+    public List<T> sortByName() {
+        List<T> sortedList = new ArrayList<>(people.values());
         sortedList.sort(Comparator.comparing(Person::getFirstName));
         return sortedList;
     }
 
-    public List<Person> sortByDateOfBirth() {
-        List<Person> sortedList = new ArrayList<>(people.values());
+    public List<T> sortByDateOfBirth() {
+        List<T> sortedList = new ArrayList<>(people.values());
         sortedList.sort(Comparator.comparing(Person::getDateOfBirth));
         return sortedList;
     }
