@@ -2,7 +2,9 @@ package ru.gb.service;
 
 import ru.gb.node.FamilyTree;
 import ru.gb.person.Person;
+import ru.gb.writable.FileHandlerForTree;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,5 +76,14 @@ public class Service {
 
     public List<FamilyTree> getFamilyTreesList() {
         return familyTreesList;
+    }
+
+    public void saveTrees(FileHandlerForTree fhTree) throws IOException, ClassNotFoundException {
+        fhTree = new FileHandlerForTree(this.familyTreesList);
+        fhTree.save();
+    }
+
+    public List<FamilyTree> loadTrees(FileHandlerForTree fhTree) throws IOException, ClassNotFoundException {
+        return (List<FamilyTree>) fhTree.load();
     }
 }

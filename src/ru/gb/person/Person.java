@@ -1,10 +1,11 @@
 package ru.gb.person;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private String name;
     private Gender gender;
     private LocalDate birthDate;
@@ -13,7 +14,7 @@ public class Person {
     private List<Person> children;
 
     public Person(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Person father,
-                 Person mother) {
+                  Person mother) {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -35,7 +36,7 @@ public class Person {
     }
 
     public Person(String name, Gender gender, LocalDate birthDate, Person father,
-                 Person mother) {
+                  Person mother) {
         this(name,gender, birthDate, null, father, mother);
     }
 
@@ -176,4 +177,6 @@ public class Person {
     public String toString() {
         return getInfo();
     }
+
+    //TODO: если человек умер, указывать это при выводе
 }
