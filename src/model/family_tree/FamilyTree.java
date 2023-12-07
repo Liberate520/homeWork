@@ -140,7 +140,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         familyTree.sort(new CreatureComporatorByAge());
     }
 
-
+//TODO: Перенести все методы связанные с отображением дерева через HUMAN в Service
     public String showTree() {
         Service service = new Service();
         topOfTree(familyTree.getFirst());
