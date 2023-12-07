@@ -1,26 +1,42 @@
-import java.util.List;
+import writer.FileHandler;
+
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        // Создание персон
-        Person person1 = new Person("John");
-        Person person2 = new Person("Alice");
-        Person person3 = new Person("Bob");
-        Person person4 = new Person("Eve");
 
-        // Связывание персон в генеалогическое древо
-        person1.addChild(person2);
-        person1.addChild(person3);
-        person2.addChild(person4);
+        //FamilyTree tree = testTree();
+        FamilyTree tree = load();
+        System.out.println(tree);
 
-        // Создание генеалогического древа с корневым персоном
-        FamilyTree familyTree = new FamilyTree(person1);
+        //save(tree);
+    }
 
-        // Исследование - получение всех детей выбранного человека
-        List<Person> allChildren = Research.getAllChildren(person1);
-        System.out.println("Все дети выбранного человека:");
-        for (Person child : allChildren) {
-            System.out.println(child.getName());
-        }
+    static FamilyTree testTree(){
+        FamilyTree tree = new FamilyTree();
+
+        Human Elena = new Human("Elena", Gender.Female, LocalDate.of(1967, 4, 22));
+        Human Rustam = new Human("Rustam", Gender.Male, LocalDate.of(1967,6,5));
+
+        tree.add(Rustam);
+        tree.add(Elena);
+        tree.setWedding(Rustam, Elena);
+
+        Human Timur = new Human("Timur", Gender.Male, LocalDate.of(1997, 9, 30), Elena, Rustam);
+        tree.add(Timur);
+
+        return tree;
+    }
+
+    static void save(FamilyTree tree){
+        String fileName = "src/writer/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(tree, fileName);
+    }
+
+    static FamilyTree load(){
+        String fileName = "src/writer/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.load(fileName);
     }
 }
