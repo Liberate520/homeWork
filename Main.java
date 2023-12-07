@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        GenealogyTree genealogyTree = new GenealogyTree();
-
+        GenealogyTree<Person> genealogyTree = new GenealogyTree<>();
         
         // Creating instances of Person to represent individuals in the genealogical tree
         Person person1 = new Person("Someone 1", "xxx", "1990-01-01", "male");
@@ -35,8 +34,8 @@ public class Main {
         // Reading the genealogical tree from the serialized file
         try {
             FileHandler fileHandler = new FileHandler();
-            GenealogyTree loadedTree = fileHandler.readFromFile("genealogyTree.ser");
-
+            GenealogyTree<Person> loadedTree = fileHandler.readFromFile("genealogyTree.ser");
+        
             // Displaying information about people in the loaded genealogical tree
             System.out.println("People in the loaded genealogy tree:");
             for (Person person : loadedTree) {
