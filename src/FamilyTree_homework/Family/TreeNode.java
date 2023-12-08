@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-public interface TreeNode<T> extends Serializable, Comparator<T> {
+public interface TreeNode<T>  {
     void setId(long id);
     long getId();
     T getFather();

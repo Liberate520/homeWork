@@ -22,10 +22,10 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable,Iterable<
 
 
     public void sortByName(){
-        humanList.sort((Comparator<? super E>) new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName<>());
     }
     public void sortByBirthday(){
-        humanList.sort((Comparator<? super E>) new HumanComparatorByBirthday());
+        humanList.sort(new HumanComparatorByBirthday<>());
     }
     public Iterator<E> iterator() {
         return new HumanIterator<>(humanList);

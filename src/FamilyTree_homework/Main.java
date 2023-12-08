@@ -42,10 +42,10 @@ public class Main {
         grandMother.addChild(vasya);
         tree.add(grandMother);
 
-        tree.sortByName();
+        tree.sortByBirthday();
         System.out.println(tree.getInfo());
 
-        tree.sortByBirthday();
+        tree.sortByName();
         System.out.println(tree.getInfo());
 
         return tree;
