@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Реализовать метод сохранения
 public class Service {
     private static Creature treeTop;
     private static List<Creature> notInTree;
