@@ -10,4 +10,9 @@ public interface View {
     void sortByAge();
     void sortByName();
     void finish();
+    void printAnswer(String answer);
+    void sortById();
+    void setParent();
+    void readFromFile();
+    void saveFromFile();
 }

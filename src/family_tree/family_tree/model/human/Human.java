@@ -8,7 +8,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements GeneralTypeTree<Human> {
+public class Human implements Comparable<Human>, GeneralTypeTree {
     private long id;
     private String name;
     private Gender gender;
@@ -17,6 +17,7 @@ public class Human implements GeneralTypeTree<Human> {
     private Human mother;
     private Human father;
     private List<Human> children;
+    private List<Human> parents;
     private Human spouse;  // супруг
 
     public Human(String name, Gender gender, LocalDate birthDate,
@@ -39,6 +40,20 @@ public class Human implements GeneralTypeTree<Human> {
                  Human father, Human mother){
         this(name, gender, birthDate, null, father, mother);
     }
+
+    public Human(String name,LocalDate birthDate, LocalDate deathDate,  Gender gender){
+        this.name=name;
+        this.birthDate= birthDate;
+        this.deathDate=deathDate;
+        this.gender=gender;
+        parents = new ArrayList<>();
+        children = new ArrayList<>();
+    }
+    public Human(String name, LocalDate birthDate, Gender gender ){
+
+        this( name, birthDate, null, gender);
+    }
+
 
 // конструктор HumanBuilder для new Human(maxId++, name, age)
 //    public Human(int Id, String name, int age) {
@@ -64,6 +79,17 @@ public class Human implements GeneralTypeTree<Human> {
     public void setMother(Human mother) {this.mother = mother; }
     public void setFather(Human father) {this.father = father; }
     public Human getMother() {return mother; }
+
+    @Override
+    public boolean addChild(Object human) {
+        return false;
+    }
+
+    @Override
+    public boolean addParent(Object human) {
+        return false;
+    }
+
     public Human getFather() {return father; }
 //вспомогательный метод для дальнейшей возможной работы в цикле (получаем список родителей)
     public List<Human> getParents(){
@@ -90,6 +116,12 @@ public class Human implements GeneralTypeTree<Human> {
     }
     public void setSpouse(Human spouse) { this.spouse = spouse; }
     public Human getSpouse() { return spouse; }
+
+    @Override
+    public void setSpouse(Object human) {
+
+    }
+
     public String getName() { return name; }
 
     public long getId(){ return id; }
@@ -177,6 +209,12 @@ public class Human implements GeneralTypeTree<Human> {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.name); // ?
+//        return 0;
     }
 
 // ????

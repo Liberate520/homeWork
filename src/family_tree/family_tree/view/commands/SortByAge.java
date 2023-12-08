@@ -1,10 +1,10 @@
 package family_tree.family_tree.view.commands;
 
-import family_tree.family_tree.view.View;
+import family_tree.family_tree.view.ConsoleUI;
 
 public class SortByAge extends Command {
 
-    public SortByAge(View view) {
+    public SortByAge(ConsoleUI view) {
         super("Отсортировать по возрасту", view);
     }
 
