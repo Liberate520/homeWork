@@ -3,10 +3,11 @@ package ru.gb.family_tree;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Human> familyTreeList;
 
     //конструктор
@@ -44,9 +45,9 @@ public class FamilyTree {
     //проверка на то кем является человек - сыном или дочерью
     public String getDescendant(Human human){
         if (human.getGender().equals(Gender.Male)){
-            return "сын";
+            return "son";
         }
-        return "дочь";
+        return "daughter";
     }
 
     //выдача человека со всеми детьми

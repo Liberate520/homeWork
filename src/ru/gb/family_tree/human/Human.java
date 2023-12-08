@@ -1,34 +1,26 @@
 package ru.gb.family_tree.human;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Human {
-    public int ID; //уникальный идентификатор
+public class Human implements Serializable {
+    private int ID; //уникальный идентификатор
     private String FIO;
     private Gender gender;
     private LocalDate birthDate, deathDate;
     private Human father, mother;
-    ArrayList<Human> children; //List подчеркивается красным почему-то
+    private ArrayList<Human> children; //List подчеркивается красным почему-то
 
     private static int counter = 0;//счетчик на самом классе
-
-    @Override
-    public String toString(){
-        if (deathDate != null){
-            return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", дата смерти: " + deathDate;
-        }
-        return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", жив(а)";
-    }
-
-
-
-
 
     //инициализатор
     {
         ID = ++counter;
     }
+
+
+
 
     //конструкторы
 
@@ -41,12 +33,12 @@ public class Human {
         this.birthDate = birthDate;
     }
 
-    public Human(String FIO, Gender gender, LocalDate birthDate, LocalDate deathDate) {
-        this.FIO = FIO;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.deathDate = deathDate;
-    }
+//    public Human(String FIO, Gender gender, LocalDate birthDate, LocalDate deathDate) {
+//        this.FIO = FIO;
+//        this.gender = gender;
+//        this.birthDate = birthDate;
+//        this.deathDate = deathDate;
+//    }
 
 //    public Human(String FIO, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father) {
 //        this.FIO = FIO;
@@ -64,6 +56,15 @@ public class Human {
 //        this.father = father;
 //        this.mother = mother;
 //    }
+
+    @Override
+    public String toString(){
+        if (deathDate != null){
+            return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", дата смерти: " + deathDate;
+        }
+        return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", жив(а)";
+    }
+
 
 
     //геттеры и сеттеры
