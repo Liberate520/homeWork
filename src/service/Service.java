@@ -28,6 +28,7 @@ public class Service {
         return treeTop;
     }
 
+    //TODO: Перенести List notinInTree в FamilyTree
     public boolean addHuman(String firstName, String lastName, Gender gender,
                             LocalDate birthDate) {
         Creature human = new Human(firstName, lastName, gender, birthDate);
