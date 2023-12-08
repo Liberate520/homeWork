@@ -11,6 +11,7 @@ public class FileHandler implements Writeble{
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
                 objectOutputStream.writeObject(serializable);
                 //objectOutputStream.close();
+                System.out.println("Family tree saved");
                 return true;
             }
             catch (Exception e) {
@@ -22,6 +23,7 @@ public class FileHandler implements Writeble{
         public Object read(String path){
             try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path)))
             {
+                System.out.println("Family tree loaded");
                 return objectInputStream.readObject();
                 //objectInputStream.close();
             }
