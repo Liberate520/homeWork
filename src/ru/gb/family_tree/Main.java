@@ -11,15 +11,15 @@ public class Main {
     public static void main(String[] args) {
         FamilyTree tree = testTree();
 //        FamilyTree tree = load();
-//        System.out.println(tree);
+        System.out.println(tree);
 
 //        save(tree);
 
-        System.out.println(tree.getInfo());
-        tree.sortByName();
-        System.out.println(tree.getInfo());
-        tree.sortByDate();
-        System.out.println(tree.getInfo());
+//        System.out.println(tree.getInfo());
+//        tree.sortByName();
+//        System.out.println(tree.getInfo());
+//        tree.sortByDate();
+//        System.out.println(tree.getInfo());
     }
 
     private static FamilyTree load() {
