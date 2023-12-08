@@ -10,11 +10,10 @@ import human.сomparators.ComparatorByAge;
 import human.сomparators.ComparatorByName;
 
 
-public class FamilyTree
-        implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
     private int id;
     private String family;
-    private List<Human> membersList;
+    private List<E> membersList;
     private int memberId = 1;
 
 
@@ -23,7 +22,7 @@ public class FamilyTree
         membersList = new ArrayList<>();
     }
 
-    public void addMembers(Human human) {
+    public void addMembers(E human) {
         human.setId(memberId++);
         membersList.add(human);
     }
@@ -31,24 +30,24 @@ public class FamilyTree
     public String getFamilyInfo(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Список родословной:\n");
-        for (Human human: membersList){
+        for (E human: membersList){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
     public void sortByAge() {
-        membersList.sort(new ComparatorByAge());
+        membersList.sort(new ComparatorByAge<>());
 
     }
 
     public void sortByName() {
-        membersList.sort(new ComparatorByName());
+        membersList.sort(new ComparatorByName<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(membersList);
+    public Iterator<E> iterator() {
+        return new FamilyTreeIterator<>(membersList);
     }
 
 

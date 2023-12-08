@@ -53,10 +53,10 @@ public class Main {
 //        System.out.println(sister.getParents());
 
         System.out.println(familyTree);
-        familyTree.sortByAge();
-        System.out.println(familyTree);
-        familyTree.sortByName();
-        System.out.println(familyTree);
+//        familyTree.sortByAge();
+//        System.out.println(familyTree);
+//        familyTree.sortByName();
+//        System.out.println(familyTree);
         save(familyTree);
     }
 }
