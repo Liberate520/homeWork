@@ -12,9 +12,11 @@ public class Human implements Serializable {
     private Gender gender;
     private Human mother, father;
     private List<Human> child;
-    private final LocalDate birthDay;
+    private LocalDate birthDay;
     private LocalDate deathDay;
 
+    public Human() {
+    }
 
     public Human(String name, Gender gender, LocalDate birthDay) {
         id = -1;
@@ -114,15 +116,6 @@ public class Human implements Serializable {
         }
         return false;
     }
-
-//    public boolean addParants(Human parents){
-//        if(parents.getGender().equals(Gender.Mail)){
-//            setFather(parents);
-//        } else {
-//            setMother(parents);
-//        }
-//        return true;
-//    }
 
     private int getPeriod(LocalDate birthDay,LocalDate deathDay){
         Period diff = Period.between(birthDay,deathDay);
