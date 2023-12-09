@@ -1,13 +1,14 @@
 package humans;
 
-import java.io.Serializable;
+import family_tree.FamilyTreeItem;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Human implements Serializable {
+public class Human implements FamilyTreeItem<Human> {
     private Integer id;
     private String name;
     private Gender gender;
@@ -76,7 +77,7 @@ public class Human implements Serializable {
         return dateDeath;
     }
 
-    public Integer getAgeHuman() {
+    public Integer getAge() {
         return setAgeHuman();
     }
 
@@ -178,7 +179,7 @@ public class Human implements Serializable {
                 .append(", birth date: ")
                 .append(getDateBirthday())
                 .append(", age: ")
-                .append(getAgeHuman())
+                .append(getAge())
                 .append(", status: ")
                 .append(liveStatus)
                 .append(", ")
