@@ -9,65 +9,57 @@ import java.util.*;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree<T extends HumanInterface<T>> implements Serializable, Iterable<Human> {
+public class FamilyTree<T extends HumanInterface<T>> implements Serializable, Iterable<T> {
 
     private static final long serialVersionUID = 1L;
 
     private long id;
 
-    private List<Human> humanList;
+    private List<T> entityList;
 
-    public List<Human> getHumanList() {
-        return humanList;
+    public List<T> getHumanList() {
+        return entityList;
     }
 
     public FamilyTree() {
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> humanList) {
-        this.humanList = humanList;
+    public FamilyTree(List<T> entityList) {
+        this.entityList = entityList;
     }
 
-    public void add(Human human) {
-        if (human != null) {
-            if (!humanList.contains(human)) {
-                human.setId(this.id++);
-                this.humanList.add(human);
+    public void add(T entity) {
+        if (entity != null) {
+            if (!entityList.contains(entity)) {
+                entity.setId(this.id++);
+                this.entityList.add(entity);
             }
         }
     }
 
-    public void prntHumanList() {
-
-        for (Human human : humanList) {
-            HumanPrint h = new HumanPrint(human);
-            h.printHumanBasic(human.getSelf());
-        }
-    }
-
-    public Human findFather(Human human) {
-        for (Human h : this.humanList) {
-            if (h == human.getFather()) {
+    public T findFather(T entity) {
+        for (T h : this.entityList) {
+            if (h == entity.getFather()) {
                 return h;
             }
         }
         return null;
     }
 
-    public Human findMather(Human human) {
-        for (Human h : this.humanList) {
-            if (h == human.getMather()) {
+    public T findMather(T entity) {
+        for (T h : this.entityList) {
+            if (h == entity.getMather()) {
                 return h;
             }
         }
         return null;
     }
 
-    public List<Human> findChildren(Human human) {
-        List<Human> lst = new ArrayList<>();
-        for (Human h : this.humanList) {
-            if (h.getMather() == human || h.getFather() == human) {
+    public List<T> findChildren(T entity) {
+        List<T> lst = new ArrayList<>();
+        for (T h : this.entityList) {
+            if (h.getMather() == entity || h.getFather() == entity) {
                 lst.add(h);
             }
         }
@@ -76,15 +68,15 @@ public class FamilyTree<T extends HumanInterface<T>> implements Serializable, It
 
     // Переопредиляем
     @Override
-    public Iterator<Human> iterator() {
-        return this.humanList.iterator();
+    public Iterator<T> iterator() {
+        return this.entityList.iterator();
     }
 
     public void sortByFirstName() {
-        Collections.sort(humanList, Comparator.comparing(Human::getFirstName));
+        Collections.sort(entityList, Comparator.comparing(T::getFirstName));
     }
 
     public void sortByBirthDate() {
-        Collections.sort(humanList, Comparator.comparing(Human::getBirthDate));
+        Collections.sort(entityList, Comparator.comparing(T::getBirthDate));
     }
 }

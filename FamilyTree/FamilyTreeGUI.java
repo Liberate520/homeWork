@@ -8,31 +8,32 @@ import java.util.List;
 
 public class FamilyTreeGUI {
 
-    static void getChildren(FamilyTree familyTree, Human human) {
-        List<Human> children = new ArrayList<>();
-        children = familyTree.findChildren(human);
+    static <T extends HumanInterface<T>> void getChildren(FamilyTree<T> familyTree, T entity) {
+        List<T> children = familyTree.findChildren(entity);
         System.out.println("This Human:");
-        HumanPrint.printHumanFLA(human);
+        HumanPrint.printHumanFLA(entity.getSelf());
         System.out.println("Has children:");
-        HumanPrint.printHumanFLAList(children);
+        // HumanPrint.printHumanFLAList(children);
+        for (T h : children) {
+            HumanPrint.printHumanFLA(h.getSelf());
+        }
     }
 
-    static void getParrents(FamilyTree familyTree, Human human) {
-        Human father = familyTree.findFather(human);
-        Human mather = familyTree.findMather(human);
+    static <T extends HumanInterface<T>> void getParents(FamilyTree<T> familyTree, T entity) {
+        T father = familyTree.findFather(entity);
+        T mother = familyTree.findMather(entity);
         if (father != null) {
             System.out.println("This Human:");
-            HumanPrint.printHumanFLA(human);
+            HumanPrint.printHumanFLA(entity.getSelf());
             System.out.println("Has father:");
-            HumanPrint.printHumanFLA(father);
+            HumanPrint.printHumanFLA(father.getSelf());
         }
-        if (mather != null) {
+        if (mother != null) {
             System.out.println("This Human:");
-            HumanPrint.printHumanFLA(human);
-            System.out.println("Has father:");
-            HumanPrint.printHumanFLA(mather);
+            HumanPrint.printHumanFLA(entity.getSelf());
+            System.out.println("Has mother:");
+            HumanPrint.printHumanFLA(mother.getSelf());
         }
-
     }
 
     static void SaveObject(String filename, FamilyTree familyTree) {

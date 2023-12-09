@@ -27,7 +27,7 @@ public class HumanPrint {
         System.out.println(human.getFirstName() + " " + human.getLastName() + " " + human.getAge());
     }
 
-    static void printHumanFLA(Human human) {
+    public static void printHumanFLA(Human human) {
         System.out.println(human.getFirstName() + " " + human.getLastName() + " " + human.getAge());
     }
 

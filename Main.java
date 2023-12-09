@@ -20,11 +20,11 @@ public class Main {
                 f.add(cat);
                 f.add(tom);
 
-                HumanPrint.printHumanFLA(f.findMather(sam));
-                HumanPrint.printHumanFLA(f.findFather(sam));
+                HumanPrint.printHumanFLA((Human) f.findMather(sam));
+                HumanPrint.printHumanFLA((Human) f.findFather(sam));
 
                 FamilyTreeGUI.getChildren(f, cat);
-                FamilyTreeGUI.getParrents(f, sam);
+                FamilyTreeGUI.getParents(f, sam);
                 System.out.println("До сериализации:");
                 FamilyTreeGUI.PrintAll(f);
                 FamilyTreeGUI.SaveObject("test.dat", f);
