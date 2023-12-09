@@ -1,4 +1,4 @@
-package family_tree;
+package human;
 
 import human.Human;
 
