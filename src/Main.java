@@ -53,7 +53,7 @@ public class Main {
 
         familyTree.sortByName();
 
-        familyTree.sortByAge();
+        //familyTree.sortByAge();
 
 
         return familyTree;
