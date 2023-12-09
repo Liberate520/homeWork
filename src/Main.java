@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args){
-        FamilyTree tree = load();
-        //FamilyTree tree = testTree();
+        //FamilyTree tree = load();
+        FamilyTree tree = testTree();
         System.out.println(tree);
         save(tree);
 
@@ -50,6 +50,10 @@ public class Main {
         familyTree.addHumanInTree(gosha);
         familyTree.addHumanInTree(vasilisa);
         familyTree.addHumanInTree(timofey);
+
+        familyTree.sortByName();
+
+        familyTree.sortByAge();
 
 
         return familyTree;
