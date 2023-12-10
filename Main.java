@@ -5,6 +5,10 @@ import io.FileHandler;
 import java.io.IOException;
 import java.util.List;
 
+import view.GenealogyTreeView;
+import presenter.GenealogyTreePresenter;
+import presenter.GenealogyTreePresenterImpl;
+
 public class Main {
     public static void main(String[] args) {
         GenealogyTree<Person> genealogyTree = new GenealogyTree<>();
