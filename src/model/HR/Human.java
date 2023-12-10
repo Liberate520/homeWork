@@ -1,4 +1,4 @@
-package HR;
+package model.HR;
 
 import java.io.Serializable;
 import java.time.LocalDate;

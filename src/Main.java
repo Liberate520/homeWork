@@ -1,7 +1,8 @@
-import HR.Gender;
-import HR.Human;
-import SaverLoader.fileHandler;
-import familyTree.FamilyTree;
+import model.HR.Gender;
+import model.HR.Human;
+import model.SaverLoader.fileHandler;
+import model.familyTree.FamilyTree;
+import model.familyTree.commonParam;
 
 import java.time.LocalDate;
 
@@ -35,18 +36,18 @@ public class Main {
         FamilyTree tree = new FamilyTree();
 
         Human andrey = null;
-        Human polina = new Human("Полина", Gender.Female,"Astana", LocalDate.of(1997, 6, 7));
-        tree.add(polina);
+        Human polina = new Human("Полина", Gender.Female, LocalDate.of(1936, 6, 7));
+        tree.add((commonParam) polina);
 
         Human viktor = new Human("Виктор", Gender.Male, LocalDate.of(1967, 4, 9), null, polina);
         Human vika = new Human("Виктория", Gender.Female, LocalDate.of(1969, 9, 7));
-        tree.add(viktor);
-        tree.add(vika);
+        tree.add((commonParam) viktor);
+        tree.add((commonParam) vika);
 
         Human olga = new Human("Ольга", Gender.Female, LocalDate.of(1990, 2, 14), viktor, vika);
-        tree.add(olga);
+        tree.add((commonParam) olga);
         Human igor = new Human("Игорь", Gender.Male, "Petersburg", LocalDate.of(2018, 8, 14),  andrey, olga);
-        tree.add(igor);
+        tree.add((commonParam) igor);
 
 
         return tree;

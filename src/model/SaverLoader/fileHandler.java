@@ -1,4 +1,4 @@
-package SaverLoader;
+package model.SaverLoader;
 
 
 import java.io.*;
@@ -34,7 +34,7 @@ public class fileHandler implements Writable{
 
 //    @Override
 //    public Object load(String filePath) {
-//        FamilyTree familyTree = new FamilyTree();
+//        FamilyTree model.familyTree = new FamilyTree();
 //        return new FamilyTree() /*(new ObjectInputStream(filePath))*/;
 //    }
 }
