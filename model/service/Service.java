@@ -78,4 +78,11 @@ public class Service<T extends HumanInterface<T>> {
         this.familyTree = FamilyTreeGUI.LoadObject(filename);
     }
 
+    public T getID(int id) {
+        return this.familyTree.getID(id);
+    }
+
+    public void GetParrents(int id) {
+        FamilyTreeGUI.getParents(this.familyTree, getID(id));
+    }
 }

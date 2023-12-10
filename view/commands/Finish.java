@@ -5,7 +5,7 @@ import view.ConsoleUI;
 public class Finish extends Command {
     public Finish(ConsoleUI consoleUI) {
         super(consoleUI);
-        description = "Распечатать всех";
+        description = "Конец";
     }
 
     public void execute() {

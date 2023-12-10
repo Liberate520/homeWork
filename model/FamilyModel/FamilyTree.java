@@ -83,4 +83,13 @@ public class FamilyTree<T extends HumanInterface<T>> implements Serializable, It
     public void sortByBirthDate() {
         Collections.sort(entityList, Comparator.comparing(T::getBirthDate));
     }
+
+    public T getID(int id) {
+        for (T h : this.entityList) {
+            if (h.getId() == id) {
+                return h;
+            }
+        }
+        return null;
+    }
 }

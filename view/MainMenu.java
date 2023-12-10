@@ -7,9 +7,12 @@ import model.FamilyModel.*;
 import model.HumanModel.*;
 import model.service.*;
 import presenter.Presenter;
+import view.commands.AddFather;
 import view.commands.AddHuman;
+import view.commands.AddMather;
 import view.commands.Command;
 import view.commands.Finish;
+import view.commands.GetParrents;
 import view.commands.LoadFile;
 import view.commands.PrintAll;
 import view.commands.SaveInFile;
@@ -22,6 +25,9 @@ public class MainMenu {
         commandList.add(new SaveInFile(consoleUI));
         commandList.add(new LoadFile(consoleUI));
         commandList.add(new AddHuman(consoleUI));
+        commandList.add(new AddMather(consoleUI));
+        commandList.add(new AddFather(consoleUI));
+        commandList.add(new GetParrents(consoleUI));
         commandList.add(new PrintAll(consoleUI));
         commandList.add(new Finish(consoleUI));
 

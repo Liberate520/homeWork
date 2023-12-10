@@ -37,4 +37,16 @@ public class Presenter {
         this.service.PrintAll();
     }
 
+    public void setFather(int id1, int id2) {
+        this.service.getID(id1).setFather(this.service.getID(id2));
+    }
+
+    public void setMather(int id1, int id2) {
+        this.service.getID(id1).setMather(this.service.getID(id2));
+    }
+
+    public void GetParrents(int id) {
+        this.service.GetParrents(id);
+    }
+
 }

@@ -151,4 +151,25 @@ public class ConsoleUI implements View {
         presenter.PrintAll();
     }
 
+    public void AddHumanFather() {
+        System.out.println("Введите ID ребенка:");
+        int h1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID отца:");
+        int h2 = Integer.parseInt(scanner.nextLine());
+        presenter.setFather(h1, h2);
+    }
+
+    public void AddHumanMather() {
+        System.out.println("Введите ID ребенка:");
+        int h1 = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID матери:");
+        int h2 = Integer.parseInt(scanner.nextLine());
+        presenter.setMather(h1, h2);
+    }
+
+    public void GetParrents() {
+        System.out.println("Введите ID ребенка:");
+        int h1 = Integer.parseInt(scanner.nextLine());
+
+    }
 }
