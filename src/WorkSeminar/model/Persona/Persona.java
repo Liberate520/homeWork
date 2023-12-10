@@ -150,6 +150,13 @@ public class Persona implements Serializable, TreeEtem<Persona> {
             return Period.between(birthday, dathday).getYears();
         }
     }
+    public String addAlive(){
+        if(dathday == null){
+            return "";
+        } else {
+            return "Умер в ";
+        }
+    }
     public String getInfo(){
         StringBuilder infoDate = new StringBuilder();
         infoDate.append("Имя: ");
@@ -159,6 +166,7 @@ public class Persona implements Serializable, TreeEtem<Persona> {
         infoDate.append(", Пол: ");
         infoDate.append(getGender());
         infoDate.append(", Возраст: ");
+        infoDate.append(addAlive());
         infoDate.append(addAge());
         infoDate.append(", ");
         infoDate.append(addSpouseInfo());

@@ -16,4 +16,14 @@ public interface View {
     void setWedding();
     void addParent();
     void addKid();
+    void setDathday();
+    void getNamePersona();
+
+    void setPathFile();
+
+    void defoldPathFile();
+
+    void getPathFile();
+
+    void getSisBroth();
 }

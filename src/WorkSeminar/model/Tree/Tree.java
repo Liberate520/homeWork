@@ -78,7 +78,7 @@ public class Tree<P extends TreeEtem<P>> implements Serializable, Iterable<P> {
         return  null;
     }
 
-    public List<P> getSisBroth(int id){
+    public List<P> getSisBroth(long id){
         P persona = addID(id);
         if (persona == null) {
             return null;
@@ -132,7 +132,7 @@ public class Tree<P extends TreeEtem<P>> implements Serializable, Iterable<P> {
 
     }
 
-    public  String getInfo(){
+    public String getInfo(){
         StringBuilder info = new StringBuilder();
         info.append("В семейном древе Грэев ");
         info.append(personaList.size());

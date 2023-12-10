@@ -3,6 +3,9 @@ package WorkSeminar.Presentor;
 import WorkSeminar.View.View;
 import WorkSeminar.model.Service.Service;
 
+import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Presentor {
     private View view;
     private Service service;
@@ -19,6 +22,11 @@ public class Presentor {
 
     public void showTree(){
         String infoTree = service.showTree();
+        view.aswer(infoTree);
+    }
+
+    public void getNamePersona(String name){
+        String infoTree = service.getNamePersona(name);
         view.aswer(infoTree);
     }
 
@@ -58,27 +66,53 @@ public class Presentor {
         view.aswer("Древо загружено!");
     }
 
+
     /*
     Методы ручного изменения древа.
      */
 
-    public  void creatPerson(){
-        service.creatPerson();
+    public  void creatPerson(Scanner scanner){
+        service.creatPerson(scanner);
         view.aswer("Персонаж создан.");
     }
-    public void setWedding(){
-        service.setWedding();
+    public void Wedding(long personaOne, long personaTwo){
+        service.setWedding(personaOne, personaTwo);
         view.aswer("Связь установлена.");
     }
 
-    public void addParent(){
-        service.addParent();
-        view.aswer("Роители добавлены");
+    public void Parent(long personaOne, long personaTwo, long kid){
+        service.addParent(personaOne, personaTwo, kid);
+        view.aswer("Роители добавлены.");
     }
 
-    public void addKid(){
-        service.addKid();
-        view.aswer("Ребёнок добавлен");
+    public void addKid(long personaOne, long personaKid){
+        service.addKid(personaOne, personaKid);
+        view.aswer("Ребёнок добавлен.");
+    }
+
+    public  void setDathday(long persona, LocalDate date){
+        service.setDathday(persona, date);
+        view.aswer("Дата смерти установлена.");
+    }
+
+    public void getSisBroth(long id){
+        service.getSisBroth(id);
+        view.aswer("Список братьев и сестёр: ");
+    }
+    /*
+    Работа с файлом.
+     */
+    public void setPathFile(String path){
+        service.setPathFile(path);
+        view.aswer("Путь файла обновлёт!");
+    }
+    public void defoldPathFile(){
+        service.defoldPathFile();
+        view.aswer("Путь файла установлен по умолчанию!");
+    }
+    public void getPathFile(){
+        String path = service.getPathFile();
+        view.aswer(path);
     }
 
 }

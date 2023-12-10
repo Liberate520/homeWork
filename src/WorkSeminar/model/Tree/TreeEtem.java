@@ -18,6 +18,7 @@ public interface TreeEtem <T> {
     boolean addParent(T parent);
     T getPartner();
     void setPartner(T partner);
+    String addAlive();
 
 
 }

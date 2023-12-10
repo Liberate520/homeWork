@@ -5,7 +5,7 @@ import WorkSeminar.View.View;
 public class SaveTree extends Commands{
 
     public SaveTree(View view){
-        super("Сохранить древо ", view);
+        super("Сохранить семейное Древо ", view);
     }
     public void execute() {
         getView().seveTree();}

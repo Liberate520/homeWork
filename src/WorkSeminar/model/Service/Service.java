@@ -6,26 +6,28 @@ import WorkSeminar.model.Persona.Builder.InputID;
 import WorkSeminar.model.Persona.Builder.PersonaBuilder;
 import WorkSeminar.model.Persona.Gender;
 import WorkSeminar.model.Persona.Persona;
+import WorkSeminar.model.SaveFile.ReadLoadable;
 import WorkSeminar.model.SaveFile.SaveLoadTree;
 import WorkSeminar.model.Tree.Tree;
+import WorkSeminar.model.Tree.TreeEtem;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Service {
     private Tree<Persona> tree;
-
     private PersonaBuilder builder;
-
-    private Scanner scanner;
-
+    private ReadLoadable readLoadable;
+    private String pathFile;
     public Tree getTree() {
         return tree;
     }
-
     public Service(){
         tree = new Tree<>();
+        pathFile = "src/WorkSeminar/model/SaveFile/saveTree.out"; //Дефолтный адрес сохранения/загрузки
         builder = new PersonaBuilder();
-        scanner = new Scanner(System.in);
+        readLoadable = new SaveLoadTree();
     }
     //Методы для ручной настройки тестового древа.
     public Persona addPersona(String name, String lastName, Gender gender, LocalDate birthday, Persona mather, Persona father){
@@ -39,54 +41,52 @@ public class Service {
         tree.getPersonID();
         return pers;
     }
-
-    public void setWedding(long personaOneId, long personaTwoId){
-        tree.setWedding(personaOneId, personaTwoId);
-    }
-
     public void addKid(Persona parent, Persona kid){
         parent.addKid(kid);
     }
-
     public  void addParent(Persona parentM, Persona parentF, Persona kid){
         kid.addParent(parentM, parentF);
     }
     public  void addParent(Persona parent, Persona kid){
         kid.addParent(parent);
     }
+
     // Методы консольной настройки древа.
 
-    public void creatPerson(){
-        Persona pers = builder.build();
+    public void creatPerson(Scanner scanner){
+        Persona pers = builder.build(scanner);
         tree.addPersona(pers);
     }
-    /*
-    TODO Ввод из сервиса, придумать алтернативу..
-     */
-    public void setWedding() {
-        long personaOne = InputID.inputsID();
-        long personaTwo = InputID.inputsID();
-        setWedding(personaOne, personaTwo);
-    }
-    /*
-    TODO Ввод из сервиса, придумать алтернативу..
-     */
 
-    public void addParent(){
-        Persona parrentOne = tree.addID(InputID.inputsID());
-        Persona parrentTwo = tree.addID(InputID.inputsID());
-        Persona kid = tree.addID(Long.parseLong(scanner.nextLine()));
+    public void setWedding(long personaOneId, long personaTwoId){
+        tree.setWedding(personaOneId, personaTwoId);
+    }
+
+    public void addParent(long personaOne, long personaTwo, long personaKid){
+        Persona parrentOne = tree.addID(personaOne);
+        Persona parrentTwo = tree.addID(personaTwo);
+        Persona kid = tree.addID(personaKid);
         addParent(parrentOne, parrentTwo, kid);
-    }
-    /*
-    TODO Ввод из сервиса, придумать алтернативу..
-     */
-    public void addKid(){
-        Persona parrent = tree.addID(InputID.inputsID());
-        Persona kid = tree.addID(InputID.inputsID());
-        addKid(parrent, kid);
+        addKid(parrentOne, kid);
+        addKid(parrentTwo, kid);
     }
 
+    public void addKid(long personaOne, long personaKid){
+        Persona parrent = tree.addID(personaOne);
+        Persona kid = tree.addID(personaKid);
+        addKid(parrent, kid);
+        addParent(parrent, kid);
+    }
+
+    public  void setDathday(long persona, LocalDate date){
+        Persona daethPersona = tree.addID(persona);
+        daethPersona.setDathday(date);
+    }
+
+    public void getSisBroth(long id){
+        List<Persona> sisterAndBrozer = tree.getSisBroth(id);
+        tree.printSisBroth(sisterAndBrozer);
+    }
 
     public void createTree(){
         TestTree test = new TestTree();
@@ -101,6 +101,21 @@ public class Service {
             treeInfo.append("\n");
         }
         return treeInfo.toString();
+    }
+
+    public String getNamePersona(String name){
+        List<Persona> list = tree.getNamePersona(name);
+        StringBuilder persInfo = new StringBuilder();
+        persInfo.append("Список искомых имён: \n");
+        if(list.size() > 0){
+            for (Object persona: list){
+                persInfo.append(persona);
+                persInfo.append("\n");
+            }
+        } else {
+            persInfo.append("В древе нет персонажей с данным именем. \n");
+        }
+        return persInfo.toString();
     }
 
     public void sortTreeByName(){
@@ -124,13 +139,21 @@ public class Service {
     }
 
     public void saveTree(){
-        SaveLoadTree saveTree = new SaveLoadTree();
-        saveTree.saveFile("src/WorkSeminar/model/SaveFile/saveTree.out", tree);
+        readLoadable.saveFile(pathFile, tree);
     }
 
     public void loadTree(){
-        SaveLoadTree loadTree = new SaveLoadTree();
-        tree = (Tree) loadTree.loadFile("src/WorkSeminar/model/SaveFile/saveTree.out");
+        tree = (Tree) readLoadable.loadFile(pathFile);
+    }
+
+    public void setPathFile(String path){
+        pathFile = path;
+    }
+    public void defoldPathFile(){
+        pathFile = "src/WorkSeminar/model/SaveFile/saveTree.out";
+    }
+    public String getPathFile(){
+        return pathFile;
     }
 }
 

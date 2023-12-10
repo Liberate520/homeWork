@@ -3,11 +3,15 @@ package WorkSeminar.View;
 import WorkSeminar.Presentor.Presentor;
 import WorkSeminar.View.CommandsConsol.mainConsole;
 import WorkSeminar.model.InputCkeck.ConvertEnter;
+import WorkSeminar.model.Persona.Builder.InputID;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleUI implements View{
     private Scanner scanner;
+    private InputsConsole scan;
     private Presentor presentor;
     private boolean cycle;
     private mainConsole menu;
@@ -17,6 +21,7 @@ public class ConsoleUI implements View{
     // Коснтруктор
     public ConsoleUI(){
         scanner = new Scanner(System.in);
+        scan = new InputsConsole();
         presentor = new Presentor(this);
         cycle = true;
         menu = new mainConsole(this);
@@ -40,7 +45,6 @@ public class ConsoleUI implements View{
         System.out.println(menu.print());
     }
     // Запрос на ввод комманд.
-    // Оставить как внутренний метод UI?
     private void consoleWork(){
         System.out.println("Ввод команды: ");
         String enterConsol = scanner.nextLine();
@@ -60,6 +64,12 @@ public class ConsoleUI implements View{
     // Показать текущее древо.
     public void showTree(){
         presentor.showTree();
+    }
+    // Показать список персонажей с аказанным именем.
+    public void getNamePersona(){
+        System.out.println("Введите имя искомого персонажа: ");
+        String name = scan.in(scanner);
+        presentor.getNamePersona(name);
     }
     // Сортировка по имени.
     public void sortTreeByName(){
@@ -90,19 +100,58 @@ public class ConsoleUI implements View{
     }
     // Создать человека через консоль.
     public void creatPersona(){
-        presentor.creatPerson();
+        presentor.creatPerson(scanner);
     }
     // Связать замужеством.
     public void setWedding(){
-        presentor.setWedding();
+        System.out.println("Супруг.");
+        long personaOne = scan.inID(scanner);
+        System.out.println("Супруга.");
+        long personaTwo = scan.inID(scanner);
+        presentor.Wedding(personaOne, personaTwo);
     }
     // Добавить ребёнку родителей.
     public void addParent(){
-        presentor.addParent();
+        System.out.println("Первый родитель.");
+        long personaOne = scan.inID(scanner);
+        System.out.println("Второй родитель.");
+        long personaTwo = scan.inID(scanner);
+        System.out.println("Ребёнок");
+        long kid = scan.inID(scanner);
+        presentor.Parent(personaOne, personaTwo, kid);
     }
     // Добавить родителю ребёнка.
     public void addKid(){
-        presentor.addKid();
+        System.out.println("Родитель.");
+        long personaOne = scan.inID(scanner);
+        System.out.println("Ребёнок.");
+        long kid = scan.inID(scanner);
+        presentor.addKid(personaOne, kid);
+    }
+    // Установить дату смерти.
+    public void setDathday(){
+        long persona = scan.inID(scanner);
+        System.out.println("Указать дату смерти(yyyy,MM,dd): ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy,MM,dd");
+        LocalDate date = LocalDate.parse(scan.in(scanner), formatter);//TODO Сделать проверку на валидность
+        presentor.setDathday(persona, date);
+    }
+    public void getSisBroth(){
+        System.out.println("Чьих братьев и сестёр ищем. ");
+        long personaId = scan.inID(scanner);
+        presentor.getSisBroth(personaId);
+    }
+
+    public void setPathFile(){
+        System.out.println("Введите новый путь файла: ");
+        String path = scan.in(scanner);
+        presentor.setPathFile(path);
+    }
+    public void defoldPathFile(){
+        presentor.defoldPathFile();
+    }
+    public void getPathFile(){
+        presentor.getPathFile();
     }
 
 }

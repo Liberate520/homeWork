@@ -7,11 +7,15 @@ import java.util.List;
 
 public class mainConsole {
     private List<Commands> commandList;
-
+    /*
+    Учитывая что лист команд значительно разросся, имеет смысл подумать о создании подменю,
+    разбив команды на категории. Но это уже как-нибудь потом.
+     */
     public mainConsole(View view){
         commandList = new ArrayList<>();
         commandList.add(new CreateTree(view));
         commandList.add(new ShowTree(view));
+        commandList.add(new GetNamePersona(view));
         commandList.add(new SaveTree(view));
         commandList.add(new LoadTree(view));
         commandList.add(new SortTreeByName(view));
@@ -22,6 +26,11 @@ public class mainConsole {
         commandList.add(new SetWedding(view));
         commandList.add(new AddParent(view));
         commandList.add(new AddKid(view));
+        commandList.add(new SetDathday(view));
+        commandList.add(new GetSisBroth(view));
+        commandList.add(new GetPathFile(view));
+        commandList.add(new DefoldPathFile(view));
+        commandList.add(new SetPathFile(view));
         commandList.add(new Exit(view));
 
     }

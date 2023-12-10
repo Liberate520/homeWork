@@ -4,10 +4,15 @@ import java.util.Scanner;
 
 public class Input {
 
-    public static String inputs(){
+    public static String inputs(Scanner scanner){
         System.out.println("Введите данные:");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        try {
+            return scanner.nextLine();
+        } catch (RuntimeException ex){
+            System.out.println("Ошибка ввода" + ex);
+        }
+        return null;
+
     }
 
 }
