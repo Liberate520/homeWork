@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements Serializable, Comparable<Object>, Creature<Human> {
+public class Human implements Serializable, Creature<Human> {
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -16,16 +16,18 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
     private Human mother;
     private Human father;
     private Human spouse;
-    private List<Human> children;
+    private Integer id;
+    private final List<Human> children;
     private boolean inTree = false;
 
     public Human() {
         this.children = new ArrayList<Human>();
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate,
+    public Human(Integer id, String firstName, String lastName, Gender gender, LocalDate birthDate,
                  LocalDate deathDate, Human mother, Human father, Human spouse) {
         this();
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -34,20 +36,18 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         this.mother = mother;
         this.father = father;
         this.spouse = spouse;
-        //TODO: Добавить список бывших супругов - должны добавляться при разводе
-        //TODO: Добавить уникальный автоматический ID каждому человеку и завязать на него equals
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate) {
-        this(firstName, lastName, gender, birthDate, null, null, null, null);
+    public Human(Integer id, String firstName, String lastName, Gender gender, LocalDate birthDate) {
+        this(id, firstName, lastName, gender, birthDate, null, null, null, null);
     }
 
-    public Human(String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
-        this(firstName, lastName, gender, birthDate, deathDate, null, null, null);
+    public Human(Integer id, String firstName, String lastName, Gender gender, LocalDate birthDate, LocalDate deathDate) {
+        this(id, firstName, lastName, gender, birthDate, deathDate, null, null, null);
     }
 
-    public Human(String firstName, String lastName, Gender gender, Human mother, Human father) {
-        this(firstName, lastName, gender, null, null, mother, father, null);
+    public Human(Integer id, String firstName, String lastName, Gender gender, Human mother, Human father) {
+        this(id, firstName, lastName, gender, null, null, mother, father, null);
     }
 
     public boolean setMother(Human mother) {
@@ -114,8 +114,12 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         return gender;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getName() {
-        return firstName + " " + lastName;
+        return id + " " + firstName + " " + lastName;
     }
 
 
@@ -198,7 +202,7 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(this.hashCode(), human.hashCode());
+        return Objects.equals(this.id, human.id);
     }
 
     @Override

@@ -1,11 +1,10 @@
 package model.family_tree;
 
-import model.creatures.Creature;
-import model.creatures.CreatureComporatorByAge;
-import model.creatures.CreatureComporatorByName;
+import model.creatures.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         if (!child.isInTree()) {
             familyTree.add(child);
             child.setInTree();
-            notInTree.remove(child)
+            notInTree.remove(child);
         }
         if (!parent.isInTree()) {
             familyTree.add(parent);
@@ -132,6 +131,28 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     public void sortByAge() {
         familyTree.sort(new CreatureComporatorByAge());
+    }
+
+    public void sortByID() {
+        familyTree.sort(new CreatureComporatorById());
+    }
+
+    public T searchById(Integer id) {
+        familyTree.sort(new CreatureComporatorById());
+        notInTree.sort(new CreatureComporatorById());
+        int finalId = Collections.binarySearch(familyTree,
+                new Human(id, null, null, null, null), new CreatureComporatorById());
+        if (finalId > 0) {
+            return familyTree.get(finalId);
+        } else if (finalId < 0) {
+            finalId = Collections.binarySearch(notInTree,
+                    new Human(id, null, null, null, null),
+                    new CreatureComporatorById());
+            return notInTree.get(finalId);
+        } else {
+            return null;
+        }
+
     }
 
     @Override

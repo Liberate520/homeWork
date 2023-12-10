@@ -4,7 +4,7 @@ package model.creatures;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface Creature<T>{
+public interface Creature<T> extends Comparable<Object> {
 
 
     String getName();
@@ -22,6 +22,8 @@ public interface Creature<T>{
     boolean setMother(T mother);
 
     boolean setSpouse(T o);
+
+    Integer getId();
 
     <E extends Creature<T>> E getSpouse();
 

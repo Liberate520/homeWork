@@ -1,23 +1,24 @@
 package service;
 
 
-import model.creatures.Creature;
-import model.creatures.Gender;
-import model.creatures.Human;
+import model.creatures.*;
 import model.family_tree.FamilyTree;
 import model.family_tree.TreeAppNaturally;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-//TODO: Реализовать метод сохранения
 public class Service {
 
     private FamilyTree familyTree;
     private TreeAppNaturally naturalView;
+    private HumanBuilder humanBuilder;
 
     public Service() {
         familyTree = new FamilyTree();
+        humanBuilder = new HumanBuilder();
         //naturalView = new TreeAppNaturally(familyTree);
 
     }
@@ -32,7 +33,8 @@ public class Service {
 
     public boolean addHuman(String firstName, String lastName, Gender gender,
                             LocalDate birthDate) {
-        Creature human = new Human(firstName, lastName, gender, birthDate);
+        Creature human = humanBuilder.build(firstName, lastName, gender, birthDate);
+
         if (familyTree.getNotInTree().contains(human) || familyTree.getFamilyTree().contains(human)) {
             return false;
         } else {
@@ -65,7 +67,22 @@ public class Service {
             }
             return sb.toString();
         }
-
-
     }
+
+    public boolean SetChild(Integer idParent, Integer idChild) {
+        if (familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean SetSpouce(Integer idSpouce1, Integer idSpouce2) {
+        if (familyTree.setSpouse(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
