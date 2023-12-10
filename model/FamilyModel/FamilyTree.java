@@ -1,3 +1,5 @@
+package model.FamilyModel;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -8,6 +10,8 @@ import java.util.*;
 
 import java.io.Serializable;
 import java.util.*;
+
+import model.HumanModel.*;
 
 public class FamilyTree<T extends HumanInterface<T>> implements Serializable, Iterable<T> {
 

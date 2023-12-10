@@ -1,3 +1,5 @@
+package model.HumanModel;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -132,5 +134,9 @@ public class Human implements Serializable, HumanInterface<Human> {
 
     public Human getSelf() {
         return this;
+    }
+
+    public String getString() {
+        return this.firstName + ' ' + this.lastName;
     }
 }

@@ -1,3 +1,5 @@
+package model.FamilyModel;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,9 +8,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.FamilyModel.*;
+import model.HumanModel.*;
+
 public class FamilyTreeGUI {
 
-    static <T extends HumanInterface<T>> void getChildren(FamilyTree<T> familyTree, T entity) {
+    public static <T extends HumanInterface<T>> void getChildren(FamilyTree<T> familyTree, T entity) {
         List<T> children = familyTree.findChildren(entity);
         System.out.println("This Human:");
         HumanPrint.printHumanFLA(entity.getSelf());
@@ -19,7 +24,7 @@ public class FamilyTreeGUI {
         }
     }
 
-    static <T extends HumanInterface<T>> void getParents(FamilyTree<T> familyTree, T entity) {
+    public static <T extends HumanInterface<T>> void getParents(FamilyTree<T> familyTree, T entity) {
         T father = familyTree.findFather(entity);
         T mother = familyTree.findMather(entity);
         if (father != null) {
@@ -36,7 +41,7 @@ public class FamilyTreeGUI {
         }
     }
 
-    static void SaveObject(String filename, FamilyTree familyTree) {
+    public static void SaveObject(String filename, FamilyTree familyTree) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(familyTree);
             System.out.println("File has been written");
@@ -47,8 +52,8 @@ public class FamilyTreeGUI {
 
     }
 
-    static FamilyTree LoadObject(String filename) {
-        FamilyTree tmp = null;
+    public static FamilyTree LoadObject(String filename) {
+        FamilyTree tmp = new FamilyTree<>();
         try (FileInputStream fis = new FileInputStream(filename);
                 ObjectInputStream ois = new ObjectInputStream(fis)) {
             tmp = (FamilyTree) ois.readObject();
@@ -58,7 +63,7 @@ public class FamilyTreeGUI {
         return tmp;
     }
 
-    static void PrintAll(FamilyTree familyTree) {
+    public static void PrintAll(FamilyTree familyTree) {
         HumanPrint.printHumanFLAList(familyTree.getHumanList());
     }
 
