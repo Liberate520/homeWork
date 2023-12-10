@@ -1,4 +1,4 @@
-package writer;
+package family_tree.model.writer;
 
 import java.io.Serializable;
 

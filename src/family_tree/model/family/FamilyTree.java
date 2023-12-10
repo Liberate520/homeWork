@@ -1,13 +1,13 @@
-package family_tree.family;
+package family_tree.model.family;
 
-import family_tree.family.comparator.FamilyTreeComparatorByAge;
+import family_tree.model.family.comparator.FamilyTreeComparatorByAge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import family_tree.family.comparator.FamilyTreeComparatorByName;
+import family_tree.model.family.comparator.FamilyTreeComparatorByName;
 
 
 public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable<T> {

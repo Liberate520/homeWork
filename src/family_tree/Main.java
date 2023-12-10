@@ -1,89 +1,99 @@
 package family_tree;
 
-import family_tree.family.FamilyTree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.service.Service;
-import writer.FileHandler;
+import family_tree.model.family.FamilyTree;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
+import family_tree.model.service.Service;
+import family_tree.model.writer.FileHandler;
+import family_tree.view.ConsoleUI;
+import family_tree.view.View;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-        Service<Human> service = new Service<>();
+        View view = new ConsoleUI();
+        view.start();
 
-        System.out.println("Дерево до сохранения в файл:\n");
-        System.out.println(service.getHumanListInfo(testTree()));
-        save(testTree());
-
-        System.out.println("Дерево после выгрузки в из файла:\n");
-        FamilyTree<Human> savedTree = download();
-        System.out.println(service.getHumanListInfo(savedTree));
-
-        service.sortByName(savedTree);
-        System.out.println("Дерево отсортированное по имени:\n");
-        System.out.println(service.getHumanListInfo(savedTree));
-
-        service.sortByAge(savedTree);
-        System.out.println("Дерево отсортированное по возрасту:\n");
-        System.out.println(service.getHumanListInfo(savedTree));
-
-        save(savedTree);
+//        Service<Human> service = new Service<>();
+//
+//        System.out.println("Дерево до сохранения в файл:\n");
+//        System.out.println(service.getHumanListInfo(testTree()));
+//        save(testTree());
+//
+//        System.out.println("Дерево после выгрузки в из файла:\n");
+//        FamilyTree<Human> savedTree = download();
+//        System.out.println(service.getHumanListInfo(savedTree));
+//
+//        service.sortByName(savedTree);
+//        System.out.println("Дерево отсортированное по имени:\n");
+//        System.out.println(service.getHumanListInfo(savedTree));
+//
+//        service.sortByAge(savedTree);
+//        System.out.println("Дерево отсортированное по возрасту:\n");
+//        System.out.println(service.getHumanListInfo(savedTree));
+//
+//        save(savedTree);
     }
+//
+//    private static void save(FamilyTree<Human> tree) {
+//        String filePath = "src/family_tree/model/writer/tree";
+//        FileHandler fh = new FileHandler();
+//        System.out.printf("Данные успешно сохранены в файл? %b\n", fh.write(tree, filePath));
+//    }
+//
+//    private static FamilyTree<Human> download() {
+//        String filePath = "src/family_tree/model/writer/tree";
+//        FileHandler fh = new FileHandler();
+//        return (FamilyTree) fh.read(filePath);
+//    }
 
-    private static void save(FamilyTree<Human> tree) {
-        String filePath = "src/writer/tree";
-        FileHandler fh = new FileHandler();
-        System.out.printf("Данные успешно сохранены в файл? %b\n", fh.write(tree, filePath));
-    }
-
-    private static FamilyTree<Human> download() {
-        String filePath = "src/writer/tree";
-        FileHandler fh = new FileHandler();
-        return (FamilyTree) fh.read(filePath);
-    }
-
-    static FamilyTree<Human> testTree() {
-
-        FamilyTree<Human> familyTree = new FamilyTree<>();
-
-        Human human1 = new Human(Gender.Male, "Ivan", "Ivanov");
-        Human human2 = new Human(Gender.Female, "Maria", "Ivanova");
-        familyTree.addFamilyMember(human1);
-        familyTree.addFamilyMember(human2);
-        familyTree.setWedding(human1, human2);
-
-        Human human3 = new Human(Gender.Male, "Peter", "Petrov");
-        Human human4 = new Human(Gender.Female, "Elena", "Petrova");
-        familyTree.addFamilyMember(human3);
-        familyTree.addFamilyMember(human4);
-        familyTree.setWedding(human3, human4);
-
-        Human human5 = new Human(Gender.Male, "Ivanushka", "Ivanov");
-        Human human6 = new Human(Gender.Female, "Alenushka", "Petrova");
-
-        human5.setFather(human1);
-        human5.setMother(human2);
-        human6.setFather(human3);
-        human6.setMother(human4);
-
-        familyTree.addFamilyMember(human5);
-        familyTree.addFamilyMember(human6);
-        familyTree.setWedding(human5, human6);
-
-        human1.setBirthDate(LocalDate.of(1921, 1, 1));
-        human2.setBirthDate(LocalDate.of(1922, 2, 2));
-        human3.setBirthDate(LocalDate.of(1923, 3, 3));
-        human4.setBirthDate(LocalDate.of(1924, 4, 4));
-        human5.setBirthDate(LocalDate.of(1945, 5, 5));
-        human6.setBirthDate(LocalDate.of(1946, 6, 6));
-
-        Human grandMother = new Human(Gender.Female, "Varvara", "Ivanova", LocalDate.of(1900, 1, 1));
-        grandMother.addChild(human1);
-        grandMother.setDeathDate(LocalDate.of(2000, 1, 1));
-        familyTree.addFamilyMember(grandMother);
-
-        return familyTree;
-    }
+//    static FamilyTree<Human> testTree() {
+//
+//        FamilyTree<Human> familyTree = new FamilyTree<>();
+//
+//        Human human1 = new Human(Gender.Male, "Ivan", "Ivanov");
+//        Human human2 = new Human(Gender.Female, "Maria", "Ivanova");
+//        familyTree.addFamilyMember(human1);
+//        familyTree.addFamilyMember(human2);
+//        familyTree.setWedding(human1, human2);
+//
+//        Human human3 = new Human(Gender.Male, "Peter", "Petrov");
+//        Human human4 = new Human(Gender.Female, "Elena", "Petrova");
+//        familyTree.addFamilyMember(human3);
+//        familyTree.addFamilyMember(human4);
+//        familyTree.setWedding(human3, human4);
+//
+//        Human human5 = new Human(Gender.Male, "Ivanushka", "Ivanov");
+//        Human human6 = new Human(Gender.Female, "Alenushka", "Petrova");
+//
+//        human5.setFather(human1);
+//        human5.setMother(human2);
+//        human6.setFather(human3);
+//        human6.setMother(human4);
+//
+//        familyTree.addFamilyMember(human5);
+//        familyTree.addFamilyMember(human6);
+//        familyTree.setWedding(human5, human6);
+//
+//        human1.setBirthDate(LocalDate.of(1921, 1, 1));
+//        human2.setBirthDate(LocalDate.of(1922, 2, 2));
+//        human3.setBirthDate(LocalDate.of(1923, 3, 3));
+//        human4.setBirthDate(LocalDate.of(1924, 4, 4));
+//        human5.setBirthDate(LocalDate.of(1945, 5, 5));
+//        human6.setBirthDate(LocalDate.of(1946, 6, 6));
+//
+//        Human grandMother = new Human(
+//                Gender.Female,
+//                "Varvara",
+//                "Ivanova",
+//                LocalDate.of(1900, 1, 1)
+//        );
+//        grandMother.addChild(human1);
+//        grandMother.setDeathDate(LocalDate.of(2000, 1, 1));
+//        familyTree.addFamilyMember(grandMother);
+//
+//        return familyTree;
+//    }
 }

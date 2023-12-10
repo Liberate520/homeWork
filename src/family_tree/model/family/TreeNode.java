@@ -1,4 +1,4 @@
-package family_tree.family;
+package family_tree.model.family;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -35,4 +35,5 @@ public interface TreeNode<T> extends Serializable, Comparable<T> {
     Object getFamilyName();
 
     int getAge();
+
 }
