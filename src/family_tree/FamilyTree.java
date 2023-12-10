@@ -1,8 +1,8 @@
 package family_tree;
 
 import human.Gender;
-import human.Human;
 import human.SortByAgeComparator;
+import human.FamilyItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,16 +10,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends FamilyItem> implements Serializable, Iterable<E> {
     private static final long serialVersionUID = 1L;
     private long countPeople;
-    private List<Human> familyTree;
+    private List<E> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();
     }
 
-    public boolean addHumanInTree(Human human) {
+    public boolean addHumanInTree(E human) {
         if (!familyTree.contains(human)) {
             familyTree.add(human);
             human.setId(countPeople++);
@@ -32,7 +32,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (!(familyTree.isEmpty())) {
-            for (Human human : familyTree) {
+            for (E human : familyTree) {
                     sb.append("Id:" + human.getId() + " " + human.getName() + " Возраст: " + human.getAge());
                     if(human.getGender().equals(Gender.Mail)){
                         sb.append(" " + "Мужчина" + "\n");
@@ -47,15 +47,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return sb.toString();
     }
     public void sortByName(){
-        Collections.sort(familyTree,new SortByAgeComparator());
+        Collections.sort(familyTree,new SortByAgeComparator<>());
     }
 
     public void sortByAge(){
-        Collections.sort(familyTree,new SortByAgeComparator());
+        Collections.sort(familyTree,new SortByAgeComparator<>());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIterator(familyTree);
+    public Iterator<E> iterator() {
+        return new FamilyTreeIterator<>(familyTree);
     }
 }

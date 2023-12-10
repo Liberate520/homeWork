@@ -51,7 +51,7 @@ public class Main {
         familyTree.addHumanInTree(vasilisa);
         familyTree.addHumanInTree(timofey);
 
-        familyTree.sortByName();
+        //familyTree.sortByName();
 
         //familyTree.sortByAge();
 
