@@ -1,59 +1,26 @@
 package main;
 
-import model.family_tree.FamilyTree;
+import model.creatures.Creature;
 import model.creatures.Gender;
 import model.creatures.Human;
+import model.family_tree.FamilyTree;
+import model.family_tree.TreeAppNaturally;
+import service.Service;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Human sergei = new Human("Sergei", "Petrov", Gender.Male,
-                LocalDate.of(1989, 1, 1), LocalDate.of(2015, 12, 31));
-        Human vaselisa = new Human("Vaselisa", "Petrova", Gender.Female,
-                LocalDate.of(1990, 1, 1));
-        Human anna = new Human("Anna", "Petrova", Gender.Female,
-                LocalDate.of(1965, 1, 1));
-        Human vasilii = new Human("Vasilii", "Petrov", Gender.Male,
-                LocalDate.of(1987, 1, 1));
-        Human sofia = new Human("Sofia", "Legneva", Gender.Female,
-                LocalDate.of(2008, 2, 3));
-        Human ivan = new Human("Ivan", "Petrov", Gender.Male,
-                LocalDate.of(2013, 12, 3));
-        FamilyTree<Human> familyPetrovi = new FamilyTree<>();
-        familyPetrovi.setSpouse(sergei, vaselisa);
-        familyPetrovi.setChildren(anna, vasilii);
-        familyPetrovi.setMother(sergei, anna);
-        familyPetrovi.setMother(sofia, vaselisa);
-        familyPetrovi.setFather(sofia, sergei);
-        familyPetrovi.setChildren(vasilii, ivan);
+    Service familyService = new Service();
+    familyService.addHuman("John", "Vebster", Gender.Male,
+            LocalDate.of(1965,12,2));
+        familyService.addHuman("Anna", "Lubova", Gender.Female,
+                LocalDate.of(1962,12,2));
+        System.out.println(familyService.showIsNotInTree());
+        System.out.println(familyService.showTree());
 
-/*        System.out.println(familyPetrovi);
-        System.out.println(sergei);
-        System.out.println("");
-        System.out.println(anna);*/
-        //System.out.println(familyPetrovi.showTree());
 
- /*       FileHandler fileHandler = new FileHandler();
-        fileHandler.writeObject(familyPetrovi, "familyPetrovi");
-        FamilyTree recordTest = (FamilyTree) fileHandler.readObject("familyPetrovi");
-        System.out.println(recordTest);
-        fileHandler.close();*/
 
-/*        familyPetrovi.sortByName();
-
-        System.out.println("\nДемонстрация сортировки по имени + Iterable:");
-        for (Human person : familyPetrovi) {
-            System.out.println(person.getName());
-        }
-        System.out.println("\nДемонстрация сортировки по возрасту");
-
-        familyPetrovi.sortByAge();
-
-        for (Human person : familyPetrovi) {
-            System.out.printf("Имя: %s, Возраст: %d%n", person.getName(), person.getAge());*/
-        System.out.println();
-        System.out.println(familyPetrovi.showTree());
     }
 }
 

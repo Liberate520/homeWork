@@ -4,7 +4,7 @@ package model.creatures;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface Creature<T> {
+public interface Creature<T>{
 
 
     String getName();
@@ -23,11 +23,11 @@ public interface Creature<T> {
 
     boolean setSpouse(T o);
 
-    <E extends Creature<E>> E getSpouse();
+    <E extends Creature<T>> E getSpouse();
 
-    <E extends Creature<T>> T getFather();
+    <E extends Creature<T>> E getFather();
 
-    <E extends Creature<T>> T getMother();
+    <E extends Creature<T>> E getMother();
 
     void setInTree();
 }

@@ -98,6 +98,14 @@ public class Human implements Serializable, Comparable<Object>, Creature<Human> 
         this.children.add(child);
     }
 
+    public boolean setDeath(Human human, LocalDate deathDate) {
+        if (human.getDeathDate() == null) {
+            human.deathDate = deathDate;
+            return true;
+        } else
+            return false;
+    }
+
     LocalDate getDeathDate() {
         return deathDate;
     }
