@@ -1,4 +1,4 @@
-package FamilyTree.family_tree;
+package FamilyTree.FamilyTree.Model.Tree;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
