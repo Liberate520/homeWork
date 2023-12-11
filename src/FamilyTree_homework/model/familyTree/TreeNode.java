@@ -1,13 +1,10 @@
-package FamilyTree_homework.Family;
+package model.familyTree;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-public interface TreeNode<T>  {
+public interface TreeNode<T> {
     void setId(long id);
     long getId();
     T getFather();
@@ -19,4 +16,6 @@ public interface TreeNode<T>  {
     LocalDate getBirthDate();
     List<T> getParents();
     List<T> getChildren();
+    T getSpouse();
+    void setSpouse(T human);
 }

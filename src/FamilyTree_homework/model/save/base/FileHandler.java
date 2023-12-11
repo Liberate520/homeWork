@@ -1,10 +1,15 @@
-package FamilyTree_homework.writer;
+package model.save.base;
 
-import FamilyTree_homework.writer.Writable;
+import model.save.Writable;
 
 import java.io.*;
 
-public class FileHandler implements Writable {
+/**
+ * как будто бы библиотечный класс в целом для разных проектов
+ * FileHandlerForFamilyTree использует его для своей работы
+ */
+public class FileHandler {
+
     public boolean save(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);
