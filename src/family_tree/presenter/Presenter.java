@@ -1,22 +1,15 @@
 package family_tree.presenter;
 
-import family_tree.model.family.FamilyTree;
-import family_tree.model.human.Human;
 import family_tree.model.service.Service;
 import family_tree.view.View;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Presenter {
     private View view;
     private Service service;
 
-
     public Presenter(View view) {
         this.view = view;
-        service = new Service<>();
+        service = new Service();
     }
 
 
@@ -32,10 +25,12 @@ public class Presenter {
 
     public void sortByName() {
         service.sortByName();
+        getFamilyTreeMembers();
     }
 
     public void sortByAge() {
         service.sortByAge();
+        getFamilyTreeMembers();
     }
 
     public void saveTreeToFile() {
@@ -43,6 +38,21 @@ public class Presenter {
     }
 
     public void getTreeFromFile() {
-        service.getTreeFromFile();
+        System.out.println(service.getTreeFromFile());
+    }
+
+    public void setWedding(long humanId1, long humanId2) {
+        service.setWedding(humanId1, humanId2);
+        getFamilyTreeMembers();
+    }
+
+    public void setFather(long childId, long fatherId) {
+        service.setFather(childId, fatherId);
+        getFamilyTreeMembers();
+    }
+
+    public void setMother(long childId, long motherId) {
+        service.setMother(childId, motherId);
+        getFamilyTreeMembers();
     }
 }

@@ -36,4 +36,7 @@ public interface TreeNode<T> extends Serializable, Comparable<T> {
 
     int getAge();
 
+    void setFather(T human);
+
+    void setMother(T human);
 }

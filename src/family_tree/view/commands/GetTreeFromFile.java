@@ -9,6 +9,6 @@ public class GetTreeFromFile extends Command {
 
     @Override
     public void execute() {
-
+        getConsoleUI().getTreeFromFile();
     }
 }

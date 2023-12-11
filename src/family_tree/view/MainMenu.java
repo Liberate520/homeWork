@@ -12,11 +12,14 @@ public class MainMenu {
         commands = new ArrayList<>();
         commands.add(new AddFamilyMember(consoleUI));
         commands.add(new GetFamilyTreeMembers(consoleUI));
+        commands.add(new SetWedding(consoleUI));
+        commands.add(new SetFather(consoleUI));
+        commands.add(new SetMother(consoleUI));
         commands.add(new SortByAge(consoleUI));
         commands.add(new SortByName(consoleUI));
-        commands.add(new Finish(consoleUI));
         commands.add(new SaveTreeToFile(consoleUI));
         commands.add(new GetTreeFromFile(consoleUI));
+        commands.add(new Finish(consoleUI));
     }
 
     public String menu() {

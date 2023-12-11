@@ -87,7 +87,7 @@ public class ConsoleUI implements View {
         String name = scanner.nextLine();
         System.out.println("Введите фамилию члена семьи:");
         String familyName = scanner.nextLine();
-        System.out.println("Введите через тире год, месяц и день рождения члена семьи (например, 2000-12-31):");
+        System.out.println("Введите через тире год, месяц и день рождения члена семьи (например, 2000-01-31):");
         String strDate = scanner.nextLine();
         presenter.addFamilyMember(gender, name, familyName, strDate);
     }
@@ -97,11 +97,54 @@ public class ConsoleUI implements View {
         System.out.println(answer);
     }
 
-    public void saveTreeToFile(){
+    public void saveTreeToFile() {
         presenter.saveTreeToFile();
     }
 
-    public void getTreeFromFile(){
+    public void getTreeFromFile() {
         presenter.getTreeFromFile();
     }
+
+    public void setWedding() {
+        System.out.println("Введите ID первого супруга:");
+        String strHumanId1 = scanner.nextLine();
+        if (isNumeric(strHumanId1)) {
+            long humanId1 = Integer.parseInt(strHumanId1);
+            System.out.println("Введите ID второго супруга:");
+            String strHumanId2 = scanner.nextLine();
+            if (isNumeric(strHumanId1)) {
+                long humanId2 = Integer.parseInt(strHumanId2);
+                presenter.setWedding(humanId1, humanId2);
+            }
+        }
+    }
+
+    public void setFather() {
+        System.out.println("Введите ID ребенка:");
+        String strChildId = scanner.nextLine();
+        if (isNumeric(strChildId)) {
+            long childId = Integer.parseInt(strChildId);
+            System.out.println("Введите ID отца:");
+            String strFatherId = scanner.nextLine();
+            if (isNumeric(strFatherId)) {
+                long fatherId = Integer.parseInt(strFatherId);
+                presenter.setFather(childId, fatherId);
+            }
+        }
+    }
+
+    public void setMother() {
+        System.out.println("Введите ID ребенка:");
+        String strChildId = scanner.nextLine();
+        if (isNumeric(strChildId)) {
+            long childId = Integer.parseInt(strChildId);
+            System.out.println("Введите ID матери:");
+            String strMotherId = scanner.nextLine();
+            if (isNumeric(strMotherId)) {
+                long motherId = Integer.parseInt(strMotherId);
+                presenter.setMother(childId, motherId);
+            }
+        }
+    }
+
 }

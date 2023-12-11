@@ -77,7 +77,7 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         return res;
     }
 
-    public boolean setWedding(Integer humanId1, Integer humanId2) {
+    public boolean setWeddingById(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
             T human1 = getById(humanId1);
             T human2 = getById(humanId2);
@@ -95,7 +95,41 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         return false;
     }
 
-    public boolean setDivorce(Integer humanId1, Integer humanId2) {
+    public boolean setFatherById(long humanId1, long humanId2) {
+        if (checkId(humanId1) && checkId(humanId2)) {
+            T humanChild = getById(humanId1);
+            T humanFather = getById(humanId2);
+            return setFatherToHuman(humanChild, humanFather);
+        }
+        return false;
+    }
+
+    public boolean setFatherToHuman(T humanChild, T humanFather) {
+        if (humanChild.getFather() == null) {
+            humanChild.setFather(humanFather);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setMotherById(long humanId1, long humanId2) {
+        if (checkId(humanId1) && checkId(humanId2)) {
+            T humanChild = getById(humanId1);
+            T humanMother = getById(humanId2);
+            return setMotherToHuman(humanChild, humanMother);
+        }
+        return false;
+    }
+
+    private boolean setMotherToHuman(T humanChild, T humanMother) {
+        if (humanChild.getMother() == null) {
+            humanChild.setMother(humanMother);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setDivorce(long humanId1, long humanId2) {
         if (checkId(humanId1) && checkId(humanId2)) {
             T human1 = getById(humanId1);
             T human2 = getById(humanId2);
