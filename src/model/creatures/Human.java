@@ -119,7 +119,7 @@ public class Human implements Serializable, Creature<Human> {
     }
 
     public String getName() {
-        return id + " " + firstName + " " + lastName;
+        return firstName + " " + lastName;
     }
 
 

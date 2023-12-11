@@ -37,7 +37,7 @@ public class TreeAppNaturally<T extends Creature> {
             }
             if (!top.getChildren().isEmpty()) {
                 sb.append(String.format("Дети: "));
-                for (T child :(List<T>) top.getChildren()){
+                for (T child : (List<T>) top.getChildren()) {
                     tempChildren.add(child);
                     if (flag) sb.append(", ");
                     sb.append(child.getName());

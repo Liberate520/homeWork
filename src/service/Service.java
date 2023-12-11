@@ -31,8 +31,7 @@ public class Service {
         return naturalView;
     }
 
-    public boolean addHuman(String firstName, String lastName, Gender gender,
-                            LocalDate birthDate) {
+    public boolean addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate) {
         Creature human = humanBuilder.build(firstName, lastName, gender, birthDate);
 
         if (familyTree.getNotInTree().contains(human) || familyTree.getFamilyTree().contains(human)) {
@@ -45,29 +44,55 @@ public class Service {
 
     public String showIsNotInTree() {
         StringBuilder sb = new StringBuilder();
+        boolean flag = false;
         if (familyTree.getNotInTree().isEmpty()) {
             sb.append("Элементы вне дерева отсутствуют");
             return sb.toString();
         } else {
             for (Creature creature : (List<Creature>) familyTree.getNotInTree()) {
-                sb.append(creature.getName() + "\n");
+                if (flag)
+                    sb.append("\n");
+                sb.append(creature.getId() + " " + creature.getName() + "\n");
+                flag = true;
             }
             return sb.toString();
         }
     }
 
     public String showTree() {
+        Boolean flag = false;
         StringBuilder sb = new StringBuilder();
         if (familyTree.getFamilyTree().isEmpty()) {
             return sb.append("Дерево пустое").toString();
         } else {
             System.out.println("Дерево состоит из следующих членов: ");
             for (Creature creature : (List<Creature>) familyTree.getFamilyTree()) {
-                sb.append(creature.getName() + "\n");
+                if (flag)
+                    sb.append("\n");
+                sb.append(creature.getId() + " " + creature.getName());
+                flag = true;
             }
-            return sb.toString();
         }
+        return sb.toString();
     }
+
+
+    public String showAll() {
+        StringBuilder sb = new StringBuilder();
+        if (familyTree.getFamilyTree().isEmpty() && familyTree.getNotInTree().isEmpty()) {
+            return sb.append("Добавленных людей нет").toString();
+        } else {
+            System.out.println("Все добавленные люди: ");
+            for (Creature creature : (List<Creature>) familyTree.getFamilyTree()) {
+                sb.append(creature.getId() + " " + creature.getName() + "\n");
+            }
+            for (Creature creature : (List<Creature>) familyTree.getNotInTree()) {
+                sb.append(creature.getId() + " " + creature.getName() + "\n");
+            }
+        }
+        return sb.toString();
+    }
+
 
     public boolean SetChild(Integer idParent, Integer idChild) {
         if (familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild))) {
@@ -85,4 +110,13 @@ public class Service {
         }
     }
 
+    public String ShowAllInfo(Integer id) {
+        StringBuilder sb = new StringBuilder();
+        if (familyTree.searchById(id) != null) {
+            sb.append(familyTree.searchById(id));
+            return sb.toString();
+        } else {
+            return sb.append("Человек с таким ID отсутствует").toString();
+        }
+    }
 }
