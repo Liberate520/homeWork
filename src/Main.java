@@ -1,3 +1,6 @@
+import family_tree.FamilyTree;
+import human.Gender;
+import human.Human;
 import writer.FileHandler;
 
 import java.time.LocalDate;
@@ -6,9 +9,14 @@ public class Main {
     public static void main(String[] args) {
 
         //FamilyTree tree = testTree();
-        FamilyTree tree = load();
+        family_tree.FamilyTree tree = load();
         System.out.println(tree);
 
+        tree.sortByAge();
+        System.out.println(tree);
+
+        tree.sortByName();
+        System.out.println(tree);
         //save(tree);
     }
 
