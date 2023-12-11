@@ -1,5 +1,7 @@
 package human;
 
+import family_tree.FamilyItem;
+
 import java.util.Comparator;
 
 public class SortByAgeComparator<E extends FamilyItem> implements Comparator<E> {

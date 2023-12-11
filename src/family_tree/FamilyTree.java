@@ -2,7 +2,6 @@ package family_tree;
 
 import human.Gender;
 import human.SortByAgeComparator;
-import human.FamilyItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;

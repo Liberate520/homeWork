@@ -1,6 +1,10 @@
-package human;
+package family_tree;
 
-public interface FamilyItem {
+import human.Gender;
+
+import java.io.Serializable;
+
+public interface FamilyItem<T> extends Serializable {
     String getName();
     int getAge();
 
