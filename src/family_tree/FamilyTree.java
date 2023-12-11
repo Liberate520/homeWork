@@ -1,7 +1,6 @@
 package family_tree;
 
 import human.Gender;
-import human.SortByAgeComparator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends FamilyItem> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterable<E> {
     private static final long serialVersionUID = 1L;
     private long countPeople;
     private List<E> familyTree;

@@ -4,7 +4,7 @@ import human.Gender;
 
 import java.io.Serializable;
 
-public interface FamilyItem<T> extends Serializable {
+public interface FamilyItem<T> extends Serializable,Comparable<T> {
     String getName();
     int getAge();
 
