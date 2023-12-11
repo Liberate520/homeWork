@@ -41,7 +41,6 @@ public class ConsoleUI implements View {
         }
     }
 
-
     //TODO: Обработать возможные ошибки ввода
     public void addCreature() {
         Gender gend = Gender.Male;
@@ -75,11 +74,6 @@ public class ConsoleUI implements View {
 
     private void printMenu() {
         System.out.println(menu.menu());
-    }
-
-    @Override
-    public void printAnswer(String answer) {
-        System.out.println(answer);
     }
 
     private void execute() {
@@ -122,6 +116,6 @@ public class ConsoleUI implements View {
     public void ShowAllInfo() {
         System.out.println("Введите ID человека");
         Integer id = Integer.parseInt(scanner.nextLine());
-            System.out.println(presenter.showAllInfo(id));
+        System.out.println(presenter.showAllInfo(id));
     }
 }
