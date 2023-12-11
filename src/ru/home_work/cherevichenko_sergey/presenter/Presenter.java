@@ -16,8 +16,6 @@ public class Presenter {
     }
     public void addHuman(String name, String lastName, Gender gender,
                          LocalDate birthDay, LocalDate dateDeath){
-
-
         service.addHuman( name, lastName,  gender, birthDay, dateDeath);
     }
     public void getHumanInfo(){
@@ -30,13 +28,6 @@ public class Presenter {
                  fatherLastName,nameChild,lastNameChild);
         view.printAnswer(answer);
 
-    }
-    public void addParentAndChildren(String nameParent,String lastNameParent,Gender gender,LocalDate birthDay,
-                                     LocalDate dateDeath,String nameChild,String lastNameChild,Gender genderChild,
-                                     LocalDate birthDayChild,LocalDate dateDeadChild){
-        String answer = service.addParentAndChildren(nameParent, lastNameParent,gender,birthDay,
-                dateDeath,nameChild,lastNameChild,genderChild,birthDayChild,dateDeadChild);
-        view.printAnswer(answer);
     }
     public  void  removeHuman(String name,String lastName){
         String answer = service.removeHuman(name,lastName);

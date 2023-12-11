@@ -20,14 +20,6 @@ public class FileHandler implements Writable {
                 new FileInputStream("tree.out"));
          Object o = objectInputStream.readObject();
          objectInputStream.close();
-
        return o;
-
-    }
-    // интерфейс, для того чтобы пользоваться классами записи и чтения
-    // методы для записи и чтения
-    public static interface Writable {
-        void save(Object o) throws IOException;
-            Object readable() throws IOException, ClassNotFoundException;
     }
 }

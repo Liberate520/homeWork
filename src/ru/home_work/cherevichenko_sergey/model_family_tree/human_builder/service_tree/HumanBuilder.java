@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// Класс для создания человека
+// Класс для создания человека и использования в классе высшего программирования ServiceTree
 public class HumanBuilder implements Serializable {
     public Human build(String name, String lastName, Gender gender,
                        LocalDate birthDay, LocalDate dateDeath, ArrayList<Human> children){

@@ -16,10 +16,6 @@ public class ConsoleUi implements View{
     private MainMenu menu;
 
     DataEntry dataEntry;
-
-
-
-
     public ConsoleUi() {
         scanner = new Scanner(System.in);
         presenter =new Presenter(this);
@@ -27,11 +23,7 @@ public class ConsoleUi implements View{
         int localDateTime = LocalDateTime.now().getHour();
         menu = new MainMenu(this);
         dataEntry  = new DataEntry();
-
-
-
     }
-
     @Override
     public void start() {
         System.out.println(dataEntry.timeDay());
@@ -46,8 +38,6 @@ public class ConsoleUi implements View{
         int line = scanner.nextInt();
         if(line > 0 && line <14) menu.execute(line);
         else error();
-
-
     }
     //int choice = Integer.parseInt(choiceStr);
     private void error(){
@@ -96,21 +86,7 @@ public class ConsoleUi implements View{
         String lastNameChild = dataEntry.name("Введите фамилию ребенка: ");
         presenter.findChildren(nameChild,lastNameChild);
     }
-    public void addParentAndChildren(){
-        String nameParent = dataEntry.name("Введите имя родителя: ");
-        String lastNameParent = dataEntry.name("Введите фамилию родителя: ");
-        Gender genderParent = dataEntry.gender();
-        LocalDate birthDayParent = dataEntry.birthDay();
-        LocalDate dateDeathParent = dataEntry.dateDeath();
-        String nameChild = dataEntry.name("Введите имя ребенка: ");
-        String lastNameChild = dataEntry.name("Введите фамилию ребенка: ");
-        Gender genderChild = dataEntry.gender();
-        LocalDate birthDayChild = dataEntry.birthDay();
-        LocalDate dateDeathChild = dataEntry.dateDeath();
-        presenter.addParentAndChildren(nameParent,lastNameParent,genderParent,birthDayParent,dateDeathParent,
-                nameChild,lastNameChild,genderChild,birthDayChild,dateDeathChild);
 
-    }
     public void sortByName(){
         presenter.sortByName();
     }
@@ -137,6 +113,5 @@ public class ConsoleUi implements View{
             e.printStackTrace();
         }
     }
-
 
 }

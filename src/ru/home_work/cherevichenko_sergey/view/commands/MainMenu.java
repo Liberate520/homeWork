@@ -13,7 +13,6 @@ public class MainMenu {
         commands.add(new AddHuman(consoleUi));
         commands.add(new GetHumanInfo(consoleUi));
         commands.add(new AddChildForFamily(consoleUi));
-        commands.add(new AddParentAndChildren(consoleUi));
         commands.add(new FindChildren(consoleUi));
         commands.add(new RemoveHuman(consoleUi));
         commands.add(new SortByName(consoleUi));

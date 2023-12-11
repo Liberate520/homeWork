@@ -6,7 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements FamilyTreeItem, Serializable, Comparable<Human> {
+public class Human implements FamilyTreeItem, Serializable {
     // Описываем класс ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.human.Human
     private String name;
     private String lastName;
@@ -83,11 +83,6 @@ public class Human implements FamilyTreeItem, Serializable, Comparable<Human> {
             br.append(",дети: ").append(getChildren());
 
         return br.toString();
-    }
-
-    @Override
-    public int compareTo(Human o) {
-        return (o.getName().compareTo(this.name));
     }
 }
 

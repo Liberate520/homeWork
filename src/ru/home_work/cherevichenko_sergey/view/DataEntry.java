@@ -18,13 +18,11 @@ public class DataEntry {
         localDateTime = LocalDateTime.now();
         scanner = new Scanner(System.in);
     }
-
     public String name( String name1){
         System.out.println(name1);
          name = scanner.nextLine();
         return name;
     }
-
     public Gender gender(){
         System.out.println("Выберите пол. Введите М или Ж:  ");
         String gender1 = scanner.nextLine();
@@ -55,7 +53,6 @@ public class DataEntry {
             System.out.println("Введите день смерти в формате ДД:  ");
             int day = Integer.parseInt(scanner.nextLine());
             return birthDay = LocalDate.of(year, month, day);
-
         }
     }
     public String  timeDay(){
@@ -72,9 +69,5 @@ public class DataEntry {
         }
         return str.toString();
     }
-    public void save(){
-
-    }
-
 
 }

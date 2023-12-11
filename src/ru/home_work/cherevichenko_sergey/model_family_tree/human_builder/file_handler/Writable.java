@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 public interface Writable  {
      void save(Object o) throws IOException;
-
      // Метод для записи
-
      Object readable() throws IOException, ClassNotFoundException;
 }
