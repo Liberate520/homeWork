@@ -204,13 +204,13 @@ public class Human implements TreeNode<Human> {
 
     //Equals
     @Override
-    public boolean equals(Object obj){
-        if(this == obj){
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if(!(obj instanceof Human human)){
-            return false;
-        }
+        if (!(obj instanceof Human)) return false;
+        Human human = (Human) obj;
+
         return human.getId() == getId();
     }
 }
