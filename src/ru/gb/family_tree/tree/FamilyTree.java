@@ -1,6 +1,5 @@
 package ru.gb.family_tree.tree;
 
-import ru.gb.family_tree.humans.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -66,15 +65,21 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     }
 
     private boolean checkId(long id) {
-        return id < humansId && id >= 0;
+        if (id >= humansId || id < 0){
+            return false;
+        }
+        for (E human: humanList){
+            if (human.getId() == id){
+                return true;
+            }
+        }
+        return false;
     }
 
-    private E getByID(long id) {
-        if (checkId(id)) {
-            for (E human : humanList) {
-                if (human.getId() == id) {
-                    return human;
-                }
+    public E getByID(long id) {
+        for (E human : humanList) {
+            if (human.getId() == id) {
+                return human;
             }
         }
         return null;
@@ -97,16 +102,16 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
         return stringBuilder.toString();
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new FamilyTreeIterator<>(humanList);
-    }
-
     public void sortByName() {
         humanList.sort(new FamilyTreeComparatorByName<>());
     }
 
     public void sortByDate() {
         humanList.sort(new FamilyTreeComparatorByDate<>());
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new FamilyTreeIterator<>(humanList);
     }
 }

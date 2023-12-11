@@ -1,7 +1,5 @@
 package ru.gb.family_tree.tree;
 
-import com.sun.source.tree.Tree;
-import ru.gb.family_tree.humans.Human;
 
 import java.util.Iterator;
 import java.util.List;

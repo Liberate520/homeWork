@@ -1,5 +1,6 @@
 package ru.gb.family_tree.writer;
 
+
 import java.io.Serializable;
 
 public interface Writable {

@@ -1,5 +1,6 @@
 package ru.gb.family_tree.humans;
 
+
 import ru.gb.family_tree.tree.TreeNode;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class Human implements Serializable, TreeNode<Human> {
     private LocalDate deathDate;
     private Human father;
     private Human mother;
+    private List<Human> parents;
     private List<Human> children;
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother) {
@@ -26,6 +28,13 @@ public class Human implements Serializable, TreeNode<Human> {
         this.deathDate = deathDate;
         this.father = father;
         this.mother = mother;
+        parents = new ArrayList<>();
+        if (father != null){
+            parents.add(father);
+        }
+        if (mother != null){
+            parents.add(mother);
+        }
         children = new ArrayList<>();
     }
 
