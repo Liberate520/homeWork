@@ -1,7 +1,10 @@
 package my_family_tree.view;
 
 import my_family_tree.model.human.Gender;
+import my_family_tree.model.writer.Writable;
 import my_family_tree.presenter.Presenter;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -29,7 +32,14 @@ public class ConsoleUI implements View{
 
     private void scanMenu() {
         int choice = checkInt();
-        menu.execute(choice);
+        try {
+            if ( choice > 0 && choice <= menu.size()){
+                menu.execute(choice);
+            }
+            else error();
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void error() {
@@ -79,8 +89,17 @@ public class ConsoleUI implements View{
         presenter.save();
     }
 
+    public void setWritable(Writable writable){
+        presenter.setWritable(writable);
+    }
+
     public void load(){
-        presenter.load();
+        try{
+            presenter.load();
+        } catch (RuntimeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
     public void sortByYear() {
         presenter.sortByYear();

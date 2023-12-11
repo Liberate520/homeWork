@@ -1,5 +1,7 @@
 package my_family_tree.view;
 
+import my_family_tree.model.writer.FileHandler;
+
 public interface View {
     void start();
     void answer(String answer);
@@ -17,4 +19,5 @@ public interface View {
     void save();
 
     void setDeathDate();
+
 }

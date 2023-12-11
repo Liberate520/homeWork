@@ -5,13 +5,16 @@ import my_family_tree.model.human.Gender;
 import my_family_tree.model.human.Human;
 import my_family_tree.model.tree.FamilyTree;
 import my_family_tree.model.writer.FileHandler;
+import my_family_tree.model.writer.Writable;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree<Human> tree;
     private HumanBuilder builder;
+    private Writable writable;
 
 
     public Service(){
@@ -63,16 +66,14 @@ public class Service {
         tree.wedding(spouse1, spouse2);
     }
 
-    public void load(){
+    public void load() throws IOException {
         String filePath = "src/my_family_tree/model/writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        tree = (FamilyTree) fileHandler.read(filePath);
+        tree = (FamilyTree) writable.read(filePath);
     }
 
-    public void save() {
+    public boolean save() {
         String filePath = "src/my_family_tree/model/writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree, filePath);
+        return writable.save(tree, filePath);
     }
 
     public void setDeathDate(int iD, LocalDate deathday) {
@@ -82,5 +83,9 @@ public class Service {
 
     public boolean checkId(int id) {
        return tree.checkId(id);
+    }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
     }
 }

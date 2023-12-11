@@ -2,8 +2,10 @@ package my_family_tree.presenter;
 
 import my_family_tree.model.human.Gender;
 import my_family_tree.model.service.Service;
+import my_family_tree.model.writer.Writable;
 import my_family_tree.view.View;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Presenter {
@@ -48,7 +50,7 @@ public class Presenter {
         service.wedding(spouse1, spouse2);
     }
 
-    public void load() {
+    public void load() throws IOException {
         service.load();
     }
 
@@ -62,5 +64,9 @@ public class Presenter {
 
     public boolean checkId(int id) {
         return service.checkId(id);
+    }
+
+    public void setWritable(Writable writable) {
+        service.setWritable(writable);
     }
 }
