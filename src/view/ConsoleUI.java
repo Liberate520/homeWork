@@ -3,16 +3,9 @@ package view;
 import model.creatures.Gender;
 import presenter.Presenter;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -53,13 +46,17 @@ public class ConsoleUI implements View {
         if (gender == 2) {
             gend = Gender.Female;
         }
-        System.out.println("Введите дату рождения в формате год-месяц-день: (1990-09-10):");
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        boolean flag = false;
         LocalDate date = null;
-        try {
-            date = LocalDate.parse(scanner.nextLine(), dateFormat);
-        } catch (DateTimeParseException e) {
-            System.out.println(e);
+        while (!flag) {
+            try {
+                System.out.println("Введите дату рождения в формате год-месяц-день: (1990-09-10):");
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate.parse(scanner.nextLine(), dateFormat);
+                flag = true;
+            } catch (DateTimeParseException e) {
+                System.out.println(e);
+            }
         }
         if (presenter.addCreature(name, lastName, gend, date)) {
             System.out.println("Человек успешно добавлен!");

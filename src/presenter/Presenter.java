@@ -1,7 +1,7 @@
 package presenter;
 
 import model.creatures.Gender;
-import service.Service;
+import model.service.Service;
 import view.View;
 
 import java.time.LocalDate;
@@ -23,6 +23,10 @@ public class Presenter {
     public boolean addCreature(String firstName, String lastName, Gender gender,
                                LocalDate birthDate) {
         return service.addHuman(firstName, lastName, gender, birthDate);
+    }
+
+    public String showHumanTree() {
+        return service.showHumanTree();
     }
 
     public String showNotInTree() {

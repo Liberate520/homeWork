@@ -1,25 +1,25 @@
-package service;
+package model.service;
 
 
-import model.creatures.*;
+import model.creatures.Creature;
+import model.creatures.Gender;
+import model.creatures.HumanBuilder;
 import model.family_tree.FamilyTree;
-import model.family_tree.TreeAppNaturally;
+import model.human_tree.HumanTree;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Service {
 
     private FamilyTree familyTree;
-    private TreeAppNaturally naturalView;
+    private HumanTree humanTree;
     private HumanBuilder humanBuilder;
 
     public Service() {
         familyTree = new FamilyTree();
         humanBuilder = new HumanBuilder();
-        //naturalView = new TreeAppNaturally(familyTree);
+        humanTree = new HumanTree(familyTree);
 
     }
 
@@ -27,8 +27,8 @@ public class Service {
         return familyTree;
     }
 
-    public TreeAppNaturally getNaturalView() {
-        return naturalView;
+    public HumanTree getHumanTree() {
+        return humanTree;
     }
 
     public boolean addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate) {
@@ -76,18 +76,32 @@ public class Service {
         return sb.toString();
     }
 
+    public String showHumanTree(){
+        return humanTree.showTree();
+    }
 
+    //TODO: Отформорматировать вывод
     public String showAll() {
         StringBuilder sb = new StringBuilder();
         if (familyTree.getFamilyTree().isEmpty() && familyTree.getNotInTree().isEmpty()) {
             return sb.append("Добавленных людей нет").toString();
         } else {
+            boolean flag1 = false;
             System.out.println("Все добавленные люди: ");
             for (Creature creature : (List<Creature>) familyTree.getFamilyTree()) {
-                sb.append(creature.getId() + " " + creature.getName() + "\n");
+                if (flag1) {
+                    sb.append("\n");
+                }
+                sb.append(creature.getId() + " " + creature.getName());
+                flag1 = true;
             }
+            flag1 = false;
             for (Creature creature : (List<Creature>) familyTree.getNotInTree()) {
+                if (flag1) {
+                    sb.append("\n");
+                }
                 sb.append(creature.getId() + " " + creature.getName() + "\n");
+                flag1 = true;
             }
         }
         return sb.toString();

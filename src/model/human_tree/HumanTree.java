@@ -1,18 +1,18 @@
-package model.family_tree;
+package model.human_tree;
 
 
 import model.creatures.Creature;
+import model.family_tree.FamilyTree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeAppNaturally<T extends Creature> {
+public class HumanTree<T extends Creature> {
     FamilyTree familyTree;
     T treeTop;
 
-    public TreeAppNaturally(FamilyTree familyTree) {
+    public HumanTree(FamilyTree familyTree) {
         this.familyTree = familyTree;
-        this.treeTop = (T) familyTree.getFamilyTree().getFirst();
     }
 
 
@@ -52,20 +52,24 @@ public class TreeAppNaturally<T extends Creature> {
     }
 
     private boolean topOfTree(T topEnter) {
-        if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
-            if (topEnter.getSpouse() != null) {
-                if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
-                    topOfTree((T) topEnter.getSpouse());
+        if (familyTree.getFamilyTree().isEmpty()) {
+            return false;
+        } else {
+            if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
+                if (topEnter.getSpouse() != null) {
+                    if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
+                        topOfTree((T) topEnter.getSpouse());
+                    }
+                } else {
+                    this.treeTop = topEnter;
                 }
-            } else {
-                this.treeTop = topEnter;
             }
-        }
-        if (topEnter != null) {
-            topOfTree((T) topEnter.getFather());
-            topOfTree((T) topEnter.getMother());
-        }
+            if (topEnter != null) {
+                topOfTree((T) topEnter.getFather());
+                topOfTree((T) topEnter.getMother());
+            }
 
-        return true;
+            return true;
+        }
     }
 }
