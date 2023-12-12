@@ -1,11 +1,15 @@
 package model.familyTree;
 
 import model.human.Human;
+import model.human.HumanComparatorByBirthDate;
+import model.human.HumanComparatorByName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable, Iterable<Human>{
 
     private List<Human> humanList;
 
@@ -69,6 +73,18 @@ public class FamilyTree {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sortByName(){
+        humanList.sort(new HumanComparatorByName());
+    }
+    public void sortByBirthDate(){
+        humanList.sort(new HumanComparatorByBirthDate());
     }
 
 }
