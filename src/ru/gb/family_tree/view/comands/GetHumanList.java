@@ -1,5 +1,7 @@
 package ru.gb.family_tree.view.comands;
 
+import ru.gb.family_tree.view.Console;
+
 public class GetHumanList {
     private Console console;
 

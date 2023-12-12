@@ -1,5 +1,8 @@
-package ru.gb.family_tree.view.comands;
+package ru.gb.family_tree.view;
 
+
+import ru.gb.family_tree.view.Console;
+import ru.gb.family_tree.view.comands.GetHumanList;
 
 import java.util.ArrayList;
 import java.util.List;

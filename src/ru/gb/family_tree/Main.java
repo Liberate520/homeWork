@@ -1,9 +1,9 @@
 package ru.gb.family_tree;
 
 
-import ru.gb.family_tree.humans.Gender;
-import ru.gb.family_tree.humans.Human;
-import ru.gb.family_tree.tree.FamilyTree;
+import ru.gb.family_tree.model.humans.Gender;
+import ru.gb.family_tree.model.humans.Human;
+import ru.gb.family_tree.model.tree.FamilyTree;
 
 import java.time.LocalDate;
 

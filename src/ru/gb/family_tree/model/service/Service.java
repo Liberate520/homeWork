@@ -1,10 +1,10 @@
-package ru.gb.family_tree.service;
+package ru.gb.family_tree.model.service;
 
 
-import ru.gb.family_tree.humans.Gender;
-import ru.gb.family_tree.humans.Human;
-import ru.gb.family_tree.tree.FamilyTree;
-import ru.gb.family_tree.writer.Writable;
+import ru.gb.family_tree.model.humans.Gender;
+import ru.gb.family_tree.model.humans.Human;
+import ru.gb.family_tree.model.tree.FamilyTree;
+import ru.gb.family_tree.model.writer.Writable;
 
 import java.time.LocalDate;
 

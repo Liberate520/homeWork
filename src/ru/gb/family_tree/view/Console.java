@@ -1,11 +1,11 @@
-package ru.gb.family_tree.view.comands;
+package ru.gb.family_tree.view;
 
 
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.util.Scanner;
 
-public class Console implements View{
+public class Console implements View {
     private Presenter presenter;
     private Scanner scanner;
     private Menu menu;
