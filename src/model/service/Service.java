@@ -3,24 +3,23 @@ package model.service;
 
 import model.creatures.Creature;
 import model.creatures.Gender;
+import model.creatures.Human;
 import model.creatures.HumanBuilder;
 import model.family_tree.FamilyTree;
 import model.human_tree.HumanTree;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Service {
 
-    private FamilyTree familyTree;
-    private HumanTree humanTree;
-    private HumanBuilder humanBuilder;
+    private final FamilyTree<Human> familyTree;
+    private final HumanTree<Human> humanTree;
+    private final HumanBuilder humanBuilder;
 
     public Service() {
-        familyTree = new FamilyTree();
+        familyTree = new FamilyTree<>();
         humanBuilder = new HumanBuilder();
-        humanTree = new HumanTree(familyTree);
-
+        humanTree = new HumanTree<>(familyTree);
     }
 
     public FamilyTree getFamilyTree() {
@@ -32,8 +31,7 @@ public class Service {
     }
 
     public boolean addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate) {
-        Creature human = humanBuilder.build(firstName, lastName, gender, birthDate);
-
+        Human human = humanBuilder.build(firstName, lastName, gender, birthDate);
         if (familyTree.getNotInTree().contains(human) || familyTree.getFamilyTree().contains(human)) {
             return false;
         } else {
@@ -49,7 +47,7 @@ public class Service {
             sb.append("Элементы вне дерева отсутствуют");
             return sb.toString();
         } else {
-            for (Creature creature : (List<Creature>) familyTree.getNotInTree()) {
+            for (Creature creature :  familyTree.getNotInTree()) {
                 if (flag)
                     sb.append("\n");
                 sb.append(creature.getId() + " " + creature.getName() + "\n");
@@ -60,13 +58,13 @@ public class Service {
     }
 
     public String showTree() {
-        Boolean flag = false;
+        boolean flag = false;
         StringBuilder sb = new StringBuilder();
         if (familyTree.getFamilyTree().isEmpty()) {
             return sb.append("Дерево пустое").toString();
         } else {
-            System.out.println("Дерево состоит из следующих членов: ");
-            for (Creature creature : (List<Creature>) familyTree.getFamilyTree()) {
+            sb.append("Дерево состоит из следующих членов");
+            for (Creature creature :  familyTree.getFamilyTree()) {
                 if (flag)
                     sb.append("\n");
                 sb.append(creature.getId() + " " + creature.getName());
@@ -76,7 +74,7 @@ public class Service {
         return sb.toString();
     }
 
-    public String showHumanTree(){
+    public String showHumanTree() {
         return humanTree.showTree();
     }
 
@@ -87,8 +85,8 @@ public class Service {
             return sb.append("Добавленных людей нет").toString();
         } else {
             boolean flag1 = false;
-            System.out.println("Все добавленные люди: ");
-            for (Creature creature : (List<Creature>) familyTree.getFamilyTree()) {
+            sb.append("Все добавленные люди:");
+            for (Creature creature : familyTree.getFamilyTree()) {
                 if (flag1) {
                     sb.append("\n");
                 }
@@ -96,7 +94,7 @@ public class Service {
                 flag1 = true;
             }
             flag1 = false;
-            for (Creature creature : (List<Creature>) familyTree.getNotInTree()) {
+            for (Creature creature : familyTree.getNotInTree()) {
                 if (flag1) {
                     sb.append("\n");
                 }
@@ -107,8 +105,7 @@ public class Service {
         return sb.toString();
     }
 
-
-    public boolean SetChild(Integer idParent, Integer idChild) {
+    public boolean setChild(Integer idParent, Integer idChild) {
         if (familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild))) {
             return true;
         } else {

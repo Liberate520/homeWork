@@ -27,7 +27,7 @@ public class ConsoleUI implements View {
 
     @Override
     public void start() {
-        System.out.println("Здравствуйте!");
+        System.out.println("Здравствуйте!\nВведите в консоль пункт меню и нажмите Enter");
         while (work) {
             printMenu();
             execute();
@@ -78,15 +78,14 @@ public class ConsoleUI implements View {
         int numCommand = 0;
         try {
             numCommand = Integer.parseInt(line);
+            try {
+                menu.execute(numCommand);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Пожалуйста, введите корректный номер пункта меню");
+            }
         } catch (NumberFormatException e) {
-            System.out.println(e);
+            System.out.println("Пожалуйста, введите корректный номер пункта меню");
         }
-        try {
-            menu.execute(numCommand);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
-        }
-
     }
 
     public void showNotInTree() {

@@ -38,7 +38,7 @@ public class Presenter {
     }
 
     public boolean setChild(Integer parentID, Integer childID) {
-        return service.SetChild(parentID, childID);
+        return service.setChild(parentID, childID);
     }
 
     public String showAllInfo(Integer id) {
