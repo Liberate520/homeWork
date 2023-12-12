@@ -1,22 +1,20 @@
-package Family;
+package model.family;
 
-import Human.Human;
-import Human.Gender;
+import model.human.Gender;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
-import java.util.Objects;
 
-public interface FamilyMember {
+public interface FamilyMember<T> extends Serializable {
     String fullInfo();
     int getAge();
     String getName();
     String getFamilyName();
-    FamilyMember getMother();
-    FamilyMember getFather();
+    T getMother();
+    T getFather();
     Gender getGender();
-    List<FamilyMember> getChildrens();
+    List<T> getChildrens();
 
     LocalDate getBirthData();
 
