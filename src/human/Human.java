@@ -1,4 +1,4 @@
-package family;
+package human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ public class Human implements Serializable {
     //поля
     private int id;
     private String name;
+    private Enum gender;
     private int birn;
     private int die;
     private List<Human> parent;
@@ -15,9 +16,10 @@ public class Human implements Serializable {
     private Human pair;
 //***********************************конструкторы
 
-    public Human(String name, int birn, int die) {
+    public Human(String name,Enum gender, int birn, int die) {
         this.id=0;
         this.name = name;
+        this.gender = gender;
         this.birn = birn;
         this.die = die;
         this.child = new ArrayList<Human>();
@@ -25,17 +27,20 @@ public class Human implements Serializable {
         pair=null;
     }
 
-    public Human(String name, int birn) {
-        this(name,birn,0);
+    public Human(String name,Enum gender, int birn) {
+        this(name,gender, birn,0);
     }
 
-    public Human(String name) {
-        this(name,0,0);
+    public Human(String name,Enum gender) {
+        this(name,gender,0,0);
     }
 
 //*************************************GET
     public int getId() {
         return id;
+    }
+    public Enum getGender() {
+        return gender;
     }
     public String getName() {
         return name;
@@ -57,7 +62,7 @@ public class Human implements Serializable {
     }
 
 
-    //******************SET//add
+ //******************SET//add
     public void setId(int id) {
         this.id = id;
     }
@@ -69,8 +74,10 @@ public class Human implements Serializable {
     }
 
     public void setPair(Human partner) {
-        this.pair=partner;
-        partner.pair=this;
+        if (partner.gender!=this.gender) {
+            this.pair = partner;
+            partner.pair = this;
+        }
     }
 
     public void addChild(Human ch) {
@@ -81,7 +88,11 @@ public class Human implements Serializable {
     }
 
     public void addParent(Human pa) {
-        if (!this.parent.contains(pa)){
+        if (parent.size()==0){
+            this.parent.add(pa);
+            pa.child.add(this);
+        }
+        else if (parent.size()==1 && !this.parent.contains(pa) && this.getParent().get(0).gender!=pa.gender) {
             this.parent.add(pa);
             pa.child.add(this);
         }
@@ -96,8 +107,16 @@ public class Human implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
         sb.append(id);
+
         sb.append(" имя: ");
         sb.append(name);
+
+        sb.append(" пол: ");
+        if (getGender()==Gender.male){
+            sb.append("мужской ");
+        }
+        else {sb.append("женский ");}
+
         if (getBirn()>0){
             sb.append(" родился : "+birn);
         }
@@ -115,10 +134,13 @@ public class Human implements Serializable {
         }
 
         if (parent.size()!= 0){
-            sb.append(" родители: ");
-            sb.append(parent.get(0).getName());
-            for (int i = 1; i < parent.size(); i++) {
-                sb.append(", "+parent.get(i).getName());
+            sb.append(" родители:");
+            for (int i = 0; i < parent.size(); i++) {
+                if (parent.get(i).getGender()==Gender.male){
+                    sb.append(" отец - "+parent.get(i).getName());}
+                else {
+                    sb.append(" мать - "+parent.get(i).getName());
+                }
             }
         }
 
@@ -126,10 +148,9 @@ public class Human implements Serializable {
             sb.append(" в браке с: ");
             sb.append(pair.getName());
         }
+
         return sb.toString();
     }
-
-
 
 }
 

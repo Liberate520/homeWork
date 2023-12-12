@@ -1,30 +1,34 @@
 package family;
 
-import family.Human;
+import family.HumanIterator;
+import human.Human;
+import human.HumanComparatorByBirn;
+import human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 
-public class Tree implements Serializable {
+public class Tree implements Serializable, Iterable<Human> {
     private List<Human> treeMan;
 
     //Конструктор
     public Tree() {
-        this.treeMan=new ArrayList<Human>();
+        treeMan=new ArrayList<Human>();
     }
 
 
     //Методы
     public void addPeople(List <Human> newpeople){
-        for (Human h : newpeople ){
-            this.treeMan.add(h);
+        for (Human human: newpeople ){
+            treeMan.add(human);
         }
     }
 
-    public void addHuman(Human Man){
-        this.treeMan.add(Man);
+    public void addHuman(Human human){
+        treeMan.add(human);
         //return this;
     }
 
@@ -35,11 +39,24 @@ public class Tree implements Serializable {
     public String outputTree(){
         StringBuilder sb = new StringBuilder();
         int j=0;
-        for (Human h : treeMan ){
+        for (Human human : treeMan ){
             j++;
-            sb.append(j+" "+h.outputHuman()+"\n");
+            sb.append(j+" "+human.outputHuman()+"\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator <Human> iterator(){
+        return new HumanIterator(this.treeMan);
+    }
+
+    public void sortByName(){
+        treeMan.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirn(){
+        treeMan.sort(new HumanComparatorByBirn());
     }
 
 }

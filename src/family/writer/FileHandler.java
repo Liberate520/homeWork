@@ -9,7 +9,7 @@ public class FileHandler implements Writable {
         try{
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
             objectOutputStream.writeObject(serializable);
-            //objectOutputStream.close();
+            objectOutputStream.close();
             return true;
         }
         catch (Exception e) {
