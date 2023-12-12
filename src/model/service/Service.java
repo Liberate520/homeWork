@@ -47,6 +47,7 @@ public class Service {
             sb.append("Элементы вне дерева отсутствуют");
             return sb.toString();
         } else {
+            sb.append("Еще не добавлены в дерево:\n");
             for (Creature creature :  familyTree.getNotInTree()) {
                 if (flag)
                     sb.append("\n");
@@ -63,7 +64,7 @@ public class Service {
         if (familyTree.getFamilyTree().isEmpty()) {
             return sb.append("Дерево пустое").toString();
         } else {
-            sb.append("Дерево состоит из следующих членов");
+            sb.append("Дерево состоит из следующих членов\n");
             for (Creature creature :  familyTree.getFamilyTree()) {
                 if (flag)
                     sb.append("\n");
@@ -73,6 +74,7 @@ public class Service {
         }
         return sb.toString();
     }
+
 
     public String showHumanTree() {
         return humanTree.showTree();

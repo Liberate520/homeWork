@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializable {
+    //TODO: Можно сделать в одном экземпляре
     private final List<T> familyTree;
     private final List<T> notInTree;
 
@@ -23,6 +24,10 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     public List<T> getNotInTree() {
         return notInTree;
+    }
+
+    public T getFirstMember(){
+        return familyTree.getFirst();
     }
 
     public boolean setSpouse(T firstSpouce, T secondSpouce) {

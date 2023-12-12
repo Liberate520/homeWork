@@ -2,16 +2,17 @@ package model.human_tree;
 
 
 import model.creatures.Creature;
+import model.creatures.Human;
 import model.family_tree.FamilyTree;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HumanTree<T extends Creature> {
-    FamilyTree familyTree;
+    FamilyTree<Human> familyTree;
     T treeTop;
 
-    public HumanTree(FamilyTree familyTree) {
+    public HumanTree(FamilyTree<Human> familyTree) {
         this.familyTree = familyTree;
     }
 
@@ -55,6 +56,7 @@ public class HumanTree<T extends Creature> {
         if (familyTree.getFamilyTree().isEmpty()) {
             return false;
         } else {
+            this.treeTop = (T) familyTree.getFirstMember();
             if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
                 if (topEnter.getSpouse() != null) {
                     if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {

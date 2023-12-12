@@ -114,4 +114,8 @@ public class ConsoleUI implements View {
         Integer id = Integer.parseInt(scanner.nextLine());
         System.out.println(presenter.showAllInfo(id));
     }
+
+    public void showHumanTree() {
+        presenter.showHumanTree();
+    }
 }
