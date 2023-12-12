@@ -6,8 +6,9 @@ import ru.gb.family_tree.human.Human;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Human> {
     private List<Human> familyTreeList;
 
     //конструктор
@@ -69,7 +70,7 @@ public class FamilyTree implements Serializable {
     //выдача списка всех людей
     public String getFamilyTree(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("=== Семейное древо ===\n");
+        stringBuilder.append("=== Family tree ===\n");
         for (Human human : familyTreeList){
             stringBuilder.append(human);
             stringBuilder.append(getChildren(human));
@@ -83,6 +84,18 @@ public class FamilyTree implements Serializable {
         return getFamilyTree();
     }
 
+    @Override
+    public Iterator<Human> iterator(){
+        return new HumanIterator(familyTreeList);
+    }
+
+    public void sortByName(){
+        familyTreeList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByBirthDate(){
+        familyTreeList.sort(new HumanComparatorByBirthDate());
+    }
 
 
 

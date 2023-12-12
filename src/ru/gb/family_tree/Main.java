@@ -34,7 +34,7 @@ public class Main {
         Human human5 = new Human("Statsenko Elena Gennadievna", Gender.Male, LocalDate.of(1952, 04, 26));
         familyTree.addHuman(human5);
 
-        Human human6 = new Human("Venediktov Olga Venediktovna", Gender.Female, LocalDate.of(1969, 06, 27));
+        Human human6 = new Human("Venediktova Olga Venediktovna", Gender.Female, LocalDate.of(1969, 06, 27));
         familyTree.addHuman(human6);
 
         //добавим родителей

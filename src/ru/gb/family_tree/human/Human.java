@@ -3,6 +3,8 @@ package ru.gb.family_tree.human;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.*;
+
 
 public class Human implements Serializable {
     private int ID; //уникальный идентификатор
@@ -60,9 +62,9 @@ public class Human implements Serializable {
     @Override
     public String toString(){
         if (deathDate != null){
-            return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", дата смерти: " + deathDate;
+            return "ID: " + ID + ", FIO: "  + FIO + ", gender: " + gender + ", birth date: " + birthDate + ", death date: " + deathDate;
         }
-        return "ID: " + ID + ", ФИО: "  + FIO + ", пол: " + gender + ", дата рождения: " + birthDate + ", жив(а)";
+        return "ID: " + ID + ", FIO: "  + FIO + ", gender: " + gender + ", birth date: " + birthDate + ", alive";
     }
 
 
@@ -118,6 +120,16 @@ public class Human implements Serializable {
 
     public void setDeathDate(LocalDate deathDate) {
         this.deathDate = deathDate;
+    }
+
+    public LocalDate getbirthDate() {
+        return birthDate;
+    }
+
+    public int getAge(){
+        LocalDate now = new LocalDate();
+        Years age = Years.yearsBetween(birthDate, now);
+        return age;
     }
 
     public Human getMother() {
