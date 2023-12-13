@@ -1,11 +1,8 @@
-package model.save.base;
-
-import model.save.Writable;
-
+package FamilyTree_homework.model.save.base;
 import java.io.*;
 
 /**
- * как будто бы библиотечный класс в целом для разных проектов
+ * Как будто бы библиотечный класс в целом для разных проектов
  * FileHandlerForFamilyTree использует его для своей работы
  */
 public class FileHandler {

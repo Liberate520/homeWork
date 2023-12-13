@@ -1,12 +1,14 @@
 package FamilyTree_homework.model.Humans;
 
-import model.familyTree.TreeNode;
+
+
+import FamilyTree_homework.model.familyTree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 public class Human implements Serializable, TreeNode<Human> {

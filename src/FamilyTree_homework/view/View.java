@@ -1,6 +1,6 @@
-package view;
+package FamilyTree_homework.view;
 
-import presenter.Presenter;
+
 
 public interface View {
     void print(String text);

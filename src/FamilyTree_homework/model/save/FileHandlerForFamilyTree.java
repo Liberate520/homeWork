@@ -1,13 +1,12 @@
 package FamilyTree_homework.model.save;
 
-import model.familyTree.FamilyTree;
-import model.human.Human;
-import model.save.base.FileHandler;
 
-import java.io.Serializable;
+import FamilyTree_homework.model.Humans.Human;
+import FamilyTree_homework.model.familyTree.FamilyTree;
+import FamilyTree_homework.model.save.base.FileHandler;
 
 public class FileHandlerForFamilyTree extends FileHandler implements Writable{
-    private String filePath = "tree.out";
+    private String filePath ="C:/Users/tiliv/IdeaProjects/homeWork/src/FamilyTree_homework/tree.txt";
 
     @Override
     public void setFilePath(String filePath) {

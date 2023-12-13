@@ -1,22 +1,33 @@
 package FamilyTree_homework.model;
 
-import model.familyTree.FamilyTree;
-import model.human.Gender;
-import model.human.Human;
-import model.save.Writable;
+
+import FamilyTree_homework.model.Humans.Gender;
+import FamilyTree_homework.model.Humans.Human;
+import FamilyTree_homework.model.familyTree.FamilyTree;
+import FamilyTree_homework.model.save.FileHandlerForFamilyTree;
+import FamilyTree_homework.model.save.Writable;
 
 import java.time.LocalDate;
 
 public class FamilyTreeService {
     private Writable writable;
-    private FamilyTree<Human> activeTree;
+    private static FamilyTree<Human> activeTree;
 
     public FamilyTreeService(FamilyTree<Human> activeTree) {
         this.activeTree = activeTree;
     }
 
     public FamilyTreeService(){
+        writable = new FileHandlerForFamilyTree();
         activeTree = new FamilyTree<>();
+    }
+
+    public static void sortByAge() {
+        activeTree.sortByAge();
+    }
+
+    public void setWritable(Writable writable) {
+        this.writable = writable;
     }
 
     public boolean save(){
@@ -35,29 +46,41 @@ public class FamilyTreeService {
     }
 
     public String addHuman(String name, String genderString, String birthDate,
-                           long idFather, long idMother){
+                           String deathDate, long idFather, long idMother){
+
         Human father = activeTree.getById(idFather);
         Human mother = activeTree.getById(idMother);
         Gender gender = Gender.valueOf(genderString);
-        LocalDate humanBirthDate = LocalDate.parse(birthDate);
-        Human human = new Human(name, gender, humanBirthDate, father, mother);
+        LocalDate BirthDate = LocalDate.parse(birthDate);
+        Human human = new Human(name, gender, BirthDate,null, father, mother);
+        if (!deathDate.equals("0")){
+            try {
+                LocalDate DeathDate = LocalDate.parse(deathDate);
+                human.setDeathDate(DeathDate);
+            }catch (Exception e){
+                System.out.println("Дата смерти неизвестна");
+            }
+        }
         activeTree.add(human);
         return "Человек успешно добавлен в дерево";
     }
 
-    public void setWritable(Writable writable) {
-        this.writable = writable;
-    }
-
-    public void sortByName(){
+    public static void sortByName(){
         activeTree.sortByName();
     }
 
-    public void sortByDeathDate(){
+    public static void sortByDeathDate(){
         activeTree.sortByDeathDate();
     }
 
+
     public String getHumanList() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Список членов семьи:\n");
+        for (Human human : activeTree) {
+            stringBuilder.append(human);
+            stringBuilder.append("\n");
+        }
         return activeTree.getInfo();
     }
 }

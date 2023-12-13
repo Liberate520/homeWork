@@ -1,9 +1,8 @@
-package model.save;
+package FamilyTree_homework.model.save;
 
-import model.familyTree.FamilyTree;
-import model.human.Human;
 
-import java.io.Serializable;
+import FamilyTree_homework.model.Humans.Human;
+import FamilyTree_homework.model.familyTree.FamilyTree;
 
 public interface Writable {
     boolean save(FamilyTree<Human> tree);
