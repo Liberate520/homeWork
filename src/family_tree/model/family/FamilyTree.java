@@ -86,7 +86,7 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         return false;
     }
 
-    public boolean setWedding(T human1, T human2) {
+    private boolean setWedding(T human1, T human2) {
         if (human1.getSpouse() == null && human2.getSpouse() == null) {
             human1.setSpouse(human2);
             human2.setSpouse(human1);
@@ -104,9 +104,10 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         return false;
     }
 
-    public boolean setFatherToHuman(T humanChild, T humanFather) {
+    private boolean setFatherToHuman(T humanChild, T humanFather) {
         if (humanChild.getFather() == null) {
             humanChild.setFather(humanFather);
+            humanFather.addChild(humanChild);
             return true;
         }
         return false;
@@ -124,6 +125,7 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
     private boolean setMotherToHuman(T humanChild, T humanMother) {
         if (humanChild.getMother() == null) {
             humanChild.setMother(humanMother);
+            humanMother.addChild(humanChild);
             return true;
         }
         return false;
@@ -186,6 +188,35 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         return sb.toString();
     }
 
+    public String getFamilyTreeMembers() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Список членов семьи:\n");
+        for (T human : familyMembersList) {
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String getChildrenListById(long parentId) {
+        if (checkId(parentId)) {
+            T humanParent = getById(parentId);
+            return getHumanChildrenList(humanParent);
+        }
+        return null;
+    }
+
+    private String getHumanChildrenList(T humanParent) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Список детей:\n");
+        assert humanParent != null;
+        for (T human : humanParent.getChildrenList()) {
+            sb.append(human);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new HumanIterator<>(familyMembersList);
@@ -198,6 +229,4 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
     public void sortByName() {
         familyMembersList.sort(new FamilyTreeComparatorByName<>());
     }
-
-
 }

@@ -15,6 +15,7 @@ public class MainMenu {
         commands.add(new SetWedding(consoleUI));
         commands.add(new SetFather(consoleUI));
         commands.add(new SetMother(consoleUI));
+        commands.add(new GetChildrenList(consoleUI));
         commands.add(new SortByAge(consoleUI));
         commands.add(new SortByName(consoleUI));
         commands.add(new SaveTreeToFile(consoleUI));

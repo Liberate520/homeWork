@@ -94,11 +94,15 @@ public class ConsoleUI implements View {
 
     @Override
     public void printAnswer(String answer) {
-        System.out.println(answer);
+        if (answer != null) {
+            System.out.println(answer);
+        } else {
+            errorText();
+        }
     }
 
     public void saveTreeToFile() {
-        presenter.saveTreeToFile();
+        System.out.printf("Данные успешно сохранены в файл? - %b\n", presenter.saveTreeToFile());
     }
 
     public void getTreeFromFile() {
@@ -147,4 +151,12 @@ public class ConsoleUI implements View {
         }
     }
 
+    public void getChildrenList() {
+        System.out.println("Введите ID родителя:");
+        String strParent = scanner.nextLine();
+        if (isNumeric(strParent)) {
+            long parentId = Integer.parseInt(strParent);
+            presenter.getChildrenList(parentId);
+        }
+    }
 }

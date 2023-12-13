@@ -12,7 +12,6 @@ public class Presenter {
         service = new Service();
     }
 
-
     public void addFamilyMember(String gender, String name, String familyName, String strDate) {
         service.addFamilyMember(gender, name, familyName, strDate);
         getFamilyTreeMembers();
@@ -33,8 +32,8 @@ public class Presenter {
         getFamilyTreeMembers();
     }
 
-    public void saveTreeToFile() {
-        service.saveTreeToFile();
+    public boolean saveTreeToFile() {
+        return service.saveTreeToFile();
     }
 
     public void getTreeFromFile() {
@@ -54,5 +53,15 @@ public class Presenter {
     public void setMother(long childId, long motherId) {
         service.setMother(childId, motherId);
         getFamilyTreeMembers();
+    }
+
+    public void getChildrenList(long parentId) {
+        String answer;
+        if (service.getChildrenList(parentId) != null) {
+            answer = service.getChildrenList(parentId);
+        } else {
+            answer = null;
+        }
+        view.printAnswer(answer);
     }
 }
