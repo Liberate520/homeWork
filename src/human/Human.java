@@ -1,5 +1,7 @@
 package human;
 
+import family_tree.TreeGenerality;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,7 +10,7 @@ import java.util.List;
 
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeGenerality<Human> {
 
     private int id;
     private String name;
@@ -38,21 +40,20 @@ public class Human implements Serializable {
         this(name, gender, birthDate, null, mother, father);
     }
 
-    public boolean addChild(Human child){
+    public void addChild(Human child){
         if(!children.contains(child)){
             children.add(child);
-            return true;
         }
-        return false;
     }
 
-    public boolean addParent(Human parent){
+    @Override
+
+    public void addParent(Human parent){
         if(parent.getGender().equals(Gender.Male)){
             setFather(parent);
         } else if (parent.getGender().equals(Gender.Female)){
             setMother(parent);
         }
-        return true;
     }
 
     public void setMother(Human mother){

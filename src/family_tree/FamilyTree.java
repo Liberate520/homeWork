@@ -1,6 +1,4 @@
 package family_tree;
-import family_tree.HumanIterator;
-import human.Human;
 import human.HumanComparatorByName;
 import human.HumanComparatorByAge;
 
@@ -9,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, Iterable<E> {
     private int humanId;
-    private List<Human> HumanList;
+    private List<E> HumanList;
 
     public FamilyTree(){
         this(new ArrayList<>());
     }
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.HumanList = humanList;
     }
 
-    public boolean add(Human human){
+    public boolean add(E human){
         if (human == null){
             return false;
         }
@@ -38,29 +36,29 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    private void addToParents(Human human){
-        for(Human parent: human.getParents()){
+    private void addToParents(E human){
+        for(E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human){
-        for(Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for(E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
     public  boolean setWedding(int humanId1, int humanId2){
         if(checkId(humanId1) && checkId(humanId2)){
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            E human1 = getById(humanId1);
+            E human2 = getById(humanId2);
             return setWedding(human1, human2);
         }
 
         return false;
     }
 
-    public boolean setWedding(Human human1, Human human2){
+    public boolean setWedding(E human1, E human2){
         if (human1.getPartner() == null && human2.getPartner() == null){
             human1.setPartner(human2);
             human2.setPartner(human1);
@@ -72,14 +70,14 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public boolean setDivorce(int humanId1, int humanId2){
         if(checkId(humanId1) && checkId(humanId2)){
-            Human human1 = getById(humanId1);
-            Human human2 = getById(humanId2);
+            E human1 = getById(humanId1);
+            E human2 = getById(humanId2);
             return setDivorce(human1, human2);
         }
         return false;
     }
 
-    public boolean setDivorce(Human human1, Human human2){
+    public boolean setDivorce(E human1, E human2){
         if(human1.getPartner() != null && human2.getPartner() != null){
             human1.setPartner(null);
             human2.setPartner(null);
@@ -91,7 +89,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
 
     public boolean remove(int humanId){
         if(checkId(humanId)){
-            Human e = getById(humanId);
+            E e = getById(humanId);
             return HumanList.remove(e);
         }
         return false;
@@ -101,8 +99,8 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return  id < humanId && id >= 0;
     }
 
-    public Human getById(int id){
-        for(Human human : HumanList){
+    public E getById(int id){
+        for(E human : HumanList){
             if(human.getId() == id){
                 return human;
             }
@@ -119,7 +117,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sb.append(HumanList.size());
         sb.append(" объектов: ");
         sb.append("\n");
-        for(Human human : HumanList){
+        for(E human : HumanList){
             sb.append(human);
             sb.append("\n");
         }
@@ -135,7 +133,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         HumanList.sort(new HumanComparatorByAge());
     }
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(HumanList);
     }
 
