@@ -48,10 +48,10 @@ public class Service {
             return sb.toString();
         } else {
             sb.append("Еще не добавлены в дерево:\n");
-            for (Creature creature :  familyTree.getNotInTree()) {
+            for (Creature creature : familyTree.getNotInTree()) {
                 if (flag)
                     sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName() + "\n");
+                sb.append(creature.getId() + " " + creature.getName());
                 flag = true;
             }
             return sb.toString();
@@ -65,7 +65,7 @@ public class Service {
             return sb.append("Дерево пустое").toString();
         } else {
             sb.append("Дерево состоит из следующих членов\n");
-            for (Creature creature :  familyTree.getFamilyTree()) {
+            for (Creature creature : familyTree.getFamilyTree()) {
                 if (flag)
                     sb.append("\n");
                 sb.append(creature.getId() + " " + creature.getName());
@@ -80,14 +80,14 @@ public class Service {
         return humanTree.showTree();
     }
 
-    //TODO: Отформорматировать вывод
+    //TODO: Отформатировать вывод
     public String showAll() {
         StringBuilder sb = new StringBuilder();
         if (familyTree.getFamilyTree().isEmpty() && familyTree.getNotInTree().isEmpty()) {
             return sb.append("Добавленных людей нет").toString();
         } else {
             boolean flag1 = false;
-            sb.append("Все добавленные люди:");
+            sb.append("Все добавленные люди:\n");
             for (Creature creature : familyTree.getFamilyTree()) {
                 if (flag1) {
                     sb.append("\n");
@@ -95,13 +95,12 @@ public class Service {
                 sb.append(creature.getId() + " " + creature.getName());
                 flag1 = true;
             }
-            flag1 = false;
+            flag1 = true;
             for (Creature creature : familyTree.getNotInTree()) {
                 if (flag1) {
                     sb.append("\n");
                 }
-                sb.append(creature.getId() + " " + creature.getName() + "\n");
-                flag1 = true;
+                sb.append(creature.getId() + " " + creature.getName());
             }
         }
         return sb.toString();

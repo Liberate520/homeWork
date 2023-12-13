@@ -26,7 +26,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         return notInTree;
     }
 
-    public T getFirstMember(){
+    public T getFirstMember() {
         return familyTree.getFirst();
     }
 
@@ -146,19 +146,22 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         familyTree.sort(new CreatureComporatorById());
         notInTree.sort(new CreatureComporatorById());
         int finalId = Collections.binarySearch(familyTree,
-                new Human(id, null, null, null, null), new CreatureComporatorById());
+                new Human(id, null, null, null, null),
+                new CreatureComporatorById());
         if (finalId > 0) {
-            return familyTree.get(finalId);
+            return familyTree.get(id);
         } else if (finalId < 0) {
             finalId = Collections.binarySearch(notInTree,
                     new Human(id, null, null, null, null),
                     new CreatureComporatorById());
-            return notInTree.get(finalId);
+            return notInTree.get(id);
         } else {
             return null;
         }
 
     }
+
+    
 
     @Override
     public Iterator<T> iterator() {

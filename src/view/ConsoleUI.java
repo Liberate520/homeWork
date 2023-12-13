@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+//TODO: Вынести обработку исключений в отдельный класс
+
 public class ConsoleUI implements View {
     private Scanner scanner;
     private Presenter presenter;
@@ -34,28 +36,37 @@ public class ConsoleUI implements View {
         }
     }
 
-    //TODO: Обработать возможные ошибки ввода
     public void addCreature() {
         Gender gend = Gender.Male;
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
         System.out.println("Введите фамилию: ");
         String lastName = scanner.nextLine();
-        System.out.println("Выберите пол: 1. Мужской, 2. Женский");
-        Integer gender = Integer.parseInt(scanner.nextLine());
-        if (gender == 2) {
-            gend = Gender.Female;
-        }
         boolean flag = false;
+        while (!flag) {
+            System.out.println("Выберите пол: 1. Мужской, 2. Женский");
+            try {
+                int gender = Integer.parseInt(scanner.nextLine());
+                if (gender == 2) {
+                    gend = Gender.Female;
+                    flag = true;
+                }
+                if (gender == 1) {
+                    gend = Gender.Male;
+                    flag = true;
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        flag = false;
         LocalDate date = null;
         while (!flag) {
             try {
                 System.out.println("Введите дату рождения в формате год-месяц-день: (1990-09-10):");
                 DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate.parse(scanner.nextLine(), dateFormat);
+                date = LocalDate.parse(scanner.nextLine(), dateFormat);
                 flag = true;
-            } catch (DateTimeParseException e) {
-                System.out.println(e);
+            } catch (DateTimeParseException ignored) {
             }
         }
         if (presenter.addCreature(name, lastName, gend, date)) {
