@@ -1,6 +1,7 @@
-package human;
+package model.human;
 
-import tree.FamilyTreeItem;
+
+import model.tree.TreeNode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Human
-        implements Serializable, Comparable<Human>, FamilyTreeItem {
+        implements Serializable, Comparable<Human>, TreeNode<Human> {
     private int id;
 
     private String name;
@@ -19,6 +20,7 @@ public class Human
     private LocalDate birthday;
     private LocalDate deathday;
     private Gender gender;
+    private Human spouse;
     private Map<String, Human> parents;
     private List<Human> children;
 
@@ -69,6 +71,14 @@ public class Human
         return stringBuilder.toString();
     }
 
+    public String getSpouse() {
+        if (this.spouse != null) {
+            StringBuilder stringBuilder = new StringBuilder("Супруг(а): ");
+            stringBuilder.append(this.spouse);
+            return stringBuilder.toString();
+        }
+        return null;
+    }
 
     public String getParents() {
         StringBuilder stringBuilder = new StringBuilder("Родители: ");
@@ -97,6 +107,9 @@ public class Human
     public LocalDate getBirthday() {
         return birthday;
     }
+    public LocalDate getDeathday() {
+        return birthday;
+    }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
@@ -114,13 +127,15 @@ public class Human
 
 
 
-    private void setParent(Human human) {
+    public void setParent(Human human) {
         if (human.gender == Gender.Male) {
             this.parents.put("отец",human);
         }
         else this.parents.put("мать",human);
     }
-
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
+    }
     public void setChild(Human human) { // в main можно использовать только этот метод, т.к. он привязывает родителей автоматически
         this.children.add(human);
         human.setParent(this);
