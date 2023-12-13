@@ -4,15 +4,14 @@ import family_Tree.model.familyTree.FamilyTree;
 import family_Tree.model.builder.TreeBuilder;
 import family_Tree.model.human.Gender;
 import family_Tree.model.human.Human;
-import family_Tree.model.writer.FileHandler;
 import family_Tree.model.writer.Writable;
 
 import java.time.LocalDate;
 
 public class Service {
 
-    public FamilyTree<Human> tree;
-    public TreeBuilder builder;
+    private FamilyTree<Human> tree;
+    private TreeBuilder builder;
     Writable writable;
 
     public Service() {
@@ -21,13 +20,14 @@ public class Service {
     }
 
     public void save(){
-        writable = new FileHandler();
         writable.save(tree);
     }
 
     public void load(){
-        writable = new FileHandler();
         tree = (FamilyTree) writable.read();
+    }
+    public void setWritable(Writable writable) {
+        this.writable = writable;
     }
 
     public void sortByName(){

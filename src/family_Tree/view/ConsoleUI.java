@@ -1,6 +1,7 @@
 package family_Tree.view;
 
 import family_Tree.model.human.Gender;
+import family_Tree.model.writer.Writable;
 import family_Tree.presenter.Presenter;
 
 import java.time.LocalDate;
@@ -195,6 +196,10 @@ public class ConsoleUI implements View {
 
     public void save(){
         presenter.save();
+    }
+
+    public void setWritable(Writable writable) {
+        presenter.setWritable(writable);
     }
 
     @Override

@@ -3,6 +3,7 @@ package family_Tree.presenter;
 import family_Tree.model.human.Gender;
 import family_Tree.model.human.Human;
 import family_Tree.model.service.Service;
+import family_Tree.model.writer.Writable;
 import family_Tree.view.View;
 
 import java.time.LocalDate;
@@ -77,5 +78,8 @@ public class Presenter {
         service.setDeathDate(id, date);
         view.answer(positive);
         printById(id);
+    }
+    public void setWritable(Writable writable) {
+        service.setWritable(writable);
     }
 }
