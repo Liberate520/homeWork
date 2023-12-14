@@ -15,21 +15,29 @@ public class Service {
         this.familyTree = new FamilyTree<>();
     }
 
-    public void addHumanInTree(String name, Gender gender, LocalDate localDate){
+    public String addHumanInTree(String name, Gender gender,LocalDate localDate){
         Human newHuman = new Human(name, gender,localDate);
         familyTree.addHumanInTree(newHuman);
-
+        return "Человек добавлен в семейное древо";
     }
 
-    public void addChildren(Human human){
+    public void addChildren(String parants,String name, Gender gender, LocalDate localDate){
+        for (Human human: familyTree){
+            if(human.getName().equals(parants)){
+                human.addChildren(name,gender,localDate);
+            }
+        }
     }
 
     public String printAllTree(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Список Людей:\n");
-        for (Human human1: familyTree){
-            sb.append(human1);
-        }
-        return sb.toString();
+        return familyTree.toString();
+    }
+
+    public void sortByName(){
+        familyTree.sortByName();
+    }
+
+    public void sortByAge(){
+        familyTree.sortByAge();
     }
 }

@@ -12,7 +12,7 @@ public interface FamilyItem<T> extends Serializable,Comparable<T> {
 
     long getId();
 
-    Gender getGender();
+    Gender gender();
 
     String getChild();
 }

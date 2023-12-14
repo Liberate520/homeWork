@@ -1,6 +1,7 @@
 package model.family_tree;
 
 import model.human.Gender;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterable<E> {
     private static final long serialVersionUID = 1L;
     private long countPeople;
-    private List<E> familyTree;
+    public List<E> familyTree;
 
     public FamilyTree() {
         familyTree = new ArrayList<>();
@@ -30,17 +31,14 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
         StringBuilder sb = new StringBuilder();
         if (!(familyTree.isEmpty())) {
             for (E human : familyTree) {
-                    sb.append("Id:" + human.getId() + " " + human.getName() + " Возраст: " + human.getAge());
-                    if(human.getGender().equals(Gender.Mail)){
-                        sb.append(" " + "Мужчина" + "\n");
-                    } else {
-                        sb.append(" " + "Женщина" + "\n");
+                    sb.append("Id:" + human.getId() + " " + human.getName() + " Возраст: " + human.getAge() + " ");
+                    if(!human.getChild().isEmpty()){
+                        sb.append("Дети: " +"\n"+ human.getChild());
                     }
-                    if(human.getChild() != null){
-                        sb.append("Дети: " +"\n"+ human.getChild() +  "\n");
-                    }
+                    sb.append("\n");
             }
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
     public void sortByName(){

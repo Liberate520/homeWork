@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
     private long id;
-    private String name;
+    public String name;
     private Gender gender;
     private Human mother, father;
-    private List<Human> child;
+    public List<Human> child;
     private LocalDate birthDay;
     private LocalDate deathDay;
 
@@ -23,9 +23,9 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
     public Human(String name, Gender gender, LocalDate birthDay) {
         id = -1;
         this.name = name;
-        this.gender = gender;
         this.mother = null;
         this.father = null;
+        this.gender = gender;
         this.birthDay = birthDay;
         this.deathDay = null;
         child = new ArrayList<>();
@@ -40,8 +40,6 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         child = new ArrayList<>();
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -50,17 +48,19 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         this.name = name;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
     public long getId() {
         return id;
+    }
+
+    @Override
+    public Gender gender() {
+        return gender;
     }
 
     public void setId(long id) {
         this.id = id;
     }
+
 
     public Human getMother() {
         return mother;
@@ -70,16 +70,11 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         return father;
     }
 
-
-
     public String getChild() {
         StringBuilder sb = new StringBuilder();
         for (Human human:child) {
-            sb.append(human.getName() + " " + human.getAge() + " ");
-            if(human.gender.equals(Gender.Mail)){
-                sb.append("Мужчина" + "\n");
-            } else {
-                sb.append("Женщина" + "\n");
+            if(!child.isEmpty()) {
+                sb.append(human.getName() + " " + human.getAge() + "\n");
             }
         }
         return sb.toString();
@@ -93,7 +88,8 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Имя: ");
+        sb.append("Id:");
+        sb.append(getId() + " ");
         sb.append(name).append(" ");
         sb.append("Возраст : ");
         sb.append(getAge()).append(" ");
@@ -107,9 +103,9 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         return sb.toString();
     }
 
-    public boolean addChildren(Human children){
-        if(!child.contains(children)) {
-            child.add(children);
+    public boolean addChildren(String name,Gender gender,LocalDate localDate){
+        if(!child.contains(name)) {
+            child.add(new Human(name,gender,localDate));
             return true;
         }
         return false;
