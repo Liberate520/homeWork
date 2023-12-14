@@ -1,6 +1,4 @@
-package family_tree;
-
-import family_tree.FamilyItem;
+package model.family_tree;
 
 import java.util.Comparator;
 

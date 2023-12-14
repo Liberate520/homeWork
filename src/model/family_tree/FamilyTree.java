@@ -1,10 +1,9 @@
-package family_tree;
+package model.family_tree;
 
-import human.Gender;
+import model.human.Gender;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,11 +44,11 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
         return sb.toString();
     }
     public void sortByName(){
-        Collections.sort(familyTree,new SortByAgeComparator<>());
+        familyTree.sort(new SortByAgeComparator<>());
     }
 
     public void sortByAge(){
-        Collections.sort(familyTree,new SortByAgeComparator<>());
+        familyTree.sort(new SortByAgeComparator<>());
     }
 
     @Override
