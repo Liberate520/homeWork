@@ -6,17 +6,17 @@ public class FileHandler implements Writable {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public void writeObject(Object o, String fileName) {
+    public boolean writeObject(Object o, String fileName) {
 
 
         {
             try {
                 objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
                 objectOutputStream.writeObject(o);
-                System.out.println("Запись прошла успешно");
+                return true;
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException ignored) {
+                return false;
             }
 
         }
@@ -36,7 +36,7 @@ public class FileHandler implements Writable {
         }
     }
 
-    public void close(){
+    public boolean close(){
         try {
             if (objectInputStream != null) {
                 objectInputStream.close();
@@ -44,9 +44,10 @@ public class FileHandler implements Writable {
             if (objectOutputStream != null) {
                 objectOutputStream.close();
             }
+            return true;
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
+        catch (IOException ignored) {
+            return false;
         }
     }
 }

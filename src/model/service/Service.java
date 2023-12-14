@@ -8,9 +8,10 @@ import model.creatures.HumanBuilder;
 import model.family_tree.FamilyTree;
 import model.human_tree.HumanTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Service {
+public class Service implements Serializable {
 
     private final FamilyTree<Human> familyTree;
     private final HumanTree<Human> humanTree;

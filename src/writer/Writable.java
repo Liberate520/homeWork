@@ -1,6 +1,11 @@
 package writer;
 
-public interface Writable {
-    void writeObject(Object o, String fileName);
+import java.io.Serializable;
+
+public interface Writable{
+
+    boolean writeObject(Object o, String fileName);
     Object readObject(String fileName);
+    boolean close();
+
 }
