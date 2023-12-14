@@ -6,8 +6,9 @@ import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyT
 import java.io.IOException;
 import java.io.Serializable;
 
-public interface Writable  {
-     void save(Object o) throws IOException;
+public interface Writable {
+     void save() ;
+
      // Метод для записи
-     Object readable() throws IOException, ClassNotFoundException;
+     Object readable();
 }

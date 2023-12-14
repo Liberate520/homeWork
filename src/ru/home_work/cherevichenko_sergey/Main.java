@@ -10,7 +10,7 @@ import java.time.Month;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        View view = new  ConsoleUi();
+        View view = new ConsoleUi();
         view.start();
 
     }

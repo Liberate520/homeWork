@@ -23,22 +23,25 @@ public class MainMenu {
         commands.add(new RestoreTree(consoleUi));
         commands.add(new Finish(consoleUi));
     }
-    public String menu(){
+
+    public String menu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commands.size(); i++) {
-            stringBuilder.append(i+1)
-                         .append(". ")
-                         .append(commands.get(i).getDescription())
-                         .append("\n");
+            stringBuilder.append(i + 1)
+                    .append(". ")
+                    .append(commands.get(i).getDescription())
+                    .append("\n");
         }
         return stringBuilder.toString();
     }
-    public void execute(int choice){
+
+    public void execute(int choice) {
         Command command = commands.get(choice - 1);
         command.execute();
 
     }
-    public int size(){
+
+    public int size() {
         return commands.size();
     }
 }

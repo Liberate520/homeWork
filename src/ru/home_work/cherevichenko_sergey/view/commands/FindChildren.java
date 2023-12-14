@@ -6,7 +6,7 @@ import ru.home_work.cherevichenko_sergey.view.commands.Command;
 public class FindChildren extends Command {
 
 
-    public FindChildren( ConsoleUi consoleUi) {
+    public FindChildren(ConsoleUi consoleUi) {
         super("Найти ребенка. ", consoleUi);
     }
 

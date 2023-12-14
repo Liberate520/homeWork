@@ -11,11 +11,12 @@ public interface FamilyTreeItem<E> {
     String getLastName();
 
     LocalDate getBirthDay();
+
     LocalDate getDateDeath();
 
     Gender getGender();
 
-     List<E> getChildren();
+    List<E> getChildren();
 
 
 }

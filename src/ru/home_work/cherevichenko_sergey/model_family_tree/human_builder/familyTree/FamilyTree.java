@@ -1,11 +1,14 @@
 package ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree;
+
 import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.human.Gender;
 import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.human.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iterable<E> {
+
+public class FamilyTree<E extends FamilyTreeItem> implements Serializable, Iterable<E> {
     // Класс имеет одно поле с листом
     private List<E> humans;
 
@@ -13,15 +16,16 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
     public FamilyTree() {
         this(new ArrayList<>());
     }
+
     public FamilyTree(List<E> humans) {
         this.humans = humans;
     }
 
 
     // Метод для заполнения ArrayList экземплярами класса ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.human.Human
-    public  boolean addHuman(E human) {
-        if (human == null)  return false;
-        if (!humans.contains(human))  humans.add(human);
+    public boolean addHuman(E human) {
+        if (human == null) return false;
+        if (!humans.contains(human)) humans.add(human);
         return false;
     }
 
@@ -33,7 +37,7 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
         boolean findMother = false;
         StringBuilder br = new StringBuilder();
         for (E human : humans) {
-            if (findChild==false) {
+            if (findChild == false) {
                 if (human.getName().equals(nameChild) && human.getLastName().equals(lastNameChild)) {
                     child = human;
                     br.append("Ребенок найден!");
@@ -41,12 +45,12 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
                 }
             }
         }
-        if (findChild==false) {
+        if (findChild == false) {
             br.append(" Ребенка с такими именем и фамилией нет в древе! Добавить? нажмите 1");
-        } else if (findChild==true) {
+        } else if (findChild == true) {
 
             for (E human : humans) {
-                if (findFather==false) {
+                if (findFather == false) {
                     if (human.getName().equals(fatherName) && human.getLastName().equals(fatherLastName)
                             && human.getChildren().contains(child)) {
                         br.append(" Этот ребенок уже добавлен отцу!");
@@ -57,7 +61,7 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
                         findFather = true;
                     }
                 }
-                if (findMother==false) {
+                if (findMother == false) {
                     if (human.getName().equals(motherName) && human.getLastName().equals(motherLastName)
                             && human.getChildren().contains(child)) {
                         br.append(" Этот ребенок уже добавлен матери!");
@@ -82,7 +86,7 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
         boolean find = false;
         boolean findChild = false;
         Iterator<E> it = humans.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             E itr = it.next();
             if (itr.getName().equals(name) && itr.getLastName().equals(lastName)) {
                 it.remove();
@@ -99,33 +103,34 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
                 }
             }
         }
-        if(find && findChild) br.append("Удален успешно из родителя и списка детей!");
-        else if(find && !findChild) br.append("Удален успешно!");
+        if (find && findChild) br.append("Удален успешно из родителя и списка детей!");
+        else if (find && !findChild) br.append("Удален успешно!");
         else br.append("Такого человека нет в вашем списке!");
 
         return br.toString();
     }
+
     public String findChildren(String name, String lastName) {
         StringBuilder br = new StringBuilder();
         boolean find = false;
         for (E parents : humans) {
             //for (E child : parents.getChildren()) {
-              Iterator<E> child1 = parents.getChildren().iterator();
-              while (child1.hasNext()){
-                 E child = child1.next();
+            Iterator<E> child1 = parents.getChildren().iterator();
+            while (child1.hasNext()) {
+                E child = child1.next();
                 if (child.getName().equals(name) && child.getLastName().equals(lastName)) {
-                    if(!find) {
+                    if (!find) {
                         if (child.getGender().equals(Gender.MALE))
                             br.append("НАЙДЕН:").append("\n").append("СЫН: ");
                         else br.append("ДОЧЬ: ");
                         br.append("имя: ")
                                 .append(child.getName()).append(", фамилия: ")
                                 .append(child.getLastName()).append(", возраст: ");
-                        if(child.getDateDeath()==null)
-                            br.append(Period.between(child.getBirthDay(),LocalDate.now()).getYears())
+                        if (child.getDateDeath() == null)
+                            br.append(Period.between(child.getBirthDay(), LocalDate.now()).getYears())
                                     .append(" лет");
                         else br.append("Умер в количестве: ")
-                                .append(Period.between(child.getBirthDay(),child.getDateDeath()).getYears())
+                                .append(Period.between(child.getBirthDay(), child.getDateDeath()).getYears())
                                 .append(" лет");
                         br.append("\n")
                                 .append("************************").append("\n");
@@ -137,18 +142,18 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
 
                     br.append(" имя: ").append(parents.getName()).append(", фамилия: ")
                             .append(parents.getLastName()).append(" возраст: ");
-                    if(parents.getDateDeath()==null)
-                        br.append(Period.between(parents.getBirthDay(),LocalDate.now()).getYears()).append(" лет");
+                    if (parents.getDateDeath() == null)
+                        br.append(Period.between(parents.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
                     else
                         br.append(" умер в возрасте: ")
-                                .append(Period.between(parents.getBirthDay(),parents.getDateDeath()).getYears())
+                                .append(Period.between(parents.getBirthDay(), parents.getDateDeath()).getYears())
                                 .append("лет");
                     br.append("\n");
                     find = true;
                 }
             }
         }
-        if(!find)  br.append("Ребенок с таким именем и фамилией НЕ НАЙДЕН!");
+        if (!find) br.append("Ребенок с таким именем и фамилией НЕ НАЙДЕН!");
 
         return br.toString();
     }
@@ -233,41 +238,23 @@ public class FamilyTree<E extends FamilyTreeItem>  implements Serializable, Iter
                     builder.append(",нет детей.").append("\n");
 
                 } else {
-                        Iterator<E> child1 = h.getChildren().iterator();
-                        while (child1.hasNext()) {
-                            E ch = child1.next();
-                            builder.append("\n").append("имя: ").append(ch.getName())
-                                    .append(" фамилия: ").append(ch.getLastName())
-                                    .append(" возраст:")
-                                    .append(Period.between(ch.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
-                        }
+                    Iterator<E> child1 = h.getChildren().iterator();
+                    while (child1.hasNext()) {
+                        E ch = child1.next();
+                        builder.append("\n").append("имя: ").append(ch.getName())
+                                .append(" фамилия: ").append(ch.getLastName())
+                                .append(" возраст:")
+                                .append(Period.between(ch.getBirthDay(), LocalDate.now()).getYears()).append(" лет");
                     }
                 }
-
-                builder.append("\n").append("--------------------------------").append("\n");
             }
+
+            builder.append("\n").append("--------------------------------").append("\n");
+        }
         return builder.toString();
     }
+
     public String toString() {
         return getHumanInfo();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
