@@ -32,12 +32,7 @@ public class Service {
 
     public boolean addHuman(String firstName, String lastName, Gender gender, LocalDate birthDate) {
         Human human = humanBuilder.build(firstName, lastName, gender, birthDate);
-        if (familyTree.getNotInTree().contains(human) || familyTree.getFamilyTree().contains(human)) {
-            return false;
-        } else {
-            familyTree.getNotInTree().add(human);
-            return true;
-        }
+        return familyTree.addCreature(human);
     }
 
     public String showIsNotInTree() {

@@ -161,7 +161,14 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
 
     }
 
-    
+    public boolean addCreature(T creature) {
+        if (getNotInTree().contains(creature) || familyTree.contains(creature)) {
+            return false;
+        } else {
+            getNotInTree().add(creature);
+            return true;
+        }
+    }
 
     @Override
     public Iterator<T> iterator() {
