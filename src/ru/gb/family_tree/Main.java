@@ -1,10 +1,10 @@
 package ru.gb.family_tree;
 
+import ru.gb.family_tree.family_tree.FamilyTree;
 import ru.gb.family_tree.human.Gender;
 import ru.gb.family_tree.human.Human;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import ru.gb.family_tree.writer.FileHandler;
@@ -64,13 +64,13 @@ public class Main {
 
     private static void save(FamilyTree familyTree){
         FileHandler fileHandler = new FileHandler();
-        String path="family_tree.txt";
+        String path="src/ru.gb.family_tree/family_tree.txt";
         fileHandler.save(familyTree, path);
     }
 
     private static FamilyTree load(){
         FileHandler fileHandler = new FileHandler();
-        String path="family_tree.txt";
+        String path="src/ru.gb.family_tree/family_tree.txt";
         return (FamilyTree) fileHandler.read(path);
     }
 }

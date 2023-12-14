@@ -1,12 +1,14 @@
 package ru.gb.family_tree.human;
 
+import ru.gb.family_tree.family_tree.TreeNode;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.*;
 
 
-public class Human implements Serializable {
+public class Human implements Serializable, TreeNode<Human> {
     private int ID; //уникальный идентификатор
     private String FIO;
     private Gender gender;
