@@ -23,7 +23,8 @@ public class Console implements View{
             System.out.println("2)Напечатать все дерево \n");
             System.out.println("3)Сортировать по имени \n");
             System.out.println("4)Сортировать по возрасту \n");
-            System.out.println("5)Выход \n");
+            System.out.println("5)Сортировать по возрасту \n");
+            System.out.println("6)Выход \n");
             System.out.println("Выберите действие");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -38,13 +39,15 @@ public class Console implements View{
                     break;
                 case "4":
                     sortByAge();
-                    break;
                 case "5":
+                    break;
+                case "6":
                     return;
             }
         }
 
     }
+
 
     private void sortByAge() {
         presenter.sortByAge();
@@ -88,4 +91,5 @@ public class Console implements View{
         int z = sc.nextInt();
         return LocalDate.of(x,y,z);
     }
+
 }

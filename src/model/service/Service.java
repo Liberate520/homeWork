@@ -1,14 +1,15 @@
 package model.service;
 
 import model.family_tree.FamilyTree;
+import model.file_handler.FileHandler;
 import model.human.Gender;
 import model.human.Human;
 
 import java.time.LocalDate;
 
 public class Service {
-    public Human human;
-    public FamilyTree<Human> familyTree;
+    private Human human;
+    private FamilyTree<Human> familyTree;
 
     public Service() {
         this.human = new Human();
@@ -39,5 +40,13 @@ public class Service {
 
     public void sortByAge(){
         familyTree.sortByAge();
+    }
+
+    private void save(FamilyTree tree){
+        familyTree.save(tree);
+    }
+
+    private FamilyTree<Human> load(){
+        return familyTree.load();
     }
 }

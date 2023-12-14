@@ -10,14 +10,15 @@ import java.util.List;
 
 public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
     private long id;
-    public String name;
+    private String name;
     private Gender gender;
     private Human mother, father;
     public List<Human> child;
     private LocalDate birthDay;
     private LocalDate deathDay;
 
-    public Human() {
+    public Human(){
+
     }
 
     public Human(String name, Gender gender, LocalDate birthDay) {

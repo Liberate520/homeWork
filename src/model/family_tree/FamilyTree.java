@@ -1,6 +1,8 @@
 package model.family_tree;
 
+import model.file_handler.FileHandler;
 import model.human.Gender;
+import model.human.Human;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.Serializable;
@@ -52,5 +54,17 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
     @Override
     public Iterator<E> iterator() {
         return new FamilyTreeIterator<>(familyTree);
+    }
+
+    public void save(FamilyTree<E> familyTree){
+        String filePath = "src/model/file_handler/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(familyTree,filePath);
+    }
+
+    public FamilyTree<E> load(){
+        String filePath = "src/model/file_handler/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree<E>) fileHandler.read(filePath);
     }
 }
