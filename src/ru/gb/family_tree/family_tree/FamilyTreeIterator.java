@@ -1,13 +1,15 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.family_tree;
+import ru.gb.family_tree.human.Human;
+
 import java.util.Iterator;
 import java.util.List;
-import java.util.Iterator;
 
-public class HumanIterator implements Iterator<Human> {
+public class
+FamilyTreeIterator implements Iterator<Human> {
     private List<Human> family;
     private int index;
 
-    public HumanIterator(List<Human> family){
+    public FamilyTreeIterator(List<Human> family){
         this.family = family;
         this.index = 0;
     }
