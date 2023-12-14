@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args){
-        FamilyTree tree = load();
-        //FamilyTree<Human> tree = testTree();
+        //FamilyTree tree = load();
+        FamilyTree<Human> tree = testTree();
         System.out.println(tree);
         save(tree);
     }
