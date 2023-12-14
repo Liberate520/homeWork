@@ -127,6 +127,6 @@ public class ConsoleUI implements View {
     }
 
     public void showHumanTree() {
-        presenter.showHumanTree();
+        System.out.println(presenter.showHumanTree());
     }
 }

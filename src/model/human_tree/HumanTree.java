@@ -16,7 +16,6 @@ public class HumanTree<T extends Creature> {
         this.familyTree = familyTree;
     }
 
-
     public T getTop() {
         topOfTree(this.treeTop);
         return this.treeTop;

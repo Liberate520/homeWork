@@ -42,11 +42,11 @@ public class Service {
             sb.append("Элементы вне дерева отсутствуют");
             return sb.toString();
         } else {
-            sb.append("Еще не добавлены в дерево:\n");
+            sb.append("Еще не добавлены в дерево:\nID  Name\n");
             for (Creature creature : familyTree.getNotInTree()) {
                 if (flag)
                     sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName());
+                sb.append(creature.getId() + "   " + creature.getName());
                 flag = true;
             }
             return sb.toString();
@@ -59,11 +59,11 @@ public class Service {
         if (familyTree.getFamilyTree().isEmpty()) {
             return sb.append("Дерево пустое").toString();
         } else {
-            sb.append("Дерево состоит из следующих членов\n");
+            sb.append("Дерево состоит из следующих членов\nID  Name\n");
             for (Creature creature : familyTree.getFamilyTree()) {
                 if (flag)
                     sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName());
+                sb.append(creature.getId() + "   " + creature.getName());
                 flag = true;
             }
         }
@@ -75,19 +75,18 @@ public class Service {
         return humanTree.showTree();
     }
 
-    //TODO: Отформатировать вывод
     public String showAll() {
         StringBuilder sb = new StringBuilder();
         if (familyTree.getFamilyTree().isEmpty() && familyTree.getNotInTree().isEmpty()) {
             return sb.append("Добавленных людей нет").toString();
         } else {
             boolean flag1 = false;
-            sb.append("Все добавленные люди:\n");
+            sb.append("Все добавленные люди:\nID  Name");
             for (Creature creature : familyTree.getFamilyTree()) {
                 if (flag1) {
                     sb.append("\n");
                 }
-                sb.append(creature.getId() + " " + creature.getName());
+                sb.append(creature.getId() + "   " + creature.getName());
                 flag1 = true;
             }
             flag1 = true;
@@ -95,26 +94,18 @@ public class Service {
                 if (flag1) {
                     sb.append("\n");
                 }
-                sb.append(creature.getId() + " " + creature.getName());
+                sb.append(creature.getId() + "  " + creature.getName());
             }
         }
         return sb.toString();
     }
 
     public boolean setChild(Integer idParent, Integer idChild) {
-        if (familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild))) {
-            return true;
-        } else {
-            return false;
-        }
+        return familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild));
     }
 
     public boolean SetSpouce(Integer idSpouce1, Integer idSpouce2) {
-        if (familyTree.setSpouse(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2))) {
-            return true;
-        } else {
-            return false;
-        }
+        return familyTree.setSpouse(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2));
     }
 
     public String ShowAllInfo(Integer id) {
