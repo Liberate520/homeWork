@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class Service implements Serializable {
 
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
     private final HumanTree<Human> humanTree;
     private final HumanBuilder humanBuilder;
 
