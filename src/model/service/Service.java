@@ -7,13 +7,14 @@ import model.creatures.Human;
 import model.creatures.HumanBuilder;
 import model.family_tree.FamilyTree;
 import model.human_tree.HumanTree;
+import writer.FileHandler;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Service implements Serializable {
 
-    private final FamilyTree<Human> familyTree;
+    private FamilyTree familyTree;
     private final HumanTree<Human> humanTree;
     private final HumanBuilder humanBuilder;
 
@@ -117,5 +118,22 @@ public class Service implements Serializable {
         } else {
             return sb.append("Человек с таким ID отсутствует").toString();
         }
+    }
+
+    public boolean Save(String filename) {
+        FileHandler fileHandler = new FileHandler();
+        if (fileHandler.writeObject(familyTree, filename)) {
+            fileHandler.close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean Read(String filename) {
+        FileHandler fileHandler = new FileHandler();
+        familyTree = (FamilyTree) fileHandler.readObject(filename);
+        fileHandler.close();
+        return true;
     }
 }

@@ -27,16 +27,13 @@ public class FileHandler implements Writable {
             try {
                 objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
                 return objectInputStream.readObject();
-
-
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 
-    public boolean close(){
+    public boolean close() {
         try {
             if (objectInputStream != null) {
                 objectInputStream.close();
@@ -45,8 +42,7 @@ public class FileHandler implements Writable {
                 objectOutputStream.close();
             }
             return true;
-        }
-        catch (IOException ignored) {
+        } catch (IOException ignored) {
             return false;
         }
     }
