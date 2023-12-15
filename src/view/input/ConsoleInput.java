@@ -16,6 +16,19 @@ public class ConsoleInput implements Input {
         } catch (Exception ignored) {
             return -1;
         }
+    }
 
+    public Integer rangeIntInput(Integer start, Integer end) {
+        Integer output;
+        try {
+            output = Integer.parseInt(scanner.nextLine());
+            if (output >= start && output <= end) {
+                return output;
+            } else {
+                return -1;
+            }
+        } catch (Exception ignored) {
+            return -1;
+        }
     }
 }
