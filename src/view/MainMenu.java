@@ -12,12 +12,15 @@ public class MainMenu {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
         commandList.add(new AllHuman(consoleUI));
+        commandList.add(new GetHumanFullInfo(consoleUI));
         commandList.add(new GetFamily(consoleUI));
         commandList.add(new GetFamilyTree(consoleUI));
         commandList.add(new HumanDeath(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByFamilyName(consoleUI));
+        commandList.add(new SaveHumanList(consoleUI));
+        commandList.add(new LoadHumanList(consoleUI));
         commandList.add(new Finish(consoleUI));
 
     }

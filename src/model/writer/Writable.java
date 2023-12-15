@@ -1,6 +1,6 @@
 package model.writer;
 
 public interface Writable {
-    void save(Object object);
+    boolean save(Object object);
     Object load();
 }

@@ -1,7 +1,6 @@
 package view;
 
 import model.human.Gender;
-import model.human.Human;
 import presentor.Presentor;
 
 import java.time.LocalDate;
@@ -144,5 +143,24 @@ public class ConsoleUI implements View {
 
     public void sortByFamilyName() {
         presentor.sortByFamilyName();
+    }
+
+    public void saveHumanList() {
+        if (presentor.saveHumanList()) {
+            System.out.println("Список успешно сохранен.");
+        }
+        else {
+            System.out.println("Не удалось сохранить список.");
+        }
+    }
+
+    public void loadHumanList() {
+
+        presentor.loadHumanList();
+        allHuman();
+    }
+
+    public void getHumanFullInfo() {
+        presentor.getHumanFullInfo(getIndexHuman());
     }
 }

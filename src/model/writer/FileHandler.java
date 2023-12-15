@@ -5,16 +5,18 @@ import java.io.*;
 public class FileHandler implements Writable{
 
     @Override
-    public void save(Object object) {
+    public boolean save(Object object) {
         ObjectOutputStream objectOutputStream;
         try {
             objectOutputStream = new ObjectOutputStream(
                     new FileOutputStream("tree.out"));
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
+            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override

@@ -1,9 +1,5 @@
 package model.family;
 
-import model.comparators.ComparatorByAge;
-import model.comparators.ComparatorByFamilyName;
-import model.comparators.ComparatorByName;
-
 import java.io.Serializable;
 import java.util.*;
 
