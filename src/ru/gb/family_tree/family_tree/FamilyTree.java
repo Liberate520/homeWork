@@ -9,38 +9,43 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
+public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E> {
     private int countPeople;
-    private List<Human> humanList;
+    private List<E> humanList;
 
-    public FamilyTree() {
-        humanList = new ArrayList<>();
-    }
+    public FamilyTree() {this(new ArrayList<>()); }
 
-    public void add(Human human) {
+    public FamilyTree(List<E> humanList) {this.humanList = humanList; }
+
+    public boolean add(E human) {
+        if (human == null){
+            return false;
+        }
         if (!humanList.contains(human)) {
             humanList.add(human);
             human.setId(countPeople++);
             addToParents(human);
             addToChildren(human);
+
+            return true;
         }
     }
 
-    private void addToParents(Human human) {
-        for (Human parent : human.getParents()) {
+    private void addToParents(E human) {
+        for (E parent : human.getParents()) {
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human) {
-        for (Human child : human.getChildren()) {
+    private void addToChildren(E human) {
+        for (E child : human.getChildren()) {
             child.addParent(human);
         }
     }
 
-    public List<Human> getByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human human : humanList) {
+    public List<E> getByName(String name) {
+        List<E> res = new ArrayList<>();
+        for (E human : humanList) {
             if (human.getName().equals(name)) {
                 res.add(human);
             }
@@ -66,7 +71,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     @Override
-    public Iterator<Human> iterator() {
+    public Iterator<E> iterator() {
         return new HumanIterator(humanList);
     }
 
