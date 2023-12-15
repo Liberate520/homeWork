@@ -1,27 +1,25 @@
 package model.familyTree;
 
 import model.human.Human;
-import model.human.HumanComparatorByBirthDate;
-import model.human.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable, Iterable<Human>{
+public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E>{
 
-    private List<Human> humanList;
+    private List<E> humanList;
 
 
-    public FamilyTree(List<Human> humanList){
+    public FamilyTree(List<E> humanList){
         this.humanList = humanList;
     }
     public FamilyTree(){
         this(new ArrayList<>());
     }
 
-    public boolean add(Human human){
+    public boolean add(E human){
         if(human == null){
             return false;
         }
@@ -34,19 +32,19 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         return false;
     }
 
-    private void addToParents(Human human){
-        for (Human parent: human.getParents()){
+    private void addToParents(E human){
+        for (E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(Human human){
-        for (Human child: human.getChildren()){
+    private void addToChildren(E human){
+        for (E child: human.getChildren()){
             child.addParent(human);
         }
     }
 
-    public boolean setWedding(Human human1, Human human2) {
+    public boolean setWedding(E human1, E human2) {
         if (human1.getCouple() == null && human2.getCouple() == null) {
             human1.setCouple(human2);
             human2.setCouple(human1);
@@ -68,7 +66,7 @@ public class FamilyTree implements Serializable, Iterable<Human>{
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов: \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             sb.append(human);
             sb.append("\n");
         }
@@ -76,15 +74,15 @@ public class FamilyTree implements Serializable, Iterable<Human>{
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return new FamilyIterator(humanList);
     }
 
     public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
+        humanList.sort(new FamilyComparatorByName());
     }
     public void sortByBirthDate(){
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new FamilyComparatorByBirthDate());
     }
 
 }
