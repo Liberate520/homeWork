@@ -29,6 +29,7 @@ public class FileHandler implements Writable {
                 return objectInputStream.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
+                return null;
             }
         }
     }
