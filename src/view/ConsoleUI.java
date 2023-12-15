@@ -1,7 +1,10 @@
 package view;
 
 import model.creatures.Gender;
+import model.service.Service;
 import presenter.Presenter;
+import view.input.ConsoleInput;
+import view.input.Input;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,12 +14,14 @@ import java.util.Scanner;
 //TODO: Вынести обработку исключений в отдельный класс
 
 public class ConsoleUI implements View {
-    private Scanner scanner;
-    private Presenter presenter;
+    private final Scanner scanner;
+    private final Input input;
+    private final Presenter presenter;
     private boolean work;
-    private MainMenu menu;
+    private final MainMenu menu;
 
     public ConsoleUI() {
+        this.input = new ConsoleInput();
         this.scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
@@ -36,6 +41,7 @@ public class ConsoleUI implements View {
         }
     }
 
+    //TODO: продолжаем обработку ввода
     public void addCreature() {
         Gender gend = Gender.Male;
         System.out.println("Введите имя: ");
@@ -43,8 +49,8 @@ public class ConsoleUI implements View {
         System.out.println("Введите фамилию: ");
         String lastName = scanner.nextLine();
         boolean flag = false;
+        System.out.println("Выберите пол: 1. Мужской, 2. Женский");
         while (!flag) {
-            System.out.println("Выберите пол: 1. Мужской, 2. Женский");
             try {
                 int gender = Integer.parseInt(scanner.nextLine());
                 if (gender == 2) {
@@ -55,7 +61,8 @@ public class ConsoleUI implements View {
                     gend = Gender.Male;
                     flag = true;
                 }
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                System.out.println("Корректно введите пол: 1. Мужской, 2. Женский");
             }
         }
         flag = false;
@@ -85,16 +92,9 @@ public class ConsoleUI implements View {
     }
 
     private void execute() {
-        String line = scanner.nextLine();
-        int numCommand = 0;
         try {
-            numCommand = Integer.parseInt(line);
-            try {
-                menu.execute(numCommand);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Пожалуйста, введите корректный номер пункта меню");
-            }
-        } catch (NumberFormatException e) {
+            menu.execute(input.intInput());
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Пожалуйста, введите корректный номер пункта меню");
         }
     }
@@ -128,5 +128,18 @@ public class ConsoleUI implements View {
 
     public void showHumanTree() {
         System.out.println(presenter.showHumanTree());
+    }
+
+    public void setSpouce() {
+        System.out.println("Введите ID первого супруга");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID второго супруга");
+        Integer id2 = Integer.parseInt(scanner.nextLine());
+        if (presenter.setSpouce(id, id2)) {
+            System.out.println("Супруги заданы успешно!");
+        } else {
+            System.out.println("Не удалось выполнить команду");
+        }
+
     }
 }

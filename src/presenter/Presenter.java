@@ -44,4 +44,8 @@ public class Presenter {
     public String showAllInfo(Integer id) {
         return service.ShowAllInfo(id);
     }
+
+    public boolean setSpouce(Integer id, Integer id2) {
+        return service.setSpouce(id, id2);
+    }
 }

@@ -106,7 +106,7 @@ public class Service implements Serializable {
         return familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild));
     }
 
-    public boolean SetSpouce(Integer idSpouce1, Integer idSpouce2) {
+    public boolean setSpouce(Integer idSpouce1, Integer idSpouce2) {
         return familyTree.setSpouse(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2));
     }
 

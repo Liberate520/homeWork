@@ -16,6 +16,7 @@ public class MainMenu {
         commandList.add(new ShowAll(consoleUI));
         commandList.add(new ShowAllInfo(consoleUI));
         commandList.add(new SetChild(consoleUI));
+        commandList.add(new SetSpouce(consoleUI));
         commandList.add(new ShowHumanTree(consoleUI));
         commandList.add(new Exit(consoleUI));
     }
