@@ -1,13 +1,5 @@
 package model.FamilyModel;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.*;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,7 +7,7 @@ import model.HumanModel.*;
 
 public class FamilyTree<T extends HumanInterface<T>> implements Serializable, Iterable<T> {
 
-    private static final long serialVersionUID = 1L;
+    private final long serialVersionUID = 1L;
 
     private long id;
 

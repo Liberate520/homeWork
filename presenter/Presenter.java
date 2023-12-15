@@ -1,8 +1,5 @@
 package presenter;
 
-import java.time.LocalDate;
-
-import model.FamilyModel.*;
 import model.HumanModel.*;
 import model.service.*;
 import view.View;
@@ -26,27 +23,27 @@ public class Presenter {
     }
 
     public void SaveInFile(String filename) {
-        this.service.SaveInFile(filename);
+        this.service.SaveObject(filename);
     }
 
     public void LoadFile(String filename) {
-        this.service.LoadFile(filename);
+        this.service.LoadObject(filename);
     }
 
     public void PrintAll() {
-        this.service.PrintAll();
+        this.service.printAll();
     }
 
     public void setFather(int id1, int id2) {
-        this.service.getID(id1).setFather(this.service.getID(id2));
+        this.service.setFather(id1, id2);
     }
 
     public void setMather(int id1, int id2) {
-        this.service.getID(id1).setMather(this.service.getID(id2));
+        this.service.setMother(id1, id2);
     }
 
     public void GetParrents(int id) {
-        this.service.GetParrents(id);
+        this.service.getParents(id);
     }
 
 }

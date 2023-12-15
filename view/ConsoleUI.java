@@ -3,9 +3,7 @@ package view;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import model.FamilyModel.*;
 import model.HumanModel.*;
-import model.service.*;
 import presenter.Presenter;
 
 public class ConsoleUI implements View {
@@ -170,6 +168,6 @@ public class ConsoleUI implements View {
     public void GetParrents() {
         System.out.println("Введите ID ребенка:");
         int h1 = Integer.parseInt(scanner.nextLine());
-
+        this.presenter.GetParrents(h1);
     }
 }
