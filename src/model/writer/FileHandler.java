@@ -10,7 +10,7 @@ public class FileHandler implements Writable {
     public boolean save(Serializable serializable, String filePath) {
         boolean flag = false;
 
-        File file = new File(filepath);
+        File file = new File("src/writer");
         ObjectOutputStream oos = null;
         try (FileOutputStream fos = new FileOutputStream(file)){
             if (fos != null) {
@@ -29,7 +29,7 @@ public class FileHandler implements Writable {
 
 
     public Object read(String filePath) throws InvalidObjectException {
-        File file = new File(filepath);
+        File file = new File("src/writer");
         ObjectInputStream ois = null;
         try (FileInputStream fis = new FileInputStream(file)){
             if (fis != null) {
