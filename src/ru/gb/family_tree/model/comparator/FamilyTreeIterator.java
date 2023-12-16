@@ -1,25 +1,24 @@
-package ru.gb.family_tree.model.tree;
-
+package ru.gb.family_tree.model.comparator;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class FamilyTreeIterator<T extends TreeNode> implements Iterator<T> {
     private int index;
-    private List<T> humanList;
+    private List<T> subList;
 
-    public FamilyTreeIterator(List<T> humanList) {
+    public FamilyTreeIterator(List<T> subList) {
         index = 0;
-        this.humanList = humanList;
+        this.subList = subList;
     }
 
     @Override
     public boolean hasNext() {
-        return index < humanList.size();
+        return index < subList.size();
     }
 
     @Override
     public T next() {
-        return humanList.get(index++);
+        return subList.get(index++);
     }
 }

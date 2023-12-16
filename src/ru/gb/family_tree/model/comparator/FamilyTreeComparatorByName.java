@@ -1,5 +1,4 @@
-package ru.gb.family_tree.model.tree;
-
+package ru.gb.family_tree.model.comparator;
 
 import java.util.Comparator;
 

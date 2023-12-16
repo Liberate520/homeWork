@@ -1,9 +1,8 @@
 package ru.gb.family_tree.model.writer;
 
-
 import java.io.*;
 
-public class FileHandler implements Writable {
+public class FileHandlerSaveFile implements Writable {
     public boolean saveFile(Serializable serializable, String filePath) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
             objectOutputStream.writeObject(serializable);

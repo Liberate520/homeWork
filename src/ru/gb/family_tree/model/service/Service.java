@@ -1,18 +1,18 @@
 package ru.gb.family_tree.model.service;
 
-
-import ru.gb.family_tree.model.humans.Gender;
-import ru.gb.family_tree.model.humans.Human;
-import ru.gb.family_tree.model.tree.FamilyTree;
+import ru.gb.family_tree.model.comparator.TreeNode;
+import ru.gb.family_tree.model.gender.Gender;
+import ru.gb.family_tree.model.subject.human.Human;
+import ru.gb.family_tree.model.familytree.FamilyTree;
 import ru.gb.family_tree.model.writer.Writable;
 
 import java.time.LocalDate;
 
-public class Service {
+public class Service<E extends TreeNode<E>> {
     private Writable writable;
-    private FamilyTree<Human> activeTree;
+    private FamilyTree<E> activeTree;
 
-    public Service(FamilyTree<Human> activeTree) {
+    public Service(FamilyTree<E> activeTree) {
         this.activeTree = activeTree;
     }
 
@@ -35,13 +35,14 @@ public class Service {
     }
 
     public String add(String name, String genderString, String birthDate, long idFather, long idMother) {
-        Human father = activeTree.getByID(idFather);
-        Human mother = activeTree.getByID(idMother);
+        E father = activeTree.getByID(idFather);
+        E mother = activeTree.getByID(idMother);
         Gender gender = Gender.valueOf(genderString);
         LocalDate humanBirthDate = LocalDate.parse(birthDate);
-        Human human = new Human(name, gender, humanBirthDate, father, mother);
-        activeTree.addHumans(human);
-        return "The human has been successfully added to the tree";
+        // Непонятно, что ставить вместо new Human
+        E sub = new Human(name, gender, humanBirthDate, father, mother);
+        activeTree.addSub(sub);
+        return "Successfully added to the tree";
     }
 
     public void setWritable(Writable writable) {

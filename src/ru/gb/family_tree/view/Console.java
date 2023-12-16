@@ -1,6 +1,5 @@
 package ru.gb.family_tree.view;
 
-
 import ru.gb.family_tree.presenter.Presenter;
 
 import java.util.Scanner;

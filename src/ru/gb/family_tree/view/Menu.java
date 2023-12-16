@@ -1,11 +1,6 @@
 package ru.gb.family_tree.view;
 
-
-import ru.gb.family_tree.view.Console;
-import ru.gb.family_tree.view.comands.GetHumanList;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Menu {
     private List<GetHumanList> list;
@@ -25,7 +20,7 @@ public class Menu {
         }
         return stringBuilder.toString();
     }
-     public void execute(String choice) {
-         list.get(Integer.parseInt(choice) - 1).execute();
-     }
+    public void execute(String choice) {
+        list.get(Integer.parseInt(choice) - 1).execute();
+    }
 }

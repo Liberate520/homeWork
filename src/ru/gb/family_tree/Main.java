@@ -1,9 +1,9 @@
 package ru.gb.family_tree;
 
 
-import ru.gb.family_tree.model.humans.Gender;
-import ru.gb.family_tree.model.humans.Human;
-import ru.gb.family_tree.model.tree.FamilyTree;
+import ru.gb.family_tree.model.gender.Gender;
+import ru.gb.family_tree.model.subject.human.Human;
+import ru.gb.family_tree.model.familytree.FamilyTree;
 
 import java.time.LocalDate;
 
@@ -16,21 +16,21 @@ public class Main {
         Human anna = new Human("Anna", Gender.Female, LocalDate.of(1973, 5, 6));
         Human denis = new Human("Denis", Gender.Male, LocalDate.of(1980, 10, 9));
 
-        tree.addHumans(egor);
-        tree.addHumans(valeria);
-        tree.addHumans(anna);
-        tree.addHumans(denis);
+        tree.addSub(egor);
+        tree.addSub(valeria);
+        tree.addSub(anna);
+        tree.addSub(denis);
 
         Human ivan = new Human("Ivan", Gender.Male, LocalDate.of(1965, 12, 1), egor, valeria);
         Human ksenia = new Human("Ksenia", Gender.Female, LocalDate.of(1986, 5, 6), denis, anna);
 
-        tree.addHumans(ivan);
-        tree.addHumans(ksenia);
+        tree.addSub(ivan);
+        tree.addSub(ksenia);
 
         Human grandMother = new Human("Natalya", Gender.Female, LocalDate.of(1970, 4, 6));
         grandMother.addChild(egor);
 
-        tree.addHumans(grandMother);
+        tree.addSub(grandMother);
 
         System.out.println(tree);
     }
