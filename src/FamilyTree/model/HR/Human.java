@@ -1,12 +1,13 @@
-package FamilyTree.HR;
+package FamilyTree.model.HR;
 
+import FamilyTree.model.FT.commonParam;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {  //, CommonParam<Human>{   Serializable можно тогда убрать
+public class Human implements Serializable, commonParam <Human>{
     private int id;
     private String name;
     private Gender gender;
@@ -234,5 +235,10 @@ public class Human implements Serializable {  //, CommonParam<Human>{   Serializ
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Human o) {
+        return 0;
     }
 }

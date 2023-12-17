@@ -1,8 +1,11 @@
-package FamilyTree.Saver;
+package FamilyTree.model.Saver;
+
+import FamilyTree.model.FT.FamTree;
+import FamilyTree.model.HR.Human;
 
 import java.io.*;
 
-public class FileHandler implements Writable {
+public class FileHandler {
     public boolean save(Serializable savingStream, String savePath) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(savePath))) {
             outputStream.writeObject(savingStream);
@@ -25,10 +28,7 @@ public class FileHandler implements Writable {
         }
     }
 
-//    @Override
-//    public void setSavePath(String savePath) {
-//
-//    }
+
 
 
 //    @Override

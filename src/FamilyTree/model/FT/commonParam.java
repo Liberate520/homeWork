@@ -1,10 +1,10 @@
-package FamilyTree.FT;
+package FamilyTree.model.FT;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface commonParam <T> extends Serializable {
+public interface commonParam <T> extends Serializable, Comparable<T> {
     void setId(int id);
     long getId();
     T getFather();
