@@ -76,8 +76,7 @@ public class Human implements Serializable, Creature<Human> {
     }
 
     public boolean setSpouse(Human spouse) {
-        if (this.spouse != null) {
-            System.out.println("Супруг уже задан");
+        if (this.spouse != null && spouse != null) {
             return false;
         } else {
             this.spouse = spouse;

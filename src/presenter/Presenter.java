@@ -2,8 +2,6 @@ package presenter;
 
 import model.creatures.Gender;
 import model.service.Service;
-import view.ConsoleUI;
-import view.View;
 
 import java.time.LocalDate;
 
@@ -41,10 +39,34 @@ public class Presenter {
     }
 
     public String showAllInfo(Integer id) {
-        return service.ShowAllInfo(id);
+        return service.showAllInfo(id);
     }
 
     public boolean setSpouce(Integer id, Integer id2) {
         return service.setSpouce(id, id2);
+    }
+
+    public boolean saveFamilyTree(String filename) {
+        return service.save(filename);
+    }
+
+    public boolean loadFamilyTree(String filename) {
+        return service.load(filename);
+    }
+
+    public boolean setDivorce(Integer id, Integer id2) {
+        return service.divorce(id, id2);
+    }
+
+    public boolean setFather(Integer childId, Integer fatherId) {
+        return service.setFather(childId, fatherId);
+    }
+
+    public boolean setMother(Integer childId, Integer motherID) {
+        return service.setMother(childId, motherID);
+    }
+
+    public boolean setDeathDate(Integer humanID, LocalDate date) {
+        return service.setDeathDate(humanID, date);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MainMenu {
     private List<Command> commandList;
-//TODO: Добавить: Свадьба/развод, родители, задать дату смерти
+
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddCreature(consoleUI));
@@ -16,8 +16,14 @@ public class MainMenu {
         commandList.add(new ShowAll(consoleUI));
         commandList.add(new ShowAllInfo(consoleUI));
         commandList.add(new SetChild(consoleUI));
+        commandList.add(new SetFather(consoleUI));
+        commandList.add(new SetMother(consoleUI));
         commandList.add(new SetSpouce(consoleUI));
+        commandList.add(new SetDivorce(consoleUI));
+        commandList.add(new SetDeathDate(consoleUI));
         commandList.add(new ShowHumanTree(consoleUI));
+        commandList.add(new SaveFamilyTree(consoleUI));
+        commandList.add(new LoadFamilyTree(consoleUI));
         commandList.add(new Exit(consoleUI));
     }
 

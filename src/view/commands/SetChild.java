@@ -2,7 +2,7 @@ package view.commands;
 
 import view.ConsoleUI;
 
-public class SetChild extends Command{
+public class SetChild extends Command {
     public SetChild(ConsoleUI consoleUI) {
         super("Задать ребенка", consoleUI);
     }

@@ -40,7 +40,6 @@ public class ConsoleUI implements View {
         }
     }
 
-    //TODO: продолжаем обработку ввода
     public void addCreature() {
         Gender gend = Gender.Male;
         System.out.println("Введите имя: ");
@@ -50,17 +49,15 @@ public class ConsoleUI implements View {
         boolean flag = false;
         System.out.println("Выберите пол: 1. Мужской, 2. Женский");
         while (!flag) {
-            try {
-                int gender = Integer.parseInt(scanner.nextLine());
-                if (gender == 2) {
-                    gend = Gender.Female;
-                    flag = true;
-                }
-                if (gender == 1) {
-                    gend = Gender.Male;
-                    flag = true;
-                }
-            } catch (Exception e) {
+            int gender = input.rangeIntInput(1, 2);
+            if (gender == 2) {
+                gend = Gender.Female;
+                flag = true;
+            }
+            if (gender == 1) {
+                gend = Gender.Male;
+                flag = true;
+            } else {
                 System.out.println("Корректно введите пол: 1. Мужской, 2. Женский");
             }
         }
@@ -102,16 +99,15 @@ public class ConsoleUI implements View {
         System.out.println(presenter.showNotInTree());
     }
 
-    //TODO: Обработать ошибки ввода
     public void setChild() {
         System.out.println("Введите ID родителя:");
-        Integer parentID = Integer.parseInt(scanner.nextLine());
+        Integer parentID = input.intInput();
         System.out.println("Введите ID ребенка:");
-        Integer childID = Integer.parseInt(scanner.nextLine());
+        Integer childID = input.intInput();
         if (presenter.setChild(parentID, childID)) {
             System.out.println("Ребенок успешно задан");
         } else {
-            System.out.println("Не удалось задать ребенка");
+            System.out.println("Не удалось задать ребенка c такими параметрами");
         }
     }
 
@@ -121,7 +117,7 @@ public class ConsoleUI implements View {
 
     public void ShowAllInfo() {
         System.out.println("Введите ID человека");
-        Integer id = Integer.parseInt(scanner.nextLine());
+        Integer id = input.intInput();
         System.out.println(presenter.showAllInfo(id));
     }
 
@@ -131,9 +127,9 @@ public class ConsoleUI implements View {
 
     public void setSpouce() {
         System.out.println("Введите ID первого супруга");
-        Integer id = Integer.parseInt(scanner.nextLine());
+        Integer id = input.intInput();
         System.out.println("Введите ID второго супруга");
-        Integer id2 = Integer.parseInt(scanner.nextLine());
+        Integer id2 = input.intInput();
         if (presenter.setSpouce(id, id2)) {
             System.out.println("Супруги заданы успешно!");
         } else {
@@ -141,4 +137,81 @@ public class ConsoleUI implements View {
         }
 
     }
+
+    public void saveFamilyTree() {
+        System.out.println("Введите имя файла: ");
+        if (presenter.saveFamilyTree(scanner.nextLine())) {
+            System.out.println("Изменения успешно сохранены");
+        } else {
+            System.out.println("Не удалось сохранить изменения");
+        }
+
+    }
+
+    public void loadFamilyTree() {
+        System.out.println("Введите имя файла: ");
+        if (presenter.loadFamilyTree(scanner.nextLine())) {
+            System.out.println("Дерево успешно загружено");
+        } else {
+            System.out.println("Не удалось загрузить из файла");
+        }
+    }
+
+    public void SetDivorce() {
+        System.out.println("Введите ID первого супруга");
+        Integer id = input.intInput();
+        System.out.println("Введите ID второго супруга");
+        Integer id2 = input.intInput();
+        if (presenter.setDivorce(id, id2)) {
+            System.out.println("Команда успешно выполнена");
+        } else {
+            System.out.println("Не удалось выполнить команду");
+        }
+    }
+
+    public void setFather() {
+        System.out.println("Введите ID ребенка:");
+        Integer childId = input.intInput();
+        System.out.println("Введите ID отца:");
+        Integer fatherId = input.intInput();
+        if (presenter.setFather(childId, fatherId)) {
+            System.out.println("Отец успешно задан");
+        } else {
+            System.out.println("Не удалось задать отца c такими параметрами");
+        }
+    }
+
+    public void setMother() {
+        System.out.println("Введите ID ребенка:");
+        Integer childId = input.intInput();
+        System.out.println("Введите ID матери:");
+        Integer motherID = input.intInput();
+        if (presenter.setMother(childId, motherID)) {
+            System.out.println("Мать успешно задана");
+        } else {
+            System.out.println("Не удалось задать мать c такими параметрами");
+        }
+    }
+
+    public void setDeathDate() {
+        boolean flag = false;
+        LocalDate date = null;
+        System.out.println("Введите ID человека:");
+        Integer humanID = input.intInput();
+        while (!flag) {
+            try {
+                System.out.println("Введите дату смерти в формате год-месяц-день: (1990-09-10):");
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(scanner.nextLine(), dateFormat);
+                flag = true;
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        if (presenter.setDeathDate(humanID, date)) {
+            System.out.println("Дата смерти успешно задана");
+        } else {
+            System.out.println("Не удалось задать дату смерти");
+        }
+    }
 }
+

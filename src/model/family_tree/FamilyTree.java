@@ -51,13 +51,8 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     }
 
     public boolean divorce(T firstSpouce, T secondSpouce) {
-        if (firstSpouce.equals(secondSpouce.getSpouse())) {
-            firstSpouce.setSpouse(null);
-            secondSpouce.setSpouse(null);
-            return true;
-        } else {
-            return false;
-        }
+        return firstSpouce.equals(secondSpouce.getSpouse()) && firstSpouce.setSpouse(null)
+                && secondSpouce.setSpouse(null);
     }
 
     public boolean setMother(T child, T mother) {
