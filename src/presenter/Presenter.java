@@ -2,17 +2,16 @@ package presenter;
 
 import model.creatures.Gender;
 import model.service.Service;
+import view.ConsoleUI;
 import view.View;
 
 import java.time.LocalDate;
 
-//TODO: implement создать интерфейс
 public class Presenter {
-    private View view;
     private Service service;
 
-    public Presenter(View view) {
-        this.view = view;
+
+    public Presenter() {
         this.service = new Service();
     }
 

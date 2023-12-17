@@ -150,7 +150,7 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
                 new CreatureComporatorById());
         if (finalId >= 0) {
             return familyTree.get(finalId);
-        } else  {
+        } else {
             finalId = Collections.binarySearch(notInTree,
                     new Human(id, null, null, null, null),
                     new CreatureComporatorById());
@@ -176,7 +176,13 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
         return new TreeIterator<T>(familyTree);
     }
 
-
+    public boolean emptyCheck() {
+        if (familyTree.isEmpty())
+            return false;
+        else {
+            return true;
+        }
+    }
 }
 
 

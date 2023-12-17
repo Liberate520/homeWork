@@ -1,7 +1,6 @@
 package view;
 
 import model.creatures.Gender;
-import model.service.Service;
 import presenter.Presenter;
 import view.input.ConsoleInput;
 import view.input.Input;
@@ -16,14 +15,14 @@ import java.util.Scanner;
 public class ConsoleUI implements View {
     private final Scanner scanner;
     private final Input input;
-    private final Presenter presenter;
     private boolean work;
     private final MainMenu menu;
+    private Presenter presenter;
 
     public ConsoleUI() {
         this.input = new ConsoleInput();
         this.scanner = new Scanner(System.in);
-        presenter = new Presenter(this);
+        this.presenter = new Presenter();
         work = true;
         menu = new MainMenu(this);
     }

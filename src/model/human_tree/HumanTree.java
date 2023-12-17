@@ -2,18 +2,18 @@ package model.human_tree;
 
 
 import model.creatures.Creature;
-import model.creatures.Human;
-import model.family_tree.FamilyTree;
+import model.service.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HumanTree<T extends Creature> {
-    FamilyTree<Human> familyTree;
-    T treeTop;
 
-    public HumanTree(FamilyTree<Human> familyTree) {
-        this.familyTree = familyTree;
+public class HumanTree<T extends Creature> {
+    private T treeTop;
+    private Service service;
+
+    public HumanTree(Service service) {
+        this.service = service;
     }
 
     public T getTop() {
@@ -52,10 +52,10 @@ public class HumanTree<T extends Creature> {
     }
 
     private boolean topOfTree(T topEnter) {
-        if (familyTree.getFamilyTree().isEmpty()) {
+        if (service.emptyCheck()) {
             return false;
         } else {
-            this.treeTop = (T) familyTree.getFirstMember();
+            this.treeTop = (T) service.getFirstMebmer();
             if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
                 if (topEnter.getSpouse() != null) {
                     if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {

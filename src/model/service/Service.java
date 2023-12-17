@@ -21,11 +21,15 @@ public class Service implements Serializable {
     public Service() {
         familyTree = new FamilyTree<>();
         humanBuilder = new HumanBuilder();
-        humanTree = new HumanTree<>(familyTree);
+        humanTree = new HumanTree<>(this);
     }
 
     public FamilyTree getFamilyTree() {
         return familyTree;
+    }
+
+    public Creature<Human> getFirstMebmer() {
+        return familyTree.getFirstMember();
     }
 
     public HumanTree getHumanTree() {
@@ -135,5 +139,13 @@ public class Service implements Serializable {
         familyTree = (FamilyTree) fileHandler.readObject(filename);
         fileHandler.close();
         return true;
+    }
+
+    public boolean emptyCheck() {
+        if (familyTree.emptyCheck())
+            return false;
+        else {
+            return true;
+        }
     }
 }
