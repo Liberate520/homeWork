@@ -1,10 +1,10 @@
 package io;
 import java.io.*;
-import model.Person;
-import io.FileHandler;
-
 import java.io.IOException;
+
+import io.FileHandler;
 import model.GenealogyTree;
+import model.Person;
 
 public class FileHandler implements FileWritableReadable {
     @Override

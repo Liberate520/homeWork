@@ -1,10 +1,10 @@
 import model.GenealogyTree;
 import model.Person;
-import io.FileHandler;
 
 import java.io.IOException;
 import java.util.List;
 
+import io.FileHandler;
 import view.GenealogyTreeView;
 import presenter.GenealogyTreePresenter;
 import presenter.GenealogyTreePresenterImpl;
