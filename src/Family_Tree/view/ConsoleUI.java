@@ -51,9 +51,42 @@ public class ConsoleUI implements View{
         presenter.sortByName();
     }
 
-    public String getHumanListInfo() {
-        presenter.getHumanListInfo();
-        return null;
+    public void getHumanListInfo() {
+        printMenu(menu);
+        execute(menu);
+    }
+
+    private void execute(MainMenu menu) {
+        String line = scanner.nextLine();
+        if (checkTextForInt(line)) {
+            int numCommand = Integer.parseInt(line);
+            if (checkCommand(numCommand,menu)) {
+                menu.execute(numCommand);
+            }
+        }
+    }
+
+    private boolean checkTextForInt(String text) {
+        if (text.matches("[0-9]+")) {
+            return true;
+        } else {
+            error();
+            return false;
+        }
+    }
+
+    private boolean checkCommand(int numCommand, MainMenu menu) {
+        if (numCommand <= menu.size()) {
+            return true;
+        } else {
+            error();
+            return false;
+        }
+    }
+
+
+    private void printMenu(MainMenu print) {
+        System.out.println(print.print());
     }
 
     public void add() {

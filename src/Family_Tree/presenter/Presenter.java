@@ -1,6 +1,8 @@
 package Family_Tree.presenter;
 
 import Family_Tree.model.Human.Gender;
+import Family_Tree.model.Human.Human;
+import Family_Tree.model.Writer.FileHandler;
 import Family_Tree.view.View;
 import Family_Tree.model.Service.Service;
 import java.time.LocalDate;
@@ -11,7 +13,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service(new FileHandler<Human>());
     }
 
     public boolean add(String name, LocalDate birthday, Gender gender) {
@@ -20,8 +22,7 @@ public class Presenter {
     }
 
     public void getHumanListInfo() {
-        String answer = view.getHumanListInfo();
-        view.answer(answer);
+        view.answer(service.getHumanListInfo);
     }
 
     public void sortByName() {

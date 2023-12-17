@@ -5,14 +5,19 @@ import Family_Tree.model.Human.Human;
 import Family_Tree.model.Human.Gender;
 import Family_Tree.model.Tree.FamilyTree;
 import Family_Tree.model.Writer.Save;
-import Family_Tree.model.Writer.Writable;
 
 import java.time.LocalDate;
 
 public class Service {
+    public String getHumanListInfo;
     private FamilyTree<Human> tree;
-    private Writable<FamilyTree<Human>> storage;
+    private Save<FamilyTree<Human>> storage;
     private int id;
+
+    public Service(FileHandler<Human> storage) {
+        this.storage = storage;
+        tree = new FamilyTree<>();
+    }
 
     public boolean add(String name, LocalDate birthday, Gender gender) {
         Human human = new Human(name, birthday, gender);
@@ -48,7 +53,7 @@ public class Service {
 
     public void addToParents(int humanId, int parentId) {
         Human human = tree.getId(id);
-        human.getParents();
+        human.addParent(tree.getId(parentId));
     }
 
 }

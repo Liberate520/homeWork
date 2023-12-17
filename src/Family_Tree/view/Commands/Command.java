@@ -4,7 +4,7 @@ import Family_Tree.view.ConsoleUI;
 import Family_Tree.view.View;
 
 public abstract class Command {
-    public String description;
+    String description;
     private View view;
     ConsoleUI consoleUI;
 

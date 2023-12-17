@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu {
-    private List<Command> commandList;
+    List<Command> commandList;
 
     public MainMenu(ConsoleUI consoleUI) {
+        commandList = new ArrayList<>();
         commandList.add(new Add(consoleUI));
         commandList.add(new GetHumanListInfo(consoleUI));
         commandList.add(new SortByName(consoleUI));
@@ -36,4 +37,5 @@ public class MainMenu {
     public int size(){
         return commandList.size();
     }
+
 }

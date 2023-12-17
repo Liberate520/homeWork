@@ -7,11 +7,12 @@ import Family_Tree.model.Tree.TreeNode;
 
 import java.io.*;
 
-public class FileHandler <E extends FamilyTreeIterator<E> & TreeNode<E>> implements Serializable {
+public class FileHandler <E extends FamilyTreeIterator<E> & TreeNode<E>> implements Save<FamilyTree<E>>{
 
-    public boolean write(Serializable serializable, String filePath){
-        try(ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream(filePath))){
+    public boolean write(FamilyTree<E> serializable, String fileName){
+        try(ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream(fileName))){
             objectOutputStream.writeObject(serializable);
+            objectOutputStream.close();
             return true;
         } catch (Exception e){
             e.printStackTrace();
@@ -19,8 +20,8 @@ public class FileHandler <E extends FamilyTreeIterator<E> & TreeNode<E>> impleme
         }
     }
 
-    public FamilyTree<E> read(String filePath) {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath))) {
+    public FamilyTree<E> read(String fileName) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             FamilyTree<E> tmp = (FamilyTree<E>) objectInputStream.readObject();
             objectInputStream.close();
             return tmp;
