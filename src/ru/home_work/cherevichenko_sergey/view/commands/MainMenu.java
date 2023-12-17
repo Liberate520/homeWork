@@ -11,7 +11,7 @@ public class MainMenu {
     public MainMenu(ConsoleUi consoleUi) {
         commands = new ArrayList<>();
         commands.add(new AddHuman(consoleUi));
-        commands.add(new GetHumanInfo(consoleUi));
+        commands.add(new GetInfo(consoleUi));
         commands.add(new AddChildForFamily(consoleUi));
         commands.add(new FindChildren(consoleUi));
         commands.add(new RemoveHuman(consoleUi));

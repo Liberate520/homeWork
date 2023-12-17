@@ -20,16 +20,19 @@ public class ServiceTree implements Serializable, Writable {
     private HumanBuilder builder;
     private Writable writable;
 
-    public ServiceTree(FamilyTree<Human> tree) {
+    public ServiceTree(FamilyTree<Human> tree,Writable writable) {
         this.tree = tree;
+        this.writable = writable;
     }
 
     public ServiceTree() {
         tree = new FamilyTree<>();
         builder = new HumanBuilder();
-        writable = new  FileHandler(this.tree);
+        writable = new FileHandler(this.tree);
+
 
     }
+
 
     // Создание человека и добавление в древо
     public void addHuman(String name, String lastName, Gender gender,
@@ -92,7 +95,7 @@ public class ServiceTree implements Serializable, Writable {
     }
 
     @Override
-    public Object readable()  {
-        return tree = (FamilyTree<Human>) writable.readable();
+    public Object read()  {
+        return tree = (FamilyTree<Human>) writable.read();
     }
 }

@@ -1,6 +1,9 @@
 package ru.home_work.cherevichenko_sergey.presenter;
 
+import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.FamilyTree;
 import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.familyTree.human.Gender;
+import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.file_handler.FileHandler;
+import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.file_handler.Writable;
 import ru.home_work.cherevichenko_sergey.model_family_tree.human_builder.service_tree.ServiceTree;
 import ru.home_work.cherevichenko_sergey.view.View;
 
@@ -10,9 +13,11 @@ public class Presenter {
     View view;
     ServiceTree service;
 
+
     public Presenter(View view) {
         this.view = view;
         service = new ServiceTree();
+
     }
 
     public void addHuman(String name, String lastName, Gender gender,
@@ -20,7 +25,7 @@ public class Presenter {
         service.addHuman(name, lastName, gender, birthDay, dateDeath);
     }
 
-    public void getHumanInfo() {
+    public void getInfo() {
         String answer = service.getHumanInfo();
         view.printAnswer(answer);
     }
@@ -75,7 +80,7 @@ public class Presenter {
     }
 
     public void read()  {
-        service.readable();
+        service.read();
     }
 
 }

@@ -39,7 +39,7 @@ public class ConsoleUi implements View {
 
     private void choice() {
         int line = scanner.nextInt();
-        if (line > 0 && line < menu.size()) menu.execute(line);
+        if (line > 0 && line <= menu.size()) menu.execute(line);
         else error();
     }
 
@@ -72,8 +72,8 @@ public class ConsoleUi implements View {
 
     }
 
-    public void getHumanInfo() {
-        presenter.getHumanInfo();
+    public void getInfo() {
+        presenter.getInfo();
 
     }
 
@@ -121,7 +121,6 @@ public class ConsoleUi implements View {
 
 
     public void restoreTree() {
-
         presenter.read();
     }
 }

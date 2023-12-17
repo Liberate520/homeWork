@@ -10,5 +10,5 @@ public interface Writable {
      void save() ;
 
      // Метод для записи
-     Object readable();
+     Object read();
 }

@@ -29,7 +29,7 @@ public class FileHandler implements Writable {
 
     @Override
     // Метод для чтения
-    public Object readable() {
+    public Object read() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(
                     new FileInputStream("tree.out"));
