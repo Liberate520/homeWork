@@ -12,6 +12,7 @@ public interface TreeNode<T> extends Serializable {
     void addChild(T human);
     void addParent(T human);
     String getName();
+    int getAge();
     LocalDate getDeathDate();
     LocalDate getBirthDate();
     List<T> getParents();

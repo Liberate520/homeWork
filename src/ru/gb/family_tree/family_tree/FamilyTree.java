@@ -27,8 +27,9 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
             addToParents(human);
             addToChildren(human);
 
-            return true;
+
         }
+        return true;
     }
 
     private void addToParents(E human) {
@@ -63,7 +64,7 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
         sb.append("В древе: ");
         sb.append(humanList.size());
         sb.append(" человек \n");
-        for (Human human: humanList){
+        for (E human: humanList){
             sb.append(human);
             sb.append("\n");
         }
@@ -71,15 +72,11 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new HumanIterator(humanList);
-    }
+    public Iterator<E> iterator() { return new HumanIterator<>(humanList); }
 
-    public void sortByName(){
-        humanList.sort(new HumanComparatorByName());
-    }
+    public void sortByName(){humanList.sort(new HumanComparatorByName<>()); }
 
     public void sortByBirthDate(){
-        humanList.sort(new HumanComparatorByBirthDate());
+        humanList.sort(new HumanComparatorByBirthDate<>());
     }
 }
