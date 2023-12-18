@@ -1,4 +1,4 @@
-package file_handler;
+package model.file_handler;
 import java.io.Serializable;
 
 public interface Writable{

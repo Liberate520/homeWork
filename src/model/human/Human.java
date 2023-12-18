@@ -1,4 +1,6 @@
-package human;
+package model.human;
+
+import model.family_tree.FamilyItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,22 +8,25 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable {
+public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
     private long id;
     private String name;
     private Gender gender;
     private Human mother, father;
-    private List<Human> child;
-    private final LocalDate birthDay;
+    public List<Human> child;
+    private LocalDate birthDay;
     private LocalDate deathDay;
 
+    public Human(){
+
+    }
 
     public Human(String name, Gender gender, LocalDate birthDay) {
         id = -1;
         this.name = name;
-        this.gender = gender;
         this.mother = null;
         this.father = null;
+        this.gender = gender;
         this.birthDay = birthDay;
         this.deathDay = null;
         child = new ArrayList<>();
@@ -36,8 +41,6 @@ public class Human implements Serializable {
         child = new ArrayList<>();
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -46,17 +49,19 @@ public class Human implements Serializable {
         this.name = name;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
     public long getId() {
         return id;
+    }
+
+    @Override
+    public Gender gender() {
+        return gender;
     }
 
     public void setId(long id) {
         this.id = id;
     }
+
 
     public Human getMother() {
         return mother;
@@ -66,23 +71,14 @@ public class Human implements Serializable {
         return father;
     }
 
-
-
     public String getChild() {
         StringBuilder sb = new StringBuilder();
         for (Human human:child) {
-            sb.append(human.getName() + " " + human.getAge() + " ");
-            if(human.gender.equals(Gender.Mail)){
-                sb.append("Мужчина" + "\n");
-            } else {
-                sb.append("Женщина" + "\n");
+            if(!child.isEmpty()) {
+                sb.append(human.getName() + " " + human.getAge() + "\n");
             }
         }
         return sb.toString();
-    }
-
-    public void setChild(List<Human> child) {
-        this.child = child;
     }
 
     public LocalDate getBirthDay() {
@@ -93,7 +89,8 @@ public class Human implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Имя: ");
+        sb.append("Id:");
+        sb.append(getId() + " ");
         sb.append(name).append(" ");
         sb.append("Возраст : ");
         sb.append(getAge()).append(" ");
@@ -107,22 +104,13 @@ public class Human implements Serializable {
         return sb.toString();
     }
 
-    public boolean addChildren(Human children){
-        if(!child.contains(children)) {
-            child.add(children);
+    public boolean addChildren(String name,Gender gender,LocalDate localDate){
+        if(!child.contains(name)) {
+            child.add(new Human(name,gender,localDate));
             return true;
         }
         return false;
     }
-
-//    public boolean addParants(Human parents){
-//        if(parents.getGender().equals(Gender.Mail)){
-//            setFather(parents);
-//        } else {
-//            setMother(parents);
-//        }
-//        return true;
-//    }
 
     private int getPeriod(LocalDate birthDay,LocalDate deathDay){
         Period diff = Period.between(birthDay,deathDay);
@@ -136,4 +124,10 @@ public class Human implements Serializable {
             return getPeriod(birthDay,deathDay);
         }
     }
+
+    @Override
+    public int compareTo(Human o) {
+        return name.compareTo(o.getName());
+    }
+
 }
