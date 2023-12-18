@@ -1,6 +1,6 @@
-package ru.gb.family_tree_homework.human;
+package ru.gb.family_tree_homework.family_tree_API.human;
 
-import ru.gb.family_tree_homework.family_tree.TreeNode;
+import ru.gb.family_tree_homework.family_tree_API.family_tree.TreeNode;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -17,7 +17,7 @@ public class Human implements TreeNode<Human> {
     private List<Human> children;
     private String name;
 
-    // Конструкторы
+    //Constructors
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human mother, Human father) {
         this.id = -1;
         this.gender = gender;
@@ -26,7 +26,7 @@ public class Human implements TreeNode<Human> {
         this.mother = mother;
         this.father = father;
         this.name = name;
-        children = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     public Human(String name, Gender gender, LocalDate birthDate) {
@@ -45,7 +45,7 @@ public class Human implements TreeNode<Human> {
     public long getId(){
         return id;
     }
-    // Пол
+    //Gender
     public Gender getGender() {
         return gender;
     }
@@ -54,16 +54,11 @@ public class Human implements TreeNode<Human> {
         this.gender = gender;
     }
 
-    // Дата рождения
+    //Dates
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(int day, int month, int year) {
-        this.birthDate = LocalDate.of(year, month, day);
-    }
-
-    // Дата смерти
     public LocalDate getDeathDate() {
         return deathDate;
     }
@@ -72,20 +67,19 @@ public class Human implements TreeNode<Human> {
         this.deathDate = LocalDate.of(year, month, day);
     }
 
-    // Возраст
+    //Age
     public Integer getAge(){
         LocalDate currentDate = LocalDate.now();
         Period diff;
         if(deathDate == null) {
             diff = Period.between(getBirthDate(), currentDate);
-            return diff.getYears();
         } else {
             diff = Period.between(getBirthDate(), getDeathDate());
-            return diff.getYears();
         }
+        return diff.getYears();
     }
 
-    // Родители
+    //Parents
     public void setFather(Human father){
         this.father = father;
     }
@@ -120,7 +114,7 @@ public class Human implements TreeNode<Human> {
         return father;
     }
 
-    // Супруги
+    //Spouse
     public void setSpouse(Human spouse){
         this.spouse = spouse;
     }
@@ -129,7 +123,7 @@ public class Human implements TreeNode<Human> {
         return spouse;
     }
 
-    // Дети
+    //Children
     public List<Human> getChildren() {
         return children;
     }
@@ -142,16 +136,12 @@ public class Human implements TreeNode<Human> {
         return false;
     }
 
-    // Имя
+    //Name
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // ToString
+    //Others
     @Override
     public String toString() {
         return getInfo();
@@ -183,14 +173,14 @@ public class Human implements TreeNode<Human> {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("ID: ")
                 .append(id)
-                .append(", name: ")
+                .append(". name: ")
                 .append(name)
                 .append(", age: ")
                 .append(getAge())
                 .append(", birth date: ")
                 .append(birthDate)
-                .append(", age: ")
-                .append(getAge())
+                .append(", gender: ")
+                .append(gender)
                 .append(", mother: ")
                 .append(nullChecker(mother))
                 .append(", father: ")

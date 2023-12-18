@@ -1,4 +1,6 @@
-package ru.gb.family_tree_homework.family_tree;
+package ru.gb.family_tree_homework.family_tree_API.family_tree.comparators;
+
+import ru.gb.family_tree_homework.family_tree_API.family_tree.TreeNode;
 
 import java.util.Comparator;
 

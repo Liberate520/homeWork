@@ -1,4 +1,4 @@
-package ru.gb.family_tree_homework.family_tree;
+package ru.gb.family_tree_homework.family_tree_API.family_tree;
 
 import java.util.Iterator;
 import java.util.List;
