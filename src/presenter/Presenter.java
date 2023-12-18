@@ -7,7 +7,7 @@ import view.View;
 import java.time.LocalDate;
 
 public class Presenter {
-    private View view;
+    private final View view;
     private Service service;
 
     public Presenter(View view) {
@@ -35,5 +35,13 @@ public class Presenter {
 
     public void addChildren(String parent, String name, Gender gender, LocalDate birthDay) {
         service.addChildren(parent,name,gender,birthDay);
+    }
+
+    public void save() {
+        service.save();
+    }
+
+    public void load() {
+        service.load();
     }
 }

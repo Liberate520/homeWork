@@ -1,6 +1,7 @@
 package view;
 
 import model.family_tree.FamilyTree;
+import model.file_handler.FileHandler;
 import model.human.Gender;
 import presenter.Presenter;
 
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Console implements View{
-    private Scanner scanner;
+    private final Scanner scanner;
     Presenter presenter;
 
     public Console() {
@@ -18,6 +19,7 @@ public class Console implements View{
 
     @Override
     public void start() {
+        load();
         System.out.println("Привет! \n");
         while (true) {
             System.out.println("1)Добавить человека \n");
@@ -44,12 +46,23 @@ public class Console implements View{
                     printAnswer(printAllTree());
                     break;
                 case "6":
+                    save();
                     System.out.println("До новых встречь!");
                     return;
             }
         }
 
     }
+
+    private void load() {
+        presenter.load();
+    }
+
+    private void save() {
+        presenter.save();
+    }
+
+
     private void addHumanInTree() {
         System.out.println("Введите имя");
         String name = scanner.nextLine();
@@ -95,8 +108,6 @@ public class Console implements View{
         return presenter.printAllTree();
     }
 
-
-
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);
@@ -112,5 +123,4 @@ public class Console implements View{
         int z = sc.nextInt();
         return LocalDate.of(x,y,z);
     }
-
 }

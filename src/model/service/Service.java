@@ -4,7 +4,6 @@ import model.family_tree.FamilyTree;
 import model.file_handler.FileHandler;
 import model.human.Gender;
 import model.human.Human;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -41,11 +40,14 @@ public class Service implements Serializable {
         familyTree.sortByAge();
     }
 
-    private void save(FamilyTree tree){
-        familyTree.save(tree);
+    public void save(){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/model/file_handler/tree.txt";
+        fileHandler.save(this,filePath);
     }
 
-    private FamilyTree<Human> load(){
+    public Service load(){
         return familyTree.load();
     }
+
 }

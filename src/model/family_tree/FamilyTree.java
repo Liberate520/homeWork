@@ -1,10 +1,7 @@
 package model.family_tree;
 
 import model.file_handler.FileHandler;
-import model.human.Gender;
-import model.human.Human;
-import org.w3c.dom.ls.LSOutput;
-
+import model.service.Service;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,11 +21,11 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
             familyTree.add(human);
             human.setId(countPeople++);
             System.out.println("Человек добавлен в древо!");
-            System.out.println(" ");
+            System.out.println();
             return true;
         }
         System.out.println("Возникла ошибка при добавлении человека в древо");
-        System.out.println(" ");
+        System.out.println();
         return false;
     }
 
@@ -59,15 +56,15 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
         return new FamilyTreeIterator<>(familyTree);
     }
 
-    public void save(FamilyTree<E> familyTree){
+    public void save(Service service){ //Familytree familytree
         String filePath = "src/model/file_handler/tree.txt";
         FileHandler fileHandler = new FileHandler();
-        fileHandler.save(familyTree,filePath);
+        fileHandler.save(service,filePath); //familytree
     }
 
-    public FamilyTree<E> load(){
+    public Service load(){
         String filePath = "src/model/file_handler/tree.txt";
         FileHandler fileHandler = new FileHandler();
-        return (FamilyTree<E>) fileHandler.read(filePath);
+        return (Service) fileHandler.read(filePath);
     }
 }
