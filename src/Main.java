@@ -2,7 +2,6 @@ import ru.gb.node.FamilyTree;
 import ru.gb.person.Gender;
 import ru.gb.person.Person;
 import ru.gb.service.Service;
-import ru.gb.writable.FileHandlerForTree;
 
 import java.io.IOException;
 import java.time.LocalDate;
