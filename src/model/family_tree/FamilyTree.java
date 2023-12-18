@@ -23,8 +23,12 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
         if (!familyTree.contains(human)) {
             familyTree.add(human);
             human.setId(countPeople++);
+            System.out.println("Человек добавлен в древо!");
+            System.out.println(" ");
             return true;
         }
+        System.out.println("Возникла ошибка при добавлении человека в древо");
+        System.out.println(" ");
         return false;
     }
 
@@ -40,7 +44,6 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
                     sb.append("\n");
             }
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
     public void sortByName(){

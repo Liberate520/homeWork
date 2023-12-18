@@ -20,8 +20,8 @@ public class Presenter {
         return true;
     }
 
-    public void printAllTree() {
-        service.printAllTree();
+    public String printAllTree() {
+        return service.printAllTree();
     }
 
     public void sortByName(){
@@ -33,4 +33,7 @@ public class Presenter {
     }
 
 
+    public void addChildren(String parent, String name, Gender gender, LocalDate birthDay) {
+        service.addChildren(parent,name,gender,birthDay);
+    }
 }

@@ -4,22 +4,21 @@ import model.family_tree.FamilyTree;
 import model.file_handler.FileHandler;
 import model.human.Gender;
 import model.human.Human;
+import org.w3c.dom.ls.LSOutput;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Service {
-    private Human human;
-    private FamilyTree<Human> familyTree;
+public class Service implements Serializable {
+    private final FamilyTree<Human> familyTree;
 
     public Service() {
-        this.human = new Human();
         this.familyTree = new FamilyTree<>();
     }
 
-    public String addHumanInTree(String name, Gender gender,LocalDate localDate){
+    public void addHumanInTree(String name, Gender gender,LocalDate localDate){
         Human newHuman = new Human(name, gender,localDate);
         familyTree.addHumanInTree(newHuman);
-        return "Человек добавлен в семейное древо";
     }
 
     public void addChildren(String parants,String name, Gender gender, LocalDate localDate){
