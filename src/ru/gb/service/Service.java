@@ -5,6 +5,7 @@ import ru.gb.person.Person;
 import ru.gb.writable.FileHandlerForTree;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,12 +79,13 @@ public class Service {
         return familyTreesList;
     }
 
-    public void saveTrees(FileHandlerForTree fhTree) throws IOException, ClassNotFoundException {
-        fhTree = new FileHandlerForTree(this.familyTreesList);
-        fhTree.save();
+    public void saveTrees() throws IOException, ClassNotFoundException {
+        FileHandlerForTree fhTree = new FileHandlerForTree();
+        fhTree.save((Serializable) this.familyTreesList);
     }
 
-    public List<FamilyTree> loadTrees(FileHandlerForTree fhTree) throws IOException, ClassNotFoundException {
-        return (List<FamilyTree>) fhTree.load();
+    public List<FamilyTree> loadTrees() throws IOException, ClassNotFoundException {
+        FileHandlerForTree fhTree = new FileHandlerForTree();
+        return (List<FamilyTree>) fhTree.loadFamilyTree();
     }
 }

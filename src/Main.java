@@ -11,7 +11,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Service service = new Service();
-        FileHandlerForTree fhTree = new FileHandlerForTree();
 
         service.createEmptyFamilyTree();
         service.addPerson(new Person("Frederick", Gender.Male, LocalDate.of(1905, 10, 11),
@@ -41,10 +40,10 @@ public class Main {
         System.out.println(service.getInfo());
 
         // Сохранение семейных древ
-        service.saveTrees(fhTree);
+        service.saveTrees();
 
-//        Загрузка семейных древ
-//        List<FamilyTree> loadedTree = service.loadTrees(fhTree);
+//        // Загрузка семейных древ
+//        List<FamilyTree> loadedTree = service.loadTrees();
 //        for (FamilyTree tree : loadedTree) {
 //            service.addFamilyTree(tree);
 //        }
