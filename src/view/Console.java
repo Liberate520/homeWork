@@ -1,10 +1,8 @@
 package view;
 
-import model.family_tree.FamilyTree;
-import model.file_handler.FileHandler;
+
 import model.human.Gender;
 import presenter.Presenter;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -19,7 +17,6 @@ public class Console implements View{
 
     @Override
     public void start() {
-        load();
         System.out.println("Привет! \n");
         while (true) {
             System.out.println("1)Добавить человека \n");
@@ -27,7 +24,9 @@ public class Console implements View{
             System.out.println("3)Сортировать по имени \n");
             System.out.println("4)Сортировать по возрасту \n");
             System.out.println("5)Вывести дерево на экран \n");
-            System.out.println("6)Выход \n");
+            System.out.println("6)Сохранить дерево \n");
+            System.out.println("7)Загрузить дерево \n");
+            System.out.println("8)Выход \n");
             System.out.println("Выберите действие");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -47,6 +46,10 @@ public class Console implements View{
                     break;
                 case "6":
                     save();
+                case "7":
+                    load();
+                    break;
+                case "8":
                     System.out.println("До новых встречь!");
                     return;
             }
@@ -61,7 +64,6 @@ public class Console implements View{
     private void save() {
         presenter.save();
     }
-
 
     private void addHumanInTree() {
         System.out.println("Введите имя");

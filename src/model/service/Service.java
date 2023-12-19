@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Service implements Serializable {
-    private final FamilyTree<Human> familyTree;
+    public FamilyTree<Human> familyTree;
 
     public Service() {
         this.familyTree = new FamilyTree<>();
@@ -40,14 +40,17 @@ public class Service implements Serializable {
         familyTree.sortByAge();
     }
 
+
     public void save(){
-        FileHandler fileHandler = new FileHandler();
         String filePath = "src/model/file_handler/tree.txt";
-        fileHandler.save(this,filePath);
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(familyTree,filePath);
     }
 
-    public Service load(){
-        return familyTree.load();
+    public FamilyTree<Human> load() {
+        String filePath = "src/model/file_handler/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        familyTree = (FamilyTree<Human>) fileHandler.read(filePath);
+        return familyTree;
     }
-
 }

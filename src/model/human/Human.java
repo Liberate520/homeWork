@@ -67,11 +67,19 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         return mother;
     }
 
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
     public Human getFather() {
         return father;
     }
 
-    public String getChild() {
+    public String setChild() {
         StringBuilder sb = new StringBuilder();
         for (Human human:child) {
             if(!child.isEmpty()) {

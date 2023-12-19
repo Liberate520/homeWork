@@ -14,5 +14,5 @@ public interface FamilyItem<T> extends Serializable,Comparable<T> {
 
     Gender gender();
 
-    String getChild();
+    String setChild();
 }
