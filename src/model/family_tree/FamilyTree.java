@@ -1,6 +1,6 @@
-package family_tree;
-import human.HumanComparatorByName;
-import human.HumanComparatorByAge;
+package model.family_tree;
+import model.human.HumanComparatorByName;
+import model.human.HumanComparatorByAge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,40 +9,38 @@ import java.util.List;
 
 public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, Iterable<E> {
     private int humanId;
-    private List<E> HumanList;
+    private List<E> humanList;
 
     public FamilyTree(){
         this(new ArrayList<>());
     }
 
     public FamilyTree(List<E> humanList) {
-        this.HumanList = humanList;
+        this.humanList = humanList;
     }
 
     public boolean add(E human){
         if (human == null){
             return false;
         }
-        if(!HumanList.contains(human)){
-            HumanList.add(human);
+        if(!humanList.contains(human)){
+            humanList.add(human);
             human.setId(humanId++);
-
             addToParents(human);
             addToChildren(human);
-
             return true;
         }
 
         return false;
     }
 
-    private void addToParents(E human){
+    public void addToParents(E human){
         for(E parent: human.getParents()){
             parent.addChild(human);
         }
     }
 
-    private void addToChildren(E human){
+    public void addToChildren(E human){
         for(E child: human.getChildren()){
             child.addParent(human);
         }
@@ -90,7 +88,7 @@ public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, It
     public boolean remove(int humanId){
         if(checkId(humanId)){
             E e = getById(humanId);
-            return HumanList.remove(e);
+            return humanList.remove(e);
         }
         return false;
     }
@@ -100,7 +98,7 @@ public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, It
     }
 
     public E getById(int id){
-        for(E human : HumanList){
+        for(E human : humanList){
             if(human.getId() == id){
                 return human;
             }
@@ -114,10 +112,10 @@ public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, It
     public String getInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
-        sb.append(HumanList.size());
+        sb.append(humanList.size());
         sb.append(" объектов: ");
         sb.append("\n");
-        for(E human : HumanList){
+        for(E human : humanList){
             sb.append(human);
             sb.append("\n");
         }
@@ -126,15 +124,15 @@ public class FamilyTree<E extends TreeGenerality<E>> implements Serializable, It
     }
 
     public void sortByName(){
-        HumanList.sort(new HumanComparatorByName());
+        humanList.sort(new HumanComparatorByName());
     }
 
     public void sortByAge(){
-        HumanList.sort(new HumanComparatorByAge());
+        humanList.sort(new HumanComparatorByAge());
     }
     @Override
     public Iterator<E> iterator() {
-        return new HumanIterator(HumanList);
+        return new HumanIterator(humanList);
     }
 
 

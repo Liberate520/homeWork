@@ -1,7 +1,6 @@
-package family_tree;
+package model.family_tree;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface TreeGenerality<T> extends Serializable {
