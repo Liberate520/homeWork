@@ -1,7 +1,7 @@
-package ru.gb.family_tree.family_tree;
+package ru.gb.family_tree.family_tree.model;
 
-import ru.gb.family_tree.family_tree.comparator.FamilyComparatorByAge;
-import ru.gb.family_tree.family_tree.comparator.FamilyComparatorByName;
+import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByAge;
+import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,6 +61,6 @@ public void sortByName(){
         familyTree.sort(new FamilyComparatorByName());
 }
 public void sortByAge(){
-        familyTree.sort(new FamilyComparatorByAge());
+        familyTree.sort(new FamilyComparatorByAge<>());
 }
 }
