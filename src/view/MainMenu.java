@@ -1,12 +1,11 @@
 package view;
 
 import view.commands.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu {
-    private List<Command> commandList;
+    private final List<Command> commandList;
 
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();

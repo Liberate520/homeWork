@@ -8,8 +8,8 @@ import java.util.List;
 // Я создал отдельный класс Model.Family.
 // Этот тоже оставлю, жалко удалять.
 public class FamilyTree<E extends FamilyMember<E>> implements Serializable {
-    private E rootHuman;
-    private List<FamilyTree<E>> heirs;
+    private final E rootHuman;
+    private final List<FamilyTree<E>> heirs;
 
     public FamilyTree(E e) {
         rootHuman = e;
@@ -18,10 +18,10 @@ public class FamilyTree<E extends FamilyMember<E>> implements Serializable {
     }
 
     private void addHeirs(E e) {
-        List<E> children = (List<E>) e.getChildrens();
+        List<E> children = e.getChildrens();
         if (!children.isEmpty()) {
             for (E child : children) {
-                heirs.add(new FamilyTree<E>(child));
+                heirs.add(new FamilyTree<>(child));
             }
         }
     }

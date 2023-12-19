@@ -1,6 +1,6 @@
 package view;
 
-import model.human.Gender;
+import model.people.Gender;
 import presentor.Presentor;
 
 import java.time.LocalDate;
@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class ConsoleUI implements View {
     private static final String INPUT_ERROR = "Введено не корректное значение!";
-    private Scanner scanner;
-    private Presentor presentor;
-    private MainMenu menu;
+    private final Scanner scanner;
+    private final Presentor presentor;
+    private final MainMenu menu;
     private boolean work;
 
     public ConsoleUI() {
@@ -130,17 +130,20 @@ public class ConsoleUI implements View {
     private int getIndexHuman() {
         presentor.getAllHumans();
         System.out.println("Выберите индекс человека.");
-        return Integer.parseInt(scanner.nextLine());
+        int index = Integer.parseInt(scanner.nextLine());
+        while (!presentor.indexHumanTrue(index)) {
+            System.out.println(INPUT_ERROR);
+            index = Integer.parseInt(scanner.nextLine());
+        }
+        return index;
     }
 
     public void sortByAge() {
         presentor.sortByAge();
     }
-
     public void sortByName() {
         presentor.sortByName();
     }
-
     public void sortByFamilyName() {
         presentor.sortByFamilyName();
     }
@@ -153,7 +156,6 @@ public class ConsoleUI implements View {
             System.out.println("Не удалось сохранить список.");
         }
     }
-
     public void loadHumanList() {
 
         presentor.loadHumanList();

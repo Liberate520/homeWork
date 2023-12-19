@@ -1,6 +1,6 @@
 package model.family;
 
-import model.human.Gender;
+import model.people.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;

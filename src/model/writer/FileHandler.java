@@ -25,7 +25,7 @@ public class FileHandler implements Writable{
         try {
             objectInputStream = new ObjectInputStream(
                     new FileInputStream("tree.out"));
-            Object object = (Object) objectInputStream.readObject();
+            Object object = objectInputStream.readObject();
             objectInputStream.close();
             return object;
         } catch (IOException | ClassNotFoundException e) {
