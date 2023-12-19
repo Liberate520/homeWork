@@ -1,8 +1,7 @@
-package ru.gb.family_tree.human;
+package ru.gb.family_tree.model.human;
 
-import ru.gb.family_tree.family_tree.TreeNode;
+import ru.gb.family_tree.model.family_tree.TreeNode;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
