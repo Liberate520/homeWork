@@ -1,18 +1,9 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator; 
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
-public class GenealogyTree<T extends Person> implements Iterable<T>, GenealogyTreeService<T> {
+public class GenealogyTree<T extends FamilyMember> implements Iterable<T>, GenealogyTreeService<T> {
     private Map<String, T> people;
 
     public GenealogyTree() {
@@ -32,10 +23,13 @@ public class GenealogyTree<T extends Person> implements Iterable<T>, GenealogyTr
         T child = people.get(childKey);
         if (parent != null && child != null) {
             parent.addChild(child);
-            if (child.getGender().equals("male")) {
-                child.setFather(parent);
-            } else {
-                child.setMother(parent);
+            if (child instanceof Person) {
+                // Check if the object is an instance of Person
+                if (((Person) child).getGender().equals("male")) {
+                    ((Person) child).setFather((Person) parent);
+                } else {
+                    ((Person) child).setMother((Person) parent);
+                }
             }
         }
     }
@@ -48,14 +42,14 @@ public class GenealogyTree<T extends Person> implements Iterable<T>, GenealogyTr
     @Override
     public List<T> sortByName() {
         List<T> sortedList = new ArrayList<>(people.values());
-        sortedList.sort(Comparator.comparing(Person::getFirstName));
+        sortedList.sort(Comparator.comparing(FamilyMember::getFirstName));
         return sortedList;
     }
 
     @Override
     public List<T> sortByDateOfBirth() {
         List<T> sortedList = new ArrayList<>(people.values());
-        sortedList.sort(Comparator.comparing(Person::getDateOfBirth));
+        sortedList.sort(Comparator.comparing(FamilyMember::getDateOfBirth));
         return sortedList;
     }
 
@@ -72,12 +66,12 @@ public class GenealogyTree<T extends Person> implements Iterable<T>, GenealogyTr
     }
 
     @Override
-public void loadGenealogyTree(String filename) throws IOException {
-    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-        GenealogyTree<T> loadedTree = (GenealogyTree<T>) ois.readObject();
-        this.people = loadedTree.people;
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
+    public void loadGenealogyTree(String filename) throws IOException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            GenealogyTree<T> loadedTree = (GenealogyTree<T>) ois.readObject();
+            this.people = loadedTree.people;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
