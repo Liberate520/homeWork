@@ -32,7 +32,7 @@ public class FamilyTree<E extends FamilyItem<E>> implements Serializable, Iterab
         StringBuilder sb = new StringBuilder();
         if (!(familyTree.isEmpty())) {
             for (E human : familyTree) {
-                    sb.append("Id:" + human.getId() + " " + human.getName() + " Возраст: " + human.getAge() + " ");
+                    sb.append(human.toString());
                     if(!human.setChild().isEmpty()){
                         sb.append("Дети: " +"\n"+ human.setChild());
                     }

@@ -58,6 +58,14 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         return gender;
     }
 
+    public String getGender() {
+        if(gender() == Gender.Mail){
+            return "Мужчина";
+        }else{
+            return "Женщина";
+        }
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -83,7 +91,7 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         StringBuilder sb = new StringBuilder();
         for (Human human:child) {
             if(!child.isEmpty()) {
-                sb.append(human.getName() + " " + human.getAge() + "\n");
+                sb.append(human.getName() + " " + human.getAge() + " " +  human.getGender() + "\n");
             }
         }
         return sb.toString();
@@ -102,13 +110,8 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         sb.append(name).append(" ");
         sb.append("Возраст : ");
         sb.append(getAge()).append(" ");
+        sb.append(getGender());
         sb.append("\n");
-        if(!(child.isEmpty())){
-            for (Human human : child) {
-                sb.append(human.getName() +" Дата рождения: " + human.getBirthDay() + "\n");
-            }
-
-        }
         return sb.toString();
     }
 
