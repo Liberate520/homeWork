@@ -1,11 +1,15 @@
-import family.Tree;
-import family.writer.FileHandler;
-import human.Human;
-import human.Gender;
+import model.family.Tree;
+import model.family.writer.FileHandler;
+import model.human.Human;
+import model.human.Gender;
+import view.View;
+import view.ConsoleUI;
 
 public class Main {
     public static void main(String[] args) {
-
+        View view = new ConsoleUI();
+        view.start();
+        /*
         Human A = new Human("A",Gender.female,1930,2011);
         Human AA = new Human("AA",Gender.male);
         Human B = new Human("B",Gender.female);
@@ -21,7 +25,7 @@ public class Main {
         family.addHuman(AA);
 
         System.out.print("исходная семья \n"+family.outputTree()+"\n");
-        //save(family);
+        //save(model.family);
 
         B.addParent(A);
         B.addParent(AA);
@@ -31,10 +35,9 @@ public class Main {
         D.setPair(C);
 
         System.out.print("новые данные \n"+family.outputTree()+"\n");
-        /*
         Tree familyNEW = load();
         System.out.print("загруженные данные \n"+familyNEW.outputTree()+"\n");
-*/
+
 
 
         family.sortByName();
@@ -46,20 +49,16 @@ public class Main {
 
     private static void save(Tree family){
         FileHandler fileHandler=new FileHandler();
-        String path="src/family.txt";
+        String path="src/model.family.txt";
         fileHandler.save(family,path);
     }
 
     private static Tree load(){
         FileHandler fileHandler=new FileHandler();
-        String path="src/family.txt";
+        String path="src/model.family.txt";
         return (Tree) fileHandler.read(path);
     }
-
-
-
-
-
-
+    */
+    }
 
 }
