@@ -21,7 +21,9 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
         familyTree.add(human);
         human.setID(++treeNum);
     }
-
+    public void printFamilyTree(FamilyTree familytree) {
+        System.out.println(familytree);
+    }
 
     public List<A> getByName(String name){
         List<A> result = new ArrayList<>();
