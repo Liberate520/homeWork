@@ -2,31 +2,32 @@ package model.human;
 
 import model.familyTree.TreeNode;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Human implements TreeNode<Human> {
+public class Human implements Serializable, TreeNode<Human> {
     private long id;
-    private String firstName;
-    private String secondName;
+    private String name;
     private Gender gender;
     private LocalDate birthDate;
     private LocalDate deathDate;
     private List<Human> parents;
     private List<Human> children;
-    private Human couple;
+    private Human spouse;
 
-    public Human(String firstName, String secondName, Gender gender, LocalDate birthDate,
-                 LocalDate deathDate, Human father, Human mother){
+    public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate,
+                 Human father, Human mother) {
         id = -1;
-        this.firstName = firstName;
-        this.secondName = secondName;
+        this.name = name;
+        this.gender = gender;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         parents = new ArrayList<>();
-        if (father != null ){
+        if (father != null){
             parents.add(father);
         }
         if (mother != null){
@@ -35,17 +36,17 @@ public class Human implements TreeNode<Human> {
         children = new ArrayList<>();
     }
 
-    public Human(String firstName, String secondName, Gender gender, LocalDate birthDate){
-        this(firstName, secondName, gender, birthDate, null, null, null);
+    public Human(String name, Gender gender, LocalDate birthDate) {
+        this(name, gender, birthDate, null, null, null);
     }
 
-    public Human(String firstName, String secondName, Gender gender, LocalDate birthDate,
-                 Human father, Human mother){
-        this(firstName, secondName, gender, birthDate, null, father, mother);
+    public Human(String name, Gender gender, LocalDate birthDate,
+                 Human father, Human mother) {
+        this(name, gender, birthDate, null, father, mother);
     }
 
     public boolean addChild(Human child){
-        if(!children.contains(child)){
+        if (!children.contains(child)){
             children.add(child);
             return true;
         }
@@ -53,17 +54,16 @@ public class Human implements TreeNode<Human> {
     }
 
     public boolean addParent(Human parent){
-        if(!parents.contains(parent)){
+        if (!parents.contains(parent)){
             parents.add(parent);
             return true;
         }
         return false;
     }
 
-
     public Human getFather() {
         for (Human parent: parents){
-            if (parent.getGender() == Gender.MALE){
+            if (parent.getGender() == Gender.Male){
                 return parent;
             }
         }
@@ -72,7 +72,7 @@ public class Human implements TreeNode<Human> {
 
     public Human getMother() {
         for (Human parent: parents){
-            if (parent.getGender() == Gender.FEMALE){
+            if (parent.getGender() == Gender.Female){
                 return parent;
             }
         }
@@ -92,16 +92,16 @@ public class Human implements TreeNode<Human> {
         return diff.getYears();
     }
 
-    public void setCouple(Human couple) {
-        this.couple = couple;
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
     }
 
-    public Human getCouple() {
-        return couple;
+    public Human getSpouse() {
+        return spouse;
     }
 
     public String getName() {
-        return firstName + " " + secondName;
+        return name;
     }
 
     public long getId() {
@@ -149,16 +149,14 @@ public class Human implements TreeNode<Human> {
         StringBuilder sb = new StringBuilder();
         sb.append("id: ");
         sb.append(id);
-        sb.append(", name: ");
-        sb.append(firstName);
-        sb.append(", surname: ");
-        sb.append(secondName);
-        sb.append(", sex: ");
+        sb.append(", имя: ");
+        sb.append(name);
+        sb.append(", пол: ");
         sb.append(getGender());
-        sb.append(", age: ");
+        sb.append(", возраст: ");
         sb.append(getAge());
         sb.append(", ");
-        sb.append(getCoupleInfo());
+        sb.append(getSpouseInfo());
         sb.append(", ");
         sb.append(getMotherInfo());
         sb.append(", ");
@@ -168,41 +166,41 @@ public class Human implements TreeNode<Human> {
         return sb.toString();
     }
 
-    public String getCoupleInfo(){
-        String res = "spouse: ";
-        if (couple == null){
-            res += "no";
+    public String getSpouseInfo(){
+        String res = "супруг(а): ";
+        if (spouse == null){
+            res += "нет";
         } else {
-            res += couple.getName();
+            res += spouse.getName();
         }
         return res;
     }
 
     public String getMotherInfo(){
-        String res = "mother: ";
+        String res = "мать: ";
         Human mother = getMother();
         if (mother != null){
             res += mother.getName();
         } else {
-            res += "unknown";
+            res += "неизвестна";
         }
         return res;
     }
 
     public String getFatherInfo(){
-        String res = "father: ";
+        String res = "отец: ";
         Human father = getFather();
         if (father != null){
             res += father.getName();
         } else {
-            res += "unknown";
+            res += "неизвестен";
         }
         return res;
     }
 
     public String getChildrenInfo(){
         StringBuilder res = new StringBuilder();
-        res.append("children: ");
+        res.append("дети: ");
         if (children.size() != 0){
             res.append(children.get(0).getName());
             for (int i = 1; i < children.size(); i++) {
@@ -210,7 +208,7 @@ public class Human implements TreeNode<Human> {
                 res.append(children.get(i).getName());
             }
         } else {
-            res.append("not exist");
+            res.append("отсутствуют");
         }
         return res.toString();
     }

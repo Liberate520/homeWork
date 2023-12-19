@@ -1,10 +1,10 @@
 package model.familyTree;
 
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
-public interface TreeNode<T> extends Serializable {
+public interface TreeNode<T> {
     void setId(long id);
     long getId();
     T getFather();
@@ -16,6 +16,6 @@ public interface TreeNode<T> extends Serializable {
     LocalDate getBirthDate();
     List<T> getParents();
     List<T> getChildren();
-    T getCouple();
-    void setCouple(T human);
+    T getSpouse();
+    void setSpouse(T human);
 }
