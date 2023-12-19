@@ -31,7 +31,6 @@ public class ConsoleUI implements View{
     private boolean choice() {
         String choiceStr = scanner.nextLine();
         int choice = Integer.parseInt(choiceStr);
-        //метод проверки на валидность
 
         if(choice > 0 && choice < menu.size()+1){
             menu.execute(choice);
