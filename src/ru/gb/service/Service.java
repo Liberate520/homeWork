@@ -51,26 +51,6 @@ public class Service {
         return tree.getByName(name);
     }
 
-//    public String getInfo() {
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//        for (FamilyTree tree : familyTreesList) {
-//            int index = getTreeIndex(tree);
-//
-//
-//            stringBuilder.append("\n");
-//            stringBuilder.append("-----------------------");
-//            stringBuilder.append("Индекс древа в списке: ");
-//            stringBuilder.append(index);
-//            stringBuilder.append("-----------------------");
-//            stringBuilder.append("\n");
-//
-//            stringBuilder.append(tree.getInfo());
-//        }
-//
-//        return stringBuilder.toString();
-//    }
-
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
 
