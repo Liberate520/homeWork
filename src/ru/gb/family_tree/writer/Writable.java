@@ -1,9 +1,7 @@
 package ru.gb.family_tree.writer;
 
-import java.io.Serializable;
-i
 
-public interface Writable{
+public interface Writable {
 
     boolean writeObject(Object o, String fileName);
     Object readObject(String fileName);

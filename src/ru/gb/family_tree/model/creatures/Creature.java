@@ -31,3 +31,4 @@ public interface Creature<T> extends Comparable<Object> {
     <E extends Creature<T>> E getMother();
 
     void setInTree();
+}
