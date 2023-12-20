@@ -1,4 +1,4 @@
-package ru.gb.person.comparators;
+package ru.gb.node;
 
 import ru.gb.person.Person;
 

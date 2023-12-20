@@ -2,7 +2,6 @@ package ru.gb.node;
 
 import ru.gb.person.comparators.HumanComparatorByAge;
 import ru.gb.person.comparators.HumanComparatorByName;
-import ru.gb.person.comparators.HumanIterator;
 import ru.gb.person.Person;
 
 
