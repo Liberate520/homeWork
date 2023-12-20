@@ -15,20 +15,9 @@ public class Main {
 
         System.out.println(tree);
 
-       // save(tree);
+        // save(tree);
     }
 
-    private static FamilyTree load() {
-        String filePath = "src/ru.gb.family_tree/writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        return (FamilyTree) fileHandler.read(filePath);
-    }
-
-    private static void save(FamilyTree tree) {
-        String filePath = "src/ru.gb.family_tree/writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree, filePath);
-    }
 
     static FamilyTree testTree() {
         FamilyTree tree = new FamilyTree();

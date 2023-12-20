@@ -2,7 +2,6 @@ package ru.gb.family_tree.model.family_tree;
 
 import ru.gb.family_tree.model.human.HumanComparatorByBirthDate;
 import ru.gb.family_tree.model.human.HumanComparatorByName;
-import ru.gb.family_tree.model.human.HumanIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
