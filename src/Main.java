@@ -38,6 +38,12 @@ public class Main {
 
         System.out.println(service.getInfo());
 
+        service.sortByAge();
+        System.out.println(service.getInfo());
+
+        service.sortByName();
+        System.out.println(service.getInfo());
+
         // Сохранение семейных древ
         service.saveTrees();
 

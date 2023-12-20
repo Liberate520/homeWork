@@ -1,14 +1,18 @@
 package ru.gb.node;
 
+import ru.gb.person.comparators.HumanComparatorByAge;
+import ru.gb.person.comparators.HumanComparatorByName;
+import ru.gb.person.comparators.HumanIterator;
 import ru.gb.person.Person;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
     private List<Person> humanList;
 
     public FamilyTree(List<Person> humanList) { this.humanList = humanList; }
@@ -47,15 +51,29 @@ public class FamilyTree implements Serializable {
         return null;
     }
 
-    public String getInfo() {
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("В дереве ");
         sb.append(humanList.size());
         sb.append(" объектов: \n");
         for (Person human : humanList) {
-            sb.append(human.getInfo());
+            sb.append(human);
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new HumanIterator(humanList);
+    }
+
+    public void sortByName() {
+        humanList.sort(new HumanComparatorByName());
+    }
+
+    public void sortByAge() {
+        humanList.sort(new HumanComparatorByAge());
     }
 }

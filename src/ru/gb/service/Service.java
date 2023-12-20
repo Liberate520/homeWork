@@ -51,6 +51,26 @@ public class Service {
         return tree.getByName(name);
     }
 
+//    public String getInfo() {
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        for (FamilyTree tree : familyTreesList) {
+//            int index = getTreeIndex(tree);
+//
+//
+//            stringBuilder.append("\n");
+//            stringBuilder.append("-----------------------");
+//            stringBuilder.append("Индекс древа в списке: ");
+//            stringBuilder.append(index);
+//            stringBuilder.append("-----------------------");
+//            stringBuilder.append("\n");
+//
+//            stringBuilder.append(tree.getInfo());
+//        }
+//
+//        return stringBuilder.toString();
+//    }
+
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -65,7 +85,7 @@ public class Service {
             stringBuilder.append("-----------------------");
             stringBuilder.append("\n");
 
-            stringBuilder.append(tree.getInfo());
+            stringBuilder.append(tree);
         }
 
         return stringBuilder.toString();
@@ -87,5 +107,17 @@ public class Service {
     public List<FamilyTree> loadTrees() throws IOException, ClassNotFoundException {
         FileHandlerForTree fhTree = new FileHandlerForTree();
         return (List<FamilyTree>) fhTree.loadFamilyTree();
+    }
+
+    public void sortByName() {
+        for (FamilyTree tree : familyTreesList) {
+            tree.sortByName();
+        }
+    }
+
+    public void sortByAge() {
+        for (FamilyTree tree : familyTreesList) {
+            tree.sortByAge();
+        }
     }
 }
