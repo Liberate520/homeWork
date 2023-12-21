@@ -1,6 +1,8 @@
 package FamTree;
 
-public class Human {
+import java.io.Serializable;
+
+public class Human implements Serializable {
     public String humanName;
     public int humanAge;
 
@@ -13,14 +15,4 @@ public class Human {
         return humanName;
     }
 
-    public void setHumanName(String humanName){
-        this.humanName = humanName;
-    }
-
-    public int getHumanAge(){
-        return humanAge;
-    }
-    public void setHumanAge(int humanAge){
-        this.humanAge = humanAge;
-    }
 }

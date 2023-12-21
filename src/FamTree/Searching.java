@@ -13,8 +13,8 @@ public class Searching {
 
     public ArrayList<String>spend(Human human, Family familyTree){
         for(NodeFamilyTree t : tree) {
-            if(t.h1.humanName == human.humanName && t.family == familyTree){
-                result.add(t.h2.humanName);
+            if(t.human1.humanName == human.humanName && t.family == familyTree){
+                result.add(t.human2.humanName);
             }
         }
         return result;
@@ -27,8 +27,8 @@ public class Searching {
         System.out.println("Peoples younger:"+age+":");
 
         for(NodeFamilyTree t : tree){
-            if(t.h1.humanAge <= age && !resAge.contains(t.h1.humanName)){
-                resAge.add(t.h1.humanName);
+            if(t.human1.humanAge <= age && !resAge.contains(t.human1.humanName)){
+                resAge.add(t.human1.humanName);
             }
         }
         return resAge;

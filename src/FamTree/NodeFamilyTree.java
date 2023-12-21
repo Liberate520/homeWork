@@ -1,18 +1,18 @@
 package FamTree;
 
 public class NodeFamilyTree {
-    public NodeFamilyTree(Human h1, Family family, Human h2){
-        this.h1 = h1;
+    public NodeFamilyTree(Human human1, Family family, Human human2){
+        this.human1 = human1;
         this.family = family;
-        this.h2 = h2;
+        this.human2 = human2;
     }
 
-    Human h1;
+    Human human1;
     Family family;
-    Human h2;
+    Human human2;
 
     @Override
     public String toString(){
-        return String.format("<%s %s %s>", h1, family, h2);
+        return String.format("<%s %s %s>", human1, family, human2);
     }
 }
