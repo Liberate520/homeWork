@@ -14,14 +14,6 @@ public class main {
         service.addHuman("Zubarzhat",Gender.Female,LocalDate.of(1949, 12, 14),null,null);
         service.addHuman("Murat",Gender.Male,LocalDate.of(1980, 12, 7),null,null);
         service.addHuman("Gulmira",Gender.Female,LocalDate.of(1971, 7, 25),null,null);
-        service.printFamilyTree();
-        service.getFamilytree().sortByName();
-        System.out.println("После сортировки по имени");
-        service.printFamilyTree();
-        service.getFamilytree().sortByAge();
-        System.out.println("После сортировки по возрасту");
-        service.printFamilyTree();
-        System.out.println();
         service.SetParentByID(2,1);
         service.SetParentByID(3,1);
         service.SetParentByID(5,4);
@@ -34,32 +26,10 @@ public class main {
         service.SetChildByID(4,6);
         service.SetChildByID(1,2);
         service.SetChildByID(1,3);
+//        service.load();
         service.printFamilyTree();
-//        System.out.println("Проверка метода поиска по имени Murat");
-//        System.out.println(familyTree.getByName("Murat"));
+//        service.save(service.getFamilytree());
 
-        // Serialize для ДЗ Семинара 2
-//        System.out.println("вывод загруженного дерева из файла");
-//        printFamilyTree(load());
-//      save(familyTree);
-        // Sort для ДЗ Семинара 3
-//        familyTree.sortByName();
-//        System.out.println("После сортировки по имени");
-//        printFamilyTree(familyTree);
-//        System.out.println("После сортировки по возрасту");
-//        familyTree.sortByAge();
-//        printFamilyTree(familyTree);
     }
 
-
-    private static FamilyTree load(){
-        String filePath = "src/ru/gb/family_tree/writer/file";
-        FileHandler fileHandler = new FileHandler();
-        return (FamilyTree) fileHandler.load(filePath);
-    }
-    private static void save(FamilyTree tree){
-        String filePath = "src/ru/gb/family_tree/writer/file";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(tree,filePath);
-    }
 }
