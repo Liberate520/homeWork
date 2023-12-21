@@ -45,10 +45,6 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public long getId() {
         return id;
     }
@@ -73,14 +69,6 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
 
     public Human getMother() {
         return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
     }
 
     public Human getFather() {
