@@ -2,6 +2,7 @@ package ru.gb.family_tree.family_tree.model;
 
 import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByAge;
 import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByName;
+import ru.gb.family_tree.family_tree.model.human.Human;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +20,18 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
     }
     public void addToFamilyTree(A human) {
         familyTree.add(human);
+    }
+    public A getPersonByID(int ID){
+        A human=null;
+        for(A person:familyTree){
+            if (person.getID()==ID){
+                human=person;
+            }
+        }
+        return human;
+    }
+    public void addParent(){
+//        this.familyTree.;
     }
     public void printFamilyTree(FamilyTree familytree) {
         System.out.println(familytree);

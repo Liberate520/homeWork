@@ -22,7 +22,19 @@ public class main {
         System.out.println("После сортировки по возрасту");
         service.printFamilyTree();
         System.out.println();
-
+        service.SetParentByID(2,1);
+        service.SetParentByID(3,1);
+        service.SetParentByID(5,4);
+        service.SetParentByID(6,4);
+        service.SetParentByID(5,3);
+        service.SetParentByID(6,3);
+        service.SetChildByID(3,5);
+        service.SetChildByID(3,6);
+        service.SetChildByID(4,5);
+        service.SetChildByID(4,6);
+        service.SetChildByID(1,2);
+        service.SetChildByID(1,3);
+        service.printFamilyTree();
 //        System.out.println("Проверка метода поиска по имени Murat");
 //        System.out.println(familyTree.getByName("Murat"));
 

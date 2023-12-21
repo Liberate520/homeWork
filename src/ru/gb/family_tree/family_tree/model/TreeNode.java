@@ -1,5 +1,7 @@
 package ru.gb.family_tree.family_tree.model;
 
+import ru.gb.family_tree.family_tree.model.human.Human;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;

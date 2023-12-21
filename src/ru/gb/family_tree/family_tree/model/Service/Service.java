@@ -28,17 +28,18 @@ public class Service {
         familytree.printFamilyTree(familytree);
     }
 
-    public FamilyTree getFamilytree(){
-        return familytree;
+    public FamilyTree getFamilytree(){return familytree;
     }
-//    Геттер человека по ID
-//    public Human getHumanByID(FamilyTree familytree,int id){
-//       for(Human person:familyTree)
-//     {
-//
-//      }
-//
-//        return human
-//    }
+    public Human getHumanByID(int ID){
+        return (Human) familytree.getPersonByID(ID);
+    }
+    public void SetParentByID(int ID1,int ID2){
+        Human human=getHumanByID(ID1);
+        human.addParent(getHumanByID(ID2));
+    }
+    public void SetChildByID(int ID1,int ID2){
+        Human human=getHumanByID(ID1);
+        human.addChild(getHumanByID(ID2));
+    }
 
 }
