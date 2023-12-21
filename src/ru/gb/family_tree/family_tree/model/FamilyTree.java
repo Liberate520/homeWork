@@ -19,7 +19,6 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
     }
     public void addToFamilyTree(A human) {
         familyTree.add(human);
-        human.setID(++treeNum);
     }
     public void printFamilyTree(FamilyTree familytree) {
         System.out.println(familytree);
@@ -47,7 +46,7 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
         sb.append(" человек\n");
         for(A human:familyTree)
         {
-            sb.append(human.getID());
+            sb.append(++treeNum);
             sb.append(") ");
             sb.append(human);
             sb.append("\n");

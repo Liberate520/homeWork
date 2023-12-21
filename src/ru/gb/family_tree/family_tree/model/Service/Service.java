@@ -1,6 +1,7 @@
 package ru.gb.family_tree.family_tree.model.Service;
 
 import ru.gb.family_tree.family_tree.model.FamilyTree;
+import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByName;
 import ru.gb.family_tree.family_tree.model.human.Gender;
 import ru.gb.family_tree.family_tree.model.human.Human;
 import ru.gb.family_tree.family_tree.model.human.HumanBuilder;
@@ -26,4 +27,18 @@ public class Service {
     public void printFamilyTree(){
         familytree.printFamilyTree(familytree);
     }
+
+    public FamilyTree getFamilytree(){
+        return familytree;
+    }
+//    Геттер человека по ID
+//    public Human getHumanByID(FamilyTree familytree,int id){
+//       for(Human person:familyTree)
+//     {
+//
+//      }
+//
+//        return human
+//    }
+
 }

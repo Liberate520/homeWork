@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Human implements TreeNode<Human> {
-    private int humanID=1;
+    static int humanCount=0;
+    private int humanID;
     private String name;
     private Gender gender;
     private LocalDate birthDate;
@@ -18,7 +19,7 @@ public class Human implements TreeNode<Human> {
     private List<Human> childrens;
 
     public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender,Human mother,Human father) {
-        humanID++;
+        humanID=++humanCount;
         this.name = name;
         this.birthDate = bDate;
         this.deathDate = dDate;
@@ -29,7 +30,7 @@ public class Human implements TreeNode<Human> {
     }
 
     public Human(String name, LocalDate bDate,Gender gender,Human mother,Human father) {
-        humanID++;
+        humanID=++humanCount;
         this.name = name;
         this.birthDate = bDate;
         this.deathDate = null;
@@ -194,7 +195,9 @@ public String getListParents(){
     public String toString() {return GetInfo();}
     public String GetInfo(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Имя: ");
+        sb.append("HumanID: ");
+        sb.append(getID());
+        sb.append(" Имя: ");
         sb.append(getName());
         sb.append(", Возраст: ");
         sb.append(getAge());
