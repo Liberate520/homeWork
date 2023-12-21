@@ -60,6 +60,7 @@ public class ConsoleUI implements View{
         Gender gender = null;
         System.out.println("Input gender:\n");
         while (gender == null) {
+            System.out.println("Print \"F\" for female or \"M\" for Male");
             String strGender = scanner.nextLine();
             gender = presenter.getGender(strGender);
         }
@@ -114,12 +115,14 @@ public class ConsoleUI implements View{
         presenter.sortByBirthDate();
     }
 
-    public boolean saveTree(String fileName){
-        return presenter.saveTree(fileName);
+    public void saveTree(String fileName){
+        if (presenter.saveTree(fileName)) System.out.println("Saved");
+        else System.out.println("Not saved");
     }
 
-    public boolean loadTree(String fileName){
-        return presenter.loadTree(fileName);
+    public void loadTree(String fileName){
+        if (presenter.loadTree(fileName)) System.out.println("Loaded");
+        else System.out.println("Failed");
     }
 
     @Override

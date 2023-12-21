@@ -32,8 +32,6 @@ public class Service implements Serializable {
                     case "F":
                         return Gender.Female;
                 }
-            } else {
-                System.out.println("Print \"F\" for female or \"M\" for Male");
             }
         return null;
     }
@@ -100,22 +98,12 @@ public class Service implements Serializable {
 
     public boolean saveTree(String fileName) {
         Writable fileHandler = new FileHandler();
-        if (fileHandler.save(familyTree, fileName)) {
-            System.out.println("Saved");
-            return true;
-        }
-        System.out.println("Not saved");
-        return false;
+        return fileHandler.save(familyTree, fileName);
     }
 
     public boolean loadTree(String fileName) {
         Writable fileHandler = new FileHandler();
         familyTree = (FamilyTree<Human>) fileHandler.read(fileName);
-        if (familyTree != null){
-            System.out.println("Loaded");
-            return true;
-        }
-        System.out.println("Failed");
-        return false;
+        return familyTree != null;
     }
 }
