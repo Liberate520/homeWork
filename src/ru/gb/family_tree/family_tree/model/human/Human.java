@@ -18,7 +18,7 @@ public class Human implements TreeNode<Human> {
     private Human mother, father;
     private List<Human> childrens;
 
-    public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender,Human mother,Human father) {
+    public Human(String name, LocalDate bDate, LocalDate dDate, Gender gender) {
         humanID=++humanCount;
         this.name = name;
         this.birthDate = bDate;
@@ -29,7 +29,7 @@ public class Human implements TreeNode<Human> {
         this.gender=gender;
     }
 
-    public Human(String name, LocalDate bDate,Gender gender,Human mother,Human father) {
+    public Human(String name, LocalDate bDate,Gender gender) {
         humanID=++humanCount;
         this.name = name;
         this.birthDate = bDate;

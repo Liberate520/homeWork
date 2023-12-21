@@ -17,12 +17,12 @@ public class Service {
         builder=new HumanBuilder();
         familytree=new FamilyTree<>();
     }
-    public void addHuman(String name, Gender gender, LocalDate birthDate, Human mother, Human father){
-        Human human = builder.build(name,gender,birthDate,mother,father);
+    public void addHuman(String name, Gender gender, LocalDate birthDate){
+        Human human = builder.build(name,gender,birthDate);
         familytree.addToFamilyTree(human);
     }
-    public void addHuman(String name,Gender gender,LocalDate birthDate,LocalDate deathDate,Human mother,Human father){
-        Human human = builder.build(name,gender,birthDate,deathDate,mother,father);
+    public void addHuman(String name,Gender gender,LocalDate birthDate,LocalDate deathDate){
+        Human human = builder.build(name,gender,birthDate,deathDate);
         familytree.addToFamilyTree(human);
     }
     public void printFamilyTree(){
@@ -52,5 +52,14 @@ public class Service {
         familytree =(FamilyTree)fileHandler.load(fileHandler.getPath());}
         else{FamilyTree familyTree =new FamilyTree();
             familyTree=(FamilyTree)fileHandler.load(fileHandler.getPath());}
+    }
+
+
+    public void sortByAge() {
+        familytree.sortByAge();
+    }
+
+    public void sortByName() {
+        familytree.sortByName();
     }
 }

@@ -1,7 +1,10 @@
 package ru.gb.family_tree.family_tree.presenter;
 
 import ru.gb.family_tree.family_tree.model.Service.Service;
+import ru.gb.family_tree.family_tree.model.human.Gender;
 import ru.gb.family_tree.family_tree.view.View;
+
+import java.time.LocalDate;
 
 public class Presenter {
     private View view;
@@ -10,5 +13,24 @@ public class Presenter {
     public Presenter(View view) {
         this.view = view;
         service = new Service();
+    }
+
+    public void addHuman(String name,Gender gender, LocalDate bDate, LocalDate dDate) {
+        service.addHuman(name,gender,bDate,dDate);
+    }
+    public void addHuman(String name, Gender gender,LocalDate bDate) {
+        service.addHuman(name,gender,bDate);
+    }
+
+    public void printTree() {
+        service.printFamilyTree();
+    }
+
+    public void sortByAge() {
+        service.sortByAge();
+    }
+
+    public void sortByName() {
+        service.sortByName();
     }
 }
