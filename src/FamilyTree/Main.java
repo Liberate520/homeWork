@@ -12,12 +12,29 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        FamTree tree = load();
-        FamTree tree = updTree();
+        FamTree tree = load();
+//        FamTree tree = updTree();
         System.out.println(tree);
-        save(tree);
+//        save(tree);
     }
 
+    private static FamTree load() {
+        String savePath = "src/FamilyTree/model/saver/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        return (FamTree) fileHandler.load(savePath);
+    }
+
+    private static void save(FamTree tree) {
+        String savePath = "src/FamilyTree/model/saver/tree.txt";
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.save(tree, savePath);
+        if (fileHandler.save((Serializable) tree, savePath)) {
+            System.out.println("каталог сохранён");
+        }
+        else {
+            System.out.println("проверьте параметры сохранения");
+        }
+    }
     static FamTree updTree(){
         FamTree tree = new FamTree();
 
@@ -30,7 +47,7 @@ public class Main {
         tree.add((commonParam) viktor);
         tree.add((commonParam) alina);
 
-        Human olga = new Human("Ольга", Gender.Female, LocalDate.of(1990, 2, 14), viktor, alina);
+        Human olga = new Human("Ольга", Gender.Female, LocalDate.of(1992, 2, 14), viktor, alina);
         tree.add((commonParam) olga);
         Human igor = new Human("Игорь", Gender.Male, "Petersburg", LocalDate.of(2018, 8, 14),  andrey, olga);
         tree.add((commonParam) igor);
@@ -38,21 +55,4 @@ public class Main {
         return tree;
     }
 
-    private static FamTree load() {
-        String savePath = "src/FamilyTree/saver/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        return (FamTree) fileHandler.load(savePath);
-    }
-
-    private static void save(FamTree tree) {
-        String savePath = "src/FamilyTree/model/saver/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-//        fileHandler.save(tree, savePath);
-        if (fileHandler.save((Serializable) tree, savePath)) {
-            System.out.println("каталог сохранён");
-        }
-        else {
-            System.out.println("проверьте параметры сохранения");
-        }
-    }
 }

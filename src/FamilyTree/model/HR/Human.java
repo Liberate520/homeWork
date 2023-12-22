@@ -1,6 +1,7 @@
 package FamilyTree.model.HR;
 
 import FamilyTree.model.FT.commonParam;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -32,18 +33,19 @@ public class Human implements Serializable, commonParam <Human>{
         children = new ArrayList<>();
     }
 
-    public Human(String name, Gender gender, String place_of_residence, LocalDate birthDate, Human father, Human mother) {
-        this(name, gender, place_of_residence, birthDate, null, father, mother);
+    public Human(String name, Gender gender, String place_of_residence, LocalDate birthDate, Human mother, Human father) {
+        this(name, gender, place_of_residence, birthDate, null, mother, father);
     }
-    public Human(String name, Gender gender, LocalDate birthDate, Human father, Human mother) {
+    public Human(String name, Gender gender, LocalDate birthDate) {
+        this(name, gender, null, birthDate, null, null, null);
+    }
+    public Human(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
         this(name, gender, null, birthDate, null, mother, father);
     }
     public Human(String name, Gender gender, String place_of_residence, LocalDate deathDate) {
         this(name, gender,  place_of_residence,null, deathDate, null,null);
     }
-    public Human(String name, Gender gender, LocalDate birthDate) {
-        this(name, gender, null, birthDate, null, null, null);
-    }
+
 
     public void setId(int id){
         this.id = id;

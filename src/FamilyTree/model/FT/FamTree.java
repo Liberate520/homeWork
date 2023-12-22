@@ -43,21 +43,21 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
         }
     }
 
-    public List<T> getSiblings(int id){
-        T human = (T) getById(id);
-        if (human == null){
-            return null;
-        }
-        List<T> result = new ArrayList<>();
-        for (T parent: human.getParents()){
-            for (T child: parent.getChildren()){
-                if (!child.equals(human)){
-                    result.add(child);
-                }
-            }
-        }
-        return result;
-    }
+//    public List<T> getSiblings(int id){
+//        T human = (T) getById(id);
+//        if (human == null){
+//            return null;
+//        }
+//        List<T> result = new ArrayList<>();
+//        for (T parent: human.getParents()){
+//            for (T child: parent.getChildren()){
+//                if (!child.equals(human)){
+//                    result.add(child);
+//                }
+//            }
+//        }
+//        return result;
+//    }
 
     public List<T> getByName(String name) {
         List<T> result = new ArrayList<>();
@@ -66,11 +66,12 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
                 result.add(human);
             }
         }
-        return result;     //.toString();                   // ?.toString
+        return result;     //.toString();  ( ?.toString)
     }
     private boolean checkId ( int id){
         return id < peopleCounter && id >= 0;
     }
+
     public T getById (int id){
         for (T human : humanList) {
             if (human.getId() == id) {
@@ -126,10 +127,9 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
     public void sortByBirthDate(){
         humanList.sort(new ComparatorByBirthDate());
     }
-    public void sortByBirthData () {
+    public void sortByAge () {
         humanList.sort(new ComparatorByAge());
     }
-
     @Override
     public Iterator<T> iterator() {
         return new HumanIterator(humanList);
