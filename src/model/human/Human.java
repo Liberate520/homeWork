@@ -1,7 +1,6 @@
 package model.human;
 
 import model.family_tree.FamilyItem;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
+    HumanBuilder humanBuilder = new HumanBuilder();
     private long id;
     private String name;
     private Gender gender;
@@ -70,17 +70,8 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
         this.id = id;
     }
 
-
     public Human getMother() {
         return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
     }
 
     public Human getFather() {
@@ -95,10 +86,6 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
             }
         }
         return sb.toString();
-    }
-
-    public LocalDate getBirthDay() {
-        return birthDay;
     }
 
 
@@ -117,7 +104,7 @@ public class Human implements Serializable,Comparable<Human>,FamilyItem<Human> {
 
     public boolean addChildren(String name,Gender gender,LocalDate localDate){
         if(!child.contains(name)) {
-            child.add(new Human(name,gender,localDate));
+            child.add(humanBuilder.build(name,gender,localDate));
             return true;
         }
         return false;

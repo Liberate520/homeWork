@@ -1,5 +1,6 @@
 package presenter;
 
+import model.file_handler.FileHandler;
 import model.human.Gender;
 import model.service.Service;
 import view.View;
@@ -12,7 +13,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service(new FileHandler());
     }
 
     public boolean addHumanInTree(String name, Gender gender,LocalDate localDate){
