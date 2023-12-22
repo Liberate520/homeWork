@@ -33,4 +33,12 @@ public class Presenter {
     public void sortByName() {
         service.sortByName();
     }
+
+    public void saveTreeToFile() {
+        service.save(service.getFamilytree());
+    }
+
+    public void loadTreeFromFile() {
+        service.load();
+    }
 }

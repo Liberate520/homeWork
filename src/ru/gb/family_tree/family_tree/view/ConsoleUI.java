@@ -136,5 +136,13 @@ public class ConsoleUI implements View {
     public void PrintTree() {
         presenter.printTree();
     }
+
+    public void saveTreeToFile() {
+        presenter.saveTreeToFile();
+    }
+
+    public void loadTreeFromFile() {
+        presenter.loadTreeFromFile();
+    }
 }
 
