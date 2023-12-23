@@ -43,38 +43,11 @@ public class Service implements Serializable {
     }
 
     public String showIsNotInTree() {
-        StringBuilder sb = new StringBuilder();
-        boolean flag = false;
-        if (familyTree.getNotInTree().isEmpty()) {
-            sb.append("Элементы вне дерева отсутствуют");
-            return sb.toString();
-        } else {
-            sb.append("Еще не добавлены в дерево:\nID  Name  BirthDate\n");
-            for (Creature creature : familyTree.getNotInTree()) {
-                if (flag)
-                    sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName() + " " + creature.getBirthDate());
-                flag = true;
-            }
-            return sb.toString();
-        }
+        return familyTree.showIsNotInTree();
     }
 
     public String showTree() {
-        boolean flag = false;
-        StringBuilder sb = new StringBuilder();
-        if (familyTree.getFamilyTree().isEmpty()) {
-            return sb.append("Дерево пустое").toString();
-        } else {
-            sb.append("Дерево состоит из следующих членов\n(ID)  Name  Birthdate\n");
-            for (Creature creature : familyTree.getFamilyTree()) {
-                if (flag)
-                    sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName() + " " + creature.getBirthDate());
-                flag = true;
-            }
-        }
-        return sb.toString();
+        return familyTree.showTree();
     }
 
 
@@ -83,22 +56,7 @@ public class Service implements Serializable {
     }
 
     public String showAll() {
-        StringBuilder sb = new StringBuilder();
-        if (familyTree.getFamilyTree().isEmpty() && familyTree.getNotInTree().isEmpty()) {
-            return sb.append("Добавленных людей нет").toString();
-        } else {
-            boolean flag1;
-            sb.append("Все добавленные люди:\nID  Name  Birthdate");
-            for (Creature creature : familyTree.getFamilyTree()) {
-                sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName() + " " + creature.getBirthDate());
-            }
-            for (Creature creature : familyTree.getNotInTree()) {
-                sb.append("\n");
-                sb.append(creature.getId() + " " + creature.getName() + " " + creature.getBirthDate());
-            }
-        }
-        return sb.toString();
+        return familyTree.showAll();
     }
 
     public boolean setChild(Integer idParent, Integer idChild) {
