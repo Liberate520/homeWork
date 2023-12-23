@@ -2,15 +2,16 @@ package presenter;
 
 import model.creatures.Gender;
 import model.service.Service;
+import writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Presenter {
-    private Service service;
+    private final Service service;
 
 
     public Presenter() {
-        this.service = new Service();
+        this.service = new Service(new FileHandler());
     }
 
     public String showTree() {

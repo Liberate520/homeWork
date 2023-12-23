@@ -18,11 +18,13 @@ public class Service implements Serializable {
     private FamilyTree<Human> familyTree;
     private final HumanTree<Human> humanTree;
     private final HumanBuilder humanBuilder;
+    private final Writable fileHandler;
 
-    public Service() {
+    public Service(Writable filehandler) {
         familyTree = new FamilyTree<>();
         humanBuilder = new HumanBuilder();
         humanTree = new HumanTree<>(this);
+        this.fileHandler = filehandler;
     }
 
     public FamilyTree getFamilyTree() {
@@ -84,7 +86,6 @@ public class Service implements Serializable {
     }
 
     public boolean save(String filename) {
-        Writable fileHandler = new FileHandler();
         if (fileHandler.writeObject(familyTree, filename)) {
             fileHandler.close();
             return true;
@@ -94,8 +95,7 @@ public class Service implements Serializable {
     }
 
     public boolean load(String filename) {
-        Writable fileHandler = new FileHandler();
-        familyTree = (FamilyTree) fileHandler.readObject(filename);
+        familyTree = (FamilyTree) this.fileHandler.readObject(filename);
         fileHandler.close();
         return true;
     }
