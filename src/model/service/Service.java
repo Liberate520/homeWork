@@ -60,63 +60,27 @@ public class Service implements Serializable {
     }
 
     public boolean setChild(Integer idParent, Integer idChild) {
-        Human parent = familyTree.searchById(idParent);
-        Human child = familyTree.searchById(idChild);
-        if (parent != null && child != null && !parent.equals(child)) {
-            return familyTree.setChildren(parent, child);
-        } else {
-            return false;
-        }
+        return familyTree.setChildren(familyTree.searchById(idParent), familyTree.searchById(idChild));
     }
 
     public boolean setMother(Integer idChild, Integer idMother) {
-        Human child = familyTree.searchById(idChild);
-        Human mother = familyTree.searchById(idMother);
-        if (child != null && mother != null && !child.equals(mother)) {
-            return familyTree.setMother(child, mother);
-        } else {
-            return false;
-        }
+        return familyTree.setMother(familyTree.searchById(idChild), familyTree.searchById(idMother));
     }
 
     public boolean setFather(Integer idChild, Integer idFather) {
-        Human child = familyTree.searchById(idChild);
-        Human father = familyTree.searchById(idFather);
-        if (child != null && father != null && !child.equals(father)) {
-            return familyTree.setFather(child, father);
-        } else {
-            return false;
-        }
+        return familyTree.setFather(familyTree.searchById(idChild), familyTree.searchById(idFather));
     }
 
     public boolean divorce(Integer idSpouce1, Integer idSpouce2) {
-        Human spouce1 = familyTree.searchById(idSpouce1);
-        Human spouce2 = familyTree.searchById(idSpouce2);
-        if (spouce1 != null && spouce1 != null) {
-            return familyTree.divorce(spouce1, spouce2);
-        } else {
-            return false;
-        }
+        return familyTree.divorce(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2));
     }
 
     public boolean setSpouce(Integer idSpouce1, Integer idSpouce2) {
-        Human spouce1 = familyTree.searchById(idSpouce1);
-        Human spouce2 = familyTree.searchById(idSpouce2);
-        if (spouce1 != null && spouce2 != null && !spouce1.equals(spouce2)) {
-            return familyTree.setSpouse(spouce1, spouce2);
-        } else {
-            return false;
-        }
+        return familyTree.setSpouse(familyTree.searchById(idSpouce1), familyTree.searchById(idSpouce2));
     }
 
     public String showAllInfo(Integer id) {
-        StringBuilder sb = new StringBuilder();
-        if (familyTree.searchById(id) != null) {
-            sb.append(familyTree.searchById(id));
-            return sb.toString();
-        } else {
-            return sb.append("Человек с таким ID отсутствует").toString();
-        }
+        return familyTree.searchById(id).toString();
     }
 
     public boolean save(String filename) {
@@ -137,11 +101,7 @@ public class Service implements Serializable {
     }
 
     public boolean emptyCheck() {
-        if (familyTree.emptyCheck())
-            return false;
-        else {
-            return true;
-        }
+        return !familyTree.emptyCheck();
     }
 
     public boolean setDeathDate(Integer id, LocalDate DeathDate) {
@@ -153,5 +113,4 @@ public class Service implements Serializable {
             return false;
         }
     }
-
 }

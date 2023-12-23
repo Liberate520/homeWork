@@ -30,86 +30,107 @@ public class FamilyTree<T extends Creature<T>> implements Iterable<T>, Serializa
     }
 
     public boolean setSpouse(T firstSpouce, T secondSpouce) {
-        if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
-            firstSpouce.setSpouse(secondSpouce);
-            secondSpouce.setSpouse(firstSpouce);
-        } else {
+        if (firstSpouce == null || secondSpouce == null || firstSpouce.equals(secondSpouce)) {
             return false;
+        } else {
+
+            if (firstSpouce.getSpouse() == null && secondSpouce.getSpouse() == null) {
+                firstSpouce.setSpouse(secondSpouce);
+                secondSpouce.setSpouse(firstSpouce);
+            } else {
+                return false;
+            }
+            if (!firstSpouce.isInTree()) {
+                familyTree.add(firstSpouce);
+                firstSpouce.setInTree();
+                notInTree.remove(firstSpouce);
+            }
+            if (!secondSpouce.isInTree()) {
+                familyTree.add(secondSpouce);
+                secondSpouce.setInTree();
+                notInTree.remove(secondSpouce);
+            }
+            return true;
         }
-        if (!firstSpouce.isInTree()) {
-            familyTree.add(firstSpouce);
-            firstSpouce.setInTree();
-            notInTree.remove(firstSpouce);
-        }
-        if (!secondSpouce.isInTree()) {
-            familyTree.add(secondSpouce);
-            secondSpouce.setInTree();
-            notInTree.remove(secondSpouce);
-        }
-        return true;
     }
 
     public boolean divorce(T firstSpouce, T secondSpouce) {
-        return firstSpouce.equals(secondSpouce.getSpouse()) && firstSpouce.setSpouse(null)
-                && secondSpouce.setSpouse(null);
+        if (firstSpouce == null || secondSpouce == null) {
+            return false;
+        } else {
+            return firstSpouce.equals(secondSpouce.getSpouse()) && firstSpouce.setSpouse(null)
+                    && secondSpouce.setSpouse(null);
+        }
     }
 
     public boolean setMother(T child, T mother) {
-        child.setMother(mother);
-        if (!child.isInTree()) {
-            familyTree.add(child);
-            child.setInTree();
-            notInTree.remove(child);
-        }
-        if (!mother.isInTree()) {
-            familyTree.add(mother);
-            mother.setInTree();
-            notInTree.remove(mother);
-        }
-        if (mother.getChildren() != null && mother.getChildren().contains(child)) {
+        if (child == null || mother == null || !child.equals(mother)) {
             return false;
         } else {
-            mother.setChildren(child);
-            return true;
+            child.setMother(mother);
+            if (!child.isInTree()) {
+                familyTree.add(child);
+                child.setInTree();
+                notInTree.remove(child);
+            }
+            if (!mother.isInTree()) {
+                familyTree.add(mother);
+                mother.setInTree();
+                notInTree.remove(mother);
+            }
+            if (mother.getChildren() != null && mother.getChildren().contains(child)) {
+                return false;
+            } else {
+                mother.setChildren(child);
+                return true;
+            }
         }
     }
 
     public boolean setChildren(T parent, T child) {
-        if (!child.isInTree()) {
-            familyTree.add(child);
-            child.setInTree();
-            notInTree.remove(child);
-        }
-        if (!parent.isInTree()) {
-            familyTree.add(parent);
-            parent.setInTree();
-            notInTree.remove(parent);
-        }
-        if (parent.getChildren() != null && parent.getChildren().contains(child)) {
+        if (parent == null || child == null || parent.equals(child)) {
             return false;
         } else {
-            parent.setChildren(child);
-            return true;
+            if (!child.isInTree()) {
+                familyTree.add(child);
+                child.setInTree();
+                notInTree.remove(child);
+            }
+            if (!parent.isInTree()) {
+                familyTree.add(parent);
+                parent.setInTree();
+                notInTree.remove(parent);
+            }
+            if (parent.getChildren() != null && parent.getChildren().contains(child)) {
+                return false;
+            } else {
+                parent.setChildren(child);
+                return true;
+            }
         }
     }
 
     public boolean setFather(T child, T father) {
-        child.setFather(father);
-        if (!child.isInTree()) {
-            familyTree.add(child);
-            child.setInTree();
-            notInTree.remove(child);
-        }
-        if (!father.isInTree()) {
-            familyTree.add(father);
-            father.setInTree();
-            notInTree.remove(father);
-        }
-        if (father.getChildren() != null && father.getChildren().contains(child)) {
+        if (child == null || father == null || child.equals(father)) {
             return false;
         } else {
-            father.setChildren(child);
-            return true;
+            child.setFather(father);
+            if (!child.isInTree()) {
+                familyTree.add(child);
+                child.setInTree();
+                notInTree.remove(child);
+            }
+            if (!father.isInTree()) {
+                familyTree.add(father);
+                father.setInTree();
+                notInTree.remove(father);
+            }
+            if (father.getChildren() != null && father.getChildren().contains(child)) {
+                return false;
+            } else {
+                father.setChildren(child);
+                return true;
+            }
         }
     }
 
