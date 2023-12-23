@@ -2,7 +2,7 @@ package model.human_tree;
 
 
 import model.creatures.Creature;
-import model.service.Service;
+import model.family_tree.FamilyTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +10,15 @@ import java.util.List;
 
 public class HumanTree<T extends Creature> {
     private T treeTop;
-    private Service service;
 
-    public HumanTree(Service service) {
-        this.service = service;
-    }
 
-    public T getTop() {
-        topOfTree(this.treeTop);
+    public T getTop(FamilyTree familyTree) {
+        topOfTree(this.treeTop, familyTree);
         return this.treeTop;
     }
 
-    public String showTree() {
-        topOfTree(this.treeTop);
+    public String showTree(FamilyTree familyTree) {
+        topOfTree(this.treeTop, familyTree);
         return showTreeService(this.treeTop, 1);
     }
 
@@ -51,23 +47,23 @@ public class HumanTree<T extends Creature> {
         return sb.toString();
     }
 
-    private boolean topOfTree(T topEnter) {
-        if (service.emptyCheck()) {
+    private boolean topOfTree(T topEnter, FamilyTree familyTree) {
+        if (!familyTree.emptyCheck()) {
             return false;
         } else {
-            this.treeTop = (T) service.getFirstMebmer();
+            this.treeTop = (T) familyTree.getFirstMember();
             if (topEnter != null && topEnter.getFather() == null && topEnter.getMother() == null) {
                 if (topEnter.getSpouse() != null) {
                     if (topEnter.getSpouse().getFather() != null || topEnter.getSpouse().getMother() != null) {
-                        topOfTree((T) topEnter.getSpouse());
+                        topOfTree((T) topEnter.getSpouse(), familyTree);
                     }
                 } else {
                     this.treeTop = topEnter;
                 }
             }
             if (topEnter != null) {
-                topOfTree((T) topEnter.getFather());
-                topOfTree((T) topEnter.getMother());
+                topOfTree((T) topEnter.getFather(), familyTree);
+                topOfTree((T) topEnter.getMother(), familyTree);
             }
 
             return true;

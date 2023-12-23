@@ -7,7 +7,6 @@ import model.creatures.Human;
 import model.creatures.HumanBuilder;
 import model.family_tree.FamilyTree;
 import model.human_tree.HumanTree;
-import writer.FileHandler;
 import writer.Writable;
 
 import java.io.Serializable;
@@ -23,7 +22,7 @@ public class Service implements Serializable {
     public Service(Writable filehandler) {
         familyTree = new FamilyTree<>();
         humanBuilder = new HumanBuilder();
-        humanTree = new HumanTree<>(this);
+        humanTree = new HumanTree<>();
         this.fileHandler = filehandler;
     }
 
@@ -54,7 +53,7 @@ public class Service implements Serializable {
 
 
     public String showHumanTree() {
-        return humanTree.showTree();
+        return humanTree.showTree(familyTree);
     }
 
     public String showAll() {
