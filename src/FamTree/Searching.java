@@ -8,6 +8,7 @@ public class Searching {
     ArrayList<String>resAge = new ArrayList<>();
 
     public Searching(FamilyTree familyTree){
+
         tree = familyTree.getTree();
     }
 

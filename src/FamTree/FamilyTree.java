@@ -3,7 +3,7 @@ package FamTree;
 import java.io.Serializable;
 import java.util.*;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree<T> implements Serializable {
 
     public ArrayList<Human>persons;
     public ArrayList<NodeFamilyTree> tree = new ArrayList<>();
