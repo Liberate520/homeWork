@@ -9,7 +9,8 @@ public class ComparatorByBirthDate <T extends commonParam> implements Comparator
         if (o1.getBirthDate().equals(o2.getBirthDate())) {
             return o1.getName().compareTo(o2.getName());
         } else {
-            return Integer.compare(o1.getAge(), o2.getAge());    // getAge -> getBirthDate
+//            return Integer.compare(o1.getAge(), o2.getAge());    // getAge -> getBirthDate
+            return o1.getBirthDate().compareTo(o2.getBirthDate());
         }
     }
 

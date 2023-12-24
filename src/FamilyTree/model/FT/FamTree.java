@@ -16,16 +16,11 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
         this.humanList = humanList;
     }
     public boolean add(T human){
-//        if(human ==null){                     // можно убрать
-//            return false;                     //
-//        }
         if (!humanList.contains(human)){
             humanList.add(human);
             human.setId(peopleCounter++);
-
             addToParents(human);
             addToChildren(human);
-
             return true;
         }
         return false;
@@ -43,22 +38,6 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
         }
     }
 
-//    public List<T> getSiblings(int id){
-//        T human = (T) getById(id);
-//        if (human == null){
-//            return null;
-//        }
-//        List<T> result = new ArrayList<>();
-//        for (T parent: human.getParents()){
-//            for (T child: parent.getChildren()){
-//                if (!child.equals(human)){
-//                    result.add(child);
-//                }
-//            }
-//        }
-//        return result;
-//    }
-
     public List<T> getByName(String name) {
         List<T> result = new ArrayList<>();
         for (T human : humanList) {
@@ -66,7 +45,7 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
                 result.add(human);
             }
         }
-        return result;     //.toString();  ( ?.toString)
+        return result;     //?.toString)
     }
     private boolean checkId ( int id){
         return id < peopleCounter && id >= 0;
@@ -95,7 +74,7 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
 
     public boolean remove(int peopleCounter){
         if (checkId(peopleCounter)){
-            T e;
+//            T t;
             T human = getById(peopleCounter);
             return humanList.remove(human);
         }
@@ -127,7 +106,7 @@ public class FamTree<T extends commonParam<T>> implements Serializable, Iterable
     public void sortByBirthDate(){
         humanList.sort(new ComparatorByBirthDate());
     }
-    public void sortByAge () {
+    public void sortByAge() {
         humanList.sort(new ComparatorByAge());
     }
     @Override

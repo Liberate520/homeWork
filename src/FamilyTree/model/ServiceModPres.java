@@ -19,24 +19,6 @@ public class ServiceModPres {
         activeTree = new FamTree<>();
     }
 
-//    private static FamTree load() {
-//        String savePath = "src/FamilyTree/saver/tree.txt";
-//        FileHandler fileHandler = new FileHandler();
-//        return (FamTree) fileHandler.load(savePath);
-//    }
-//
-//    private static void save(FamTree tree) {
-//        String savePath = "src/FamilyTree/saver/tree.txt";
-//        FileHandler fileHandler = new FileHandler();
-////        fileHandler.save(tree, savePath);
-//        if (fileHandler.save((Serializable) tree, savePath)) {
-//            System.out.println("каталог сохранён");
-//        }
-//        else {
-//            System.out.println("проверьте параметры сохранения");
-//        }
-//    }
-
     public boolean save(){
         if (writable == null){
             return false;
@@ -48,14 +30,17 @@ public class ServiceModPres {
         if (writable == null){
             return false;
         }
-        activeTree = writable.load();
+        activeTree = writable.read();
         return true;
     }
 
+//    public Human(String name, Gender gender, LocalDate birthDate, Human mother, Human father) {
+//        this(name, gender, null, birthDate, null, mother, father);
+//    }
     public String addHuman(String name, String genderString, String birthDate,
-                           int fatherId, int motherId){
-        Human father = activeTree.getById(fatherId);
-        Human mother = activeTree.getById(motherId);
+                           long fatherId, long motherId){
+        Human father = activeTree.getById((int) fatherId);
+        Human mother = activeTree.getById((int) motherId);
         Gender gender = Gender.valueOf(genderString);
         LocalDate humanBirthDate = LocalDate.parse(birthDate);
         Human human = new Human(name, gender, humanBirthDate, father, mother);
@@ -71,7 +56,7 @@ public class ServiceModPres {
         activeTree.sortByName();
     }
 
-    public void sortByDeathDate(){
+    public void sortByBirthDate(){
         activeTree.sortByBirthDate();
     }
 

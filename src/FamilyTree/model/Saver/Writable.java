@@ -4,10 +4,11 @@ import FamilyTree.model.FT.FamTree;
 import FamilyTree.model.HR.Human;
 
 public interface Writable {
-//    boolean save(Serializable saveStream, String savePath);
-//    Object load(String savePath);
 
     boolean save(FamTree<Human> activeTree);
-    FamTree<Human> load();
+    FamTree<Human> read();
     void setSavePath(String savePath);
+
+//    boolean save(Serializable saveStream, String savePath);
+//    Object load(String savePath);
 }

@@ -7,12 +7,12 @@ public class FileHandlerExtend extends FileHandler implements Writable {
     private String savePath = "src/FamilyTree/model/saver/tree.txt";
 
     @Override
-    public boolean save(FamTree<Human> activeTree) {
-        return super.save(activeTree, savePath);
+    public boolean save(FamTree<Human> tree) {
+        return super.save(tree, savePath);
     }
 
     @Override
-    public FamTree<Human> load() {
+    public FamTree<Human> read() {
         return (FamTree<Human>)super.load(savePath);
     }
 

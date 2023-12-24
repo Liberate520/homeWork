@@ -28,12 +28,9 @@ public class FileHandler {
         }
     }
 
-
-
-
 //    @Override
 //    public Object load(String savePath) {
 //        FamTree familyTree = new FamTree();
-//        return new FamTree() /*(new ObjectInputStream(filePath))*/;
+//        return new FamTree()               /*(new ObjectInputStream(filePath))*/;
 //    }
 }

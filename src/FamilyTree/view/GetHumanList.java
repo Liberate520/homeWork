@@ -3,9 +3,9 @@ package FamilyTree.view;
 import java.io.Console;
 
 public class GetHumanList {
-    private Console console;
+    private ConsoleUI console;
 
-    public GetHumanList(Console console) {
+    public GetHumanList(ConsoleUI console) {
         this.console = console;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 public class Menu {
     private List<GetHumanList> list;
 
-    public Menu(Console console) {
+    public Menu(ConsoleUI console) {
         list = new ArrayList<>();
         list.add(new GetHumanList(console));
     }

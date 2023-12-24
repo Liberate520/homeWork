@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human implements Serializable, commonParam <Human>{
-    private int id;
+    private long id;
     private String name;
     private Gender gender;
     private String place_of_residence;
@@ -47,7 +47,7 @@ public class Human implements Serializable, commonParam <Human>{
     }
 
 
-    public void setId(int id){
+    public void setId(long id){
         this.id = id;
     }
     public long getId(){
@@ -186,11 +186,11 @@ public class Human implements Serializable, commonParam <Human>{
     public String getChildrenInfo(){
         StringBuilder chldrn = new StringBuilder();
         chldrn.append("дети: ");
-        if (!this.children.isEmpty()) {
-            chldrn.append(this.children.get(0).getName());
-            for (int i = 1; i < this.children.size(); i++) {
+        if (!children.isEmpty()) {                                // убраны this. от children
+            chldrn.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
                 chldrn.append(", ");
-                chldrn.append(this.children.get(i).getName());
+                chldrn.append(children.get(i).getName());
             }
         }
         else {
@@ -217,7 +217,7 @@ public class Human implements Serializable, commonParam <Human>{
         PersData.append(getLived());
         PersData.append(", возраст: ");
         PersData.append(getAge());
-        PersData.append(", супруг(а): ");
+        PersData.append(", ");
         PersData.append(getSpouseInfo());
         PersData.append(", ");
         PersData.append(getMotherInfo());
@@ -242,5 +242,5 @@ public class Human implements Serializable, commonParam <Human>{
     @Override
     public int compareTo(Human o) {
         return 0;
-    }
+    }      // ??, требование класса
 }
