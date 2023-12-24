@@ -2,9 +2,9 @@ package ru.gb.family_tree.family_tree.view.commands;
 
 import ru.gb.family_tree.family_tree.view.ConsoleUI;
 
-public class AddHuman extends Command{
+public class addHuman extends Command{
 
-    public AddHuman(ConsoleUI consoleUI) {
+    public addHuman(ConsoleUI consoleUI) {
         super(consoleUI);
         description = "Добавить человека";
     }

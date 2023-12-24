@@ -14,7 +14,7 @@ public class Service {
 
     public Service(){
         builder=new HumanBuilder();
-        familytree=new FamilyTree<>();
+        familytree=new FamilyTree<Human>();
     }
     public void addHuman(String name, Gender gender, LocalDate birthDate){
         Human human = builder.build(name,gender,birthDate);
@@ -47,7 +47,7 @@ public class Service {
         FileHandler fileHandler = new FileHandler();
         if (this.familytree!=null){
         familytree =(FamilyTree)fileHandler.load(fileHandler.getPath());}
-        else{FamilyTree familyTree =new FamilyTree();
+        else{FamilyTree familyTree =new FamilyTree<Human>();
             familyTree=(FamilyTree)fileHandler.load(fileHandler.getPath());}
     }
 

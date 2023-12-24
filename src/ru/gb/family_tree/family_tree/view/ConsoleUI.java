@@ -138,7 +138,7 @@ public class ConsoleUI implements View {
         presenter.createFamilyConnectionByID(childID,parentID);
     }
 
-    public void PrintTree() {
+    public void printTree() {
         presenter.printTree();
     }
 
