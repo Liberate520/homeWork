@@ -68,7 +68,7 @@ public class ConsoleUI implements View {
     }
 
     private boolean checkCommand(int numCommand){
-        if (numCommand < menu.getSize()){
+        if (numCommand <= menu.getSize()){
             return true;
         } else {
             inputError();
@@ -130,7 +130,12 @@ public class ConsoleUI implements View {
             presenter.addHuman(name, gender, birthdate);
         }
     }
-    public void addParent() {
+    public void createFamilyConnectionByID() {
+        System.out.println("Введите ID ребенка ");
+        int childID = Integer.parseInt(scanner.nextLine());
+        System.out.println("Введите ID родителя ");
+        int parentID =Integer.parseInt(scanner.nextLine());
+        presenter.createFamilyConnectionByID(childID,parentID);
     }
 
     public void PrintTree() {
@@ -144,5 +149,6 @@ public class ConsoleUI implements View {
     public void loadTreeFromFile() {
         presenter.loadTreeFromFile();
     }
+
 }
 

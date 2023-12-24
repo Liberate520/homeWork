@@ -9,5 +9,6 @@ public class SaveTreeToFile extends Command {
     }
     public void execute(){
         consoleUI.saveTreeToFile();
+        System.out.println("Семейное древо сохранено в файл");
     }
 }

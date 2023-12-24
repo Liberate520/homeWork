@@ -2,13 +2,14 @@ package ru.gb.family_tree.family_tree.model.human;
 
 import ru.gb.family_tree.family_tree.model.TreeNode;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Human implements TreeNode<Human> {
+public class Human implements TreeNode<Human>, Serializable {
     static int humanCount=0;
     private int humanID;
     private String name;
@@ -134,16 +135,6 @@ public class Human implements TreeNode<Human> {
     public Gender getGender(){
         return this.gender;
     }
-//    public List<Human>getParents(){
-//        List<Human> parents = new ArrayList<>(2);
-//        if(father!=null){
-//            parents.add(father);
-//        }
-//        if(mother!=null){
-//            parents.add(mother);
-//        }
-//        return parents;
-//    }
 public String getListParents(){
     StringBuilder sb = new StringBuilder();
     if (this.father!=null||this.mother!=null){

@@ -2,8 +2,6 @@ package ru.gb.family_tree.family_tree.model;
 
 import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByAge;
 import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByName;
-import ru.gb.family_tree.family_tree.model.human.Human;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,6 +62,7 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
             sb.append(human);
             sb.append("\n");
         }
+        treeNum=0;
         return sb.toString();
     }
 

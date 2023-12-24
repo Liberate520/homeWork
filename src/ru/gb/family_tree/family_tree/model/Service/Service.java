@@ -1,7 +1,6 @@
 package ru.gb.family_tree.family_tree.model.Service;
 
 import ru.gb.family_tree.family_tree.model.FamilyTree;
-import ru.gb.family_tree.family_tree.model.comparator.FamilyComparatorByName;
 import ru.gb.family_tree.family_tree.model.human.Gender;
 import ru.gb.family_tree.family_tree.model.human.Human;
 import ru.gb.family_tree.family_tree.model.human.HumanBuilder;
@@ -34,13 +33,11 @@ public class Service {
     public Human getHumanByID(int ID){
         return (Human) familytree.getPersonByID(ID);
     }
-    public void SetParentByID(int ID1,int ID2){
-        Human human=getHumanByID(ID1);
-        human.addParent(getHumanByID(ID2));
-    }
-    public void SetChildByID(int ID1,int ID2){
-        Human human=getHumanByID(ID1);
-        human.addChild(getHumanByID(ID2));
+    public void createFamilyConnectionByID(int ID1,int ID2){
+        Human humanChild=getHumanByID(ID1);
+        Human humanParent=getHumanByID(ID2);
+        humanChild.addParent(humanParent);
+        humanParent.addChild(humanChild);
     }
     public void save(FamilyTree tree){
             FileHandler fileHandler = new FileHandler();

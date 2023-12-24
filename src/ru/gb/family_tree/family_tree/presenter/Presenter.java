@@ -41,4 +41,10 @@ public class Presenter {
     public void loadTreeFromFile() {
         service.load();
     }
+
+    public void createFamilyConnectionByID(int childID,int parentID) {
+        service.createFamilyConnectionByID(childID,parentID);
+    }
+
+
 }

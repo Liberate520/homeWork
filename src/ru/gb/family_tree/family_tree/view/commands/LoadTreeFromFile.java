@@ -10,5 +10,6 @@ public class LoadTreeFromFile extends Command{
 
     public void execute(){
         consoleUI.loadTreeFromFile();
+        System.out.println("Древо загружено");
     }
 }

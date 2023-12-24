@@ -9,7 +9,7 @@ public class MainMenu {
     public MainMenu(ConsoleUI consoleUI) {
         commandList = new ArrayList<>();
         commandList.add(new AddHuman(consoleUI));
-        commandList.add(new Parent(consoleUI));
+        commandList.add(new AddFamilyConnections(consoleUI));
         commandList.add(new SortByName(consoleUI));
         commandList.add(new SortByAge(consoleUI));
         commandList.add(new PrintListOfHuman(consoleUI));

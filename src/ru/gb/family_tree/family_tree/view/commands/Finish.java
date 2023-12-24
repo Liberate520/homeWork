@@ -9,6 +9,7 @@ public class Finish extends Command {
     }
 
     public void execute(){
+        System.out.println("Закрытие программы");
         consoleUI.finish();
     }
 }
