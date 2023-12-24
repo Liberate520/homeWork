@@ -33,6 +33,9 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
     public void printFamilyTree(FamilyTree familytree) {
         System.out.println(familytree);
     }
+    public String getFamilyTree() {
+        return getInfo();
+    }
 
     public List<A> getByName(String name){
         List<A> result = new ArrayList<>();
@@ -44,9 +47,7 @@ public class FamilyTree<A extends TreeNode<A>> implements Serializable,Iterable<
         }
         return result;
     }
-    public List<A> getFamilyTree() {
-        return familyTree;
-    }
+
     @Override
     public String toString() {return getInfo();}
     public String getInfo(){

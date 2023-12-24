@@ -22,8 +22,8 @@ public class Presenter {
         service.addHuman(name,gender,bDate);
     }
 
-    public void printTree() {
-        service.printFamilyTree();
+    public String getFamilyTree() {
+        return service.getFamilyTree();
     }
 
     public void sortByAge() {

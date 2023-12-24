@@ -2,7 +2,7 @@ package ru.gb.family_tree.family_tree.model.writer;
 
 import java.io.*;
 
-public class FileHandler implements Writable{
+public class FileHandler implements Writable,SaveAndLoad{
     String path="src/ru/gb/family_tree/family_tree/model/writer/file";
     public boolean save(Serializable serializable,String path) {
         try (ObjectOutputStream familytreeOut= new ObjectOutputStream(new FileOutputStream(path))) {

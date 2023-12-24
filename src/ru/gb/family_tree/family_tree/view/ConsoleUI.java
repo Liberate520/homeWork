@@ -124,7 +124,7 @@ public class ConsoleUI implements View {
             }
             presenter.addHuman(name, gender, birthdate, deathdate);
             System.out.println("человек создан и добавлен в древо");
-            presenter.printTree();
+            presenter.getFamilyTree();
         }
         if (!choiceDeathDate.equals("1")) {
             presenter.addHuman(name, gender, birthdate);
@@ -139,7 +139,7 @@ public class ConsoleUI implements View {
     }
 
     public void printTree() {
-        presenter.printTree();
+        System.out.println(presenter.getFamilyTree());
     }
 
     public void saveTreeToFile() {

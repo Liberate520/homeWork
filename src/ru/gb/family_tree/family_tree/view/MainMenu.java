@@ -12,7 +12,7 @@ public class MainMenu {
         commandList.add(new addFamilyConnections(consoleUI));
         commandList.add(new sortByName(consoleUI));
         commandList.add(new sortByAge(consoleUI));
-        commandList.add(new printListOfHuman(consoleUI));
+        commandList.add(new printFamilyTree(consoleUI));
         commandList.add(new saveTreeToFile(consoleUI));
         commandList.add(new loadTreeFromFile(consoleUI));
         commandList.add(new finish(consoleUI));
