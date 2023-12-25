@@ -1,6 +1,7 @@
 package presenter;
 
 import model.service.Service;
+import model.writer.FileHandler;
 import view.View;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ public class Presenter {
 
     public Presenter(View view) {
         this.view = view;
-        service = new Service();
+        service = new Service(new FileHandler());
     }
 
     public void addHuman(String name, String genderStr, LocalDate birthDate) {

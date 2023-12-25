@@ -10,6 +10,6 @@ public class AddWedding extends Command{
 
     @Override
     public void execute() {
-    getConsoleUI().Wedding();
+    getConsoleUI().wedding();
     }
 }

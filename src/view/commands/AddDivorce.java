@@ -10,6 +10,6 @@ public class AddDivorce extends Command{
 
     @Override
     public void execute() {
-        getConsoleUI().Divorce();
+        getConsoleUI().divorce();
     }
 }

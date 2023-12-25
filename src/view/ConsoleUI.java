@@ -31,7 +31,6 @@ public class ConsoleUI implements View{
     private boolean choice() {
         String choiceStr = scanner.nextLine();
         int choice = Integer.parseInt(choiceStr);
-        //метод проверки на валидность
 
         if(choice > 0 && choice < menu.size()+1){
             menu.execute(choice);
@@ -78,7 +77,7 @@ public class ConsoleUI implements View{
         }
     }
 
-    public void Wedding(){
+    public void wedding(){
         System.out.println("Введите id жениха:");
         int id1 = Integer.parseInt(scanner.nextLine());
         System.out.println("Введите id невесты:");
@@ -86,7 +85,7 @@ public class ConsoleUI implements View{
         presenter.addWedding(id1, id2);
     }
 
-    public void Divorce(){
+    public void divorce(){
         System.out.println("Введите id мужа:");
         int id1 = Integer.parseInt(scanner.nextLine());
         System.out.println("Введите id жены:");

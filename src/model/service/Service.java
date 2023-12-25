@@ -4,15 +4,18 @@ import model.family_tree.FamilyTree;
 import model.human.Gender;
 import model.human.Human;
 import model.writer.FileHandler;
+import model.writer.Writable;
 
 import java.time.LocalDate;
 
 public class Service {
     private FamilyTree familyTree;
     private boolean choice = true;
+    private Writable writable;
 
-    public Service() {
+    public Service(Writable writable) {
         familyTree = new FamilyTree();
+        this.writable = writable;
     }
 
     public void addHuman(String name, String genderStr, LocalDate birthDate) {
@@ -27,8 +30,6 @@ public class Service {
                     familyTree.add(human);
                     break;
                 default:
-                    System.out.println("Неправильно введен пол");
-                    choice = false;
                     break;
         }
     } //добавление нового человека в семейное древо
@@ -57,21 +58,17 @@ public class Service {
                 familyTree.add(human);
                 break;
             default:
-                System.out.println("Неправильно введен пол");
-                choice = false;
                 break;
         }
     }
 
     public void saveTree() {
-        String fileName = "src/model.writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.save(familyTree, fileName);
+        String fileName = "src/model/writer/tree.txt";
+        writable.save(familyTree, fileName);
     }
 
     public void loadSaveTree() {
-        String fileName = "src/model.writer/tree.txt";
-        FileHandler fileHandler = new FileHandler();
-        familyTree = (FamilyTree) fileHandler.load(fileName);
+        String fileName = "src/model/writer/tree.txt";
+        familyTree = (FamilyTree) writable.load(fileName);
     }
 }
