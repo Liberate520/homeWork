@@ -1,16 +1,13 @@
-package ru.gb.family_tree.model.subject.human;
-
+package ru.gb.family_tree.model.human;
 
 import ru.gb.family_tree.model.comparator.TreeNode;
-import ru.gb.family_tree.model.gender.Gender;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements Serializable, TreeNode<Human> {
+public class Human implements TreeNode<Human> {
     private long id;
     private String name;
     private Gender gender;
@@ -18,7 +15,7 @@ public class Human implements Serializable, TreeNode<Human> {
     private LocalDate deathDate;
     private Human father;
     private Human mother;
-    private List<Human> parents;
+    private Human spouse;
     private List<Human> children;
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother) {
@@ -29,14 +26,7 @@ public class Human implements Serializable, TreeNode<Human> {
         this.deathDate = deathDate;
         this.father = father;
         this.mother = mother;
-        parents = new ArrayList<>();
-        if (father != null){
-            parents.add(father);
-        }
-        if (mother != null){
-            parents.add(mother);
-        }
-        children = new ArrayList<>();
+        this.children = new ArrayList<>();
     }
 
     public Human(String name, Gender gender, LocalDate birthDate) {
@@ -88,6 +78,24 @@ public class Human implements Serializable, TreeNode<Human> {
         return mother;
     }
 
+    public Human getSpouse() {
+        return spouse;
+    }
+
+    @Override
+    public void setSpouse(Object o) {
+
+    }
+
+    @Override
+    public void addParents(Human parent) {
+
+    }
+
+    public void setSpouse(Human spouse) {
+        this.spouse = spouse;
+    }
+
     public List<Human> getParents() {
         List<Human> list = new ArrayList<>(2);
         if (father != null) {
@@ -114,6 +122,11 @@ public class Human implements Serializable, TreeNode<Human> {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void addToChild(Human child) {
+
     }
 
     public long getId() {

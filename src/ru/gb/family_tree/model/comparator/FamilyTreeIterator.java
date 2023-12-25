@@ -3,22 +3,22 @@ package ru.gb.family_tree.model.comparator;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTreeIterator<T extends TreeNode> implements Iterator<T> {
+public class FamilyTreeIterator<T> implements Iterator<T> {
     private int index;
-    private List<T> subList;
+    private List<T> familyTreeList;
 
-    public FamilyTreeIterator(List<T> subList) {
+    public FamilyTreeIterator(List<T> familyTreeList) {
         index = 0;
-        this.subList = subList;
+        this.familyTreeList = familyTreeList;
     }
 
     @Override
     public boolean hasNext() {
-        return index < subList.size();
+        return index < familyTreeList.size();
     }
 
     @Override
     public T next() {
-        return subList.get(index++);
+        return familyTreeList.get(index++);
     }
 }

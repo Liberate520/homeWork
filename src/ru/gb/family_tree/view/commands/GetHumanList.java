@@ -2,18 +2,12 @@ package ru.gb.family_tree.view.commands;
 
 import ru.gb.family_tree.view.Console;
 
-public class GetHumanList {
-    private Console console;
-
+public class GetHumanList extends Command {
     public GetHumanList(Console console) {
-        this.console = console;
-    }
-
-    public String getDescription() {
-        return "Get a list of human";
+        super("Family Tree Search", console);
     }
 
     public void execute() {
-        console.getHumanList();
+        getConsole().getFamilyTreeInfo();
     }
 }

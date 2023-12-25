@@ -1,26 +1,35 @@
 package ru.gb.family_tree.view;
 
+import ru.gb.family_tree.view.commands.Command;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
-    private List<GetHumanList> list;
+    private List<Command> commandList;
 
     public Menu(Console console) {
-        list = new ArrayList<>();
-        list.add(new GetHumanList(console));
+        commandList = new ArrayList<>();
+//        commandList.add(new GetHumanList(console));
     }
 
-    public String print() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(list.get(i).getDescription());
-            stringBuilder.append("\n");
+    public String menu() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < commandList.size(); i++) {
+            sb.append(i + 1);
+            sb.append(". ");
+            sb.append(commandList.get(i).getDescription());
+            sb.append("\n");
         }
-        return stringBuilder.toString();
+        return sb.toString();
     }
-    public void execute(String choice) {
-        list.get(Integer.parseInt(choice) - 1).execute();
+
+    public void execute(int choice) {
+        Command command = commandList.get(choice - 1);
+        command.execute();
+    }
+
+    public int getSize() {
+        return commandList.size();
     }
 }
