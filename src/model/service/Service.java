@@ -1,6 +1,7 @@
 package model.service;
 
 import model.family_tree.FamilyTree;
+import model.family_tree.TreeGenerality;
 import model.human.Gender;
 import model.human.Human;
 import model.writer.FileHandler;
@@ -9,8 +10,7 @@ import model.writer.Writable;
 import java.time.LocalDate;
 
 public class Service {
-    private FamilyTree familyTree;
-    private boolean choice = true;
+    private FamilyTree<Human> familyTree;
     private Writable writable;
 
     public Service(Writable writable) {
