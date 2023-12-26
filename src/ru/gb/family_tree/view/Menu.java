@@ -1,6 +1,6 @@
 package ru.gb.family_tree.view;
 
-import ru.gb.family_tree.view.commands.Command;
+import ru.gb.family_tree.view.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,13 @@ public class Menu {
 
     public Menu(Console console) {
         commandList = new ArrayList<>();
-//        commandList.add(new GetHumanList(console));
+        commandList.add(new GetHumanList(console));
+        commandList.add(new Finish(console));
+        commandList.add(new GetByName(console));
+        commandList.add(new GetHumanList(console));
+        commandList.add(new Remove(console));
+        commandList.add(new SortByAge(console));
+        commandList.add(new SortByName(console));
     }
 
     public String menu() {
