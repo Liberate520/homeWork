@@ -76,7 +76,7 @@ public class ConsoleUI implements View {
         }
     }
 
-    public void Wedding() {
+    public void wedding() {
         System.out.println("Введите id жениха:");
         int id1 = Integer.parseInt(scanner.nextLine());
         System.out.println("Введите id невесты:");

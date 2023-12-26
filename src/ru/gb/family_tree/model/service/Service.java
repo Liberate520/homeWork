@@ -7,7 +7,7 @@ import ru.gb.family_tree.model.writer.FileHandler;
 import java.time.LocalDate;
 
 public class Service {
-    private FamilyTree familyTree;
+    private FamilyTree<Human> familyTree;
     private boolean choice = true;
 
     public Service() {
@@ -17,7 +17,7 @@ public class Service {
     public void loadTree() {
         String filePath = "src/ru.gb.family_tree/model/writer/tree.txt";
         FileHandler fileHandler = new FileHandler();
-        familyTree = (FamilyTree) fileHandler.load(filePath);
+        familyTree = (FamilyTree<Human>) fileHandler.load(filePath);
     }
 
     public void saveTree() {
