@@ -12,7 +12,6 @@ import java.util.List;
 
 public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E> {
     private List<E> familyTree;
-    long counter;
 
     public FamilyTree() {
         this.familyTree = new ArrayList<>();
@@ -22,9 +21,6 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
         this.familyTree = familyTree;
     }
 
-    public int getTreeSize(){
-        return familyTree.size();
-    }
     public void addFamilyMember(E member) {
         if (member != null) {
             if(!familyTree.contains(member)) {
@@ -51,18 +47,16 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
         }
     }
 
-    public List<E> getByName(String name){
-        List<E> familyMembers = new ArrayList<>();
+    public String getByName(String name){
+        StringBuilder stringBuilder = new StringBuilder();
         for (E member:
                 familyTree) {
             if(member.getName().equals(name)){
-                familyMembers.add(member);
+                stringBuilder.append(member)
+                        .append("\n");
             }
         }
-        if (!familyMembers.isEmpty()){
-            return familyMembers;
-        }
-        return null;
+        return stringBuilder.toString();
     }
 
     public E getById(long id) {

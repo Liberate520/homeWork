@@ -44,7 +44,7 @@ public class Presenter {
     }
 
     public void getByName(String name){
-        System.out.println(service.getByName(name));
+        view.printAnswer(service.getByName(name));
     }
 
     public boolean setParent(long parentId, long childId){

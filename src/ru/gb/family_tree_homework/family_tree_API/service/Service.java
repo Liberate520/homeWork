@@ -7,16 +7,17 @@ import ru.gb.family_tree_homework.family_tree_API.family_tree.FamilyTree;
 import ru.gb.family_tree_homework.family_tree_API.human.Gender;
 import ru.gb.family_tree_homework.family_tree_API.human.Human;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Service implements Serializable {
+public class Service {
     private FamilyTree<Human> familyTree;
     private HumanBuilder builder;
+    private Writable writable;
 
     public Service() {
-        familyTree = new FamilyTree<>();
-        builder = new HumanBuilder();
+        this.familyTree = new FamilyTree<>();
+        this.builder = new HumanBuilder();
+        this.writable = new FileHandler();
     }
 
     public void addMember(String name, Gender gender, LocalDate birthDate) {
@@ -37,23 +38,11 @@ public class Service implements Serializable {
     }
 
     public String getFamilyTreeInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("There are ").append(familyTree.getTreeSize())
-                .append(" family members in family tree: \n");
-        for (Human member:
-                familyTree) {
-            stringBuilder.append(member).append("\n");
-        }
-        return stringBuilder.toString();
+        return familyTree.toString();
     }
 
     public String getByName(String name){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Human human:
-             familyTree.getByName(name)) {
-            stringBuilder.append(human).append("\n");
-        }
-        return stringBuilder.toString();
+        return familyTree.getByName(name);
     }
 
     public boolean setWedding(long humanId1, long humanId2){
@@ -97,13 +86,11 @@ public class Service implements Serializable {
     }
 
     public boolean saveTree(String fileName) {
-        Writable fileHandler = new FileHandler();
-        return fileHandler.save(familyTree, fileName);
+        return writable.save(familyTree, fileName);
     }
 
     public boolean loadTree(String fileName) {
-        Writable fileHandler = new FileHandler();
-        familyTree = (FamilyTree<Human>) fileHandler.read(fileName);
+        familyTree = (FamilyTree<Human>) writable.read(fileName);
         return familyTree != null;
     }
 }
