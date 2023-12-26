@@ -1,12 +1,5 @@
 package ru.gb.family_tree;
 
-import ru.gb.family_tree.model.family_tree.FamilyTree;
-import ru.gb.family_tree.model.human.Gender;
-import ru.gb.family_tree.model.human.Human;
-import ru.gb.family_tree.model.writer.FileHandler;
-
-import java.time.LocalDate;
-
 public class Main {
     public static void main(String[] args) {
         //FamilyTree tree = load();

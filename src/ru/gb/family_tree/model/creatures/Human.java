@@ -1,13 +1,12 @@
-package ru.gb.family_tree.model.human;
+package ru.gb.family_tree.model.creatures;
 
-import ru.gb.family_tree.model.family_tree.TreeNode;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Human implements TreeNode<Human> { 
+public class Human implements Creature<Human>, Serializable {
     private int id;
     private String name;
     private Gender gender;
@@ -82,6 +81,16 @@ public class Human implements TreeNode<Human> {
         return id;
     }
 
+    @Override
+    public <E extends Creature<Human>> E getSpouse() {
+        return null;
+    }
+
+    @Override
+    public void setInTree() {
+
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -92,6 +101,11 @@ public class Human implements TreeNode<Human> {
 
     public List<Human> getChildren() {
         return children;
+    }
+
+    @Override
+    public void setChildren(Human child) {
+
     }
 
     public void setBirthDate(LocalDate birthDate) {
@@ -106,8 +120,18 @@ public class Human implements TreeNode<Human> {
         this.father = father;
     }
 
+    @Override
+    public boolean isInTree() {
+        return inTree;
+    }
+
     public void setMother(Human mother) {
         this.mother = mother;
+    }
+
+    @Override
+    public boolean setSpouse(Human o) {
+        return false;
     }
 
     public Human getFather() {
@@ -213,5 +237,10 @@ public class Human implements TreeNode<Human> {
         }
         Human human = (Human) obj;
         return human.getId() == getId();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

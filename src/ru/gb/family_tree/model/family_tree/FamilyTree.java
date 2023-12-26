@@ -1,27 +1,28 @@
 package ru.gb.family_tree.model.family_tree;
 
-import ru.gb.family_tree.model.human.HumanComparatorByBirthDate;
-import ru.gb.family_tree.model.human.HumanComparatorByName;
+import ru.gb.family_tree.model.creatures.Creature;
+import ru.gb.family_tree.model.creatures.CreatureComporatorByAge;
+import ru.gb.family_tree.model.creatures.CreatureComporatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable<E> {
+public class FamilyTree<E extends Creature<E>> implements Serializable, Iterable<E> {
     private int countPeople;
-    private List<E> humanList;
+    private List<E> familyTree;
 
     public FamilyTree() {this(new ArrayList<>()); }
 
-    public FamilyTree(List<E> humanList) {this.humanList = humanList; }
+    public FamilyTree(List<E> familyTree) {this.familyTree = familyTree; }
 
     public boolean add(E human) {
         if (human == null){
             return false;
         }
-        if (!humanList.contains(human)) {
-            humanList.add(human);
+        if (!familyTree.contains(human)) {
+            familyTree.add(human);
             human.setId(countPeople++);
             addToParents(human);
             addToChildren(human);
@@ -45,7 +46,7 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
 
     public List<E> getByName(String name) {
         List<E> res = new ArrayList<>();
-        for (E human : humanList) {
+        for (E human : familyTree) {
             if (human.getName().equals(name)) {
                 res.add(human);
             }
@@ -61,9 +62,9 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("В древе: ");
-        sb.append(humanList.size());
+        sb.append(familyTree.size());
         sb.append(" человек \n");
-        for (E human: humanList){
+        for (E human: familyTree){
             sb.append(human);
             sb.append("\n");
         }
@@ -71,11 +72,11 @@ public class FamilyTree<E extends TreeNode<E>> implements Serializable, Iterable
     }
 
     @Override
-    public Iterator<E> iterator() { return new HumanIterator<>(humanList); }
+    public Iterator<E> iterator() { return new TreeIterator<>(familyTree); }
 
-    public void sortByName(){humanList.sort(new HumanComparatorByName<>()); }
+    public void sortByName(){familyTree.sort(new CreatureComporatorByName()); }
 
     public void sortByBirthDate(){
-        humanList.sort(new HumanComparatorByBirthDate<>());
+        familyTree.sort(new CreatureComporatorByAge());
     }
 }
