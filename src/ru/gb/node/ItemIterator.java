@@ -1,14 +1,12 @@
 package ru.gb.node;
 
-import ru.gb.person.Person;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Person> {
+public class ItemIterator<E extends TreeItem<E>> implements Iterator<E> {
     private int index;
-    private List<Person> tree;
-    public HumanIterator(List<Person> tree) {
+    private List<E> tree;
+    public ItemIterator(List<E> tree) {
         this.tree = tree;
     }
 
@@ -18,7 +16,7 @@ public class HumanIterator implements Iterator<Person> {
     }
 
     @Override
-    public Person next() {
+    public E next() {
         return tree.get(index++);
     }
 }

@@ -1,6 +1,7 @@
 package ru.gb.service;
 
 import ru.gb.node.FamilyTree;
+import ru.gb.node.TreeItem;
 import ru.gb.person.Person;
 import ru.gb.writable.FileHandlerForTree;
 
@@ -9,11 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Service {
-    private List<FamilyTree> familyTreesList;
+public class Service<E extends TreeItem<E>> {
+    private List<FamilyTree<E>> familyTreesList;
     private int treeIndex;
 
-    public Service(List<FamilyTree> familyTreesList) {
+    public Service(List<FamilyTree<E>> familyTreesList) {
         this.familyTreesList = familyTreesList;
 
         if (!familyTreesList.isEmpty()) {
@@ -27,34 +28,34 @@ public class Service {
         this(new ArrayList<>());
     }
 
-    public void addFamilyTree(FamilyTree tree) {
+    public void addFamilyTree(FamilyTree<E> tree) {
         familyTreesList.add(tree);
         System.out.printf("Добавлено древо с индесом: %d", treeIndex);
         this.treeIndex++;
         System.out.println();
     }
 
-    public void addPerson(Person person, int treeIndex) {
-        FamilyTree needTree = familyTreesList.get(treeIndex);
-        needTree.add(person);
+    public void addItem(E treeItem, int treeIndex) {
+        FamilyTree<E> needTree = familyTreesList.get(treeIndex);
+        needTree.add(treeItem);
     }
 
     public void createEmptyFamilyTree() {
-        familyTreesList.add(new FamilyTree());
+        familyTreesList.add(new FamilyTree<E>());
         System.out.printf("Создано пустое древо с индесом: %d", treeIndex);
         this.treeIndex++;
         System.out.println();
     }
 
-    public Person getByName(String name, int treeIndex) {
-        FamilyTree tree = familyTreesList.get(treeIndex);
+    public E getByName(String name, int treeIndex) {
+        FamilyTree<E> tree = familyTreesList.get(treeIndex);
         return tree.getByName(name);
     }
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (FamilyTree tree : familyTreesList) {
+        for (FamilyTree<E> tree : familyTreesList) {
             int index = getTreeIndex(tree);
 
 
@@ -71,11 +72,11 @@ public class Service {
         return stringBuilder.toString();
     }
 
-    public int getTreeIndex(FamilyTree tree) {
+    public int getTreeIndex(FamilyTree<E> tree) {
         return this.familyTreesList.indexOf(tree);
     }
 
-    public List<FamilyTree> getFamilyTreesList() {
+    public List<FamilyTree<E>> getFamilyTreesList() {
         return familyTreesList;
     }
 
@@ -84,19 +85,19 @@ public class Service {
         fhTree.save((Serializable) this.familyTreesList);
     }
 
-    public List<FamilyTree> loadTrees() throws IOException, ClassNotFoundException {
+    public List<FamilyTree<E>> loadTrees() throws IOException, ClassNotFoundException {
         FileHandlerForTree fhTree = new FileHandlerForTree();
-        return (List<FamilyTree>) fhTree.loadFamilyTree();
+        return (List<FamilyTree<E>>) fhTree.loadFamilyTree();
     }
 
     public void sortByName() {
-        for (FamilyTree tree : familyTreesList) {
+        for (FamilyTree<E> tree : familyTreesList) {
             tree.sortByName();
         }
     }
 
     public void sortByAge() {
-        for (FamilyTree tree : familyTreesList) {
+        for (FamilyTree<E> tree : familyTreesList) {
             tree.sortByAge();
         }
     }

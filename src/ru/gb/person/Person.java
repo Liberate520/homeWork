@@ -1,11 +1,14 @@
 package ru.gb.person;
 
+import ru.gb.node.TreeItem;
+import ru.gb.treeItem.Gender;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable, TreeItem<Person> {
     private String name;
     private Gender gender;
     private LocalDate birthDate;
@@ -40,6 +43,7 @@ public class Person implements Serializable {
         this(name,gender, birthDate, null, father, mother);
     }
 
+    @Override
     public int getAge() {
         LocalDate currentDate = LocalDate.now();
         LocalDate dateToCalculate = deathDate != null ? deathDate : currentDate;
@@ -53,24 +57,23 @@ public class Person implements Serializable {
         return age;
     }
 
-    public boolean addChild(Person child) {
+    @Override
+    public void addChild(Person child) {
         if (!children.contains(child)) {
             children.add(child);
-            return true;
         }
-        return false;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
-    public boolean addParent(Person parent) {
+    @Override
+    public void addParent(Person parent) {
         if (!parents.contains(parent)) {
             parents.add(parent);
-            return true;
         }
-        return false;
     }
 
     public LocalDate getBirthDate() {
@@ -100,6 +103,7 @@ public class Person implements Serializable {
         return null;
     }
 
+    @Override
     public List<Person> getParents() {
         return parents;
     }
@@ -108,6 +112,7 @@ public class Person implements Serializable {
         return gender;
     }
 
+    @Override
     public List<Person> getChildren() {
         return children;
     }
