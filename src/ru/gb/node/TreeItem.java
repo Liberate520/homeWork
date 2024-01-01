@@ -1,6 +1,5 @@
 package ru.gb.node;
 
-import java.util.Iterator;
 import java.util.List;
 
 public interface TreeItem<E extends TreeItem<E>> {

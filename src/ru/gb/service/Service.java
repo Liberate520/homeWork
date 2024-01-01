@@ -81,13 +81,13 @@ public class Service<E extends TreeItem<E>> {
     }
 
     public void saveTrees() throws IOException, ClassNotFoundException {
-        FileHandlerForTree fhTree = new FileHandlerForTree();
+        FileHandlerForTree<E> fhTree = new FileHandlerForTree<>();
         fhTree.save((Serializable) this.familyTreesList);
     }
 
     public List<FamilyTree<E>> loadTrees() throws IOException, ClassNotFoundException {
-        FileHandlerForTree fhTree = new FileHandlerForTree();
-        return (List<FamilyTree<E>>) fhTree.loadFamilyTree();
+        FileHandlerForTree<E> fhTree = new FileHandlerForTree<>();
+        return fhTree.loadFamilyTree();
     }
 
     public void sortByName() {
