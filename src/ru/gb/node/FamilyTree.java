@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<Person> {
+public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> treeItemList;
 
     public FamilyTree(List<E> treeItemList) { this.treeItemList = treeItemList; }
