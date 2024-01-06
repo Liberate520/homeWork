@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable, TreeItem<Person> {
+public class Person implements TreeItem<Person> {
     private String name;
     private Gender gender;
     private LocalDate birthDate;
