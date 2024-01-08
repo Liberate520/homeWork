@@ -45,7 +45,7 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
         Scanner sc = new Scanner(System.in);
 
         for (E treeItem : treeItemList) {
-            if (treeItem.getName().equals(name)) {
+            if (treeItem.getName().equalsIgnoreCase(name)) {
                 System.out.println("Вы хотите получить этого члена семьи? Да/нет");
                 System.out.println(treeItem);
                 if (sc.nextLine().strip().equalsIgnoreCase("да")) {

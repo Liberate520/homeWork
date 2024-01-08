@@ -6,7 +6,7 @@ import ru.gb.model.node.TreeItem;
 import java.io.*;
 import java.util.List;
 
-public class FileHandlerForTree<E extends TreeItem<E>> implements Writable {
+public class FileHandlerForTree<E extends TreeItem<E>> implements Writable<E> {
     @Override
     public void save(Serializable serializable) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("trees.out"));
@@ -21,5 +21,4 @@ public class FileHandlerForTree<E extends TreeItem<E>> implements Writable {
         objectInputStream.close();
         return treeLoaded;
     }
-
 }

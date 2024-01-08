@@ -75,15 +75,6 @@ public class Person implements TreeItem<Person> {
         }
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public LocalDate getDeathDate() {
-        return deathDate;
-    }
-
-
     public Person getFather() {
         for (Person parent : parents) {
             if (parent.getGender() == Gender.Male) {
@@ -114,10 +105,6 @@ public class Person implements TreeItem<Person> {
     @Override
     public List<Person> getChildren() {
         return children;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     public void setDeathDate(LocalDate deathDate) {

@@ -30,13 +30,6 @@ public class Service<E extends TreeItem<E>> {
         this(new ArrayList<>());
     }
 
-    public void addFamilyTree(FamilyTree<E> tree) {
-        familyTreesList.add(tree);
-        System.out.printf("Добавлено древо с индесом: %d", treeIndex);
-        this.treeIndex++;
-        System.out.println();
-    }
-
     public void addItem(E treeItem, int treeIndex) {
         FamilyTree<E> needTree = familyTreesList.get(treeIndex);
         needTree.add(treeItem);
@@ -81,11 +74,7 @@ public class Service<E extends TreeItem<E>> {
         return this.familyTreesList.indexOf(tree);
     }
 
-    public List<FamilyTree<E>> getFamilyTreesList() {
-        return familyTreesList;
-    }
-
-    public void saveTrees() throws IOException, ClassNotFoundException {
+    public void saveTrees() throws IOException {
         FileHandlerForTree<E> fhTree = new FileHandlerForTree<>();
         fhTree.save((Serializable) this.familyTreesList);
     }
@@ -107,26 +96,29 @@ public class Service<E extends TreeItem<E>> {
         }
     }
 
-    public TreeItem<E> createPerson(String name, Gender gender, LocalDate birthDate) {
-        return (TreeItem<E>) new Person(name, gender, birthDate);
-    }
-
     public void addMom(String momName, String childName, int treeIndex) {
         E mom = getByName(momName, treeIndex);
         E child = getByName(childName, treeIndex);
         child.addParent(mom);
+        mom.addChild(child);
     }
 
     public void addDad(String dadName, String childName, int treeIndex) {
         E dad = getByName(dadName, treeIndex);
         E child = getByName(childName, treeIndex);
         child.addParent(dad);
+        dad.addChild(child);
     }
 
     public void addChild(String parentName, String childName, int treeIndex) {
         E parent = getByName(parentName, treeIndex);
         E child = getByName(childName, treeIndex);
         parent.addChild(child);
+        child.addParent(parent);
+    }
+
+    public TreeItem<E> createPerson(String name, Gender gender, LocalDate birthDate) {
+        return (TreeItem<E>) new Person(name, gender, birthDate);
     }
 
     public void setGender(String name, String gender, int treeIndex) {
@@ -137,6 +129,4 @@ public class Service<E extends TreeItem<E>> {
         E person = getByName(name, treeIndex);
         person.setDeathDate(deathDate);
     }
-
-    //TODO: Сделать методы добавления отца, матери и ребенка не чувствительными к case
 }

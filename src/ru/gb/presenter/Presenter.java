@@ -18,10 +18,6 @@ public class Presenter implements Serializable {
         service.createEmptyFamilyTree();
     }
 
-    public void addItemToFamilyTree(String name, Gender gender, LocalDate birthDate, int treeIndex) {
-        service.addItem(service.createPerson(name, gender, birthDate), treeIndex);
-    }
-
     public void createNewFamilyTree() {
         service.createEmptyFamilyTree();
     }
@@ -38,7 +34,11 @@ public class Presenter implements Serializable {
         service.saveTrees();
     }
     public void loadAllTrees() throws IOException, ClassNotFoundException {
-        service.loadTrees();
+        service = new Service(service.loadTrees());
+    }
+
+    public void addItemToFamilyTree(String name, Gender gender, LocalDate birthDate, int treeIndex) {
+        service.addItem(service.createPerson(name, gender, birthDate), treeIndex);
     }
 
     public void sortByName() {
@@ -55,15 +55,10 @@ public class Presenter implements Serializable {
 
     public void addDad(String dadName, String childName, int treeIndex) {
         service.addDad(dadName, childName, treeIndex);
-        //TODO: Добавить связь, когда добавляешь ребенку отца, у него должен появиться ребенок
     }
 
     public void addChild(String parentName, String childName, int treeIndex) {
         service.addChild(parentName, childName, treeIndex);
-    }
-
-    public void setGender(String name, String gender, int treeIndex) {
-        service.setGender(name, gender, treeIndex);
     }
 
     public Gender strToGender(String genderStr) {
@@ -77,6 +72,4 @@ public class Presenter implements Serializable {
     public void setDeathDate(String name, int treeIndex, LocalDate deathDate) {
         service.setDeathDate(name, treeIndex, deathDate);
     }
-
-    //TODO: метод загрузки деревьев не работает - поправить
 }
