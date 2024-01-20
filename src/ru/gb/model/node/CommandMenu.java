@@ -10,10 +10,28 @@ import java.util.List;
 public class CommandMenu {
     List<Command> commands;
 
-    public CommandMenu(TreeItem treeItem) {
+    public CommandMenu() {
         commands = new ArrayList<>();
 
-        commands.add(new TrueAnswerCommand(treeItem));
-        commands.add(new FalseAnswerCommand(treeItem));
+        commands.add(new TrueAnswerCommand());
+        commands.add(new FalseAnswerCommand());
+    }
+
+    public String menu() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < commands.size(); i++) {
+            stringBuilder.append(i+1);
+            stringBuilder.append(". ");
+            stringBuilder.append(commands.get(i).getDescription());
+            stringBuilder.append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public boolean execute(int choice) {
+        Command command = commands.get(choice - 1);
+        return command.execute();
     }
 }

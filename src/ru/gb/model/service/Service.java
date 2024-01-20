@@ -99,22 +99,34 @@ public class Service<E extends TreeItem<E>> {
     public void addMom(String momName, String childName, int treeIndex) {
         E mom = getByName(momName, treeIndex);
         E child = getByName(childName, treeIndex);
-        child.addParent(mom);
-        mom.addChild(child);
+        if (child != null && mom != null) {
+            child.addParent(mom);
+            mom.addChild(child);
+        } else {
+            System.out.println("Этого члена семьи не найдено!");
+        }
     }
 
     public void addDad(String dadName, String childName, int treeIndex) {
         E dad = getByName(dadName, treeIndex);
         E child = getByName(childName, treeIndex);
-        child.addParent(dad);
-        dad.addChild(child);
+        if (child != null && dad != null) {
+            child.addParent(dad);
+            dad.addChild(child);
+        } else {
+            System.out.println("Этого члена семьи не найдено!");
+        }
     }
 
     public void addChild(String parentName, String childName, int treeIndex) {
         E parent = getByName(parentName, treeIndex);
         E child = getByName(childName, treeIndex);
-        parent.addChild(child);
-        child.addParent(parent);
+        if (child != null && parent != null) {
+            parent.addChild(child);
+            child.addParent(parent);
+        } else {
+            System.out.println("Этого члена семьи не найдено!");
+        }
     }
 
     public TreeItem<E> createPerson(String name, Gender gender, LocalDate birthDate) {

@@ -13,8 +13,11 @@ import java.util.Scanner;
 
 public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable<E> {
     private List<E> treeItemList;
+    private CommandMenu commandMenu;
 
-    public FamilyTree(List<E> treeItemList) { this.treeItemList = treeItemList; }
+    public FamilyTree(List<E> treeItemList) {
+        this.treeItemList = treeItemList;
+    }
 
     public FamilyTree() { this(new ArrayList<>()); }
 
@@ -42,19 +45,30 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     }
 
     public E getByName(String name) {
-        Scanner sc = new Scanner(System.in);
-
-        for (E treeItem : treeItemList) {
-            if (treeItem.getName().equalsIgnoreCase(name)) {
-                System.out.println("Вы хотите получить этого члена семьи? Да/нет");
-                System.out.println(treeItem);
-                if (sc.nextLine().strip().equalsIgnoreCase("да")) {
-                    return treeItem;
+            for (E treeItem : treeItemList) {
+                if (treeItem.getName().equalsIgnoreCase(name)) {
+                    commandMenu = new CommandMenu();
+                        printMenu(treeItem);
+                        if (choice()) { return treeItem;}
                 }
-            }
         }
         return null;
     }
+
+    private void printMenu(E treeItem) {
+        System.out.println("Вы хотите получить этого члена семьи?");
+        System.out.println(treeItem);
+        System.out.println(commandMenu.menu());
+    }
+
+    private boolean choice() {
+        Scanner sc = new Scanner(System.in);
+        String choiceStr = sc.nextLine();
+        //TODO: Метод проверки числа на валидность
+        int choice = Integer.parseInt(choiceStr);
+        return commandMenu.execute(choice);
+    }
+
 
     @Override
     public String toString() {
