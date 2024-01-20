@@ -12,11 +12,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Service<E extends TreeItem<E>> {
-    private List<FamilyTree<E>> familyTreesList;
+public class ServiceForPeople {
+    private List<FamilyTree<Person>> familyTreesList;
     private int treeIndex;
 
-    public Service(List<FamilyTree<E>> familyTreesList) {
+    public ServiceForPeople(List<FamilyTree<Person>> familyTreesList) {
         this.familyTreesList = familyTreesList;
 
         if (!familyTreesList.isEmpty()) {
@@ -26,17 +26,17 @@ public class Service<E extends TreeItem<E>> {
         }
     }
 
-    public Service() {
+    public ServiceForPeople() {
         this(new ArrayList<>());
     }
 
-    public void addItem(E treeItem, int treeIndex) {
-        FamilyTree<E> needTree = familyTreesList.get(treeIndex);
+    public void addItem(Person treeItem, int treeIndex) {
+        FamilyTree<Person> needTree = familyTreesList.get(treeIndex);
         needTree.add(treeItem);
     }
 
     public void createEmptyFamilyTree() {
-        familyTreesList.add(new FamilyTree<E>());
+        familyTreesList.add(new FamilyTree<Person>());
         System.out.println("--------------------------------------------");
         System.out.printf("Создано пустое древо с индесом: %d\n", treeIndex);
         System.out.println("--------------------------------------------");
@@ -45,15 +45,15 @@ public class Service<E extends TreeItem<E>> {
         System.out.println();
     }
 
-    public E getByName(String name, int treeIndex) {
-        FamilyTree<E> tree = familyTreesList.get(treeIndex);
+    public Person getByName(String name, int treeIndex) {
+        FamilyTree<Person> tree = familyTreesList.get(treeIndex);
         return tree.getByName(name);
     }
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (FamilyTree<E> tree : familyTreesList) {
+        for (FamilyTree<Person> tree : familyTreesList) {
             int index = getTreeIndex(tree);
 
 
@@ -70,35 +70,35 @@ public class Service<E extends TreeItem<E>> {
         return stringBuilder.toString();
     }
 
-    public int getTreeIndex(FamilyTree<E> tree) {
+    public int getTreeIndex(FamilyTree<Person> tree) {
         return this.familyTreesList.indexOf(tree);
     }
 
     public void saveTrees() throws IOException {
-        FileHandlerForTree<E> fhTree = new FileHandlerForTree<>();
+        FileHandlerForTree<Person> fhTree = new FileHandlerForTree<>();
         fhTree.save((Serializable) this.familyTreesList);
     }
 
-    public List<FamilyTree<E>> loadTrees() throws IOException, ClassNotFoundException {
-        FileHandlerForTree<E> fhTree = new FileHandlerForTree<>();
+    public List<FamilyTree<Person>> loadTrees() throws IOException, ClassNotFoundException {
+        FileHandlerForTree<Person> fhTree = new FileHandlerForTree<>();
         return fhTree.loadFamilyTree();
     }
 
     public void sortByName() {
-        for (FamilyTree<E> tree : familyTreesList) {
+        for (FamilyTree<Person> tree : familyTreesList) {
             tree.sortByName();
         }
     }
 
     public void sortByAge() {
-        for (FamilyTree<E> tree : familyTreesList) {
+        for (FamilyTree<Person> tree : familyTreesList) {
             tree.sortByAge();
         }
     }
 
     public void addMom(String momName, String childName, int treeIndex) {
-        E mom = getByName(momName, treeIndex);
-        E child = getByName(childName, treeIndex);
+        Person mom = getByName(momName, treeIndex);
+        Person child = getByName(childName, treeIndex);
         if (child != null && mom != null) {
             child.addParent(mom);
             mom.addChild(child);
@@ -108,8 +108,8 @@ public class Service<E extends TreeItem<E>> {
     }
 
     public void addDad(String dadName, String childName, int treeIndex) {
-        E dad = getByName(dadName, treeIndex);
-        E child = getByName(childName, treeIndex);
+        Person dad = getByName(dadName, treeIndex);
+        Person child = getByName(childName, treeIndex);
         if (child != null && dad != null) {
             child.addParent(dad);
             dad.addChild(child);
@@ -119,8 +119,8 @@ public class Service<E extends TreeItem<E>> {
     }
 
     public void addChild(String parentName, String childName, int treeIndex) {
-        E parent = getByName(parentName, treeIndex);
-        E child = getByName(childName, treeIndex);
+        Person parent = getByName(parentName, treeIndex);
+        Person child = getByName(childName, treeIndex);
         if (child != null && parent != null) {
             parent.addChild(child);
             child.addParent(parent);
@@ -129,8 +129,8 @@ public class Service<E extends TreeItem<E>> {
         }
     }
 
-    public TreeItem<E> createPerson(String name, Gender gender, LocalDate birthDate) {
-        return (TreeItem<E>) new Person(name, gender, birthDate);
+    public Person createPerson(String name, Gender gender, LocalDate birthDate) {
+        return new Person(name, gender, birthDate);
     }
 
     public void setGender(String name, String gender, int treeIndex) {
@@ -138,7 +138,7 @@ public class Service<E extends TreeItem<E>> {
     }
 
     public void setDeathDate(String name, int treeIndex, LocalDate deathDate) {
-        E person = getByName(name, treeIndex);
+        Person person = getByName(name, treeIndex);
         person.setDeathDate(deathDate);
     }
 }

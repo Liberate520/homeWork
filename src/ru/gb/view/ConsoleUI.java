@@ -1,7 +1,7 @@
 package ru.gb.view;
 
 import ru.gb.model.treeItem.Gender;
-import ru.gb.presenter.Presenter;
+import ru.gb.presenter.PresenterForPeople;
 import ru.gb.view.gender.GenderMenu;
 
 import java.io.IOException;
@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 public class ConsoleUI implements View {
     private Scanner scanner;
-    private Presenter presenter;
+    private PresenterForPeople presenter;
     private boolean flag;
     private GenderMenu genderMenu;
     private MainMenu menu;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
-        presenter = new Presenter(this);
+        presenter = new PresenterForPeople(this);
         flag = true;
         genderMenu = new GenderMenu(this);
         menu = new MainMenu(this);

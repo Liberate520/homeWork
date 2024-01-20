@@ -1,11 +1,7 @@
-import ru.gb.model.treeItem.Gender;
-import ru.gb.model.person.Person;
-import ru.gb.model.service.Service;
 import ru.gb.view.ConsoleUI;
 import ru.gb.view.View;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -18,5 +14,6 @@ public class Main {
         //TODO: допаботать пункт 8 - обработать момент когда не найден чел
         //TODO: при выборе 12 пункта, когда нет сохраненных древ, приложение падает с ошибкой
         //TODO: обработка чисел при дате рождения, введении номера древа,
+        //TODO: при попытке сохранить дерево, если до этого уже есть сохраненное выходит ошибка java.io.NotSerializableException
     }
 }

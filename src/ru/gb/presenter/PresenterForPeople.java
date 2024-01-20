@@ -1,6 +1,6 @@
 package ru.gb.presenter;
 
-import ru.gb.model.service.Service;
+import ru.gb.model.service.ServiceForPeople;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.view.View;
 
@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Presenter implements Serializable {
-    private Service service;
+public class PresenterForPeople implements Serializable {
+    private ServiceForPeople service;
     private View view;
 
-    public Presenter(View view) {
+    public PresenterForPeople(View view) {
         this.view = view;
-        service = new Service<>();
+        service = new ServiceForPeople();
         service.createEmptyFamilyTree();
     }
 
@@ -34,7 +34,7 @@ public class Presenter implements Serializable {
         service.saveTrees();
     }
     public void loadAllTrees() throws IOException, ClassNotFoundException {
-        service = new Service(service.loadTrees());
+        service = new ServiceForPeople(service.loadTrees());
     }
 
     public void addItemToFamilyTree(String name, Gender gender, LocalDate birthDate, int treeIndex) {
