@@ -1,5 +1,6 @@
 package ru.gb.model.node;
 
+import ru.gb.model.person.Person;
 import ru.gb.model.treeItem.comparators.ItemComparatorByAge;
 import ru.gb.model.treeItem.comparators.ItemComparatorByName;
 
@@ -94,5 +95,19 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
 
     public void sortByAge() {
         treeItemList.sort(new ItemComparatorByAge<E>());
+    }
+
+    public String getInfo(int treeIndex) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n");
+        stringBuilder.append("-----------------------");
+        stringBuilder.append("Индекс древа в списке: ");
+        stringBuilder.append(treeIndex++);
+        stringBuilder.append("-----------------------");
+        stringBuilder.append("\n");
+
+        stringBuilder.append(this);
+        return stringBuilder.toString();
     }
 }

@@ -55,16 +55,7 @@ public class ServiceForPeople {
 
         for (FamilyTree<Person> tree : familyTreesList) {
             int index = getTreeIndex(tree);
-
-
-            stringBuilder.append("\n");
-            stringBuilder.append("-----------------------");
-            stringBuilder.append("Индекс древа в списке: ");
-            stringBuilder.append(index);
-            stringBuilder.append("-----------------------");
-            stringBuilder.append("\n");
-
-            stringBuilder.append(tree);
+            stringBuilder.append(tree.getInfo(index));
         }
 
         return stringBuilder.toString();
