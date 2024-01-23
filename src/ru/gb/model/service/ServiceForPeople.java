@@ -1,10 +1,10 @@
 package ru.gb.model.service;
 
 import ru.gb.model.node.FamilyTree;
-import ru.gb.model.node.TreeItem;
 import ru.gb.model.person.Person;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.model.writable.FileHandlerForTree;
+import ru.gb.model.writable.Writable;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -66,12 +66,12 @@ public class ServiceForPeople {
     }
 
     public void saveTrees() throws IOException {
-        FileHandlerForTree<Person> fhTree = new FileHandlerForTree<>();
+        Writable<Person> fhTree = new FileHandlerForTree<>();
         fhTree.save((Serializable) this.familyTreesList);
     }
 
     public List<FamilyTree<Person>> loadTrees() throws IOException, ClassNotFoundException {
-        FileHandlerForTree<Person> fhTree = new FileHandlerForTree<>();
+        Writable<Person> fhTree = new FileHandlerForTree<>();
         return fhTree.loadFamilyTree();
     }
 
