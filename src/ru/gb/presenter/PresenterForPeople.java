@@ -1,5 +1,6 @@
 package ru.gb.presenter;
 
+import ru.gb.model.person.Person;
 import ru.gb.model.service.ServiceForPeople;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.view.View;
@@ -22,8 +23,8 @@ public class PresenterForPeople implements Serializable {
         service.createEmptyFamilyTree();
     }
 
-    public void getInfoByName(String name, int treeIndex) {
-        System.out.println(service.getByName(name, treeIndex));
+    public Person getInfoByName(String name, int treeIndex) {
+        return service.getByName(name, treeIndex);
     }
 
     public void getAllTreesInfo() {

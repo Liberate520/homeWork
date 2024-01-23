@@ -113,7 +113,7 @@ public class ConsoleUI implements View {
         System.out.println("Введите индекс древа в котором находится человек");
         int treeIndex = Integer.parseInt(scanner.nextLine());
 
-        presenter.getInfoByName(name, treeIndex);
+        System.out.println(presenter.getInfoByName(name, treeIndex));
     }
 
     public void getAllTreesInfo() {
