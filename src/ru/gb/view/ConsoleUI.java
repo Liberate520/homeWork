@@ -35,9 +35,12 @@ public class ConsoleUI implements View {
 
     private void choice() throws IOException, ClassNotFoundException {
         String choiceStr = scanner.nextLine();
-        //TODO: Метод проверки числа на валидность
-        int choice = Integer.parseInt(choiceStr);
-        menu.execute(choice);
+        if (choiceStr.matches("\\d+") && Integer.parseInt(choiceStr) <= menu.size() && Integer.parseInt(choiceStr) > 0) {
+            int choice = Integer.parseInt(choiceStr);
+            menu.execute(choice);
+        } else {
+            System.out.println("Введите валидное число");
+        }
     }
 
     private void printMenu() {

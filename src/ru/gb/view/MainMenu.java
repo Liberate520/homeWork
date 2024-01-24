@@ -40,6 +40,10 @@ public class MainMenu {
         return stringBuilder.toString();
     }
 
+    public int size() {
+        return commands.size();
+    }
+
     public void execute(int choice) throws IOException, ClassNotFoundException {
         Command command = commands.get(choice - 1);
         command.execute();
