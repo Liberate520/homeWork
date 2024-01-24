@@ -1,14 +1,17 @@
 package ru.gb.view;
 
+import ru.gb.general_methods.IsValidNumber;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.presenter.PresenterForPeople;
 import ru.gb.view.gender.GenderMenu;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
+    private IsValidNumber numberValidChecker;
     private Scanner scanner;
     private PresenterForPeople presenter;
     private boolean flag;
@@ -21,6 +24,7 @@ public class ConsoleUI implements View {
         flag = true;
         genderMenu = new GenderMenu(this);
         menu = new MainMenu(this);
+        numberValidChecker = new IsValidNumber();
     }
 
     @Override
@@ -35,11 +39,11 @@ public class ConsoleUI implements View {
 
     private void choice() throws IOException, ClassNotFoundException {
         String choiceStr = scanner.nextLine();
-        if (choiceStr.matches("\\d+") && Integer.parseInt(choiceStr) <= menu.size() && Integer.parseInt(choiceStr) > 0) {
+        if (numberValidChecker.isValid(1, menu.size() + 1, choiceStr)) {
             int choice = Integer.parseInt(choiceStr);
             menu.execute(choice);
         } else {
-            System.out.println("Введите валидное число");
+            numberValidChecker.error();
         }
     }
 
@@ -90,13 +94,35 @@ public class ConsoleUI implements View {
 
     public LocalDate getBirthDate() {
         System.out.println("Введите год рождения:");
-        int year = Integer.parseInt(scanner.nextLine());
+        String strYear = scanner.nextLine();
+        while (!numberValidChecker.isValid(0, Year.now().getValue(), strYear)) {
+            numberValidChecker.error();
+            System.out.println("Введите год рождения:");
+            strYear = scanner.nextLine();
+        }
+        int year = Integer.parseInt(strYear);
+
         System.out.println("Введите месяц рождения:");
-        int month = Integer.parseInt(scanner.nextLine());
+        String strMonth = scanner.nextLine();
+        while (!numberValidChecker.isValid(1, 12, strMonth)) {
+            numberValidChecker.error();
+            System.out.println("Введите месяц рождения:");
+            strMonth = scanner.nextLine();
+        }
+        int month = Integer.parseInt(strMonth);
+
         System.out.println("Введите день рождения:");
-        int day = Integer.parseInt(scanner.nextLine());
+        String strDay = scanner.nextLine();
+        while (!numberValidChecker.isValid(1, 31, strDay)) {
+            numberValidChecker.error();
+            System.out.println("Введите день рождения:");
+            strDay = scanner.nextLine();
+        }
+        int day = Integer.parseInt(strDay);
+
         return LocalDate.of(year, month, day);
     }
+    //TODO: возможно можно вынести этот цикл в отдельный метод
 
     public void printGenderMenu() {
         System.out.println(genderMenu.menu());
