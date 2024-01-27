@@ -65,9 +65,12 @@ public class FamilyTree<E extends TreeItem<E>> implements Serializable, Iterable
     private boolean choice() {
         Scanner sc = new Scanner(System.in);
         String choiceStr = sc.nextLine();
-        //TODO: Метод проверки числа на валидность
         int choice = Integer.parseInt(choiceStr);
-        return commandMenu.execute(choice);
+        if (choice <= commandMenu.getMenuSize() && choice >= 0) {
+            return commandMenu.execute(choice);
+        } else {
+            return false;
+        }
     }
 
 

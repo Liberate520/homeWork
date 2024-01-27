@@ -90,9 +90,14 @@ public class ServiceForPeople {
     public void addMom(String momName, String childName, int treeIndex) {
         Person mom = getByName(momName, treeIndex);
         Person child = getByName(childName, treeIndex);
+
         if (child != null && mom != null) {
-            child.addParent(mom);
-            mom.addChild(child);
+            if (mom.equals(child)) {
+                System.out.println("Вы не можете создать связь с одним и тем же человеком");
+            } else {
+                child.addParent(mom);
+                mom.addChild(child);
+            }
         } else {
             System.out.println("Этого члена семьи не найдено!");
         }
@@ -101,9 +106,14 @@ public class ServiceForPeople {
     public void addDad(String dadName, String childName, int treeIndex) {
         Person dad = getByName(dadName, treeIndex);
         Person child = getByName(childName, treeIndex);
+
         if (child != null && dad != null) {
-            child.addParent(dad);
-            dad.addChild(child);
+            if (dad.equals(child)) {
+                System.out.println("Вы не можете создать связь с одним и тем же человеком");
+            } else {
+                child.addParent(dad);
+                dad.addChild(child);
+            }
         } else {
             System.out.println("Этого члена семьи не найдено!");
         }
@@ -113,8 +123,12 @@ public class ServiceForPeople {
         Person parent = getByName(parentName, treeIndex);
         Person child = getByName(childName, treeIndex);
         if (child != null && parent != null) {
-            parent.addChild(child);
-            child.addParent(parent);
+            if (parent.equals(child)) {
+                System.out.println("Вы не можете создать связь с одним и тем же человеком");
+            } else {
+                parent.addChild(child);
+                child.addParent(parent);
+            }
         } else {
             System.out.println("Этого члена семьи не найдено!");
         }
@@ -130,6 +144,14 @@ public class ServiceForPeople {
 
     public void setDeathDate(String name, int treeIndex, LocalDate deathDate) {
         Person person = getByName(name, treeIndex);
-        person.setDeathDate(deathDate);
+        if (person != null) {
+            person.setDeathDate(deathDate);
+        } else {
+            System.out.println("Этого человека не найдено");
+        }
+    }
+
+    public int getAmountOfTrees() {
+        return familyTreesList.size();
     }
 }

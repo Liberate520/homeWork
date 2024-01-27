@@ -108,14 +108,20 @@ public class Person implements TreeItem<Person> {
     }
 
     public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = deathDate;
+
+        if (this.birthDate.isBefore(deathDate)) {this.deathDate = deathDate;}
+        else System.out.println("Дата смерти не может быть раньше даты рождения");
     }
 
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Имя: ");
         sb.append(name);
-        sb.append(", Возраст: ");
+        if (deathDate != null) {
+            sb.append(", Умер в возрасте: ");
+        } else {
+            sb.append(", Возраст: ");
+        }
         sb.append(getAge());
         sb.append(", ");
         sb.append(getMotherInfo());
@@ -179,6 +185,4 @@ public class Person implements TreeItem<Person> {
             System.out.println("Введен неверный гендер!");
         }
     }
-
-    //TODO: если человек умер, указывать это при выводе
 }

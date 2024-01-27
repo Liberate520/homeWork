@@ -1,6 +1,8 @@
 package ru.gb.view;
 
 import ru.gb.general_methods.IsValidNumber;
+import ru.gb.general_methods.IsValidTreeNum;
+import ru.gb.model.person.Person;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.presenter.PresenterForPeople;
 import ru.gb.view.gender.GenderMenu;
@@ -16,6 +18,7 @@ public class ConsoleUI implements View {
     private PresenterForPeople presenter;
     private boolean flag;
     private GenderMenu genderMenu;
+    private IsValidTreeNum treeNumChecker;
     private MainMenu menu;
 
     public ConsoleUI() {
@@ -25,6 +28,7 @@ public class ConsoleUI implements View {
         genderMenu = new GenderMenu(this);
         menu = new MainMenu(this);
         numberValidChecker = new IsValidNumber();
+        treeNumChecker = new IsValidTreeNum(presenter.getAmountOfTrees());
     }
 
     @Override
@@ -39,7 +43,7 @@ public class ConsoleUI implements View {
 
     private void choice() throws IOException, ClassNotFoundException {
         String choiceStr = scanner.nextLine();
-        if (numberValidChecker.isValid(1, menu.size() + 1, choiceStr)) {
+        if (numberValidChecker.isValidInRange(1, menu.size() + 1, choiceStr)) {
             int choice = Integer.parseInt(choiceStr);
             menu.execute(choice);
         } else {
@@ -62,40 +66,71 @@ public class ConsoleUI implements View {
 
         System.out.println("Введите номер гендера");
         printGenderMenu();
-        Gender gender = genderMenu.execute(Integer.parseInt(scanner.nextLine()));
+        String userResponse = scanner.nextLine();
+        if (numberValidChecker.isValidInRange(1, genderMenu.size(), userResponse)) {
+            Gender gender = genderMenu.execute(Integer.parseInt(userResponse));
+            LocalDate birthDate = getBirthDate();
 
-        LocalDate birthDate = getBirthDate();
+            int treeIndex = getTreeIndexConsole();
 
-        System.out.println("Введите индекс семейного древа, в которое хотите добавить члена семьи");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
-
-        presenter.addItemToFamilyTree(name, gender, birthDate, treeIndex);
+            if (treeNumChecker.isValidTreeNum(treeIndex)) {
+                presenter.addItemToFamilyTree(name, gender, birthDate, treeIndex);
+            } else {
+                treeNumChecker.error();
+            }
+        } else {
+            System.out.println("Неверный номер гендера");
+        }
     }
 
     public LocalDate getDeathDate() {
         System.out.println("Введите год смерти:");
-        int year = Integer.parseInt(scanner.nextLine());
+        String strYear = scanner.nextLine();
+        while (!numberValidChecker.isValidInRange(0, Year.now().getValue(), strYear)) {
+            numberValidChecker.error();
+            System.out.println("Введите год смерти:");
+            strYear = scanner.nextLine();
+        }
+        int year = Integer.parseInt(strYear);
+
         System.out.println("Введите месяц смерти:");
-        int month = Integer.parseInt(scanner.nextLine());
+        String strMonth = scanner.nextLine();
+        while (!numberValidChecker.isValidInRange(1, 12, strMonth)) {
+            numberValidChecker.error();
+            System.out.println("Введите месяц смерти:");
+            strMonth = scanner.nextLine();
+        }
+        int month = Integer.parseInt(strMonth);
+
         System.out.println("Введите день смерти:");
-        int day = Integer.parseInt(scanner.nextLine());
+        String strDay = scanner.nextLine();
+        while (!numberValidChecker.isValidInRange(1, 31, strDay)) {
+            numberValidChecker.error();
+            System.out.println("Введите день смерти:");
+            strDay = scanner.nextLine();
+        }
+        int day = Integer.parseInt(strDay);
+
         return LocalDate.of(year, month, day);
     }
 
     public void setDeathDate() {
         System.out.println("Введите имя нужного человека");
         String name = scanner.nextLine();
-        System.out.println("Введите индекс древа в котором находится человек");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
+        int treeIndex = getTreeIndexConsole();
         LocalDate deathDate = getDeathDate();
 
-        presenter.setDeathDate(name, treeIndex, deathDate);
+        if (treeNumChecker.isValidTreeNum(treeIndex)) {
+            presenter.setDeathDate(name, treeIndex, deathDate);
+        } else {
+            treeNumChecker.error();
+        }
     }
 
     public LocalDate getBirthDate() {
         System.out.println("Введите год рождения:");
         String strYear = scanner.nextLine();
-        while (!numberValidChecker.isValid(0, Year.now().getValue(), strYear)) {
+        while (!numberValidChecker.isValidInRange(0, Year.now().getValue(), strYear)) {
             numberValidChecker.error();
             System.out.println("Введите год рождения:");
             strYear = scanner.nextLine();
@@ -104,7 +139,7 @@ public class ConsoleUI implements View {
 
         System.out.println("Введите месяц рождения:");
         String strMonth = scanner.nextLine();
-        while (!numberValidChecker.isValid(1, 12, strMonth)) {
+        while (!numberValidChecker.isValidInRange(1, 12, strMonth)) {
             numberValidChecker.error();
             System.out.println("Введите месяц рождения:");
             strMonth = scanner.nextLine();
@@ -113,7 +148,7 @@ public class ConsoleUI implements View {
 
         System.out.println("Введите день рождения:");
         String strDay = scanner.nextLine();
-        while (!numberValidChecker.isValid(1, 31, strDay)) {
+        while (!numberValidChecker.isValidInRange(1, 31, strDay)) {
             numberValidChecker.error();
             System.out.println("Введите день рождения:");
             strDay = scanner.nextLine();
@@ -122,7 +157,6 @@ public class ConsoleUI implements View {
 
         return LocalDate.of(year, month, day);
     }
-    //TODO: возможно можно вынести этот цикл в отдельный метод
 
     public void printGenderMenu() {
         System.out.println(genderMenu.menu());
@@ -139,10 +173,20 @@ public class ConsoleUI implements View {
     public void getInfoByName() {
         System.out.println("Введите имя нужного человека");
         String name = scanner.nextLine();
-        System.out.println("Введите индекс древа в котором находится человек");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
+        int treeIndex = getTreeIndexConsole();
 
-        System.out.println(presenter.getInfoByName(name, treeIndex));
+        if (treeNumChecker.isValidTreeNum(treeIndex)) {
+            Person person = presenter.getInfoByName(name, treeIndex);
+            if (person == null) {
+                System.out.println("Члена семьи не найдено");
+            } else {
+                System.out.println("-----------------------");
+                System.out.println(person);
+                System.out.println("-----------------------");
+            }
+        } else {
+            treeNumChecker.error();
+        }
     }
 
     public void getAllTreesInfo() {
@@ -170,10 +214,13 @@ public class ConsoleUI implements View {
         String momName = scanner.nextLine();
         System.out.println("Введите имя ребенка");
         String childName = scanner.nextLine();
-        System.out.println("Введите индекс древа в котором они находятся");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
+        int treeIndex = getTreeIndexConsole();
 
-        presenter.addMom(momName, childName, treeIndex);
+        if (treeNumChecker.isValidTreeNum(treeIndex)) {
+            presenter.addMom(momName, childName, treeIndex);
+        } else {
+            treeNumChecker.error();
+        }
     }
 
     public void addDad() {
@@ -181,10 +228,13 @@ public class ConsoleUI implements View {
         String dadName = scanner.nextLine();
         System.out.println("Введите имя ребенка");
         String childName = scanner.nextLine();
-        System.out.println("Введите индекс древа в котором они находятся");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
+        int treeIndex = getTreeIndexConsole();
 
-        presenter.addDad(dadName, childName, treeIndex);
+        if (treeNumChecker.isValidTreeNum(treeIndex)) {
+            presenter.addMom(dadName, childName, treeIndex);
+        } else {
+            treeNumChecker.error();
+        }
     }
 
     public void addChild() {
@@ -192,14 +242,27 @@ public class ConsoleUI implements View {
         String parentName = scanner.nextLine();
         System.out.println("Введите имя ребенка");
         String childName = scanner.nextLine();
-        System.out.println("Введите индекс древа в котором они находятся");
-        int treeIndex = Integer.parseInt(scanner.nextLine());
+        int treeIndex = getTreeIndexConsole();
 
-        presenter.addChild(parentName, childName, treeIndex);
+        if (treeNumChecker.isValidTreeNum(treeIndex)) {
+            presenter.addMom(parentName, childName, treeIndex);
+        } else {
+            treeNumChecker.error();
+        }
     }
 
     public void finish() {
         System.out.println("Завершение работы...");
         flag = false;
+    }
+
+    private int getTreeIndexConsole() {
+        System.out.println("Введите индекс семейного древа");
+        String consoleRespond = scanner.nextLine();
+        if (numberValidChecker.isNumeric(consoleRespond)) {
+            return Integer.parseInt(consoleRespond);
+        } else {
+            return presenter.getAmountOfTrees() + 1;
+        }
     }
 }

@@ -5,7 +5,9 @@ import ru.gb.model.service.ServiceForPeople;
 import ru.gb.model.treeItem.Gender;
 import ru.gb.view.View;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -31,11 +33,20 @@ public class PresenterForPeople implements Serializable {
         view.printAnswer(service.getInfo());
     }
 
-    public void saveTrees() throws IOException, ClassNotFoundException {
-        service.saveTrees();
+    public void saveTrees() throws IOException {
+        try {
+            service.saveTrees();
+        } catch (NotSerializableException e) {
+            System.out.println("Древо уже было сохранено ранее");
+        }
     }
-    public void loadAllTrees() throws IOException, ClassNotFoundException {
-        service = new ServiceForPeople(service.loadTrees());
+
+    public void loadAllTrees() throws IOException {
+        try {
+            service = new ServiceForPeople(service.loadTrees());
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addItemToFamilyTree(String name, Gender gender, LocalDate birthDate, int treeIndex) {
@@ -72,5 +83,8 @@ public class PresenterForPeople implements Serializable {
 
     public void setDeathDate(String name, int treeIndex, LocalDate deathDate) {
         service.setDeathDate(name, treeIndex, deathDate);
+    }
+    public int getAmountOfTrees() {
+        return service.getAmountOfTrees();
     }
 }
