@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
+
     private int id;
     private String name;
     private Gender gender;

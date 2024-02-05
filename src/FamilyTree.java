@@ -3,7 +3,7 @@ import java.util.List;
 
 
 
-public class FamilyTree{
+public class FamilyTree  {
 
     private int humansId;
     private List<Human> humanList;

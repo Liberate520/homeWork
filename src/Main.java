@@ -1,4 +1,8 @@
+import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -6,7 +10,24 @@ public class Main {
         FamilyTree tree = mainTree();
         System.out.println(tree);
 
+        save(tree);
     }
+
+    private static FamilyTree load(){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/tree.txt";
+        return (FamilyTree) fileHandler.read(filePath);
+    }
+
+    public static void save (FamilyTree tree){
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "src/tree.txt";
+        fileHandler.save(tree,filePath);
+    }
+
+
+
+
 
     static FamilyTree mainTree() {
         FamilyTree tree = new FamilyTree();
@@ -36,4 +57,6 @@ public class Main {
 
         return tree;
     }
+
+
 }
