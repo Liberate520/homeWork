@@ -23,33 +23,44 @@ public class FileHandler {
 //        Human human10 = new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal,1000.0, LocalDate.of(2020, 8, 12), 0.010);
 //        Human human11 = new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal,12000.0, LocalDate.of(2010, 4, 24), 0.011);
 //        Human human12 = new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Null, Fondation.Formal,120000.0, LocalDate.of(1975, 11, 29), 0.012);
-        humans.add(new Human("Ивановский", "Иван Семенович", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Formal, 350000.0, LocalDate.of(1991, 1, 10), null,0.001));
-        humans.add(new Human("Семенова", "Марианна Петровна", Gender.Female, Position.Mother, SocialPosition.Married, Fondation.Informal, 350000.0, LocalDate.of(1993, 10, 10), null,0.002));
-        humans.add(new Human("Семенов", "Денис Петрович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal, 950000.0, LocalDate.of(1998, 7, 7), null,0.003));
-        humans.add(new Human("Савельев", "Петр Сергеевич", Gender.Male, Position.Father, SocialPosition.Not_married, Fondation.Informal, 50000.0, LocalDate.of(1980, 6, 5), null,0.004));
-        humans.add(new Human("Живнов", "Марат Клементьевич", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Informal, 600000.0, LocalDate.of(1973, 12, 6), null,0.005));
-        humans.add(new Human("Алябьева", "Маргарита Васильевна", Gender.Female, Position.Mother, SocialPosition.Not_married, Fondation.Formal, 135000.0, LocalDate.of(1984, 9, 27), null,0.006));
-        humans.add(new Human("Ивановский", "Михаил Иванович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Non_formal, 5000.0, LocalDate.of(2009, 4, 21), null,0.007));
-        humans.add(new Human("Алябьев", "Петр Маратович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal, 10000.0, LocalDate.of(2003, 11, 9), null,0.008));
-        humans.add(new Human("Малинович", "Анна Борисовна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal, 5000.0, LocalDate.of(2013, 3, 5), null,0.009));
-        humans.add(new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal, 1000.0, LocalDate.of(2020, 8, 12), null,0.010));
-        humans.add(new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal, 12000.0, LocalDate.of(2010, 4, 24), null,0.011));
-        humans.add(new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Married, Fondation.Formal, 120000.0, LocalDate.of(1975, 11, 29), null,0.012));
-        humans.add(new Human("Живнов", "Олег Андреевич", Gender.Male, Position.Son, SocialPosition.Married, Fondation.Formal, 160000.0, LocalDate.of(1975, 11, 29), null,0.013));
-        humans.add(new Human("Семенова", "Марина Денисовна", Gender.Female, Position.Daughter, SocialPosition.Null, Fondation.Non_formal, 3000.0, LocalDate.of(2020, 6, 2), null,0.014));
-
+        humans.add(new Human("Ивановский", "Иван Семенович", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Formal, 350000.0, LocalDate.of(1991, 1, 10), 1));
+        humans.add(new Human("Семенова", "Марианна Петровна", Gender.Female, Position.Mother, SocialPosition.Married, Fondation.Informal, 350000.0, LocalDate.of(1993, 10, 10), 2));
+        humans.add(new Human("Семенов", "Денис Петрович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal, 950000.0, LocalDate.of(1998, 7, 7), 3));
+        humans.add(new Human("Савельев", "Петр Сергеевич", Gender.Male, Position.Father, SocialPosition.Not_married, Fondation.Informal, 50000.0, LocalDate.of(1980, 6, 5), 4));
+        humans.add(new Human("Живнов", "Марат Клементьевич", Gender.Male, Position.Father, SocialPosition.Married, Fondation.Informal, 600000.0, LocalDate.of(1973, 12, 6), 5));
+        humans.add(new Human("Алябьева", "Маргарита Васильевна", Gender.Female, Position.Mother, SocialPosition.Not_married, Fondation.Formal, 135000.0, LocalDate.of(1984, 9, 27), 6));
+        humans.add(new Human("Ивановский", "Михаил Иванович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Non_formal, 5000.0, LocalDate.of(2009, 4, 21), 7));
+        humans.add(new Human("Алябьев", "Петр Маратович", Gender.Male, Position.Son, SocialPosition.Not_married, Fondation.Informal, 10000.0, LocalDate.of(2003, 11, 9), 8));
+        humans.add(new Human("Малинович", "Анна Борисовна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal, 5000.0, LocalDate.of(2013, 3, 5), 9));
+        humans.add(new Human("Малинович", "Марианна Борисовна", Gender.Female, Position.Child, SocialPosition.Not_married, Fondation.Non_formal, 1000.0, LocalDate.of(2020, 8, 12), 10));
+        humans.add(new Human("Крылова", "Сабина Сергеевна", Gender.Female, Position.Daughter, SocialPosition.Not_married, Fondation.Non_formal, 12000.0, LocalDate.of(2010, 4, 24), 11));
+        humans.add(new Human("Живнова", "Аделаида Андреевна", Gender.Female, Position.Daughter, SocialPosition.Married, Fondation.Formal, 120000.0, LocalDate.of(1975, 11, 29), 12));
+        humans.add(new Human("Живнов", "Олег Андреевич", Gender.Male, Position.Son, SocialPosition.Married, Fondation.Formal, 160000.0, LocalDate.of(1975, 11, 29), 13));
+        humans.add(new Human("Семенова", "Марина Денисовна", Gender.Female, Position.Daughter, SocialPosition.Null, Fondation.Non_formal, 3000.0, LocalDate.of(2020, 6, 2), 14));
+        humans.add(new Human("Семенов", "Ян Петрович", Gender.Male, Position.Son, SocialPosition.Null, Fondation.Non_formal, 34000.0, LocalDate.of(2000, 8, 23), 15));
 
 //        String filePath = "homeWork/src/family_tree.txt";
-        String filePath = "homeWork/src/model_app/family_tree.txt";
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath/*, true*/);
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
+//        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath/*, true*/);
+//             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream))
+//             {
+            // Сериализуем объект
+//            for (Human human : humans) {
+//                objectOutputStream.writeObject(human);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             // Сериализуем объект
             for (Human human : humans) {
-                objectOutputStream.writeObject(human);
-            }
+                writer.write(String.valueOf(human));
+                writer.newLine();
+            };
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
 //        {
 //            // Сериализуем объект

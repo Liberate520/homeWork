@@ -2,7 +2,6 @@ package family_tree.model.tree;
 
 import family_tree.model.human.Position;
 
-
 import java.time.LocalDate;
 
 public interface TreeNode<T> {
@@ -13,7 +12,7 @@ public interface TreeNode<T> {
 
     void setId(double id);
 
-    double setId();
+    int setId();
 
     double getIncome();
 

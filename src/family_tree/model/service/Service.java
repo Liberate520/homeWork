@@ -4,7 +4,6 @@ package family_tree.model.service;
 import family_tree.model.base.SortFileByLastName;
 import family_tree.model.human.*;
 import family_tree.model.tree.FamilyTree;
-import family_tree.model.tree.TreeNode;
 
 import java.time.LocalDate;
 
@@ -33,8 +32,8 @@ public class Service {
         handlerForTree();
     }
 
-    public void addNewHuman(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, LocalDate deathDate, double id) {
-        Human newHuman = new Human(lastName, firstName, gender, position, socialPosition, fondation, income, birthDate, deathDate, id);
-        FamilyTree.addNewHumans(newHuman);
+    public void addNewHuman(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, int id) {
+        Human newHuman = new Human(lastName, firstName, gender, position, socialPosition, fondation, income, birthDate, id);
+//        FamilyTree.addNewHumans(newHuman);
     }
 }

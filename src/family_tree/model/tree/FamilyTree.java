@@ -137,26 +137,36 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
 
 
     public static Human handlerForTree() {
-        String filePath = "homeWork/src/model_app/family_tree.txt";
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
         // выводим на экран
         Human human = null;
-        try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-            // Десериализуем объекты
-            while (true) {
-                try {
-                    human = (Human) objectInputStream.readObject();
-                    System.out.println(human);
-                }
-                catch (EOFException e) {
-                    return null;
-                }
+//        try (FileInputStream fileInputStream = new FileInputStream(filePath);
+//             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+//            // Десериализуем объекты
+//            while (true) {
+//                try {
+//                    human = (Human) objectInputStream.readObject();
+//                    System.out.println(human);
+//                }
+//                catch (EOFException e) {
+//                    return null;
+//                }
+//            }
+//        }
+//        catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-        }
-        catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
+        } catch (IOException e) {
+            System.out.println("ошибка чтения файла : " + e.getMessage());
         }
 
+        return human;
     }
 
     public static Human handlerForIncome() {
@@ -220,9 +230,9 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         humans.sort(new ComparatorByBirthDate());
     }
 
-    public static void addNewHumans(Human newHuman){
-        humanList.add(newHuman);
-    }
+//    public static void addNewHumans(Human newHuman){
+//        humanList.add(newHuman);
+//    }
 
 
 

@@ -5,7 +5,6 @@ import family_tree.model.tree.TreeNode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.io.Serializable;
 
@@ -19,10 +18,10 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
     private double income;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private double id;
+    private int id;
 
 
-    public <children> Human(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, LocalDate deathDate, double id) {
+    public <children> Human(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, LocalDate deathDate, int id) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
@@ -32,6 +31,19 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
         this.income = income;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+        this.id = id;
+        List<Human> children = new ArrayList<>();
+    }
+
+    public <children> Human(String lastName, String firstName, Gender gender, Position position, SocialPosition socialPosition, Fondation fondation, double income, LocalDate birthDate, int id) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.gender = gender;
+        this.position = position;
+        this.socialPosition = socialPosition;
+        this.fondation = fondation;
+        this.income = income;
+        this.birthDate = birthDate;
         this.id = id;
         List<Human> children = new ArrayList<>();
     }
@@ -148,7 +160,7 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
     public void setId(double v) {  }
 
     @Override
-    public double setId() {
+    public int setId() {
         return id;
     }
 
@@ -157,6 +169,7 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
 
     @Override
     public Position getPosition(Human human) { return position; }
+
 
     @Override
     public int compareTo(Human other) {

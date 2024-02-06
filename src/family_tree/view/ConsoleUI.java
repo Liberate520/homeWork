@@ -1,13 +1,15 @@
 package family_tree.view;
 
-import family_tree.model.human.Fondation;
-import family_tree.model.human.Gender;
-import family_tree.model.human.Position;
-import family_tree.model.human.SocialPosition;
+import family_tree.model.human.*;
 import family_tree.presenter.Presenter;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -21,6 +23,8 @@ public class ConsoleUI implements View {
     // Цвет строки в консоли
     public static final String PURPLE_TEXT = "\u001B[35m";
     public static final String PURPLE_TEXT_RESET = "\u001B[0m";
+
+    String filePath = "homeWork/src/model_app/family_tree_.txt";
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
@@ -125,15 +129,50 @@ public class ConsoleUI implements View {
         Fondation fondation = Fondation.valueOf(scan());
         System.out.print("укажите доход (только цифры) : ");
         double income = Double.parseDouble(scan());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
         System.out.print("введите дату рождения (в формате: yyyy-MM-dd) :");
-        String birthDate = scan();
+        LocalDate birthDate = LocalDate.parse(scan(), formatter);
+//        LocalDate birthDate = LocalDate.parse(scan(), formatter);
+        LocalDate deathDate = null;
         System.out.print("введите дату смерти (в формате: yyyy-MM-dd) или пропустите : ");
-        String deathDate =  scan();
-        System.out.print("укажите ID (в формате 0.**) : ");
-        double id = Double.parseDouble(scan());
-        presenter.add(lastName, firstName, gender, position, socialPosition, fondation, income, LocalDate.parse(birthDate), LocalDate.parse(deathDate, DateTimeFormatter.ISO_LOCAL_DATE), id);
+        String deathDateStr = scan();
+        if (!deathDateStr.isEmpty()) {
+            try {
+            deathDate = LocalDate.parse(deathDateStr, formatter);
+        }  catch (DateTimeParseException e) {
+            System.out.println("неверный формат даты - дата смерти не будет указана.");
+        }
+        }
+        // Generate ID
+        int nextID = 16;
+        int id = ++nextID;
+
+//        System.out.print("укажите ID (в формате int) : ");
+//        int id = scan();
+        presenter.add(lastName, firstName, gender, position, socialPosition, fondation, income, birthDate, id);
+
+
+        // Запись в файл
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.append("\n===============================" +
+                    "\nчлен семьи: " + lastName + " " + firstName +
+                    "\nпол: " + gender +
+                    "\nположение: " + position +
+                    "\nсоциальный статус: " + socialPosition +
+                    "\nобразование: " + fondation +
+//                "\nКто дети: " + children +
+                    "\nдоходы: " + income +
+                    "\nвозраст: " + birthDate +
+                    "\nid: " + id +
+                    "\n===============================");
+//            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("ошибка записи файла : " + e.getMessage());
+        }
         
     }
+
+
 
     private String scan() {
         scanner = new Scanner(System.in, "UTF-8");

@@ -21,7 +21,7 @@ public class SortFileByLastName {
             while (true) {
                 try {
                     humNam = (Human) objectInputStream.readObject();
-                    //Сортировка списка по Доходам
+                    //Сортировка списка по фамилии
                     humans.sort(Comparator.comparing(Human::getLastName).reversed());
                     System.out.println(humNam);
 
