@@ -122,7 +122,7 @@ public class ConsoleUI implements View {
         String lastName = scan();
         System.out.print("введите имя отчество (через пробел) : ");
         String firstName = scan();
-        System.out.print("укажите пол соответсвующее число (Male-1, Female-2) : ");
+        System.out.print("укажите пол соответсвующим числом (Male-1, Female-2) : ");
         inputNumber = scanner.nextInt();
         String memberGender = "";
         switch (inputNumber) {
@@ -133,11 +133,11 @@ public class ConsoleUI implements View {
                 memberGender = "Female";
                 break;
             default:
-                System.out.println("Указан неверный номер. Введите 1 или 2");
+                System.out.println("указан неверный номер - введите 1 или 2");
                 return; // Выход из программы, если выполнен неверный ввод
         }
         Gender gender = Gender.valueOf(memberGender);
-        System.out.print("укажите соответствующее число кто (Father-1, Mother-2, Child-3, Daughter-4, Son-5) : ");
+        System.out.print("укажите соответствующим числом кто (Father-1, Mother-2, Child-3, Daughter-4, Son-5) : ");
         inputNumber = scanner.nextInt();
         String familyMember = "";
         switch (inputNumber) {
@@ -157,11 +157,11 @@ public class ConsoleUI implements View {
                 familyMember = "Son";
                 break;
             default:
-                System.out.println("Указан неверный номер. Введите 1, 2, 3, 4, или 5");
+                System.out.println("указан неверный номер - введите 1, 2, 3, 4, или 5");
                 return; // Выход из программы, если выполнен неверный ввод
         }
         Position position = Position.valueOf(familyMember);
-        System.out.print("укажите социальное положение (Not_married-1, Married-2) : ");
+        System.out.print("укажите социальное положение соответствующим числом (Not_married-1, Married-2) : ");
         inputNumber = scanner.nextInt();
         String socialMember = "";
         switch (inputNumber) {
@@ -172,11 +172,11 @@ public class ConsoleUI implements View {
                 socialMember = "Married";
                 break;
             default:
-                System.out.println("Указан неверный номер. Введите 1 или 2");
+                System.out.println("указан неверный номер - введите 1 или 2");
                 return; // Выход из программы, если выполнен неверный ввод
         }
         SocialPosition socialPosition = SocialPosition.valueOf(socialMember);
-        System.out.print("укажите образование (Formal-1, Informal-2, Non_formal-3) : ");
+        System.out.print("укажите образование соответствующим числом (Formal-1, Informal-2, Non_formal-3) : ");
         inputNumber = scanner.nextInt();
         String memberFondation = "";
         switch (inputNumber) {
@@ -190,7 +190,7 @@ public class ConsoleUI implements View {
                 memberFondation = "Non_formal";
                 break;
             default:
-                System.out.println("Указан неверный номер. Введите 1, 2 или 3");
+                System.out.println("указан неверный номер - ведите 1, 2 или 3");
                 return; // Выход из программы, если выполнен неверный ввод
         }
         Fondation fondation = Fondation.valueOf(memberFondation);
