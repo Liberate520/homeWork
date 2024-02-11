@@ -3,6 +3,7 @@ package family_tree.view;
 import family_tree.model.human.*;
 import family_tree.presenter.Presenter;
 
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -116,24 +117,93 @@ public class ConsoleUI implements View {
     public void sortByName() { presenter.sortByName(); }
 
     public void addHuman() {
+        int inputNumber;
         System.out.print("введите фамилию : ");
         String lastName = scan();
         System.out.print("введите имя отчество (через пробел) : ");
         String firstName = scan();
-        System.out.print("укажите пол (Male, Female) : ");
-        Gender gender = Gender.valueOf(scan());
-        System.out.print("укажите кто (Father, Mother, Child, Daughter, Son) : ");
-        Position position = Position.valueOf(scan());
-        System.out.print("укажите социальное положение (Not_married, Married) : ");
-        SocialPosition socialPosition = SocialPosition.valueOf(scan());
-        System.out.print("укажите образование (Formal, Informal, Non_formal) : ");
-        Fondation fondation = Fondation.valueOf(scan());
+        System.out.print("укажите пол соответсвующее число (Male-1, Female-2) : ");
+        inputNumber = scanner.nextInt();
+        String memberGender = "";
+        switch (inputNumber) {
+            case 1:
+                memberGender = "Male";
+                break;
+            case 2:
+                memberGender = "Female";
+                break;
+            default:
+                System.out.println("Указан неверный номер. Введите 1 или 2");
+                return; // Выход из программы, если выполнен неверный ввод
+        }
+        Gender gender = Gender.valueOf(memberGender);
+        System.out.print("укажите соответствующее число кто (Father-1, Mother-2, Child-3, Daughter-4, Son-5) : ");
+        inputNumber = scanner.nextInt();
+        String familyMember = "";
+        switch (inputNumber) {
+            case 1:
+                familyMember = "Father";
+                break;
+            case 2:
+                familyMember = "Mother";
+                break;
+            case 3:
+                familyMember = "Child";
+                break;
+            case 4:
+                familyMember = "Daughter";
+                break;
+            case 5:
+                familyMember = "Son";
+                break;
+            default:
+                System.out.println("Указан неверный номер. Введите 1, 2, 3, 4, или 5");
+                return; // Выход из программы, если выполнен неверный ввод
+        }
+        Position position = Position.valueOf(familyMember);
+        System.out.print("укажите социальное положение (Not_married-1, Married-2) : ");
+        inputNumber = scanner.nextInt();
+        String socialMember = "";
+        switch (inputNumber) {
+            case 1:
+                socialMember = "Not_married";
+                break;
+            case 2:
+                socialMember = "Married";
+                break;
+            default:
+                System.out.println("Указан неверный номер. Введите 1 или 2");
+                return; // Выход из программы, если выполнен неверный ввод
+        }
+        SocialPosition socialPosition = SocialPosition.valueOf(socialMember);
+        System.out.print("укажите образование (Formal-1, Informal-2, Non_formal-3) : ");
+        inputNumber = scanner.nextInt();
+        String memberFondation = "";
+        switch (inputNumber) {
+            case 1:
+                memberFondation = "Formal";
+                break;
+            case 2:
+                memberFondation = "Informal";
+                break;
+            case 3:
+                memberFondation = "Non_formal";
+                break;
+            default:
+                System.out.println("Указан неверный номер. Введите 1, 2 или 3");
+                return; // Выход из программы, если выполнен неверный ввод
+        }
+        Fondation fondation = Fondation.valueOf(memberFondation);
         System.out.print("укажите доход (только цифры) : ");
         double income = Double.parseDouble(scan());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        LocalDate birthDate = null;
         System.out.print("введите дату рождения (в формате: yyyy-MM-dd) : ");
-        LocalDate birthDate = LocalDate.parse(scan(), formatter);
-//        LocalDate birthDate = LocalDate.parse(scan(), formatter);
+        try {
+            birthDate = LocalDate.parse(scan(), formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("неверный формат даты - укажите в формате yyyy-MM-dd.");
+        }
         LocalDate deathDate = null;
         System.out.print("введите дату смерти (в формате: yyyy-MM-dd) или пропустите : ");
         String deathDateStr = scan();
@@ -144,6 +214,7 @@ public class ConsoleUI implements View {
             System.out.println("неверный формат даты - дата смерти не будет указана.");
         }
         }
+        int age = getAge(birthDate, deathDate);
         // Generate ID
         int Num = LastIdsMethod.getLastId();
         int id = Num + 1;
@@ -151,6 +222,7 @@ public class ConsoleUI implements View {
 //        System.out.print("укажите ID (в формате int) : ");
 //        int id = scan();
         presenter.add(lastName, firstName, gender, position, socialPosition, fondation, income, birthDate, id);
+
 
 
         // Запись в файл
@@ -164,7 +236,7 @@ public class ConsoleUI implements View {
                     "\nобразование: " + fondation +
 //                "\nКто дети: " + children +
                     "\nдоходы: " + income +
-                    "\nвозраст: " + birthDate +
+                    "\nвозраст: " + age +
                     "\nid: " + id);
 //            writer.newLine();
         } catch (IOException e) {
@@ -174,6 +246,15 @@ public class ConsoleUI implements View {
     }
 
 
+    public static int getAge(LocalDate birthDate, LocalDate deathDate) {
+        if (deathDate != null && deathDate.isBefore(LocalDate.now())) {
+            return deathDate.getYear() - birthDate.getYear() - ((deathDate.getMonthValue() < birthDate.getMonthValue() ||
+                    (deathDate.getMonthValue() == birthDate.getMonthValue() && deathDate.getDayOfMonth() < birthDate.getDayOfMonth())) ? 1 : 0);
+        } else {
+            return LocalDate.now().getYear() - birthDate.getYear() - ((LocalDate.now().getMonthValue() < birthDate.getMonthValue() ||
+                    (LocalDate.now().getMonthValue() == birthDate.getMonthValue() && LocalDate.now().getDayOfMonth() < birthDate.getDayOfMonth())) ? 1 : 0);
+        }
+    }
 
     private String scan() {
         scanner = new Scanner(System.in, "UTF-8");

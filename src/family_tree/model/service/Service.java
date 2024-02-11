@@ -1,12 +1,10 @@
 package family_tree.model.service;
 
-
 import family_tree.model.base.SortFileByLastName;
 import family_tree.model.human.*;
 import family_tree.model.tree.FamilyTree;
 
 import java.time.LocalDate;
-
 
 import static family_tree.model.tree.FamilyTree.*;
 

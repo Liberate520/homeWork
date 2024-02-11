@@ -165,12 +165,11 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
         } catch (IOException e) {
             System.out.println("ошибка чтения файла : " + e.getMessage());
         }
-
         return human;
     }
 
     public static Human handlerForIncome() {
-        String filePath = "homeWork/src/model_app/family_tree.txt";
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
         // выводим на экран
         Human human = null;
         try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
@@ -196,7 +195,7 @@ public class FamilyTree<T extends TreeNode<T>> implements Serializable, Iterable
 
 
     public static Human handlerForAge() {
-        String filePath = "homeWork/src/model_app/family_tree.txt";
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
         // выводим на экран
         Human human = null;
         try (FileInputStream fileInputStream = new FileInputStream(filePath); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
