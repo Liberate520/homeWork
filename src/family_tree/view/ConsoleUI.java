@@ -38,6 +38,7 @@ public class ConsoleUI implements View {
     }
 
     public void title() {
+        System.out.println(" ");
         System.out.println("                    FAMILY TREE");
         System.out.println("===============================");
         System.out.println("===============================");
@@ -130,7 +131,7 @@ public class ConsoleUI implements View {
         System.out.print("укажите доход (только цифры) : ");
         double income = Double.parseDouble(scan());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
-        System.out.print("введите дату рождения (в формате: yyyy-MM-dd) :");
+        System.out.print("введите дату рождения (в формате: yyyy-MM-dd) : ");
         LocalDate birthDate = LocalDate.parse(scan(), formatter);
 //        LocalDate birthDate = LocalDate.parse(scan(), formatter);
         LocalDate deathDate = null;
@@ -144,8 +145,8 @@ public class ConsoleUI implements View {
         }
         }
         // Generate ID
-        int nextID = 16;
-        int id = ++nextID;
+        int Num = LastIdsMethod.getLastId();
+        int id = Num + 1;
 
 //        System.out.print("укажите ID (в формате int) : ");
 //        int id = scan();
@@ -155,6 +156,7 @@ public class ConsoleUI implements View {
         // Запись в файл
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.append("\n===============================" +
+                    "\n===============================" +
                     "\nчлен семьи: " + lastName + " " + firstName +
                     "\nпол: " + gender +
                     "\nположение: " + position +
@@ -163,8 +165,7 @@ public class ConsoleUI implements View {
 //                "\nКто дети: " + children +
                     "\nдоходы: " + income +
                     "\nвозраст: " + birthDate +
-                    "\nid: " + id +
-                    "\n===============================");
+                    "\nid: " + id);
 //            writer.newLine();
         } catch (IOException e) {
             System.out.println("ошибка записи файла : " + e.getMessage());
