@@ -40,7 +40,7 @@ public class FileHandler {
         humans.add(new Human("Семенов", "Ян Петрович", Gender.Male, Position.Son, SocialPosition.Null, Fondation.Non_formal, 34000.0, LocalDate.of(2000, 8, 23), 15));
 
 //        String filePath = "homeWork/src/family_tree.txt";
-        String filePath = "homeWork/src/model_app/family_tree_.txt";
+        String filePath = "homeWork/src/model_app/family_tree.txt";
 //        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath/*, true*/);
 //             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream))
 //             {

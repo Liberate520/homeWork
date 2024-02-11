@@ -52,6 +52,7 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
     @Override
     public String toString() {
         return "===============================" +
+                "\n===============================" +
                 "\nчлен семьи: " + lastName + " " + firstName +
                 "\nпол: " + getGender() +
                 "\nположение: " + getPosition() +
@@ -60,10 +61,9 @@ public class Human implements Comparable<Human>, Serializable, TreeNode<Human> {
 //                "\nКто дети: " + children +
                 "\nдоходы: " + income +
                 "\nвозраст: " + getAge() +
-                "\nid: " + id +
-                "\n===============================";
-
+                "\nid: " + id;
     }
+
     @Override
     public String getLastName() {
         return lastName;

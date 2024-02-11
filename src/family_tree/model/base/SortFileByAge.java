@@ -11,7 +11,7 @@ import java.util.Comparator;
 public class SortFileByAge {
     static ArrayList<Human> humans = new ArrayList<>();
     public static void sortByAgeForTree() {
-        String filePath = "homeWork/src/model_app/family_tree.txt";
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
         // выводим на экран
         Object humAge;
         try (FileInputStream fileInputStream = new FileInputStream(filePath);

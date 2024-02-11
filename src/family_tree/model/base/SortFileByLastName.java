@@ -11,7 +11,7 @@ import java.util.Comparator;
 public class SortFileByLastName {
     static ArrayList<Human> humans = new ArrayList<>();
     public static void sortByLastNameForTree() {
-        String filePath = "homeWork/src/model_app/family_tree.txt";
+        String filePath = "homeWork/src/model_app/family_tree_.txt";
         // выводим на экран
         Object humNam;
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
