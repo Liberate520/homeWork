@@ -1,1 +1,1 @@
-Записано в файл{tree=[<A parent H>, <H children A>, <И parent H>, <H children И>]}
+Записано в файл{tree=[<Нина parent Миша>, <Миша children Нина>, <Саша parent Миша>, <Миша children Саша>]}

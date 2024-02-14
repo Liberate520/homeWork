@@ -61,7 +61,7 @@ public class Service<E extends HumanGroupItem> {
     public String searchByName(String name) {
         for (E lst : listAllHuman) {
             if (lst.getFullName().equals(name)) {
-                return name.toString();
+                return lst.toString();
             }
         }
         return "Имя не найдено";
