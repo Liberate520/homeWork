@@ -12,6 +12,11 @@ public class Main {
 
         save(tree);
 
+        System.out.println(tree);
+        tree.sortByName();
+        System.out.println(tree);
+        tree.sortByDeathDate();
+
     }
 
     private static FamilyTree load(){
