@@ -1,9 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 
-public class FamilyTree  {
+public class FamilyTree  implements Serializable, Iterable<Human> {
 
     private int humansId;
     private List<Human> humanList;
@@ -137,5 +139,13 @@ public class FamilyTree  {
     public String toString () {
         return getInfo();
     }
+
+
+    public void sortByName() {humanList.sort(new FamilyTreeComparatorByName());}
+
+    public void sortByDeathDate() {humanList.sort(new FamilyTreeComparatorByName());}
+
+    @Override
+    public Iterator<Human> iterator(){return new FamilyTreeIterator(humanList);}
 
 }

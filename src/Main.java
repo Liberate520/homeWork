@@ -1,7 +1,7 @@
-import java.io.File;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Scanner;
+
 
 
 public class Main {
@@ -11,6 +11,7 @@ public class Main {
         System.out.println(tree);
 
         save(tree);
+
     }
 
     private static FamilyTree load(){
@@ -19,14 +20,11 @@ public class Main {
         return (FamilyTree) fileHandler.read(filePath);
     }
 
-    public static void save (FamilyTree tree){
+    private static void save(FamilyTree tree){
         FileHandler fileHandler = new FileHandler();
         String filePath = "src/tree.txt";
         fileHandler.save(tree,filePath);
     }
-
-
-
 
 
     static FamilyTree mainTree() {
