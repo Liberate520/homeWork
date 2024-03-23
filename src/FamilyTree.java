@@ -18,6 +18,12 @@ public class FamilyTree {
 
         if (parent != null && child != null) {
             parent.addChild(child);
+            if (parent.getGender().equals(Gender.Male)){
+                child.setFather(parent);
+            }
+            else{
+                child.setMother(parent);
+            }
         } else {
             System.out.println("Person not found in the family tree.");
         }

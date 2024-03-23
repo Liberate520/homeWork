@@ -6,10 +6,10 @@ public class Main {
         FamilyTree familyTree = new FamilyTree();
 
         // Добавляем людей в дерево
-        Person person1 = new Person("John", Gender.Male, 1950);
-        Person person2 = new Person("Jane", Gender.Female, 1955);
-        Person person3 = new Person("Tom", Gender.Male, 1980);
-        Person person4 = new Person("Emily", Gender.Female, 1985);
+        Person person1 = new Person("John", Gender.Male, LocalDate.of(1950, 05, 30));
+        Person person2 = new Person("Jane", Gender.Female, LocalDate.of(1952, 02, 15));
+        Person person3 = new Person("Tom", Gender.Male, LocalDate.of(1960, 04, 2));
+        Person person4 = new Person("Emily", Gender.Female, LocalDate.of(1990, 8, 5));
         familyTree.addPerson(person1);
         familyTree.addPerson(person2);
         familyTree.addPerson(person3);
@@ -28,5 +28,6 @@ public class Main {
             System.out.println(child);
         }
         System.out.println(familyTree);
+        System.out.println(person3.getFather());
     }
 }

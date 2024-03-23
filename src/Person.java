@@ -1,14 +1,34 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
     private String name;
     private Gender gender;
-    private int birthYear;
-    private Integer deathYear;
+    private LocalDate birthYear;
+    private LocalDate deathYear;
+    private Person mother;
+    private Person father;
+
+    public Person getMother() {
+        return mother;
+    }
+
+    public void setMother(Person mother) {
+        this.mother = mother;
+    }
+
+    public Person getFather() {
+        return father;
+    }
+
+    public void setFather(Person father) {
+        this.father = father;
+    }
+
     private List<Person> children;
 
-    public Person(String name, Gender gender, int birthYear) {
+    public Person(String name, Gender gender, LocalDate birthYear) {
         this.name = name;
         this.gender = gender;
         this.birthYear = birthYear;
@@ -23,15 +43,15 @@ public class Person {
         return gender;
     }
 
-    public int getBirthYear() {
+    public LocalDate getBirthYear() {
         return birthYear;
     }
 
-    public Integer getDeathYear() {
+    public LocalDate getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(Integer deathYear) {
+    public void setDeathYear(LocalDate deathYear) {
         this.deathYear = deathYear;
     }
 
@@ -42,6 +62,7 @@ public class Person {
     public void addChild(Person child) {
         children.add(child);
     }
+
 
     @Override
     public String toString() {
