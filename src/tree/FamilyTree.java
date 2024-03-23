@@ -1,7 +1,10 @@
+package tree;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<Person> people;
 
     public FamilyTree() {
@@ -25,7 +28,7 @@ public class FamilyTree {
                 child.setMother(parent);
             }
         } else {
-            System.out.println("Person not found in the family tree.");
+            System.out.println("tree.Person not found in the family tree.");
         }
     }
 
@@ -34,7 +37,7 @@ public class FamilyTree {
         if (person != null) {
             return person.getChildren();
         } else {
-            System.out.println("Person not found in the family tree.");
+            System.out.println("tree.Person not found in the family tree.");
             return new ArrayList<>();
         }
     }
@@ -50,7 +53,7 @@ public class FamilyTree {
 
     @Override
     public String toString() {
-        return "FamilyTree{" +
+        return "tree.FamilyTree{" +
                 "people=" + people +
                 '}';
     }
