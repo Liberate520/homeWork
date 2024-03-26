@@ -1,9 +1,12 @@
+package Tree;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private int id; //Добавляем id,кооторый будет увеличиваться, как автоинкремент в Main.
     private String fullName;
     private Gender gender;
@@ -205,5 +208,18 @@ public class Person {
         return str.toString();
 
     }
+
+    //Переопределение метода equals исходя из равенства по имени
+    public boolean equals(Object obj){
+        if (this==obj){
+            return true;
+        }
+        if(!(obj instanceof Person)){
+            return false;
+        }
+        Person person=(Person) obj;
+        return person.getFullName()==getFullName();
+    }
+
 
 }

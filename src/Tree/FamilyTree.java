@@ -1,7 +1,12 @@
+package Tree;
+
+import java.io.Serializable;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+
+public class FamilyTree implements Serializable {
     private List<Person> personList;
 
     public FamilyTree(){
@@ -12,14 +17,16 @@ public class FamilyTree {
     }
 
     //Добавление человека в генеалогическое древо
-    public void add(Person person){
-        if(person==null || personList.contains(person.getFullName())){
-            return;
+    public boolean add(Person person){
+        if(person==null || personList.contains(person)){
+            System.out.println("Пустой объект или такой объект имеется");
+            return false;
         }
         else{
             personList.add(person);
             addToParents(person);//Добавление родственных связей
             addToChildren(person);//Добавление родственных связей
+            return true;
         }
     }
 

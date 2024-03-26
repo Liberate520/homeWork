@@ -1,12 +1,28 @@
-import org.w3c.dom.ls.LSOutput;
+import Tree.Gender;
+import Tree.Person;
+import Tree.FamilyTree;
+import writer.FileHandler;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLOutput;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        FamilyTree tree=upLoadTree();
+        //FamilyTree tree=createTree();
 
+        System.out.println(tree);
+        //saveTree(tree);
+
+    }
+
+
+
+    static FamilyTree createTree() {
         FamilyTree tree=new FamilyTree();
+
 
         int id = 0;// ID будет выступать автоинкрементом
 
@@ -51,11 +67,26 @@ public class Main {
         tree.add(sergey);
         tree.add(ludmila);
         tree.add(alexandr);
-
-
-        System.out.println(tree);
+        return tree;
 
     }
+
+    private static void saveTree(FamilyTree tree){
+        String filePath="src/writer/familyTree.txt";
+        FileHandler fileHandler=new FileHandler();
+        fileHandler.saveToFile(tree,filePath);
+
+    }
+
+    private static FamilyTree upLoadTree() {
+        String filePath="src/writer/familyTree.txt";
+        FileHandler fileHandler=new FileHandler();
+        return fileHandler.uploadFromFile(filePath);
+    }
+
+
+
+
 
 
 
