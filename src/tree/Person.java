@@ -5,13 +5,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+public class Person implements Serializable{
     private String name;
     private Gender gender;
     private LocalDate birthYear;
     private LocalDate deathYear;
     private Person mother;
     private Person father;
+
+    private List<Person> children;
 
     public Person getMother() {
         return mother;
@@ -29,7 +31,7 @@ public class Person implements Serializable {
         this.father = father;
     }
 
-    private List<Person> children;
+
 
     public Person(String name, Gender gender, LocalDate birthYear) {
         this.name = name;

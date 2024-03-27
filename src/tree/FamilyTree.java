@@ -1,10 +1,14 @@
 package tree;
 
+import utils.FamilyTreeIterator;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
+public class FamilyTree implements Serializable, Iterable<Person> {
+
     private List<Person> people;
 
     public FamilyTree() {
@@ -56,5 +60,10 @@ public class FamilyTree implements Serializable {
         return "tree.FamilyTree{" +
                 "people=" + people +
                 '}';
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new FamilyTreeIterator(people);
     }
 }
