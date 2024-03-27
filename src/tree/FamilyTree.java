@@ -3,9 +3,7 @@ package tree;
 import utils.FamilyTreeIterator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FamilyTree implements Serializable, Iterable<Person> {
 
@@ -53,6 +51,24 @@ public class FamilyTree implements Serializable, Iterable<Person> {
             }
         }
         return null;
+    }
+
+    public void sortByName() {
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person person1, Person person2) {
+                return person1.getName().compareTo(person2.getName());
+            }
+        });
+    }
+
+    public void sortByDateOfBirth() {
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person person1, Person person2) {
+                return person1.getBirthYear().compareTo(person2.getBirthYear());
+            }
+        });
     }
 
     @Override

@@ -34,6 +34,9 @@ public class Main {
 //        }
 //        System.out.println(familyTree);
 
+        familyTree.sortByName();
+        familyTree.sortByDateOfBirth();
+
         for(Person person: familyTree){
             System.out.println(person.toString());
         }
